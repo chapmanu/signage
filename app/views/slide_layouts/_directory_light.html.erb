@@ -1,0 +1,20 @@
+<article class="ui-slide ui-slide--directory ui-slide--light">
+  <h1 class="ui-slide-heading"><%= slide.heading %></h1>
+  <subhead class="ui-slide-subheading"><%= slide.subheading %></subhead>
+
+  <div class="ui-slide-collection" on-pointerdown="delayAutoScroll" on-mousewheel="delayAutoScroll">
+    <div class="ui-slide-collection-inset">
+      <% slide.people.each do |person| %>
+        <article class="ui-member">
+          <%= image_tag person.image, alt: person.name, class: 'ui-member-image' %>
+
+          <h1 class="ui-member-name"><%= person.name %></h1>
+          <p class="ui-member-location"><%= person.location %></p>
+          <p class="ui-member-email"><%= person.email %></p>
+        </article>
+      <% end %>
+    </div>
+  </div>
+
+  <footer class="ui-slide-organizer"><img class="ui-slide-organizer-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-<%= slide.organizer_id %>.svg"/><%= slide.organizer %></footer>
+</article>

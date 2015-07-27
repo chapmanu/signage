@@ -1,0 +1,58 @@
+<div id="ui-feed" class="ui-feed ui-feed--show-mouse">
+  <header class="ui-head" role="banner">
+    <h1 id="chapman-logo" class="ui-logo"></h1>
+
+    <subhead class="ui-location">
+      <p class="ui-location-name"><%= @device.location %></p>
+      <p class="ui-location-time"></p>
+    </subhead>
+
+
+    <!-- Buttons for the directory slides if there are any -->
+
+<!--     <div class="ui-buttons">
+        <button on-tap="selectSlide:{{.}}" class="ui-button-directory ui-button--{{ index === . ? 'active' : 'inactive' }}"><span>@directory slide names</span></button>
+    </div> -->
+
+    <nav class="ui-menu" role="navigation">
+      <div class="ui-menu-caret"></div>
+      <ul class="ui-menu-list">
+        <% @device.slides.each do |slide| %>
+          <li class="ui-menu-item" data-hash="<%= slide.slug %>"><a href="#<%= slide.slug %>"><span><%= slide.menu_name %></span></a></li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="owl-carousel" role="main" >
+    <% if @device.slides.empty? %>
+      <article class="ui-slider ui-slide--dark ui-slide--standard">
+        <h1 class="ui-slide-heading">No Slides to Display</h1>
+      </article>
+    <% else %>
+      <% @device.slides.each do |slide| %>
+        <div data-hash="<%= slide.slug %>">
+          <%= render "slide_layouts/#{slide.template_partial}", slide: slide %>
+        </div>
+      <% end %>
+    <% end %>
+
+
+
+    <% unless @device.notification.empty? %>
+      <article class="ui-slide ui-slide--notification">
+        <h1 class="ui-slide-heading"><%= @device.notification %></h1>
+
+        <p class="ui-slide-content"><%= @device.notification_detail %></p>
+      </article>
+    <% end %>
+
+    <% unless @device.emergency.empty? %>
+      <article class="ui-slide ui-slide--emergency">
+        <h1 class="ui-slide-heading"><%= @device.emergency %></h1>
+
+        <p class="ui-slide-content"><%= @device.emergency_detail %></p>
+      </article>
+    <% end %>
+  </main>
+</div>

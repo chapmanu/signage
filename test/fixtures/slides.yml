@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  template: MyString
+  menu_name: MyString
+  organizer: MyString
+  organizer_id: MyString
+  duration: 1
+  heading: MyString
+  subheading: MyString
+  datetime: 2015-07-24 11:49:42
+  location: MyString
+  content: MyText
+  background: MyString
+  background_type: MyString
+  background_sizing: MyString
+  foreground: MyString
+  foreground_type: MyString
+  foreground_sizing: MyString
+
+two:
+  name: MyString
+  template: MyString
+  menu_name: MyString
+  organizer: MyString
+  organizer_id: MyString
+  duration: 1
+  heading: MyString
+  subheading: MyString
+  datetime: 2015-07-24 11:49:42
+  location: MyString
+  content: MyText
+  background: MyString
+  background_type: MyString
+  background_sizing: MyString
+  foreground: MyString
+  foreground_type: MyString
+  foreground_sizing: MyString
