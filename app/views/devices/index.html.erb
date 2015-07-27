@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Devices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Number of Slides</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= link_to device.name, device %></td>
+        <td><%= device.location %></td>
+        <td><%= device.slides.length %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

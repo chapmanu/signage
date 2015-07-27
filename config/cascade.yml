@@ -1,0 +1,46 @@
+default: &default
+  endpoint: http://www2.chapman.edu/digital-signage/devices/:device/slideshow.json
+  devices:
+    - ALL-live-slides
+    - argyros-forum-303-front-desk
+    - argyros-forum-admission-waiting-room
+    - argyros-forum-pankey-lounge
+    - beckman-hall-argyros-career-services
+    - beckman-hall-lobby
+    - bertea-hall-entrance
+    - digital-media-arts-center-room-101
+    - digital-media-arts-center-room-117
+    - digital-media-arts-center-screening-room
+    - digital-media-arts-center-snack-bar
+    - doti-hall-1st-floor
+    - doti-hall-2nd-floor
+    - doti-hall-basement
+    - fitness-center-desk
+    - fitness-center-stretch-room
+    - hashinger-science-center-1st-floor
+    - hashinger-science-center-2nd-floor
+    - kennedy-hall-lobby
+    - library-lobby
+    - library-lobby-donor-screen
+    - marion-knott-studios-lobby
+    - marion-knott-studios-southwest-hall
+    - moulton-hall-lobby
+    - reeves-hall-lobby
+    - rinker-9401-lobby
+    - rinker-9501-lobby
+    - salmon-recital-hall-lobby
+    - smc-test-device
+    - union-services
+    - union-student-programs
+
+development:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
+
+
+
