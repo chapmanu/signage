@@ -1,4 +1,4 @@
-# Chapman University Digital Signage 2.0
+# Digital Signage 2.0
 
 ### Set up
 ```
