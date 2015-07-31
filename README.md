@@ -1,6 +1,6 @@
-# digital-signage-2
+# Chapman University Digital Signage 2.0
 
-Set up
+### Set up
 ```
 git clone https://github.com/chapmanu/digital-signage-2.git
 cd digital-signage-2
