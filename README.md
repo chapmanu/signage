@@ -9,3 +9,4 @@ rake db:create db:migrate
 rake cascade:sync
 rails s
 ```
+Then head over to localhost:3000.
