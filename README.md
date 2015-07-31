@@ -5,7 +5,7 @@
 git clone https://github.com/chapmanu/digital-signage-2.git
 cd digital-signage-2
 bundle install
-rake db:migrate
+rake db:create db:migrate
 rake cascade:sync
 rails s
 ```
