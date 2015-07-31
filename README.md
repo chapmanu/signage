@@ -10,4 +10,4 @@ rake cascade:sync
 rails s
 ```
 
-Then head over to [localhost](http://localhost:3000)
+Then head over to [localhost:3000](http://localhost:3000)
