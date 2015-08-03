@@ -66,24 +66,10 @@ Device.currentSlideMeta = function(key) {
     });
   };
 
-  /**
-   * OTHER POSSIBLE ANNIMATIONS
-   */
-
-  // animateOut: 'slideOutDown',
-  // animateIn:  'zoomIn',
-
-  // animateOut: 'rollOut',
-  // animateIn:  'rollIn',
-
-  // animateOut: 'fadeOutDown',
-  // animateIn:  'fadeInDown',
-
   Device._initializeSlides = function(slides) {
     var owl = slides.owlCarousel({
-      animateOut: 'slideOutDown',
-      animateIn:  'flipInX',
-
+      animateOut: 'fadeOutDown',
+      animateIn:  'fadeInDown',
       items: 1,
       URLhashListener: true,
       onInitialized: function(evt) {
