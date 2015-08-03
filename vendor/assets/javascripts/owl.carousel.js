@@ -313,7 +313,20 @@
             for (i = 0, n = this._clones.length + this._items.length; i < n; i++) {
                 merge = this._mergers[this.relative(i)];
                 merge = (this.settings.mergeFit && Math.min(merge, this.settings.items)) || merge;
-                coordinate += (this.settings.autoWidth ? this._items[this.relative(i)].width() + this.settings.margin : width * merge) * rtl;
+
+                /**
+                 * James Kerr changed this for better width percision.
+                 * jQuery's default .width() rounds down, so I was running into a problem,
+                 * with the owl-stage being 1px too small, causeing the last item to wrap.
+                 */
+                 this._items[this.relative(i)].css('display', 'block');
+                 coordinate += (this.settings.autoWidth ? this._items[this.relative(i)][0].getBoundingClientRect().width + this.settings.margin : width * merge) * rtl;
+
+
+                /**
+                 * Original CODE
+                 * coordinate += (this.settings.autoWidth ? this._items[this.relative(i)].width() + this.settings.margin : width * merge) * rtl;
+                 */
 
                 this._coordinates.push(coordinate);
             }
