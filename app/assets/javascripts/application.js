@@ -18,4 +18,5 @@
 //= require moment
 
 /* APPLICATION */
+//= require device
 //= require devices
