@@ -16,3 +16,8 @@
  *= require devices
  *= require_self
  */
+
+body {
+  font-family: 'Futura light';
+  font-size: 1.2em;
+}

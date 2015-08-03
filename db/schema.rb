@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20150727200510) do
     t.integer "slide_id",  null: false
   end
 
+  add_index "people_slides", ["person_id", "slide_id"], name: "index_people_slides_on_person_id_and_slide_id", using: :btree
+  add_index "people_slides", ["slide_id", "person_id"], name: "index_people_slides_on_slide_id_and_person_id", using: :btree
+
   create_table "scheduled_items", force: :cascade do |t|
     t.string   "date"
     t.string   "time"
