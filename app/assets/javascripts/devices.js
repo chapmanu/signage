@@ -1,10 +1,9 @@
 $(document).on('ready page:load', function() {
 
   Device.initialize({
-    menu:   $('.ui-menu-list'),
+    menu: $('.ui-menu-list'),
     slides: $('main')
   });
-
   Device.play();
 
   // Listen for 5 clicks on the chapman Logo

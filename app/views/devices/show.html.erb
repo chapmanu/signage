@@ -10,9 +10,13 @@
 
     <!-- Buttons for the directory slides if there are any -->
 
-<!--     <div class="ui-buttons">
-        <button on-tap="selectSlide:{{.}}" class="ui-button-directory ui-button--{{ index === . ? 'active' : 'inactive' }}"><span>@directory slide names</span></button>
-    </div> -->
+    <div class="ui-buttons">
+      <% @device.directory_slides.each do |slide| %>
+        <a href="#<%= slide.slug %>">
+          <button class="ui-button-directory"><span><%= slide.menu_name %></span></button>
+        </a>
+      <% end %>
+    </div>
 
     <nav class="ui-menu" role="navigation">
       <ul class="ui-menu-list">

@@ -76,7 +76,9 @@ Device.currentSlideMeta = function(key) {
         Device.slides = this;
       }
     });
-    owl.on('changed.owl.carousel', function(evt) { Device._refreshMenu(); });
+    owl.on('changed.owl.carousel', function(evt) {
+      Device._refreshMenu();
+    });
   }
 
   Device._refreshMenu = function() {
