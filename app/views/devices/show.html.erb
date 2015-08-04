@@ -7,9 +7,6 @@
       <p class="ui-location-time"></p>
     </subhead>
 
-
-    <!-- Buttons for the directory slides if there are any -->
-
     <div class="ui-buttons">
       <% @device.directory_slides.each do |slide| %>
         <a href="#<%= slide.slug %>">
@@ -30,7 +27,7 @@
   <main class="owl-carousel" role="main" >
     <% if !@device.slides.empty? %>
       <% @device.slides.each do |slide| %>
-        <div class="js-slide-meta" data-hash="<%= slide.slug %>" data-duration="<%= slide.duration %>">
+        <div class="js-slide-meta" data-id="<%= slide.id %>" data-hash="<%= slide.slug %>" data-duration="<%= slide.duration %>" data-template="<%= slide.template_partial %>">
           <%= render "slide_layouts/#{slide.template_partial}", slide: slide %>
         </div>
       <% end %>
