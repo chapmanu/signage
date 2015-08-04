@@ -19,6 +19,6 @@
 //= require jquery.scroll_into_view
 
 /* APPLICATION */
-//= require device
-//= require slide
-//= require devices
+//= require_tree ./models
+//= require main
+

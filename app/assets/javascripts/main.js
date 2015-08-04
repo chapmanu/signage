@@ -4,7 +4,8 @@ $(document).on('ready page:load', function() {
     menu: $('.ui-menu-list'),
     slides: $('main')
   });
-  // Device.play();
+
+  Device.play();
 
   // Listen for 5 clicks on the chapman Logo
   $('#chapman-logo').on('click', function(event) {
