@@ -1,0 +1,36 @@
+<h1 class="ui-slide-heading"><%= slide.heading %></h1>
+<subhead class="ui-slide-subheading"><%= slide.subheading %></subhead>
+
+<div class="ui-slide-collection" on-pointerdown="delayAutoScroll" on-mousewheel="delayAutoScroll">
+  <div class="ui-slide-collection-inset">
+    <% slide.scheduled_items.each do |item| %>
+      <article class="ui-event">
+        <div class="ui-event-body">
+          <%= image_tag item.image_url, class: 'ui-event-image' unless item.image.blank? %>
+
+          <h1 class="ui-event-name"><%= item.name %></h1>
+
+          <div class="ui-event-content"><%= item.content.html_safe %></div>
+        </div>
+
+        <div class="ui-event-date-time-location">
+          <p class="ui-event-date"><%= item.date %></p>
+          <p class="ui-event-time"><%= item.time %></p>
+          <p class="ui-event-location"><%= item.location %></p>
+        </div>
+        <p class="ui-event-admission">
+          <% unless item.admission.blank? %>
+            <img class="ui-event-admission-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-ticket<%=slide.variation =~/dark/ ? '-white' : '' %>.svg"/><%= item.admission %>
+          <% end %>
+        </p>
+        <p class="ui-event-audience">
+          <% unless item.audience.blank? %>
+            <img class="ui-event-audience-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-audience<%=slide.variation =~/dark/ ? '-white' : '' %>.svg"/><%= item.audience %>
+          <% end %>
+        </p>
+      </article>
+    <% end %>
+  </div>
+</div>
+
+<footer class="ui-slide-organizer"><img class="ui-slide-organizer-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-<%= slide.organizer_id %>.svg"/><%= slide.organizer %></footer>

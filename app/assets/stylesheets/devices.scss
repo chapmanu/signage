@@ -100,6 +100,10 @@ subhead {
   box-shadow: 0 2px 1px 0 rgba(0,0,0,0.3);
 }
 
+.ui-head.dodge{
+  background-color: rgba(0,0,0,0.85);
+}
+
 .ui-head > * {
   display: table-cell;
   vertical-align: middle;
@@ -116,6 +120,12 @@ subhead {
   width: 280px;
   margin:30px 14px 30px 0;
   -webkit-user-select: none;
+}
+
+.ui-logo-dodge {
+  background: image-url('logo-dodge.svg') 0 0 / 100% 100%;
+  width: 556px;
+  height: 55px;
 }
 
 /* ui-locality

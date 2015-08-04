@@ -1,0 +1,13 @@
+<div class="js-slide-meta"
+     data-id="<%= slide.id %>"
+     data-hash="<%= slide.slug %>"
+     data-duration="<%= slide.duration %>"
+     data-layout="<%= slide.layout %>"
+     >
+  <article data-slide-name="<%= slide.name %>" class="<%= slide.css_classes %>">
+    <%= render "slides/layouts/#{slide.layout}", slide: slide %>
+    <footer class="ui-slide-organizer">
+    <img class="ui-slide-organizer-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-<%= slide.organizer_id %>.svg"/><%= slide.organizer %></footer>
+  </article>
+
+</div>

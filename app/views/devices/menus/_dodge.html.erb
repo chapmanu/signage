@@ -1,0 +1,25 @@
+<header class="ui-head dodge" role="banner">
+  <h1 id="chapman-logo" class="ui-logo ui-logo-dodge"></h1>
+
+  <subhead class="ui-location">
+    <p class="ui-location-time"></p>
+  </subhead>
+
+  <div class="ui-buttons">
+    <% @device.directory_slides.each do |slide| %>
+      <a href="#<%= slide.slug %>">
+        <button class="ui-button-directory"><span><%= slide.menu_name %></span></button>
+      </a>
+    <% end %>
+  </div>
+
+  <nav class="ui-menu" role="navigation">
+    <ul class="ui-menu-list">
+      <% @device.slides.each do |slide| %>
+        <li class="ui-menu-item" data-hash="<%= slide.slug %>">
+          <a href="#<%= slide.slug %>"><span><%= slide.menu_name %></span></a>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

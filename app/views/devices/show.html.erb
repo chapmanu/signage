@@ -1,56 +1,10 @@
 <div id="ui-feed" class="ui-feed ui-feed--show-mouse">
-  <header class="ui-head" role="banner">
-    <h1 id="chapman-logo" class="ui-logo"></h1>
 
-    <subhead class="ui-location">
-      <p class="ui-location-name"><%= @device.location %></p>
-      <p class="ui-location-time"></p>
-    </subhead>
-
-    <div class="ui-buttons">
-      <% @device.directory_slides.each do |slide| %>
-        <a href="#<%= slide.slug %>">
-          <button class="ui-button-directory"><span><%= slide.menu_name %></span></button>
-        </a>
-      <% end %>
-    </div>
-
-    <nav class="ui-menu" role="navigation">
-      <ul class="ui-menu-list">
-        <% @device.slides.each do |slide| %>
-          <li class="ui-menu-item" data-hash="<%= slide.slug %>"><a href="#<%= slide.slug %>"><span><%= slide.menu_name %></span></a></li>
-        <% end %>
-      </ul>
-    </nav>
-  </header>
+  <%= render "devices/menus/#{@device.menu}" %>
 
   <main class="owl-carousel" role="main" >
-    <% if !@device.slides.empty? %>
-      <% @device.slides.each do |slide| %>
-        <div class="js-slide-meta" data-id="<%= slide.id %>" data-hash="<%= slide.slug %>" data-duration="<%= slide.duration %>" data-template="<%= slide.template_partial %>">
-          <%= render "slide_layouts/#{slide.template_partial}", slide: slide %>
-        </div>
-      <% end %>
-    <% else %>
-      <article class="ui-slider ui-slide--dark ui-slide--standard">
-        <h1 class="ui-slide-heading">No Slides to Display</h1>
-      </article>
-    <% end %>
-
-    <% unless @device.notification.empty? %>
-      <article class="ui-slide ui-slide--notification">
-        <h1 class="ui-slide-heading"><%= @device.notification %></h1>
-
-        <p class="ui-slide-content"><%= @device.notification_detail %></p>
-      </article>
-    <% end %>
-
-    <% unless @device.emergency.empty? %>
-      <article class="ui-slide ui-slide--emergency">
-        <h1 class="ui-slide-heading"><%= @device.emergency %></h1>
-
-        <p class="ui-slide-content"><%= @device.emergency_detail %></p>
-      </article>
-    <% end %>
+    <%= render(@device.slides) %>
+    <%= render 'notification' unless @device.notification.empty? %>
+    <%= render 'emergency'    unless @device.emergency.empty?    %>
   </main>
 </div>
