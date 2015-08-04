@@ -1,6 +1,6 @@
 var Slide = function($element) {
   this.$element = $element;
-  if (/directory/.test(this.meta('template')) ) {
+  if (/directory/.test(this.meta('layout')) ) {
     this.behaviors = [
     $.extend({}, autoscrollable, {
       container:        '.ui-slide-collection',

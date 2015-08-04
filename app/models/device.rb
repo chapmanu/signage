@@ -5,6 +5,10 @@ class Device < ActiveRecord::Base
     slides.where('template ILIKE ?', '%directory%')
   end
 
+  def menu
+    template.to_s[/(\w+)(\.mustache)?$/, 1].underscore
+  end
+
   def to_param
     name
   end
