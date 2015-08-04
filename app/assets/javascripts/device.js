@@ -28,12 +28,12 @@ Device.play = function() {
 };
 
 Device.next = function() {
-  Device.slides.to(Device.nextIndex());
+  Device.owl_slides.to(Device.nextIndex());
   setTimeout(Device.next, Device.currentSlideMeta('duration') * 1000)
 };
 
 Device.nextIndex = function() {
-  if (Device.currentIndex() < Device.slides._items.length - 1) {
+  if (Device.currentIndex() < Device.owl_slides._items.length - 1) {
     return Device.currentIndex() + 1;
   } else {
     return 0;
@@ -41,11 +41,11 @@ Device.nextIndex = function() {
 };
 
 Device.currentSlide = function() {
-  return this.slides._items[this.currentIndex()];
+  return this.slides[this.currentIndex()];
 };
 
 Device.currentIndex = function() {
-  return this.slides._current;
+  return this.owl_slides._current;
 };
 
 Device.currentSlideMeta = function(key) {
@@ -61,7 +61,7 @@ Device.currentSlideMeta = function(key) {
       center:    true,
       autoWidth: true,
       onInitialized: function(evt) {
-        Device.menu = this;
+        Device.owl_menu = this;
       }
     });
   };
@@ -73,18 +73,20 @@ Device.currentSlideMeta = function(key) {
       items: 1,
       URLhashListener: true,
       onInitialized: function(evt) {
-        Device.slides = this;
+        Device.owl_slides = this;
+        Device.slides = $.map(this._items, function(item) { return new Slide(item) });
       }
     });
     owl.on('changed.owl.carousel', function(evt) {
       Device._refreshMenu();
+      Device.currentSlide().play();
     });
   }
 
   Device._refreshMenu = function() {
-    Device.menu.$element.trigger('to.owl.carousel', this.currentIndex());
-    Device.menu.$element.find('.ui-menu-item--active').removeClass('ui-menu-item--active');
-    Device.menu.$element.find('.owl-item.center').addClass('ui-menu-item--active');
+    Device.owl_menu.$element.trigger('to.owl.carousel', this.currentIndex());
+    Device.owl_menu.$element.find('.ui-menu-item--active').removeClass('ui-menu-item--active');
+    Device.owl_menu.$element.find('.owl-item.center').addClass('ui-menu-item--active');
   };
 
   Device._startClock = function() {

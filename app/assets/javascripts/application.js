@@ -16,7 +16,9 @@
 //= require turbolinks
 //= require owl.carousel
 //= require moment
+//= require jquery.scroll_into_view
 
 /* APPLICATION */
 //= require device
+//= require slide
 //= require devices
