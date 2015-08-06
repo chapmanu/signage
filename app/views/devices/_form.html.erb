@@ -15,6 +15,7 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :template %>
     <%= f.text_field :template %>
@@ -31,6 +32,30 @@
     <%= f.label :emergency_detail %>
     <%= f.text_field :emergency_detail %>
   </div>
+
+  <h4>Slides</h4>
+  <div class="vertical-tabs-container">
+    <div class="vertical-tabs">
+      <% @device.slides.each_with_index do |slide, index| %>
+        <% classes = 'js-vertical-tab vertical-tab' %>
+        <% classes += ' is-active' if index == 0 %>
+        <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+      <% end %>
+    </div>
+
+    <div class="vertical-tab-content-container">
+      <% @device.slides.each_with_index do |slide, index| %>
+          <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
+          <% classes += ' is-active' if index == 0 %>
+          <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+          <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
+            <%= render "slide_preview", slide: slide %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

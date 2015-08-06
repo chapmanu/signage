@@ -1,0 +1,8 @@
+<div class="slide-preview">
+  <div class="slide-preview-wrapper">
+    <%= content_tag :iframe, nil, src: slide_path(slide), frameborder: 0, allowfullscreen: true %>
+  </div>
+  <%= link_to "Edit", edit_slide_path(slide) %> |
+  <%= link_to "Preview", slide_path(slide) %>
+</div>
+

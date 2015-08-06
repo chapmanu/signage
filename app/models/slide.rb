@@ -4,7 +4,11 @@ class Slide < ActiveRecord::Base
   has_and_belongs_to_many :people
 
   def slug
-    "#{id.to_s}-#{name[/\w+$/]}".parameterize
+    "#{id}-#{short_name}".parameterize
+  end
+
+  def short_name
+    name[/\w+$/]
   end
 
   def people_slide?

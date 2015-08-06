@@ -1,0 +1,85 @@
+<%= form_for(@slide) do |f| %>
+  <% if @slide.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+
+      <ul>
+      <% @slide.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :template %><br>
+    <%= f.text_field :template %>
+  </div>
+  <div class="field">
+    <%= f.label :menu_name %><br>
+    <%= f.text_field :menu_name %>
+  </div>
+  <div class="field">
+    <%= f.label :organizer %><br>
+    <%= f.text_field :organizer %>
+  </div>
+  <div class="field">
+    <%= f.label :organizer_id %><br>
+    <%= f.text_field :organizer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.text_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :heading %><br>
+    <%= f.text_field :heading %>
+  </div>
+  <div class="field">
+    <%= f.label :subheading %><br>
+    <%= f.text_field :subheading %>
+  </div>
+  <div class="field">
+    <%= f.label :datetime %><br>
+    <%= f.datetime_select :datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :background %><br>
+    <%= f.text_field :background %>
+  </div>
+  <div class="field">
+    <%= f.label :background_type %><br>
+    <%= f.text_field :background_type %>
+  </div>
+  <div class="field">
+    <%= f.label :background_sizing %><br>
+    <%= f.text_field :background_sizing %>
+  </div>
+  <div class="field">
+    <%= f.label :foreground %><br>
+    <%= f.text_field :foreground %>
+  </div>
+  <div class="field">
+    <%= f.label :foreground_type %><br>
+    <%= f.text_field :foreground_type %>
+  </div>
+  <div class="field">
+    <%= f.label :foreground_sizing %><br>
+    <%= f.text_field :foreground_sizing %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
