@@ -1,5 +1,5 @@
-$(document).on('ready page:load', function() {
-
+Utils.fireWhenReady(['devices#show'], function(e) {
+  console.log("sup");
   Device.initialize({
     menu: $('.ui-menu-list'),
     slides: $('main')

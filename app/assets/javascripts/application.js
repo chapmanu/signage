@@ -17,8 +17,15 @@
 //= require owl.carousel
 //= require moment
 //= require jquery.scroll_into_view
+//= require jquery.throttle_debounce
 
 /* APPLICATION */
+//= require utils
 //= require_tree ./models
-//= require main
+//= require devices
+//= require slides
 
+$(document).on('ready page:load', function(e){
+  var controller_action = $('body').data('controller-action');
+  Utils.ready(controller_action);
+});

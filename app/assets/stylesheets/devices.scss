@@ -38,27 +38,17 @@ html {
   text-size-adjust: 100%;
   word-wrap: break-word;
   color: white;
+  overflow: hidden;
+}
+
+body {
+  transform-origin: 0,0;
 }
 
 subhead {
   display: block;
 }
 
-.ui-feed.preview-notice .ui-slide:before {
-  position: fixed;
-  top: 50px;
-  right: 130px;
-  z-index: 9999999;
-  display: block;
-  color: #F00;
-  letter-spacing: 10px;
-  font-size: 72px;
-  opacity: 0.3;
-}
-
-.ui-feed.preview-notice .ui-slide--right:before {
-  right: auto;
-}
 
 /* ui-feed
    =============================================================================
@@ -66,17 +56,10 @@ subhead {
 
 .ui-feed {
   font: 100%/1 sans-serif;
-}
-
-.ui-feed {
   background-color: rgba(236,235,229,1);
   background-color: rgba(0,0,0,1);
   color: rgba(255,255,255,1);
-  cursor: none;
-}
-
-.ui-feed--show-mouse {
-  cursor: default;
+  transform-origin: 0 0;
 }
 
 /* ui-head
@@ -207,12 +190,12 @@ subhead {
 }
 
 .ui-button-directory span {
-  background: url(../img/button-address-book.svg) 12px center / 100% 100% no-repeat;
+  background: image-url('button-address-book.svg') 12px center / 100% 100% no-repeat;
   background-size: 18px;
 }
 
 .ui-button-directory.ui-button--active span {
-  background-image: url(../img/button-address-book-red.svg);
+  background-image: image-url('button-address-book-red.svg');
 }
 
 /* ui-nav
@@ -271,12 +254,6 @@ subhead {
   text-align: center;
   overflow: hidden;
   padding: 4px 32px;
-
-
-}
-
-.ui-resizing .ui-menu-item span, .ui-resizing .ui-menu-caret {
-  transition: color 0ms;
 }
 
 .ui-menu-item span {
@@ -377,16 +354,31 @@ subhead {
   background-size: initial;
 }
 
+
+.ui-slide {
+  height: 100vh;
+}
+
+.ui-feed--preview .ui-slide {
+  bottom: 0px;
+  font-size: 20px;
+  height: 100%;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+}
+
+
+
 /* slide: standard
    =============================================================================
 */
 
 .ui-slide--standard {
   padding: 120px 140px 20px 140px;
-}
-
-.ui-slide {
-  height: 100vh;
 }
 
 .ui-slide--standard .ui-slide-datetime {
