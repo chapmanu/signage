@@ -9,8 +9,7 @@
 @import "refills/*";
 
 body, html {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .home-button {
@@ -22,6 +21,18 @@ body, html {
   @include outer-container;
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.admin-site-title {
+  text-align: center;
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0px;
+    @include media($medium-screen ) {
+      font-size: 3em;
+    }
+  }
+  margin-bottom: $base-spacing;
 }
 
 .admin-emergency-header {
