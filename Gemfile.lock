@@ -42,6 +42,13 @@ GEM
     awesome_print (1.6.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitters (1.0.0)
+      bourbon (>= 3.2)
+      sass (>= 3.2)
+      thor
+    bourbon (4.2.3)
+      sass (~> 3.4)
+      thor
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -107,6 +114,9 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.11.2)
+    neat (1.7.2)
+      bourbon (>= 4.0)
+      sass (>= 3.3)
     nenv (0.2.0)
     netrc (0.10.3)
     nokogiri (1.6.6.2)
@@ -151,6 +161,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
+    refills (0.1.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -204,6 +215,8 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  bitters
+  bourbon
   byebug
   coffee-rails (~> 4.1.0)
   guard (= 2.12.9)
@@ -211,8 +224,10 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   minitest-reporters
+  neat
   pg (= 0.18.2)
   rails (= 4.2.3)
+  refills
   rest-client (= 1.8.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

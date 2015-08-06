@@ -1,5 +1,5 @@
 class Slide < ActiveRecord::Base
-  belongs_to :device
+  belongs_to :device, touch: true
   has_many :scheduled_items, dependent: :destroy
   has_and_belongs_to_many :people
 

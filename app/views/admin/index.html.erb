@@ -1,0 +1,27 @@
+<div class="admin-content">
+
+  <div class="device-background">
+    <div class="device-text">
+      <h4>Digital Signage Administration</h4>
+      <p>The admin panel for Chapman's Digital Signs on Campus</p>
+    </div>
+  </div>
+
+  <div class="grid-items-lines">
+    <a href="<%= admin_emergency_path%>" class="grid-item">
+      <%= image_tag 'fire2.png', alt: 'Emergency' %>
+
+      <h1>Broadcast an Emergency</h1>
+      <p>Send an emergency notification to one, several, or all deivces.</p>
+    </a>
+
+    <a href="<%= devices_path %>" class="grid-item">
+      <%= image_tag 'screen.png', alt: 'Devices' %>
+      <h1>Manage Devices</h1>
+      <p>Add, update, and delete digital signage devices.</p>
+    </a>
+    <div class="right-cover"></div>
+    <div class="bottom-cover"></div>
+  </div>
+
+</div>

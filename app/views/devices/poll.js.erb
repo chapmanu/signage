@@ -1,0 +1,21 @@
+<% if @refresh %>
+  window.location = '<%= j device_path(@device) %>';
+<% end %>
+
+var $current_emergency = $('#js-emergency-slide');
+
+<%  if @device.emergency? %>
+  var $new_emergency = $('<%=j render("emergency") %>');
+
+  console.log('new', $new_emergency.text());
+  console.log('old', $current_emergency.text());
+
+
+  if ($new_emergency.text() !== $current_emergency.text()) {
+    $current_emergency.remove();
+    $('body').prepend($new_emergency);
+  }
+
+<% else %>
+  if ($current_emergency.length > 0) $current_emergency.remove();
+<% end %>

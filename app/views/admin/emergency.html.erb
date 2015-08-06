@@ -1,0 +1,54 @@
+<div class="admin-content">
+  <%= home_button %>
+  <header class="admin-emergency-header">
+    <h1 class="admin-page-title"><%= image_tag 'fire2.png', alt: 'Emergency' %> Emergency Broadcast </h1>
+    <%= link_to "Clear All Emergency Messages", admin_clear_emergency_path, method: :post, data: {confirm: 'Are you sure you want to clear all emergency messages?'} %>
+  </header>
+
+  <%= form_tag action: 'update_emergency' do %>
+    <fieldset>
+    <div class="field">
+      <%= label_tag :emergency, "Emergency message title" %>
+      <%= text_field_tag :emergency %>
+    </div>
+
+
+    <div class="field">
+      <%= label_tag :emergency_detail, "Emergency message description" %>
+      <%= text_field_tag :emergency_detail %>
+    </div>
+
+    <label>Choose the devices you would like to broadcast this message to:</label>
+
+    <%= link_to "Select all",    "javascript:Admin.selectAllCheckboxes()" %> |
+    <%= link_to "De-select all", "javascript:Admin.deselectAllCheckboxes()" %>
+    <table class="device-checkboxes-table">
+      <tr>
+        <th></th>
+        <th>Device Name</th>
+        <th>Emergency Message</th>
+      </tr>
+      <% @devices.each do |device| %>
+      <tr>
+          <td><%= check_box_tag "device_ids[]", device.id, false, id: "device_ids_#{device.id}" %></td>
+          <td><%= label_tag "device_ids[#{device.id}]", device.name.try(:humanize) %></td>
+          <td>
+            <% if device.emergency? %>
+              <b><%= device.emergency %></b><br />
+              <i><%= device.emergency_detail %></i>
+            <% else %>
+              (None)
+            <% end %>
+          </td>
+      </tr>
+      <% end %>
+    </table>
+
+    <div class="field submit-emergency">
+      <%= submit_tag "Broadcast!" %>
+      <p>Your emergency message will immediately display on all the checked devices.</p>
+    </div>
+    </fieldset>
+  <% end %>
+
+</div>
