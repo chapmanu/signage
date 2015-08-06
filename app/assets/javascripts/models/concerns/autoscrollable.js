@@ -45,6 +45,7 @@ var autoscrollable = {
 
   _scrollToItem: function(index) {
     var $child = this.$container.find(this.items).eq(index);
+    console.log("Scrolling to ", $child.text())
     this.$container.animate({
       scrollTop: $child.offset().top - this.$container.offset().top + this.$container.scrollTop()
     });

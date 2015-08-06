@@ -12,4 +12,8 @@ class Device < ActiveRecord::Base
   def to_param
     name
   end
+
+  def emergency?
+    !emergency.blank? || !emergency_detail.blank?
+  end
 end

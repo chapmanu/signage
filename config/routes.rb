@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  resources :devices, only: [:index, :show]
-  namespace :admin do
-    resources :devices
+
+  get 'admin', to: 'admin#index'
+  get 'admin/index'
+  get 'admin/emergency'
+  get 'admin/devices'
+  post 'admin/update_emergency'
+  post 'admin/clear_emergency'
+
+  resources :devices do
+    get 'poll', on: :member
   end
 
   root 'devices#index'

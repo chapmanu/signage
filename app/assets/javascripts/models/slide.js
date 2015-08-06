@@ -1,18 +1,29 @@
 var Slide = function($element) {
   this.$element = $element;
-  if (/directory/.test(this.meta('layout')) ) {
-    this.behaviors = [
-    $.extend({}, autoscrollable, {
-      container:        '.ui-slide-collection',
-      items:            '.ui-member',
-      visible_rows:    4,
-      items_per_row:   4,
-      rows_per_scroll: 2,
-      scroll_interval: 8000
-    })
-  ];
-  } else {
-    this.behaviors = []
+  this.behaviors = [];
+
+  if (/directory/.test(this.meta('layout'))) {
+    this.behaviors.push(
+      $.extend({}, autoscrollable, {
+        container:        '.ui-slide-collection',
+        items:            '.ui-member',
+        visible_rows:    4,
+        items_per_row:   4,
+        rows_per_scroll: 2,
+        scroll_interval: 8000
+      })
+    );
+  } else if (/schedule/.test(this.meta('layout'))) {
+    this.behaviors.push(
+      $.extend({}, autoscrollable, {
+        container:        '.ui-slide-collection',
+        items:            '.ui-event',
+        visible_rows:    4,
+        items_per_row:   1,
+        rows_per_scroll: 1,
+        scroll_interval: 1000
+      })
+    );
   }
   var self = this;
   $.each(this.behaviors, function(i, behavior) { behavior.initialize(self); });

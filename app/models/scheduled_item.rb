@@ -1,5 +1,5 @@
 class ScheduledItem < ActiveRecord::Base
-  belongs_to :slide
+  belongs_to :slide, touch: true
 
   def image_url
     Rails.application.config.asset_url + image

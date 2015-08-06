@@ -7,7 +7,8 @@
  */
 window.Device = {
   slides: undefined,
-  menu:   undefined
+  menu:   undefined,
+  emergency_poll_interval: 5000
 };
 
 /**
@@ -21,6 +22,7 @@ Device.initialize = function(config) {
   Device._initializeSlides(config.slides);
   Device._startClock();
   Device._refreshMenu();
+  Device._startPolling();
 }
 
 Device.play = function() {
@@ -45,6 +47,10 @@ Device.currentSlide = function() {
 Device.currentIndex = function() {
   return this.owl_slides._current;
 };
+
+Device.meta = function(key) {
+  return $('.js-device-meta').data(key);
+}
 
 /**
  * PRIVATE (Don't rely on these methods outside this file)
@@ -102,3 +108,11 @@ Device._queueNextSlide = function() {
     Device.owl_slides.to(Device.nextIndex());
   }, Device.currentSlide().meta('duration') * 1000);
 };
+
+Device._startPolling = function() {
+  var path = Device.meta('poll-device-path');
+  var data = { device: {updated_at: Device.meta('updated-at')}};
+  setInterval(function() {
+    $.get(path, data);
+  }, Device.emergency_poll_interval);
+}

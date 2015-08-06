@@ -664,21 +664,21 @@ subhead {
 */
 
 .ui-slide--notification, .ui-slide--emergency {
-  -webkit-animation: fade-in 50ms;
-  animation: fade-in 50ms;
   opacity: 1;
   padding: 120px 140px 20px 140px;
   text-align: center;
   z-index: 11;
+  position: fixed;
+  top: 0; right: 0; left: 0; bottom: 0;
 }
 
 .ui-slide--notification {
   background-color: rgba(46, 47, 48, 0.95);
-  background-image: url(../img/bg-notification.png);
+  background-image: image-url('bg-notification.png');
 }
 
 .ui-slide--emergency {
-  background: url(../img/bg-emergency.png);
+  background: image-url('bg-emergency.png');
   background-color: rgba(152,30,50,0.95);
   text-shadow: 0 0 5px rgba(0,0,0,1), 0 -5px 5px rgba(0,0,0,1);
 }

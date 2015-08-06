@@ -1,0 +1,61 @@
+// Place all the styles related to the admin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "fonts";
+@import "bourbon";
+@import "base/base";
+@import "neat";
+@import "refills/*";
+
+body, html {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.home-button {
+  display: block;
+  margin-bottom: $base-spacing;
+}
+
+.admin-content {
+  @include outer-container;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.admin-emergency-header {
+  @include outer-container;
+  vertical-align: middle;
+  h1 {
+    @include span-columns(8);
+  }
+  a {
+    text-align: right;
+    @include span-columns(4);
+  }
+}
+
+.admin-page-title {
+  font-size: 2em;
+  img {
+    height: 1em;
+    opacity: 0.2;
+  }
+}
+
+.field {
+  margin-bottom: $base-spacing;
+}
+
+.device-checkboxes-table {
+  table-layout: auto;
+}
+
+.submit-emergency {
+  text-align: center;
+  input {
+    width: 50%;
+    margin: $base-spacing 0;
+  }
+}
