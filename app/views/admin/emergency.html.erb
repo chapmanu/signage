@@ -1,17 +1,15 @@
-<div class="admin-content">
-  <%= home_button %>
-  <header class="admin-emergency-header">
-    <h1 class="admin-page-title"><%= image_tag 'fire2.png', alt: 'Emergency' %> Emergency Broadcast </h1>
-    <%= link_to "Clear All Emergency Messages", admin_clear_emergency_path, method: :post, data: {confirm: 'Are you sure you want to clear all emergency messages?'} %>
-  </header>
+<%= home_button %>
+<header class="admin-emergency-header">
+  <h1 class="admin-page-title"><%= image_tag 'fire2.png', alt: 'Emergency' %> Emergency Broadcast </h1>
+  <%= link_to "Clear All Emergency Messages", admin_clear_emergency_path, method: :post, data: {confirm: 'Are you sure you want to clear all emergency messages?'} %>
+</header>
 
-  <%= form_tag action: 'update_emergency' do %>
-    <fieldset>
+<%= form_tag action: 'update_emergency' do %>
+  <fieldset>
     <div class="field">
       <%= label_tag :emergency, "Emergency message title" %>
       <%= text_field_tag :emergency %>
     </div>
-
 
     <div class="field">
       <%= label_tag :emergency_detail, "Emergency message description" %>
@@ -48,7 +46,5 @@
       <%= submit_tag "Broadcast!" %>
       <p>Your emergency message will immediately display on all the checked devices.</p>
     </div>
-    </fieldset>
-  <% end %>
-
-</div>
+  </fieldset>
+<% end %>

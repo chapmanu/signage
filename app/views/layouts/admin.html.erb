@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= display_flashes %>
-  <%= content_for(:home_button, home_button) %>
+
+<%= display_flashes %>
+
+<div class="admin-content">
   <%= yield %>
+</div>
+
 </body>
 </html>
