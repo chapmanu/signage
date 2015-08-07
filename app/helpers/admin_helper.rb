@@ -4,9 +4,7 @@ module AdminHelper
   end
 
   def display_flashes
-    ap 'Whaaaat up!?!'
     html = ''.html_safe
-    ap flash.inspect
     flash.each do |type, message|
       # We have styles for when type = 'success', 'error', 'notice', and 'alert'
       html += content_tag :div, class: "flash-#{type}" do
