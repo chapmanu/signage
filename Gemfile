@@ -5,6 +5,7 @@ gem 'neat'
 gem 'bitters'
 gem 'refills'
 gem 'rest-client', '1.8.0'
+gem 'awesome_print'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -42,7 +43,6 @@ gem 'capistrano-rvm',   '~> 0.1.2', group: :development
 group :development, :test do
   gem 'guard', '2.12.9'
   gem 'guard-minitest', '2.4.4'
-  gem 'awesome_print'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
