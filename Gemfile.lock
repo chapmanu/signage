@@ -241,7 +241,7 @@ DEPENDENCIES
   byebug
   capistrano (~> 3.1)
   capistrano-rails (~> 1.1)
-  capistrano-rvm
+  capistrano-rvm (~> 0.1.2)
   coffee-rails (~> 4.1.0)
   guard (= 2.12.9)
   guard-minitest (= 2.4.4)
