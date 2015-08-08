@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Ds
+module Signage
   class Application < Rails::Application
     config.asset_url = 'http://www2.chapman.edu'
     # Settings in config/environments/* take precedence over those specified here.
