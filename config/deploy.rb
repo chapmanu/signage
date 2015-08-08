@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'signage'
-set :repo_url, 'git@github.com:chapmanu/digital-signage-2.git'
+set :repo_url, 'git@github.com:chapmanu/signage.git'
 
 # RVM SETTINGS
 set :rvm_ruby_version, '2.2.1'
