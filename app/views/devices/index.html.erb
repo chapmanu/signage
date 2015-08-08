@@ -4,7 +4,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th style="width: 30%">Name</th>
       <th>Location</th>
       <th>Type</th>
       <th style="text-align: center">Number of Slides</th>
@@ -15,13 +15,12 @@
   <tbody>
     <% @devices.each do |device| %>
       <tr>
-        <td><%= link_to device.name.try(:humanize), device %></td>
+        <td><%= link_to device.name.try(:humanize), edit_device_path(device) %></td>
         <td><%= device.location %></td>
         <td><%= device.menu.try(:humanize) %>
         <td style="text-align: center"><%= device.slides.length %></td>
         <td style="text-align: center">
-          <%= link_to "Edit", edit_device_path(device) %> |
-          <%= link_to "Delete", device, method: 'delete', data: {confirm: 'Are you sure you want to delete this thing?'} %>
+          <%= link_to "Play", device %>
         </td>
       </tr>
     <% end %>

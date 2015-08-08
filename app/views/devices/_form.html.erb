@@ -34,6 +34,10 @@
   </div>
 
   <h4>Slides</h4>
+  <% if @device.slides.empty? %>
+  <p>No slides have been added to this device.</p>
+  <br />
+  <% else %>
   <div class="vertical-tabs-container">
     <div class="vertical-tabs">
       <% @device.slides.each_with_index do |slide, index| %>
@@ -54,6 +58,7 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 
 
   <div class="actions">
