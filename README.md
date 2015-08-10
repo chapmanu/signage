@@ -2,8 +2,8 @@
 
 ### Set up
 ```
-git clone https://github.com/chapmanu/digital-signage-2.git
-cd digital-signage-2
+git clone https://github.com/chapmanu/signage.git
+cd signage
 bundle install
 rake db:create db:migrate
 rake cascade:sync
