@@ -78,6 +78,10 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+staging:
+  <<: *default
+  database: signage_staging
+
 production:
   <<: *default
   database: signage_production
