@@ -36,6 +36,17 @@ body, html {
   margin-bottom: $base-spacing;
 }
 
+.admin-page-header {
+  @include clearfix;
+  .admin-page-title {
+    float: left;
+  }
+  a {
+    line-height: 2em;
+    float: right;
+  }
+}
+
 .admin-emergency-header {
   @include outer-container;
   vertical-align: middle;
@@ -106,8 +117,6 @@ body, html {
     @include span-columns(4);
   }
 }
-
-
 
 .show-slide-settings{
   margin-top: $base-spacing;

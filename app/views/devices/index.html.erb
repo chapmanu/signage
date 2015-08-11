@@ -1,5 +1,8 @@
 <%= home_button %>
-<h1 class="admin-page-title"><%= image_tag 'screen.png', alt: 'Devices' %> Devices</h1>
+<header class="admin-page-header">
+<h1 class="admin-page-title">Devices</h1>
+<%= link_to "+ New Device", new_device_path %>
+</header>
 
 <table>
   <thead>
@@ -26,6 +29,3 @@
     <% end %>
   </tbody>
 </table>
-
-<p><%= link_to "+ New Device", new_device_path %></p>
-</div>
