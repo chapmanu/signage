@@ -1,7 +1,10 @@
 class SlidesController < ApplicationController
-  before_action :set_slide,   only: [:show, :edit, :update, :destroy]
- before_action :set_devices, only: [:new, :edit]
-  layout 'admin', except: [:show]
+  before_action :set_slide,   only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_devices, only: [:new, :edit]
+  layout 'admin', except: [:preview]
+
+  def preview
+  end
 
   # GET /slides
   # GET /slides.json

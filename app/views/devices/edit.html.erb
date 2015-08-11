@@ -1,4 +1,4 @@
-<%= link_to '<< Back', devices_path, class: 'home-button' %>
+<%= link_to '<< All Devices', devices_path, class: 'home-button' %>
 
 <%= link_to 'Play', @device, style: 'float: right;' %>
 <h1 class="admin-page-title">Editing Device</h1>
@@ -25,7 +25,13 @@
             <% classes += ' is-active' if index == 0 %>
             <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
             <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
-              <%= render "slide_preview", slide: slide %>
+              <p>
+                <%= link_to "Show", slide %> |
+                <%= link_to "Edit", edit_slide_path(slide) %> |
+                <%= link_to "Full Preview", preview_slide_path(slide), target: '_blank' %>
+                </p>
+              <%= render "slides/preview_iframe", slide: slide %>
+
             </div>
         <% end %>
       </div>
@@ -33,6 +39,3 @@
   <% end %>
   <%= link_to "+ Add Slide", new_slide_path %>
 </div>
-
-
-
