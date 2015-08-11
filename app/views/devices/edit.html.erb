@@ -9,15 +9,13 @@
 <div class="admin-device-slides-preview">
 
   <h4>Slides</h4>
-  <%= link_to "+ Add Slide", new_slide_path %>
-
   <% if !@device.slides.empty? %>
     <div class="vertical-tabs-container">
       <div class="vertical-tabs">
         <% @device.slides.each_with_index do |slide, index| %>
           <% classes = 'js-vertical-tab vertical-tab' %>
           <% classes += ' is-active' if index == 0 %>
-          <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+          <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
         <% end %>
       </div>
 
@@ -25,7 +23,7 @@
         <% @device.slides.each_with_index do |slide, index| %>
             <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
             <% classes += ' is-active' if index == 0 %>
-            <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+            <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
             <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
               <%= render "slide_preview", slide: slide %>
             </div>
@@ -33,6 +31,7 @@
       </div>
     </div>
   <% end %>
+  <%= link_to "+ Add Slide", new_slide_path %>
 </div>
 
 

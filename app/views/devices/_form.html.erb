@@ -1,4 +1,4 @@
-<%= form_for(@device, 'data-no-turbolink' => true) do |f| %>
+<%= form_for(@device) do |f| %>
   <% if @device.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
