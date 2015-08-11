@@ -1,3 +1,5 @@
+<%= link_to '<< All Devices', devices_path, class: 'home-button' %>
+
 <h1 class="admin-page-title"><%= @slide.menu_name %></h1>
 
 <p><%= link_to "Edit", edit_slide_path(@slide) %> |
@@ -6,13 +8,12 @@
 <%= render 'preview_iframe', slide: @slide %>
 
 <div class="show-slide-settings">
-  <table display>
+  <table>
     <tr>
       <td>Devices playing this slide:</td>
       <th>
-        <% @slide.devices.order(:name).each do |d| %>
-          <%= link_to d.name, edit_device_path(d) %>
-        <% end %>
+        <%= "None" if @slide.devices.empty? %>
+        <%= @slide.devices.order(:name).map{|d| link_to d.name, edit_device_path(d) }.join(', ').try(:html_safe) %>
       </th>
     </tr>
     <tr>
@@ -31,5 +32,5 @@
       <td>Menu Name:</td>
       <th><%= @slide.menu_name %></th>
     </tr>
-
+  </table>
 </div>

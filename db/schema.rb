@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811184231) do
+ActiveRecord::Schema.define(version: 20150811225543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150811184231) do
     t.datetime "play_on"
     t.datetime "stop_on"
     t.boolean  "show",              default: true, null: false
-    t.datetime "datetime"
+    t.string   "datetime"
   end
 
   add_foreign_key "scheduled_items", "slides"
