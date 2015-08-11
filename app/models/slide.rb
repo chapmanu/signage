@@ -3,6 +3,38 @@ class Slide < ActiveRecord::Base
   has_many :scheduled_items, dependent: :destroy
   has_and_belongs_to_many :people
 
+  def self.templates
+    @templates ||= Dir[Rails.root.join('app', 'views', 'slides', 'templates', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
+  end
+
+  def self.themes
+    @_themes ||= ['dark', 'light'] # It's always the darkest before light
+  end
+
+  def self.layouts
+    @_layouts ||= ['left', 'right'] # We are in America peeps, left then right
+  end
+
+  def self.directory_feeds
+    @_directory_feeds ||= ['Beckman Hall', 'Moulton Hall', 'Musco Center for the Arts']
+  end
+
+  def self.organizers
+    @_organizers ||= ['CES', 'Dodge', 'Stuff', 'Yeah!'] # Read all the file names of the image files
+  end
+
+  def self.background_types
+    @_background_types ||= ['none', 'image', 'video']
+  end
+
+  def self.foreground_types
+    @_foreground_types ||= ['none', 'image', 'video']
+  end
+
+  def self.foreground_sizings
+    @_foreground_sizings ||= ['exact size', 'fill screen', 'fill screen (do not crop)']
+  end
+
   def slug
     "#{id}-#{short_name}".parameterize
   end
@@ -17,10 +49,6 @@ class Slide < ActiveRecord::Base
 
   def schedule_slide?
     !!(template.downcase =~ /schedule/)
-  end
-
-  def layout
-    normalized_template[:layout]
   end
 
   def css_classes

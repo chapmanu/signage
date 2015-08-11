@@ -6,6 +6,7 @@
 @import "bourbon";
 @import "base/base";
 @import "neat";
+@import "jquery.datetimepicker";
 @import "refills/*";
 
 body, html {
@@ -87,5 +88,21 @@ body, html {
 }
 
 .admin-content .actions {
-  margin-top: $base-spacing;
+  margin-bottom: $base-spacing;
+}
+
+.slide-options {
+  @include clearfix;
+  .field {
+    @include span-columns(4);
+    select {
+      width: 100%;
+    }
+  }
+}
+
+.slide-time-range {
+  .field {
+    @include span-columns(4);
+  }
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727200510) do
+ActiveRecord::Schema.define(version: 20150811171709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,10 +67,9 @@ ActiveRecord::Schema.define(version: 20150727200510) do
     t.string   "menu_name"
     t.string   "organizer"
     t.string   "organizer_id"
-    t.integer  "duration"
+    t.integer  "duration",          default: 20,   null: false
     t.string   "heading"
     t.string   "subheading"
-    t.datetime "datetime"
     t.string   "location"
     t.text     "content"
     t.string   "background"
@@ -79,9 +78,15 @@ ActiveRecord::Schema.define(version: 20150727200510) do
     t.string   "foreground"
     t.string   "foreground_type"
     t.string   "foreground_sizing"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "device_id"
+    t.string   "theme"
+    t.string   "layout"
+    t.string   "directory_feed"
+    t.datetime "play_on"
+    t.datetime "stop_on"
+    t.boolean  "show",              default: true, null: false
   end
 
   add_index "slides", ["device_id"], name: "index_slides_on_device_id", using: :btree
