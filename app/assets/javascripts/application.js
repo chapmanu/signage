@@ -26,6 +26,7 @@
 //= require slides
 
 $(document).on('ready page:load', function(e){
+  // Fire all the stuff for the controllers
   var controller_action = $('body').data('controller-action');
   Utils.ready(controller_action);
 });
