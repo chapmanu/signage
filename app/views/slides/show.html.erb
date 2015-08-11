@@ -1,3 +1,35 @@
-<div class="ui-feed ui-feed--preview">
-  <%= render 'slide', slide: @slide %>
+<h1 class="admin-page-title"><%= @slide.menu_name %></h1>
+
+<p><%= link_to "Edit", edit_slide_path(@slide) %> |
+<%= link_to "Full Screen Preview", preview_slide_path(@slide) %></p>
+
+<%= render 'preview_iframe', slide: @slide %>
+
+<div class="show-slide-settings">
+  <table display>
+    <tr>
+      <td>Devices playing this slide:</td>
+      <th>
+        <% @slide.devices.order(:name).each do |d| %>
+          <%= link_to d.name, edit_device_path(d) %>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <td>Visibility:</td>
+      <th><%= @slide.show ? 'Visible' : 'Hidden'%></th>
+    </tr>
+    <tr>
+      <td>Duration to play:</td>
+      <th><%= @slide.duration.to_s + " second".pluralize(@slide.duration) %></th>
+    </tr>
+    <tr>
+      <td>Date range to display:</td>
+      <th>From <%= @slide.play_on ? format_date(@slide.play_on) : 'never' %> to <%= @slide.stop_on ? format_date(@slide.stop_on) : 'infinity' %></th>
+    </tr>
+    <tr>
+      <td>Menu Name:</td>
+      <th><%= @slide.menu_name %></th>
+    </tr>
+
 </div>
