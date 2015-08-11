@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :slides
+  resources :slides do
+    get 'preview', on: :member
+  end
 
   get 'admin', to: 'admin#index'
   get 'admin/index'
