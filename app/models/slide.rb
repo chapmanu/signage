@@ -1,7 +1,7 @@
 class Slide < ActiveRecord::Base
-  belongs_to :device, touch: true
-  has_many :scheduled_items, dependent: :destroy
+  has_and_belongs_to_many :devices
   has_and_belongs_to_many :people
+  has_many :scheduled_items, dependent: :destroy
 
   def self.templates
     @templates ||= Dir[Rails.root.join('app', 'views', 'slides', 'templates', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
@@ -36,11 +36,7 @@ class Slide < ActiveRecord::Base
   end
 
   def slug
-    "#{id}-#{short_name}".parameterize
-  end
-
-  def short_name
-    name[/\w+$/]
+    "#{id}-#{menu_name}".parameterize
   end
 
   def people_slide?
@@ -53,19 +49,15 @@ class Slide < ActiveRecord::Base
 
   def css_classes
     classes = ['ui-slide']
-    classes << 'ui-slide--standard'       if layout =~ /standard/
-    classes << 'ui-slide--directory'      if layout =~ /directory/
-    classes << 'ui-slide--schedule'       if layout =~ /schedule/
-    classes << 'ui-slide--right'          if variation =~ /right/
-    classes << 'ui-slide--left'           if variation =~ /left/
-    classes << 'ui-slide--dark'           if variation =~ /dark/
-    classes << 'ui-slide--light'          if variation =~ /light/
+    classes << 'ui-slide--standard'       if template =~ /standard/
+    classes << 'ui-slide--directory'      if template =~ /directory/
+    classes << 'ui-slide--schedule'       if template =~ /schedule/
+    classes << 'ui-slide--right'          if layout =~ /right/
+    classes << 'ui-slide--left'           if layout =~ /left/
+    classes << 'ui-slide--dark'           if theme =~ /dark/
+    classes << 'ui-slide--light'          if theme =~ /light/
     classes << 'ui-slide--has-background' if !background.blank?
     classes.join(' ')
-  end
-
-  def variation
-    normalized_template[:variation]
   end
 
   def background_url
@@ -75,10 +67,4 @@ class Slide < ActiveRecord::Base
   def foreground_url
     Rails.application.config.asset_url + foreground
   end
-
-  private
-    def normalized_template
-      array = template.to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
-      { layout: array.shift, variation: array.join('_') }
-    end
 end
