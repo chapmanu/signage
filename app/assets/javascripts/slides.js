@@ -1,4 +1,4 @@
-Utils.fireWhenReady(['slides#show'], function(e) {
+Utils.fireWhenReady(['slides#preview'], function(e) {
   $('.ui-feed').css({width: '1920px', height: '1080px'});
   var scaleSlidePreview = $.throttle(50, function() {
     var

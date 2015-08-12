@@ -26,9 +26,16 @@ class FetchDeviceDataJob < ActiveJob::Base
     def save_slides(data)
       data.map do |item|
         slide = Slide.where(name: item['id']).first_or_initialize
+        # The easy stuff where it maps directly
         item.except(*excluded_keys).each { |k, v| slide[k.underscore] = v }
+        # The association stuff
         slide.people          = save_people(item['collection'] || [])          if slide.people_slide?
         slide.scheduled_items = save_scheduled_items(item['collection'] || []) if slide.schedule_slide?
+        # The custom attribute processing
+        slide_type_parts = slide.template.to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
+        slide.template   = slide_type_parts[0]
+        slide.theme      = slide_type_parts[1]
+        slide.layout     = slide_type_parts[2]
         slide.save!
         slide
       end

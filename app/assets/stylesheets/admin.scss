@@ -6,6 +6,7 @@
 @import "bourbon";
 @import "base/base";
 @import "neat";
+@import "jquery.datetimepicker";
 @import "refills/*";
 
 body, html {
@@ -33,6 +34,17 @@ body, html {
     }
   }
   margin-bottom: $base-spacing;
+}
+
+.admin-page-header {
+  @include clearfix;
+  .admin-page-title {
+    float: left;
+  }
+  a {
+    line-height: 2em;
+    float: right;
+  }
 }
 
 .admin-emergency-header {
@@ -87,5 +99,25 @@ body, html {
 }
 
 .admin-content .actions {
+  margin-bottom: $base-spacing;
+}
+
+.slide-options {
+  @include clearfix;
+  .field {
+    @include span-columns(4);
+    select {
+      width: 100%;
+    }
+  }
+}
+
+.slide-time-range {
+  .field {
+    @include span-columns(4);
+  }
+}
+
+.show-slide-settings{
   margin-top: $base-spacing;
 }

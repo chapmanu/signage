@@ -1,6 +1,11 @@
 class SlidesController < ApplicationController
-  before_action :set_slide, only: [:show, :edit, :update, :destroy]
-  layout 'admin', except: [:show]
+  before_action :set_slide,   only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_devices, only: [:new, :edit]
+  layout 'admin', except: [:preview]
+
+  def preview
+  end
+
   # GET /slides
   # GET /slides.json
   def index
@@ -67,8 +72,37 @@ class SlidesController < ApplicationController
       @slide = Slide.find(params[:id])
     end
 
+    def set_devices
+      @devices = Device.all.order(:name)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def slide_params
-      params.require(:slide).permit(:name, :template, :menu_name, :organizer, :organizer_id, :duration, :heading, :subheading, :datetime, :location, :content, :background, :background_type, :background_sizing, :foreground, :foreground_type, :foreground_sizing)
+      params.require(:slide).permit(
+        :name,
+        :template,
+        :theme,
+        :layout,
+        :play_on,
+        :stop_on,
+        :show,
+        :directory_feed,
+        :menu_name,
+        :organizer,
+        :organizer_id,
+        :duration,
+        :heading,
+        :subheading,
+        :datetime,
+        :location,
+        :content,
+        :background,
+        :background_type,
+        :background_sizing,
+        :foreground,
+        :foreground_type,
+        :foreground_sizing,
+        :device_ids => []
+        )
     end
 end
