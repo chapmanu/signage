@@ -28,7 +28,8 @@ class SlidesController < ApplicationController
   # GET /slides/new
   def new
     @slide = Slide.new
-    @slide.devices << Device.find_by_name(session[:parent_device_id]) if session[:parent_device_id]
+    device = Device.friendly.find(session[:parent_device_id]) if session[:parent_device_id]
+    @slide.devices << device if device
   end
 
   # GET /slides/1/edit

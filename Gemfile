@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'friendly_id', '~> 5.1.0'
 gem 'tinymce-rails', '4.2.3'
 gem 'bourbon'
 gem 'neat'
