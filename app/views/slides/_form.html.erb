@@ -1,4 +1,4 @@
-<%= form_for @slide do |f| %>
+<%= form_for @slide, html: { id: 'slide_form' } do |f| %>
   <% if @slide.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
@@ -11,19 +11,32 @@
     </div>
   <% end %>
 
-  <h4>Slide Content</h4>
+  <!-- First Fieldset -->
+
   <fieldset>
     <div class="field">
       <%= f.label :menu_name, "Name (appears on menu)" %>
       <%= f.text_field :menu_name %>
     </div>
 
-    <div class="slide-options">
-      <div class="field">
-        <%= f.label :template %>
-        <%= f.select :template, Slide.templates.map{|t| [t.humanize, t] }, { include_blank: 'Select your template'}, class: 'dropdown-select' %>
+    <div class="field">
+      <%= f.label :template, "Choose from the three available slide templates" %>
+      <div class="field-description">
+        <ul>
+          <li><strong>Directory:</strong> listing of faculty in a building</li>
+          <li><strong>Schedule:</strong> listing of events</li>
+          <li><strong>Standard:</strong> heading, main content, background image/video, foreground image/video</li>
+        </ul>
       </div>
+      <%= f.select :template, Slide.templates.map{|t| [t.humanize, t] }, { include_blank: 'Select your template'}, class: 'dropdown-select' %>
+    </div>
+  </fieldset>
 
+  <!-- Second Fieldset -->
+
+  <fieldset data-show-when="#slide_template==(standard|directory|schedule)">
+    <h4>Slide Content</h4>
+    <div class="slide-fields">
       <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
         <%= f.label :theme %>
         <%= f.select :theme, Slide.themes.map{|t| [t.humanize, t] } %>
@@ -33,114 +46,116 @@
         <%= f.label :layout %>
         <%= f.select :layout, Slide.layouts.map{|t| [t.humanize, t] } %>
       </div>
-    </div>
 
-    <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
-      <%= f.label :heading %>
-      <%= f.text_field :heading %>
-    </div>
+      <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+        <%= f.label :heading %>
+        <%= f.text_field :heading %>
+      </div>
 
-    <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
-      <%= f.label :subheading %>
-      <%= f.text_field :subheading %>
-    </div>
+      <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+        <%= f.label :subheading %>
+        <%= f.text_field :subheading %>
+      </div>
 
-    <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
-      <%= f.label :organizer, "Organizer/Sponsor" %>
-      <%= f.select :organizer, Slide.organizers.map{|f| [f, f] } %>
-    </div>
+      <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+        <%= f.label :organizer, "Organizer/Sponsor" %>
+        <%= f.select :organizer, Slide.organizers.map{|f| [f, f] } %>
+      </div>
 
-    <div class="field" data-show-when="#slide_template==standard">
-      <%= f.label :datetime %>
-      <%= f.text_field :datetime %>
-    </div>
+      <div class="field" data-show-when="#slide_template==standard">
+        <%= f.label :datetime %>
+        <%= f.text_field :datetime %>
+      </div>
 
-    <div class="field" data-show-when="#slide_template==standard">
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-    </div>
+      <div class="field" data-show-when="#slide_template==standard">
+        <%= f.label :location %>
+        <%= f.text_field :location %>
+      </div>
 
-    <div class="field" data-show-when="#slide_template==standard">
-      <%= f.label :content %>
-      <%= f.text_area :content, :class => "tinymce", :rows => 16, :cols => 120 %>
-      <%= tinymce %>
-    </div>
+      <div class="field" data-show-when="#slide_template==standard">
+        <%= f.label :content %>
+        <%= f.text_area :content, :class => "tinymce", :rows => 16, :cols => 120 %>
+        <%= tinymce %>
+      </div>
 
-    <div data-show-when="#slide_template==standard">
-    <div class="field">
-      <%= f.label :background_type %>
-      <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]} %>
-    </div>
-
-    <div class="field" data-show-when="#slide_background_type==^(?!none)">
-      <%= f.label :background %>
-      <%= f.text_field :background %>
-    </div>
-
-    <div class="field" >
-      <%= f.label :foreground_type %>
-      <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]} %>
-    </div>
-
-    <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
-      <%= f.label :foreground %>
-      <%= f.text_field :foreground %>
-    </div>
-
-    <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
-      <%= f.label :foreground_sizing %>
-      <%= f.select :foreground_sizing, Slide.foreground_sizings.map{|s| [s.humanize, s]} %>
-    </div>
-    </div>
-
-    <div class="field" data-show-when="#slide_template==directory">
-      <%= f.label :directory_feed, "Show Faculty In" %>
-      <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] } %>
-    </div>
-  </fieldset>
-  <br />
-  <h4>Slide Settings</h4>
-  <fieldset>
-    <div class="field">
-      <%= label_tag "Show this slide" %>
-      <%= f.label :show_1, style: 'display: inline' do %>
-        <%= f.radio_button :show, "1", checked: @slide.show %>Yes
-      <% end %>
-      &nbsp;&nbsp;&nbsp;
-      <%= f.label :show_0, style: 'display: inline' do %>
-        <%= f.radio_button :show, "0", checked: !@slide.show %>No
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= f.label :device_ids %>
-      <%= f.select :device_ids, @devices.map{|d| [d.name, d.id] }, {}, multiple: true, size: 8 %>
-    </div>
-
-    <div class="slide-time-range">
+      <div data-show-when="#slide_template==standard">
       <div class="field">
-        <%= f.label :duration, "Number of seconds to display slide" %>
-        <%= f.number_field :duration %>
+        <%= f.label :background_type %>
+        <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]} %>
+      </div>
+
+      <div class="field" data-show-when="#slide_background_type==^(?!none)">
+        <%= f.label :background %>
+        <%= f.text_field :background %>
+      </div>
+
+      <div class="field" >
+        <%= f.label :foreground_type %>
+        <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]} %>
+      </div>
+
+      <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
+        <%= f.label :foreground %>
+        <%= f.text_field :foreground %>
+      </div>
+
+      <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
+        <%= f.label :foreground_sizing %>
+        <%= f.select :foreground_sizing, Slide.foreground_sizings.map{|s| [s.humanize, s]} %>
+      </div>
+      </div>
+
+      <div class="field" data-show-when="#slide_template==directory">
+        <%= f.label :directory_feed, "Show Faculty In" %>
+        <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] } %>
+      </div>
+
+      <hr />
+
+      <h4>Slide Settings</h4>
+      <div class="field">
+        <%= label_tag "Show this slide" %>
+        <%= f.label :show_1, style: 'display: inline' do %>
+          <%= f.radio_button :show, "1", checked: @slide.show %>Yes
+        <% end %>
+        &nbsp;&nbsp;&nbsp;
+        <%= f.label :show_0, style: 'display: inline' do %>
+          <%= f.radio_button :show, "0", checked: !@slide.show %>No
+        <% end %>
       </div>
 
       <div class="field">
-        <%= f.label :play_on, "Start playing slide on" %>
-        <%= f.text_field :play_on, value: format_date(@slide.play_on || Time.zone.now), data: { datetimepicker: true } %>
+        <%= f.label :device_ids %>
+        <%= f.select :device_ids, @devices.map{|d| [d.name, d.id] }, {}, multiple: true, size: 8 %>
       </div>
 
-      <div class="field">
-        <%= f.label :stop_on, "Stop playing slide on" %>
-        <%= f.text_field :stop_on, data: { datetimepicker: true } %>
+      <div class="slide-time-range">
+        <div class="field">
+          <%= f.label :duration, "Number of seconds to display slide" %>
+          <%= f.number_field :duration %>
+        </div>
+
+        <div class="field">
+          <%= f.label :play_on, "Start playing slide on" %>
+          <%= f.text_field :play_on, value: format_date(@slide.play_on || Time.zone.now), data: { datetimepicker: true } %>
+        </div>
+
+        <div class="field">
+          <%= f.label :stop_on, "Stop playing slide on" %>
+          <%= f.text_field :stop_on, data: { datetimepicker: true } %>
+        </div>
+      </div>
+    </div>
+    <div class="slide-live-preview">
+      <div class="slide-preview js-sticky-slide-preview">
+        <div class="slide-preview-wrapper">
+          <%= content_tag  :iframe, nil, src: nil, id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
+        </div>
       </div>
     </div>
   </fieldset>
-  <br />
-  <h4>Slide Preview</h4>
-  <fieldset>
-    <p>I am going to put a preview of the slide here.</p>
-  </fieldset>
 
-  <div class="actions">
+  <div class="actions" data-show-when="#slide_template==(standard|directory|schedule)">
     <%= f.submit %>
   </div>
 <% end %>
