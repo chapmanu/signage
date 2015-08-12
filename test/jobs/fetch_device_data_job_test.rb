@@ -20,6 +20,14 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
     end
   end
 
+  test "it saves template, theme, and layout" do
+    perform_job_with_people
+    s = Slide.last
+    assert_equal('standard', s.template)
+    assert_equal('dark', s.theme)
+    assert_equal('right', s.layout)
+  end
+
   private
     def perform_job_with_people
       VCR.use_cassette("bertea_hall_entrance") do

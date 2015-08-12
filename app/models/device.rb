@@ -5,8 +5,12 @@ class Device < ActiveRecord::Base
     @_menus ||= Dir[Rails.root.join('app', 'views', 'devices', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
   end
 
+  def active_slides
+    slides.shown.active
+  end
+
   def directory_slides
-    slides.where('template ILIKE ?', '%directory%')
+    active_slides.where('template ILIKE ?', '%directory%')
   end
 
   def menu

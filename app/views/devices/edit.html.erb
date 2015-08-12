@@ -15,7 +15,11 @@
         <% @device.slides.each_with_index do |slide, index| %>
           <% classes = 'js-vertical-tab vertical-tab' %>
           <% classes += ' is-active' if index == 0 %>
-          <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+          <%= link_to "javascript:void(0)", class: classes, rel: "tab#{index}" do %>
+            <%= slide.menu_name %>
+            <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
+            <%= content_tag :small, '(expired)' if slide.expired? %>
+          <% end %>
         <% end %>
       </div>
 
@@ -31,7 +35,6 @@
                 <%= link_to "Full Preview", preview_slide_path(slide), target: '_blank' %>
                 </p>
               <%= render "slides/preview_iframe", slide: slide %>
-
             </div>
         <% end %>
       </div>
