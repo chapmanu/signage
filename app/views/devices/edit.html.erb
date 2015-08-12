@@ -1,10 +1,44 @@
-<%= link_to '<< Back', devices_path, class: 'home-button' %>
+<%= link_to '<< All Devices', devices_path, class: 'home-button' %>
 
 <%= link_to 'Play', @device, style: 'float: right;' %>
 <h1 class="admin-page-title">Editing Device</h1>
 
-
-<%= render 'form' %>
 <%= link_to "Delete", @device, style: 'float: right;', method: 'delete', data: {confirm: 'Are you sure you want to delete this thing?'} %>
+<%= render 'form' %>
 
+<div class="admin-device-slides-preview">
 
+  <h4>Slides</h4>
+  <% if !@device.slides.empty? %>
+    <div class="vertical-tabs-container">
+      <div class="vertical-tabs">
+        <% @device.slides.each_with_index do |slide, index| %>
+          <% classes = 'js-vertical-tab vertical-tab' %>
+          <% classes += ' is-active' if index == 0 %>
+          <%= link_to "javascript:void(0)", class: classes, rel: "tab#{index}" do %>
+            <%= slide.menu_name %>
+            <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
+            <%= content_tag :small, '(expired)' if slide.expired? %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="vertical-tab-content-container">
+        <% @device.slides.each_with_index do |slide, index| %>
+            <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
+            <% classes += ' is-active' if index == 0 %>
+            <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+            <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
+              <p>
+                <%= link_to "Show", slide %> |
+                <%= link_to "Edit", edit_slide_path(slide) %> |
+                <%= link_to "Full Preview", preview_slide_path(slide), target: '_blank' %>
+                </p>
+              <%= render "slides/preview_iframe", slide: slide %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "+ Add Slide", new_slide_path %>
+</div>

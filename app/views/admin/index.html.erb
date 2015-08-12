@@ -1,7 +1,5 @@
 <div class="admin-content">
 
-
-
   <div class="admin-site-title">
     <%= image_tag 'tv_top.jpg', alt: 'TV' %>
     <h1>Digital Signage Administration</h1>
@@ -15,8 +13,15 @@
       <p>Add, update, and delete digital signage devices.</p>
     </a>
 
+    <a href="<%= slides_path %>" class="grid-item">
+      <%= image_tag 'film.png', alt: 'Slides' %>
+
+      <h1>Manage Slides</h1>
+      <p>Add, update, and delete individual slides.</p>
+    </a>
+
     <a href="<%= admin_emergency_path%>" class="grid-item">
-      <%= image_tag 'fire2.png', alt: 'Emergency' %>
+      <%= image_tag 'feed.png', alt: 'Emergency' %>
 
       <h1>Broadcast an Emergency</h1>
       <p>Send an emergency notification to one, several, or all deivces.</p>
