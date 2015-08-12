@@ -36,6 +36,8 @@ class FetchDeviceDataJob < ActiveJob::Base
         slide.template   = slide_type_parts[0]
         slide.theme      = slide_type_parts[1]
         slide.layout     = slide_type_parts[2]
+        slide.background = 'http://www2.chapman.edu' + slide.background unless slide.background.blank?
+        slide.foreground = 'http://www2.chapman.edu' + slide.foreground unless slide.foreground.blank?
         slide.save!
         slide
       end
