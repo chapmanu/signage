@@ -1,4 +1,4 @@
-<%= form_for(@device, 'data-no-turbolink' => true) do |f| %>
+<%= form_for(@device) do |f| %>
   <% if @device.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
@@ -17,46 +17,14 @@
   </div>
 
   <div class="field">
-    <%= f.label :template %>
-    <%= f.text_field :template %>
-  </div>
-  <div class="field">
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
-  <div class="field">
-    <%= f.label :emergency %>
-    <%= f.text_field :emergency %>
-  </div>
-  <div class="field">
-    <%= f.label :emergency_detail %>
-    <%= f.text_field :emergency_detail %>
-  </div>
 
-  <h4>Slides</h4>
-  <%= link_to "+ Add Slide", new_slide_path %>
-  <% if !@device.slides.empty? %>
-  <div class="vertical-tabs-container">
-    <div class="vertical-tabs">
-      <% @device.slides.each_with_index do |slide, index| %>
-        <% classes = 'js-vertical-tab vertical-tab' %>
-        <% classes += ' is-active' if index == 0 %>
-        <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
-      <% end %>
-    </div>
-
-    <div class="vertical-tab-content-container">
-      <% @device.slides.each_with_index do |slide, index| %>
-          <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
-          <% classes += ' is-active' if index == 0 %>
-          <%= link_to slide.short_name.try(:humanize), "javascript:void(0)", class: classes, rel: "tab#{index}" %>
-          <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
-            <%= render "slide_preview", slide: slide %>
-          </div>
-      <% end %>
-    </div>
+  <div class="field">
+    <%= f.label :template, "Menu Type" %>
+    <%= f.select :template, Device.menus.map{|m| [m.humanize, m] } %>
   </div>
-  <% end %>
 
   <div class="actions">
     <%= f.submit %>

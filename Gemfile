@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'tinymce-rails', '4.2.3'
 gem 'bourbon'
 gem 'neat'
 gem 'bitters'

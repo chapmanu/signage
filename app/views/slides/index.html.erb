@@ -1,54 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%= home_button %>
 
-<h1>Listing Slides</h1>
+<header class="admin-page-header">
+  <h1 class="admin-page-title">Slides </h1>
+  <%= link_to '+ New Slide', new_slide_path %>
+</header>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Template</th>
-      <th>Menu name</th>
-      <th>Organizer</th>
-      <th>Organizer</th>
-      <th>Duration</th>
-      <th>Heading</th>
-      <th>Subheading</th>
-      <th>Datetime</th>
-      <th>Location</th>
-      <th>Content</th>
-      <th>Background</th>
-      <th>Background type</th>
-      <th>Background sizing</th>
-      <th>Foreground</th>
-      <th>Foreground type</th>
-      <th>Foreground sizing</th>
-      <th colspan="3"></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @slides.each do |slide| %>
       <tr>
-        <td><%= slide.name %></td>
-        <td><%= slide.template %></td>
-        <td><%= slide.menu_name %></td>
-        <td><%= slide.organizer %></td>
-        <td><%= slide.organizer_id %></td>
-        <td><%= slide.duration %></td>
-        <td><%= slide.heading %></td>
-        <td><%= slide.subheading %></td>
-        <td><%= slide.datetime %></td>
-        <td><%= slide.location %></td>
-        <td><%= slide.content %></td>
-        <td><%= slide.background %></td>
-        <td><%= slide.background_type %></td>
-        <td><%= slide.background_sizing %></td>
-        <td><%= slide.foreground %></td>
-        <td><%= slide.foreground_type %></td>
-        <td><%= slide.foreground_sizing %></td>
-        <td><%= link_to 'Show', slide %></td>
-        <td><%= link_to 'Edit', edit_slide_path(slide) %></td>
-        <td><%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= render 'preview_iframe', slide: slide %></td>
+        <td style="text-align: left; vertical-align: top; padding-left: 16px;">
+          <br />
+          <h4><%= slide.menu_name %></h4>
+          <%= link_to 'Show', slide %> |
+          <%= link_to 'Edit', edit_slide_path(slide) %> |
+          <%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -56,4 +31,3 @@
 
 <br>
 
-<%= link_to 'New Slide', new_slide_path %>

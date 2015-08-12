@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :slides do
+    get 'preview', on: :member
+  end
 
   get 'admin', to: 'admin#index'
   get 'admin/index'
@@ -11,7 +14,6 @@ Rails.application.routes.draw do
     get 'poll', on: :member
   end
 
-  resources :slides
 
   root 'admin#index'
   # The priority is based upon order of creation: first created -> highest priority.
