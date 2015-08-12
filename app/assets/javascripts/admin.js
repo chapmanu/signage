@@ -2,9 +2,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.datetimepicker
+//= require jquery.sticky
 //= require moment
 //= require tinymce-jquery
 //= require turbolinks
+//= require utils
 //= require_tree ./refills
 
 Date.parseDate = function( input, format ){
@@ -18,14 +20,23 @@ Admin = {};
 
 Admin.selectAllCheckboxes = function() {
   $('input[type="checkbox"]').prop('checked', true);
-}
+};
 
 Admin.deselectAllCheckboxes = function() {
   $('input[type="checkbox"]').prop('checked', false);
-}
+};
 
-$(document).on('ready page:load', function() {
+Admin.refreshLivePreview = function() {
+  $.post('/slides/live_preview', $("#slide_form").serialize(), function(data){
+    tinymce.triggerSave();
+    var iframe_doc = $('#slide-live-preview').contents()[0];
+    iframe_doc.open();
+    iframe_doc.write(data);
+    iframe_doc.close();
+  });
+};
 
+Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
   // Initialize all datetimepickers
   $('[data-datetimepicker]').datetimepicker({
     format:'MMMM DD, YYYY h:mm a',
@@ -48,4 +59,19 @@ $(document).on('ready page:load', function() {
     $el.on('change', listener);
     listener();
   });
+
+  // Stick slide preview
+  $('.js-sticky-slide-preview').sticky({topSpacing: 64});
+
+  // List for all form change events
+  Admin.refreshLivePreview();
+  $('#slide_form :input').on('change', Admin.refreshLivePreview);
+});
+
+
+// DOCUMENT READY
+$(document).on('ready page:load', function(e){
+  // Fire all the stuff for the controllers
+  var controller_action = $('body').data('controller-action');
+  Utils.ready(controller_action);
 });
