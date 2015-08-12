@@ -2,7 +2,7 @@ var Slide = function($element) {
   this.$element = $element;
   this.behaviors = [];
 
-  if (/directory/.test(this.meta('layout'))) {
+  if (/directory/.test(this.meta('template'))) {
     this.behaviors.push(
       $.extend({}, autoscrollable, {
         container:        '.ui-slide-collection',
@@ -13,7 +13,7 @@ var Slide = function($element) {
         scroll_interval: 8000
       })
     );
-  } else if (/schedule/.test(this.meta('layout'))) {
+  } else if (/schedule/.test(this.meta('template'))) {
     this.behaviors.push(
       $.extend({}, autoscrollable, {
         container:        '.ui-slide-collection',

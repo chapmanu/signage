@@ -77,3 +77,8 @@ select {
   max-width: 100%;
   width: auto;
 }
+
+.field-description {
+  font-size: $base-font-size * 0.8;
+  margin-bottom: $small-spacing;
+}

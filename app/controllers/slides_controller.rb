@@ -1,9 +1,17 @@
 class SlidesController < ApplicationController
-  before_action :set_slide,   only: [:preview, :show, :edit, :update, :destroy]
-  before_action :set_devices, only: [:new, :edit]
+  before_action :set_slide,              only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_devices,            only: [:new, :edit]
+  before_action :set_parent_device_path,   only: [:new, :edit]
   layout 'admin', except: [:preview]
 
   def preview
+  end
+
+  def live_preview
+    @slide = Slide.new(slide_params)
+    render :preview, layout: 'application'
+  rescue ActionView::Template::Error
+    render status: :unprocessable_entity, nothing: true
   end
 
   # GET /slides
@@ -20,6 +28,7 @@ class SlidesController < ApplicationController
   # GET /slides/new
   def new
     @slide = Slide.new
+    @slide.devices << Device.find_by_name(session[:parent_device_id]) if session[:parent_device_id]
   end
 
   # GET /slides/1/edit
@@ -74,6 +83,16 @@ class SlidesController < ApplicationController
 
     def set_devices
       @devices = Device.all.order(:name)
+    end
+
+    def set_parent_device_path
+      if id = request.referrer.to_s[/devices\/([^\/]+)\/.*/, 1]
+        session[:parent_device_id]   = id
+        session[:parent_device_path] = edit_device_path(id)
+      else
+        session[:parent_device_id]   = nil
+        session[:parent_device_path] = nil
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
