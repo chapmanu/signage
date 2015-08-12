@@ -21,7 +21,7 @@ class DevicesControllerTest < ActionController::TestCase
       post :create, device: { emergency: @device.emergency, emergency_detail: @device.emergency_detail, location: @device.location, name: @device.name, template: @device.template, updated_at: @device.updated_at }
     end
 
-    assert_redirected_to device_path(assigns(:device))
+    assert_redirected_to edit_device_path(assigns(:device))
   end
 
   test "should show device" do
@@ -36,7 +36,7 @@ class DevicesControllerTest < ActionController::TestCase
 
   test "should update device" do
     patch :update, id: @device, device: { emergency: @device.emergency, emergency_detail: @device.emergency_detail, location: @device.location, name: @device.name, template: @device.template, updated_at: @device.updated_at }
-    assert_redirected_to device_path(assigns(:device))
+    assert_redirected_to edit_device_path(assigns(:device))
   end
 
   test "should destroy device" do

@@ -8,8 +8,8 @@
 <table>
   <thead>
     <tr>
-      <th>Preview</th>
-      <th>Actions</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -17,7 +17,7 @@
     <% @slides.each do |slide| %>
       <tr>
         <td><%= render 'preview_iframe', slide: slide %></td>
-        <td style="text-align: left; vertical-align: top; padding: 16px 0 0 16px;">
+        <td style="text-align: left; vertical-align: top; padding-left: 16px;">
           <br />
           <h4><%= slide.menu_name %></h4>
           <%= link_to 'Show', slide %> |

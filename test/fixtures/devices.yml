@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  template: MyString
+  template: default
   location: MyString
   notification: MyString
   notification_detail: MyString
@@ -11,7 +11,7 @@ one:
 
 two:
   name: MyString
-  template: MyString
+  template: dodge
   location: MyString
   notification: MyString
   notification_detail: MyString

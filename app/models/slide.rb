@@ -3,6 +3,11 @@ class Slide < ActiveRecord::Base
   has_and_belongs_to_many :people
   has_many :scheduled_items, dependent: :destroy
 
+  after_save :touch_devices
+
+  scope :shown,  -> { where(show: true) }
+  scope :active, -> { where('slides.play_on IS NULL OR slides.play_on <= ?', Time.zone.now).where('slides.stop_on IS NULL OR slides.stop_on >= ?', Time.zone.now) }
+
   def self.templates
     @templates ||= Dir[Rails.root.join('app', 'views', 'slides', 'templates', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
   end
@@ -33,6 +38,18 @@ class Slide < ActiveRecord::Base
 
   def self.foreground_sizings
     @_foreground_sizings ||= ['exact size', 'fill screen', 'fill screen (do not crop)']
+  end
+
+  def active?
+    !upcoming? && !expired?
+  end
+
+  def upcoming?
+    !(play_on.nil? || play_on <= Time.zone.now)
+  end
+
+  def expired?
+    !(stop_on.nil? || stop_on >= Time.zone.now)
   end
 
   def slug
@@ -67,4 +84,9 @@ class Slide < ActiveRecord::Base
   def foreground_url
     Rails.application.config.asset_url + foreground
   end
+
+  private
+    def touch_devices
+      devices.update_all(updated_at: Time.now)
+    end
 end
