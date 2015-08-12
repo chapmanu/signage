@@ -1,4 +1,8 @@
-<%= link_to '<< All Devices', devices_path, class: 'home-button' %>
+<% if session[:parent_device_path] %>
+  <%= link_to '<< Back to Device', session[:parent_device_path], class: 'home-button' %>
+<% else %>
+  <%= link_to '<< All Slides', slides_path, class: 'home-button' %>
+<% end %>
 
 <h1 class="admin-page-title"><%= @slide.menu_name %></h1>
 
@@ -13,7 +17,7 @@
       <td>Devices playing this slide:</td>
       <th>
         <%= "None" if @slide.devices.empty? %>
-        <%= @slide.devices.order(:name).map{|d| link_to d.name, edit_device_path(d) }.join(', ').try(:html_safe) %>
+        <%= @slide.devices.order(:name).map{|d| link_to d.name, edit_device_path(d) }.join('<br />').try(:html_safe) %>
       </th>
     </tr>
     <tr>
@@ -26,7 +30,7 @@
     </tr>
     <tr>
       <td>Date range to display:</td>
-      <th>From <%= @slide.play_on ? format_date(@slide.play_on) : 'never' %> to <%= @slide.stop_on ? format_date(@slide.stop_on) : 'infinity' %></th>
+      <th>From <%= @slide.play_on ? format_date(@slide.play_on) : 'the beginning of time' %> to <%= @slide.stop_on ? format_date(@slide.stop_on) : 'infinity' %></th>
     </tr>
     <tr>
       <td>Menu Name:</td>
