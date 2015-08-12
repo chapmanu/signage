@@ -77,14 +77,6 @@ class Slide < ActiveRecord::Base
     classes.join(' ')
   end
 
-  def background_url
-    Rails.application.config.asset_url + background
-  end
-
-  def foreground_url
-    Rails.application.config.asset_url + foreground
-  end
-
   private
     def touch_devices
       devices.update_all(updated_at: Time.now)
