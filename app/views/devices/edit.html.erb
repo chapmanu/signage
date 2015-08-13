@@ -11,11 +11,12 @@
   <h4>Slides</h4>
   <% if !@device.slides.empty? %>
     <div class="vertical-tabs-container">
-      <div class="vertical-tabs">
-        <% @device.slides.each_with_index do |slide, index| %>
+      <div class="vertical-tabs" id="js-sortable-slides">
+        <% @device.device_slides.each_with_index do |device_slide, index| %>
+          <% slide = device_slide.slide %>
           <% classes = 'js-vertical-tab vertical-tab' %>
           <% classes += ' is-active' if index == 0 %>
-          <%= link_to "javascript:void(0)", class: classes, rel: "tab#{index}" do %>
+          <%= link_to "javascript:void(0)", id: "device_slide_ids-#{device_slide.id}", class: classes, rel: "tab#{index}" do %>
             <%= slide.menu_name %>
             <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
             <%= content_tag :small, '(expired)' if slide.expired? %>
@@ -42,3 +43,5 @@
   <% end %>
   <%= link_to "+ Add Slide", new_slide_path %>
 </div>
+
+<%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_device_path(@device) } %>

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'jquery-ui-rails', '5.0.5'
 gem 'kaminari', '0.16.3'
 gem 'remotipart', '~> 1.2'
 gem 'carrierwave', '0.10.0'
