@@ -13,4 +13,12 @@ module AdminHelper
     end
     html
   end
+
+  def search_form(path)
+    form_tag path, class: 'search-bar', role: 'search', method: 'get' do
+      html =  ''.html_safe
+      html += search_field_tag :search, params[:search], placeholder: 'Enter Search'
+      html += button_tag(name: nil) { image_tag('search-icon.png', alt: 'Search Icon') }
+    end
+  end
 end

@@ -2,6 +2,13 @@ class DevicesController < ApplicationController
   before_action :set_device, only: [:poll, :show, :edit, :update, :destroy]
   layout 'admin', except: [:show]
 
+  def order
+    params[:device_slide_ids].each_with_index do |id, index|
+      DeviceSlide.find(id).update(order: index)
+    end
+    render nothing: true
+  end
+
   def poll
     last_updated = Time.zone.parse(device_params[:updated_at])
     @refresh = @device.updated_at.to_i > last_updated.to_i
@@ -10,7 +17,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.includes(:slides).order(:name)
+    @devices = Device.includes(:slides).search(params[:search]).order(:name)
   end
 
   # GET /devices/1

@@ -16,7 +16,7 @@
 
   <nav class="ui-menu" role="navigation">
     <ul class="ui-menu-list">
-      <% @device.slides.each do |slide| %>
+      <% @device.active_slides.each do |slide| %>
         <li class="ui-menu-item" data-hash="<%= slide.slug %>"><a href="#<%= slide.slug %>"><span><%= slide.menu_name %></span></a></li>
       <% end %>
     </ul>

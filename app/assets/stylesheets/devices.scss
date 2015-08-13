@@ -399,6 +399,11 @@ subhead {
   margin-top: 1.25em;
 }
 
+.ui-slide-body {
+  position: relative;
+  z-index: 1;
+}
+
 /* slide: left
    =============================================================================
 */
