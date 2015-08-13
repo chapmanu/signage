@@ -8,36 +8,17 @@ class Slide < ActiveRecord::Base
   scope :shown,  -> { where(show: true) }
   scope :active, -> { where('slides.play_on IS NULL OR slides.play_on <= ?', Time.zone.now).where('slides.stop_on IS NULL OR slides.stop_on >= ?', Time.zone.now) }
 
-  def self.templates
-    @templates ||= Dir[Rails.root.join('app', 'views', 'slides', 'templates', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
+  mount_uploader :background, ImageUploader
+  mount_uploader :foreground, ImageUploader
+
+  include SlideFormOptions
+
+  def existing_background
+    self['background']
   end
 
-  def self.themes
-    @_themes ||= ['dark', 'light'] # It's always the darkest before light
-  end
-
-  def self.layouts
-    @_layouts ||= ['left', 'right'] # We are in America peeps, left then right
-  end
-
-  def self.directory_feeds
-    @_directory_feeds ||= ['Beckman Hall', 'Moulton Hall', 'Musco Center for the Arts']
-  end
-
-  def self.organizers
-    @_organizers ||= ['CES', 'Dodge', 'Stuff', 'Yeah!'] # Read all the file names of the image files
-  end
-
-  def self.background_types
-    @_background_types ||= ['none', 'image', 'video']
-  end
-
-  def self.foreground_types
-    @_foreground_types ||= ['none', 'image', 'video']
-  end
-
-  def self.foreground_sizings
-    @_foreground_sizings ||= ['exact size', 'fill screen', 'fill screen (do not crop)']
+  def existing_foreground
+    self['foreground']
   end
 
   def active?
@@ -52,16 +33,16 @@ class Slide < ActiveRecord::Base
     !(stop_on.nil? || stop_on >= Time.zone.now)
   end
 
-  def slug
-    "#{id}-#{menu_name}".parameterize
-  end
-
   def people_slide?
     !!(template.downcase =~ /directory/)
   end
 
   def schedule_slide?
     !!(template.downcase =~ /schedule/)
+  end
+
+  def slug
+    id.to_s
   end
 
   def css_classes
