@@ -10,7 +10,7 @@ class SlidesController < ApplicationController
   def live_preview
     @slide = Slide.new(slide_params)
     @slide.remove_background! if slide_params[:remove_background] == '1'
-    @slide.remove_foreground! if slide_params[:remove_background] == '1'
+    @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
     ap slide_params[:remove_foreground]
     render :preview, layout: 'application'
   rescue ActionView::Template::Error
