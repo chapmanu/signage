@@ -20,6 +20,7 @@
             <%= slide.menu_name %>
             <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
             <%= content_tag :small, '(expired)' if slide.expired? %>
+            <%= content_tag :small, '(hidden)' unless slide.show? %>
           <% end %>
         <% end %>
       </div>
