@@ -5,7 +5,7 @@ class Device < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
   def self.menus
-    @_menus ||= Dir[Rails.root.join('app', 'views', 'devices', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}
+    @_menus ||= Dir[Rails.root.join('app', 'views', 'devices', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
   end
 
   def active_slides

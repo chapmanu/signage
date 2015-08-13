@@ -1,3 +1,0 @@
-default:
-  menubar: false
-  content_style: "p { font-size: 16px; }"

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'remotipart', '~> 1.2'
+gem 'carrierwave', '0.10.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'tinymce-rails', '4.2.3'
 gem 'bourbon'
