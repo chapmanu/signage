@@ -1,6 +1,8 @@
 class Device < ActiveRecord::Base
   has_and_belongs_to_many :slides
 
+  scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 

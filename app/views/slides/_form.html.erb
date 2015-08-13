@@ -98,7 +98,6 @@
 
       <div class="field" data-show-when="#slide_background_type==^(?!none)">
         <%= f.label :background %>
-        <%= image_tag(@slide.background_url) if @slide.background? %>
         <%= f.file_field :background %>
         <%= f.hidden_field :background_cache %>
         <%= f.label :remove_background do %>
@@ -114,7 +113,6 @@
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
         <%= f.label :foreground %>
-        <%= image_tag(@slide.foreground_url) if @slide.foreground? %>
         <%= f.file_field :foreground %>
         <%= f.hidden_field :foreground_cache %>
         <%= f.label :remove_foreground do %>
