@@ -1,4 +1,4 @@
-<%= form_for @slide, html: { id: 'slide_form' } do |f| %>
+<%= form_for @slide, html: { multipart: true, id: 'slide_form' } do |f| %>
   <% if @slide.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
@@ -75,7 +75,19 @@
       <div class="field" data-show-when="#slide_template==standard">
         <%= f.label :content %>
         <%= f.text_area :content, :class => "tinymce", :rows => 16, :cols => 120 %>
-        <%= tinymce %>
+        <script>
+          tinyMCE.init({
+            menubar:        false,
+            content_style: 'p { font-size: 16px; }',
+            selector:      '.tinymce',
+            setup: function (editor) {
+              editor.on('blur', function () {
+                tinyMCE.triggerSave();
+                $('textarea.tinymce').trigger('change');
+              });
+            }
+          });
+        </script>
       </div>
 
       <div data-show-when="#slide_template==standard">
@@ -86,7 +98,13 @@
 
       <div class="field" data-show-when="#slide_background_type==^(?!none)">
         <%= f.label :background %>
-        <%= f.text_field :background %>
+        <%= image_tag(@slide.background_url) if @slide.background? %>
+        <%= f.file_field :background %>
+        <%= f.hidden_field :background_cache %>
+        <%= f.label :remove_background do %>
+          <%= f.check_box :remove_background %> Remove background
+        <% end %>
+
       </div>
 
       <div class="field" >
@@ -96,7 +114,12 @@
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
         <%= f.label :foreground %>
-        <%= f.text_field :foreground %>
+        <%= image_tag(@slide.foreground_url) if @slide.foreground? %>
+        <%= f.file_field :foreground %>
+        <%= f.hidden_field :foreground_cache %>
+        <%= f.label :remove_foreground do %>
+          <%= f.check_box :remove_foreground %> Remove foreground
+        <% end %>
       </div>
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">

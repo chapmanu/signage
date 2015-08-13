@@ -7,22 +7,26 @@
       <% @device.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-      </ul>
+      </ul>p
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, "Name this device (this name becomes the url)" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :location %>
+    <%= f.label :location, "Physical device location (displayed on the menu bar)" %>
     <%= f.text_field :location %>
   </div>
 
   <div class="field">
-    <%= f.label :template, "Menu Type" %>
+    <%= f.label :template, "Select from the two types of menu bars" %>
+    <div class="field-description">
+      <p><strong>Default:</strong> red bar, with Chapman University logo</p>
+      <p><strong>Dodge:</strong> black bar, with Dodge College logo</p>
+    </div>
     <%= f.select :template, Device.menus.map{|m| [m.humanize, m] } %>
   </div>
 
