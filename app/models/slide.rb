@@ -5,6 +5,7 @@ class Slide < ActiveRecord::Base
 
   after_save :touch_devices
 
+  scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
   scope :shown,  -> { where(show: true) }
   scope :active, -> { where('slides.play_on IS NULL OR slides.play_on <= ?', Time.zone.now).where('slides.stop_on IS NULL OR slides.stop_on >= ?', Time.zone.now) }
 
@@ -12,6 +13,8 @@ class Slide < ActiveRecord::Base
   mount_uploader :foreground, ImageUploader
 
   include SlideFormOptions
+
+  paginates_per 10
 
   def existing_background
     self['background']
