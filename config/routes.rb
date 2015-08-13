@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   post 'admin/clear_emergency'
 
   resources :devices do
-    get 'poll', on: :member
+    get 'poll',   on: :member
+    post 'order', on: :member
   end
 
   root 'admin#index'

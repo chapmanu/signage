@@ -1,5 +1,6 @@
 class Device < ActiveRecord::Base
-  has_and_belongs_to_many :slides
+  has_many :device_slides
+  has_many :slides, through: :device_slides
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
 

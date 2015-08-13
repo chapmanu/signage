@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require jquery.datetimepicker
 //= require jquery.sticky
+//= require jquery-ui/sortable
 //= require tinymce-jquery
 //= require turbolinks
 //= require moment
