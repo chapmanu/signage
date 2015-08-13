@@ -19,11 +19,9 @@
 //= require jquery.scroll_into_view
 //= require jquery.throttle_debounce
 
-/* APPLICATION */
-//= require utils
-//= require_tree ./models
-//= require devices
-//= require slides
+/* APP */
+//= require_tree ./shared
+//= require_tree ./application
 
 $(document).on('ready page:load', function(e){
   // Fire all the stuff for the controllers

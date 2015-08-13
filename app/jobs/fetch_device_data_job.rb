@@ -36,9 +36,13 @@ class FetchDeviceDataJob < ActiveJob::Base
         slide.template   = slide_type_parts[0]
         slide.theme      = slide_type_parts[1]
         slide.layout     = slide_type_parts[2]
-        slide.background = 'http://www2.chapman.edu' + slide.background unless slide.background.blank?
-        slide.foreground = 'http://www2.chapman.edu' + slide.foreground unless slide.foreground.blank?
-        slide.save!
+        slide.remote_background_url = 'http://www2.chapman.edu' + slide['background'] unless slide['background'].blank?
+        slide.remote_foreground_url = 'http://www2.chapman.edu' + slide['foreground'] unless slide['foreground'].blank?
+        begin
+          slide.save!
+        rescue => e
+          puts "Failed to Save #{slide.inspect}"
+        end
         slide
       end
     end

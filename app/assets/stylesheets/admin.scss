@@ -123,3 +123,10 @@ body, html {
 .slide-live-preview {
   @include span-columns(6);
 }
+
+.ui-sortable-helper {
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+  border-left: 3px $action-color solid !important;
+  border-right: 3px $action-color solid !important;
+  opacity: 0.9;
+}

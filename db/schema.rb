@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812205340) do
+ActiveRecord::Schema.define(version: 20150813215403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "device_slides", force: :cascade do |t|
+    t.integer  "order"
+    t.integer  "device_id"
+    t.integer  "slide_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "device_slides", ["device_id"], name: "index_device_slides_on_device_id", using: :btree
+  add_index "device_slides", ["slide_id"], name: "index_device_slides_on_slide_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
@@ -30,14 +41,6 @@ ActiveRecord::Schema.define(version: 20150812205340) do
   end
 
   add_index "devices", ["slug"], name: "index_devices_on_slug", unique: true, using: :btree
-
-  create_table "devices_slides", id: false, force: :cascade do |t|
-    t.integer "device_id", null: false
-    t.integer "slide_id",  null: false
-  end
-
-  add_index "devices_slides", ["device_id", "slide_id"], name: "index_devices_slides_on_device_id_and_slide_id", using: :btree
-  add_index "devices_slides", ["slide_id", "device_id"], name: "index_devices_slides_on_slide_id_and_device_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -113,5 +116,7 @@ ActiveRecord::Schema.define(version: 20150812205340) do
     t.string   "datetime"
   end
 
+  add_foreign_key "device_slides", "devices"
+  add_foreign_key "device_slides", "slides"
   add_foreign_key "scheduled_items", "slides"
 end

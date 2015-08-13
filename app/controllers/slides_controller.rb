@@ -9,6 +9,9 @@ class SlidesController < ApplicationController
 
   def live_preview
     @slide = Slide.new(slide_params)
+    @slide.remove_background! if slide_params[:remove_background] == '1'
+    @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
+    ap slide_params[:remove_foreground]
     render :preview, layout: 'application'
   rescue ActionView::Template::Error
     render status: :unprocessable_entity, nothing: true
@@ -17,7 +20,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.all
+    @slides = Slide.search(params[:search]).order(:name).page params[:page]
   end
 
   # GET /slides/1
@@ -119,9 +122,13 @@ class SlidesController < ApplicationController
         :background,
         :background_type,
         :background_sizing,
+        :remove_background,
         :foreground,
         :foreground_type,
         :foreground_sizing,
+        :background_cache,
+        :foreground_cache,
+        :remove_foreground,
         :device_ids => []
         )
     end
