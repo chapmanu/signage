@@ -10,7 +10,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.includes(:slides).order(:name)
+    @devices = Device.includes(:slides).search(params[:search]).order(:name)
   end
 
   # GET /devices/1

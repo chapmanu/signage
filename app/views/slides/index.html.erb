@@ -5,29 +5,37 @@
   <%= link_to '+ New Slide', new_slide_path %>
 </header>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<%= search_form slides_path  %>
 
-  <tbody>
-    <% @slides.each do |slide| %>
+<% if @slides.empty? %>
+  <br />
+  <p>No slides to display</p>
+<% else %>
+  <table>
+    <thead>
       <tr>
-        <td><%= render 'preview_iframe', slide: slide %></td>
-        <td style="text-align: left; vertical-align: top; padding-left: 16px;">
-          <br />
-          <h4><%= slide.menu_name %></h4>
-          <%= link_to 'Show', slide %> |
-          <%= link_to 'Edit', edit_slide_path(slide) %> |
-          <%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @slides.each do |slide| %>
+        <tr>
+          <td><%= render 'preview_iframe', slide: slide %></td>
+          <td style="text-align: left; vertical-align: top; padding-left: 16px;">
+            <br />
+            <h4><%= slide.menu_name %></h4>
+            <%= link_to 'Show', slide %> |
+            <%= link_to 'Edit', edit_slide_path(slide) %> |
+            <%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= paginate @slides %>
 
 <br>
 

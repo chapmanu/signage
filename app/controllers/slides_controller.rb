@@ -20,7 +20,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.all
+    @slides = Slide.search(params[:search]).order(:name).page params[:page]
   end
 
   # GET /slides/1
