@@ -1,0 +1,33 @@
+<fieldset data-behavior="dynamic-fields">
+  <div class="field">
+    <%= f.label :date, "Date of Event" %>
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :time, "Time Event Starts" %>
+    <%= f.text_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :image, "Small Image" %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+    <%= f.label :remove_image do %>
+      <%= f.check_box :remove_image %> Remove image
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: 'tinymce' %>
+  </div>
+  <div class="field">
+    <%= f.label :admission %>
+    <%= f.text_field :admission %>
+  </div>
+  <div class="field">
+    <%= f.label :audience %>
+    <%= f.text_field :audience %>
+  </div>
+  <div class="field">
+    <%= link_to_remove_dynamic_fields "Delete", f %>
+  </div>
+</fieldset>

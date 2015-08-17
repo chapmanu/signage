@@ -59,7 +59,7 @@ Admin.Slides.initShowWhen = function() {
 
 Admin.Slides.initLivePreview = function() {
   Admin.Slides.livePreviewAjax();
-  $('#slide_form :input').on('change', Admin.Slides.livePreviewAjax);
+  $(document).on('change', ':input', Admin.Slides.livePreviewAjax);
 };
 
 
