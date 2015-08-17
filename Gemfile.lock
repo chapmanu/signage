@@ -72,6 +72,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -247,6 +248,8 @@ GEM
     webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -285,6 +288,7 @@ DEPENDENCIES
   vcr (= 2.9.3)
   web-console (~> 2.0)
   webmock (= 1.21.0)
+  whenever (= 0.9.4)
 
 BUNDLED WITH
    1.10.6
