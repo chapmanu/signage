@@ -121,13 +121,24 @@
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
         <%= f.label :foreground_sizing %>
-        <%= f.select :foreground_sizing, Slide.foreground_sizings.map{|s| [s.humanize, s]} %>
+        <%= f.select :foreground_sizing, Slide.foreground_sizings %>
       </div>
       </div>
 
       <div class="field" data-show-when="#slide_template==directory">
         <%= f.label :directory_feed, "Show Faculty In" %>
         <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] } %>
+      </div>
+
+
+      <div data-show-when="#slide_template==schedule" >
+        <label>Listing of Events to Show on Slide</label>
+        <div data-behavior="dynamic-fields-parent" >
+          <%= f.fields_for :scheduled_items do |ff| %>
+            <%= render 'scheduled_item_fields', f: ff %>
+          <% end %>
+        </div>
+        <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items %>
       </div>
 
       <hr />
