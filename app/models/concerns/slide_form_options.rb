@@ -18,10 +18,6 @@ module SlideFormOptions
       @_directory_feeds ||= ['Beckman Hall', 'Moulton Hall', 'Musco Center for the Arts']
     end
 
-    def organizers
-      @_organizers ||= ['CES', 'Dodge', 'Stuff', 'Yeah!'] # Read all the file names of the image files
-    end
-
     def background_types
       @_background_types ||= ['none', 'image', 'video']
     end
