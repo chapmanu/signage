@@ -1,4 +1,4 @@
-var autoscrollable = {
+SlideBehaviors['autoscrollable'] = {
 
   /**
    * Public configuration

@@ -5,7 +5,7 @@
  *  slides [OWL CAROUSEL]
  *  menu   [OWL CAROUSEL]
  */
-window.Device = {
+var Device = {
   slides: undefined,
   menu:   undefined,
   emergency_poll_interval: 5000
