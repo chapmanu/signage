@@ -1,7 +1,7 @@
 class SlidesController < ApplicationController
   before_action :set_slide,              only: [:preview, :show, :edit, :update, :destroy]
-  before_action :set_devices,            only: [:new, :edit]
-  before_action :set_parent_device_path,   only: [:new, :edit]
+  before_action :set_devices,            only: [:new, :edit, :create, :update]
+  before_action :set_parent_device_path, only: [:new, :edit]
   layout 'admin', except: [:preview]
 
   def preview
