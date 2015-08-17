@@ -8,10 +8,12 @@ class SlidesController < ApplicationController
   end
 
   def live_preview
-    params[:slide][:scheduled_items_attributes].reject! do |index, attrs|
-      attrs.delete(:id)
-      if attrs[:_destroy] == '1'
-        params[:slide][:scheduled_items_attributes].delete(index)
+    if params[:slide][:scheduled_items_attributes]
+      params[:slide][:scheduled_items_attributes].each do |index, attrs|
+        attrs.delete(:id)
+        if attrs[:_destroy] == '1'
+          params[:slide][:scheduled_items_attributes].delete(index)
+        end
       end
     end
     @slide = Slide.new(slide_params)
