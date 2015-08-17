@@ -131,36 +131,14 @@
       </div>
 
 
-      <div data-show-when="#slide_template==schedule">
+      <div data-show-when="#slide_template==schedule" >
         <label>Listing of Events to Show on Slide</label>
-        <%= f.fields_for :scheduled_items do |ff| %>
-          <fieldset>
-            <div class="field">
-              <%= ff.label :date %>
-              <%= ff.text_field :date %>
-            </div>
-            <div class="field">
-              <%= ff.label :time %>
-              <%= ff.text_field :time %>
-            </div>
-            <div class="field">
-              <%= ff.label :image %>
-              <%= ff.text_field :image %>
-            </div>
-            <div class="field">
-              <%= ff.label :content %>
-              <%= ff.text_field :content %>
-            </div>
-            <div class="field">
-              <%= ff.label :admission %>
-              <%= ff.text_field :admission %>
-            </div>
-            <div class="field">
-              <%= ff.label :audience %>
-              <%= ff.text_field :audience %>
-            </div>
-          </fieldset>
-        <% end %>
+        <div data-behavior="dynamic-fields-parent" >
+          <%= f.fields_for :scheduled_items do |ff| %>
+            <%= render 'scheduled_item_fields', f: ff %>
+          <% end %>
+        </div>
+        <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items %>
       </div>
 
       <hr />

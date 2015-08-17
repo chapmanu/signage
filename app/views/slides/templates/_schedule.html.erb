@@ -6,7 +6,7 @@
     <% slide.scheduled_items.each do |item| %>
       <article class="ui-event">
         <div class="ui-event-body">
-          <%= image_tag item.image_url, class: 'ui-event-image' unless item.image.blank? %>
+          <%= image_tag item.image.url, class: 'ui-event-image' unless item.image.url.blank? %>
 
           <h1 class="ui-event-name"><%= item.name %></h1>
 
