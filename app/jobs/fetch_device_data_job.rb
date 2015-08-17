@@ -60,7 +60,13 @@ class FetchDeviceDataJob < ActiveJob::Base
       data.map do |item|
         scheduled_item = ScheduledItem.new
         item.except(*excluded_keys).each { |k, v| scheduled_item[k.underscore] = v }
-        scheduled_item.save!
+        # Custom Processing
+        scheduled_item.remote_image_url = 'http://www2.chapman.edu' + scheduled_item['image'] unless scheduled_item['image'].blank?
+        begin
+          scheduled_item.save!
+        rescue => e
+          puts "Failed to Save #{scheduled_item.inspect}"
+        end
         scheduled_item
       end
     end
