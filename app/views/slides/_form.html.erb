@@ -121,13 +121,46 @@
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
         <%= f.label :foreground_sizing %>
-        <%= f.select :foreground_sizing, Slide.foreground_sizings.map{|s| [s.humanize, s]} %>
+        <%= f.select :foreground_sizing, Slide.foreground_sizings %>
       </div>
       </div>
 
       <div class="field" data-show-when="#slide_template==directory">
         <%= f.label :directory_feed, "Show Faculty In" %>
         <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] } %>
+      </div>
+
+
+      <div data-show-when="#slide_template==schedule">
+        <label>Listing of Events to Show on Slide</label>
+        <%= f.fields_for :scheduled_items do |ff| %>
+          <fieldset>
+            <div class="field">
+              <%= ff.label :date %>
+              <%= ff.text_field :date %>
+            </div>
+            <div class="field">
+              <%= ff.label :time %>
+              <%= ff.text_field :time %>
+            </div>
+            <div class="field">
+              <%= ff.label :image %>
+              <%= ff.text_field :image %>
+            </div>
+            <div class="field">
+              <%= ff.label :content %>
+              <%= ff.text_field :content %>
+            </div>
+            <div class="field">
+              <%= ff.label :admission %>
+              <%= ff.text_field :admission %>
+            </div>
+            <div class="field">
+              <%= ff.label :audience %>
+              <%= ff.text_field :audience %>
+            </div>
+          </fieldset>
+        <% end %>
       </div>
 
       <hr />

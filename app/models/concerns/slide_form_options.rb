@@ -27,7 +27,7 @@ module SlideFormOptions
     end
 
     def foreground_sizings
-      @_foreground_sizings ||= ['exact size', 'fill screen', 'fill screen (do not crop)']
+      @_foreground_sizings ||= [['Exact Size', 'auto'], ['Fill Screen', 'cover'], ['Fill Screen (do not crop)', 'contain']]
     end
   end
 end
