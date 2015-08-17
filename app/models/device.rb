@@ -4,6 +4,8 @@ class Device < ActiveRecord::Base
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
 
+  validates :name, presence: true
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 

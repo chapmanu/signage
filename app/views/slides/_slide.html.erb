@@ -6,7 +6,10 @@
      >
   <article data-slide-name="<%= slide.name %>" class="<%= slide.css_classes %>">
     <%= render "slides/templates/#{slide.template}", slide: slide %>
-    <footer class="ui-slide-organizer">
-    <img class="ui-slide-organizer-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-<%= slide.organizer_id %>.svg"/><%= slide.organizer %></footer>
   </article>
+
+  <footer class="ui-slide-organizer">
+    <%= image_tag "organizers/icon-#{SlidesHelper::ORGANIZER_ICONS[slide.organizer] || 'chapman'}.svg", class: 'ui-slide-organizer-icon' %>
+    <%= slide.organizer %>
+  </footer>
 </div>

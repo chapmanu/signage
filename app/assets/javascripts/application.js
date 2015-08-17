@@ -20,8 +20,12 @@
 //= require jquery.throttle_debounce
 
 /* APP */
+//= require_self
 //= require_tree ./shared
 //= require_tree ./application
+
+var App            = {};
+var SlideBehaviors = {}
 
 $(document).on('ready page:load', function(e){
   // Fire all the stuff for the controllers

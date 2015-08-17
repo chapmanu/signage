@@ -59,7 +59,7 @@
 
       <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
         <%= f.label :organizer, "Organizer/Sponsor" %>
-        <%= f.select :organizer, Slide.organizers.map{|f| [f, f] } %>
+        <%= f.select :organizer, organizer_options.map{|f| [f, f] } %>
       </div>
 
       <div class="field" data-show-when="#slide_template==standard">
@@ -103,7 +103,6 @@
         <%= f.label :remove_background do %>
           <%= f.check_box :remove_background %> Remove background
         <% end %>
-
       </div>
 
       <div class="field" >
