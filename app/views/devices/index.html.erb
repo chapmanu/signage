@@ -20,7 +20,7 @@
   <tbody>
     <% @devices.each do |device| %>
       <tr>
-        <td><%= link_to device.name.try(:humanize), edit_device_path(device) %></td>
+        <td><%= link_to device.name, edit_device_path(device) %></td>
         <td><%= device.location %></td>
         <td><%= device.menu.try(:humanize) %>
         <td style="text-align: center"><%= device.slides.length %></td>
