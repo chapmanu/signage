@@ -1,5 +1,5 @@
 class Device < ActiveRecord::Base
-  has_many :device_slides
+  has_many :device_slides, dependent: :destroy
   has_many :slides, through: :device_slides
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
