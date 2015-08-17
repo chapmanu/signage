@@ -18,6 +18,8 @@ class Slide < ActiveRecord::Base
 
   include SlideFormOptions
 
+  accepts_nested_attributes_for :scheduled_items
+
   paginates_per 10
 
   def existing_background

@@ -129,7 +129,8 @@ class SlidesController < ApplicationController
         :background_cache,
         :foreground_cache,
         :remove_foreground,
-        :device_ids => []
+        :device_ids => [],
+        :scheduled_items_attributes => [:date, :time, :image, :content, :admission, :audience]
         )
     end
 end
