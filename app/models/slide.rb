@@ -13,6 +13,9 @@ class Slide < ActiveRecord::Base
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
 
+  validates :menu_name, presence: true
+  validates :template,  presence: true
+
   include SlideFormOptions
 
   paginates_per 10
