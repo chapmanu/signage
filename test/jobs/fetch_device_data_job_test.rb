@@ -9,7 +9,7 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
   end
 
   test "it saves people" do
-    assert_difference 'Person.count', 75 do
+    assert_difference 'Person.count', 71 do
       perform_job_with_people
     end
   end
