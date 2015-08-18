@@ -8,6 +8,10 @@
     <%= f.text_field :time %>
   </div>
   <div class="field">
+    <%= f.label :name, "Name of Event" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
     <%= f.label :image, "Small Image" %>
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>

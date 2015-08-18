@@ -18,7 +18,7 @@ class Slide < ActiveRecord::Base
 
   include SlideFormOptions
 
-  accepts_nested_attributes_for :scheduled_items
+  accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 
   paginates_per 10
 

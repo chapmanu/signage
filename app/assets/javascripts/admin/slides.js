@@ -8,17 +8,21 @@ Admin.Slides = {};
  */
 
 Admin.Slides.livePreviewAjax = function() {
-  var form_data = new FormData($('#slide_form')[0]);
-  $.ajax({
-      url:        '/slides/live_preview',
-      type:       'POST',
-      data:        form_data,
-      success:     Admin.Slides.livePreviewSuccess,
-      error:       Admin.Slides.livePreviewError,
-      cache:       false,
-      contentType: false,
-      processData: false
-  });
+  if (!Admin.Slides.currently_ajaxing) {
+    Admin.Slides.currently_ajaxing  = true;
+    var form_data = new FormData($('#slide_form')[0]);
+    $.ajax({
+        url:        '/slides/live_preview',
+        type:       'POST',
+        data:        form_data,
+        success:     Admin.Slides.livePreviewSuccess,
+        error:       Admin.Slides.livePreviewError,
+        complete:    Admin.Slides.livePreviewComplete,
+        cache:       false,
+        contentType: false,
+        processData: false
+    });
+  }
 };
 
 Admin.Slides.livePreviewSuccess = function(data) {
@@ -26,10 +30,18 @@ Admin.Slides.livePreviewSuccess = function(data) {
   iframe_doc.open();
   iframe_doc.write(data);
   iframe_doc.close();
+  setTimeout(function() {
+    $(iframe_doc.body).hide();
+    $(iframe_doc.body).show(300);
+  }, 100);
 };
 
 Admin.Slides.livePreivewError = function(error) {
-  console.log(error);
+  // Should one need to do something here, here it is.
+};
+
+Admin.Slides.livePreviewComplete = function(data) {
+  Admin.Slides.currently_ajaxing = false;
 };
 
 Admin.Slides.initDateTimePickers = function() {
@@ -58,8 +70,30 @@ Admin.Slides.initShowWhen = function() {
 };
 
 Admin.Slides.initLivePreview = function() {
+  $('#slide_template').on('change', function() {
+    Admin.Slides.livePreviewAjax();
+    $('.js-sticky-slide-preview').sticky('update');
+  });
   Admin.Slides.livePreviewAjax();
-  $(document).on('change', ':input', Admin.Slides.livePreviewAjax);
+};
+
+Admin.Slides.initTinyMCE = function() {
+  var init = function() {
+    tinyMCE.init({
+      menubar:        false,
+      content_style: 'p { font-size: 16px; }',
+      selector:      '.tinymce',
+      setup: function (editor) {
+        editor.on('blur', function () {
+          tinyMCE.triggerSave();
+          $('textarea.tinymce').trigger('change');
+        });
+      }
+    });
+  };
+  tinyMCE.remove();
+  init();
+  $(document).on('dynamic_fields_added', init);
 };
 
 
@@ -71,4 +105,5 @@ Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
   Admin.Slides.initLivePreview();
+  Admin.Slides.initTinyMCE();
 });
