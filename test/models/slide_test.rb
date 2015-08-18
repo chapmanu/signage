@@ -1,6 +1,22 @@
 require 'test_helper'
 
 class SlideTest < ActiveSupport::TestCase
+  test 'fixture is valid' do
+    assert slides(:one).valid?
+  end
+
+  test 'validates menu_name presence' do
+    slide = slides(:one)
+    slide.menu_name = nil
+    assert_not slide.valid?
+  end
+
+  test 'validates template presence' do
+    slide = slides(:one)
+    slide.template = nil
+    assert_not slide.valid?
+  end
+
   test "touches devices when save" do
     slide  = slides(:one)
     device = devices(:one)
