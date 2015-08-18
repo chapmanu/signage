@@ -8,7 +8,6 @@ class Slide < ActiveRecord::Base
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
   scope :shown,  -> { where(show: true) }
-  scope :active, -> { where('slides.play_on IS NULL OR slides.play_on <= ?', Time.zone.now).where('slides.stop_on IS NULL OR slides.stop_on >= ?', Time.zone.now) }
 
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
@@ -17,30 +16,11 @@ class Slide < ActiveRecord::Base
   validates :template,  presence: true
 
   include SlideFormOptions
+  include Schedulable
 
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 
   paginates_per 10
-
-  def existing_background
-    self['background']
-  end
-
-  def existing_foreground
-    self['foreground']
-  end
-
-  def active?
-    !upcoming? && !expired?
-  end
-
-  def upcoming?
-    !(play_on.nil? || play_on <= Time.zone.now)
-  end
-
-  def expired?
-    !(stop_on.nil? || stop_on >= Time.zone.now)
-  end
 
   def people_slide?
     !!(template.downcase =~ /directory/)
