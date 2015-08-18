@@ -126,3 +126,21 @@
   border-right: 3px $action-color solid !important;
   opacity: 0.9;
 }
+
+.device-inactive, .device-active {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.device-active {
+  width: 8px;
+  height: 8px;
+  background-color: #4CE737;
+  box-shadow: 0 0 5px 5px #4CE737;
+}
+
+.device-inactive {
+  background-color: $light-gray
+}
