@@ -25,11 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :admission %>
-    <%= f.text_field :admission %>
+    <%= f.select :admission, Slide.admission_types.map{|t| [t, t]} %>
   </div>
   <div class="field">
     <%= f.label :audience %>
-    <%= f.text_field :audience %>
+    <%= f.select :audience, Slide.audience_types.map{|t| [t, t]} %>
   </div>
   <div class="field">
     <%= link_to_remove_dynamic_fields "Delete", f %>
