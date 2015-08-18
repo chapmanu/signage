@@ -25,12 +25,23 @@
   </div>
   <div class="field">
     <%= f.label :admission %>
-    <%= f.text_field :admission %>
+    <%= f.select :admission, Slide.admission_types.map{|t| [t, t]} %>
   </div>
   <div class="field">
     <%= f.label :audience %>
-    <%= f.text_field :audience %>
+    <%= f.select :audience, Slide.audience_types.map{|t| [t, t]} %>
   </div>
+
+  <div class="field">
+    <%= f.label :play_on, "Start playing event on" %>
+    <%= f.text_field :play_on, value: format_date(f.object.play_on), data: { datetimepicker: true } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :stop_on, "Stop playing event on" %>
+    <%= f.text_field :stop_on, data: { datetimepicker: true } %>
+  </div>
+
   <div class="field">
     <%= link_to_remove_dynamic_fields "Delete", f %>
   </div>

@@ -10,7 +10,6 @@ class DevicesController < ApplicationController
   end
 
   def poll
-    ap @device
     @device.touch_last_ping
     last_updated = Time.zone.parse(device_params[:updated_at])
     @refresh = @device.updated_at.to_i > last_updated.to_i

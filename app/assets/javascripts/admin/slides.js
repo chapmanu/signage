@@ -78,22 +78,17 @@ Admin.Slides.initLivePreview = function() {
 };
 
 Admin.Slides.initTinyMCE = function() {
-  var init = function() {
-    tinyMCE.init({
-      menubar:        false,
-      content_style: 'p { font-size: 16px; }',
-      selector:      '.tinymce',
-      setup: function (editor) {
-        editor.on('blur', function () {
-          tinyMCE.triggerSave();
-          $('textarea.tinymce').trigger('change');
-        });
-      }
-    });
-  };
-  tinyMCE.remove();
-  init();
-  $(document).on('dynamic_fields_added', init);
+  tinyMCE.init({
+    menubar:        false,
+    content_style: 'p { font-size: 16px; }',
+    selector:      '.tinymce',
+    setup: function (editor) {
+      editor.on('blur', function () {
+        tinyMCE.triggerSave();
+        $('textarea.tinymce').trigger('change');
+      });
+    }
+  });
 };
 
 
@@ -104,6 +99,12 @@ Admin.Slides.initTinyMCE = function() {
 Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
+  tinyMCE.remove();
   Admin.Slides.initLivePreview();
   Admin.Slides.initTinyMCE();
 });
+
+$(document).on('dynamic_fields_added', function($fields) {
+  Admin.Slides.initTinyMCE();
+  Admin.Slides.initDateTimePickers();
+})
