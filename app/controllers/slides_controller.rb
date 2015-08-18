@@ -8,17 +8,12 @@ class SlidesController < ApplicationController
   end
 
   def live_preview
-    if params[:slide][:scheduled_items_attributes]
-      params[:slide][:scheduled_items_attributes].each do |index, attrs|
-        attrs.delete(:id)
-        if attrs[:_destroy] == '1'
-          params[:slide][:scheduled_items_attributes].delete(index)
-        end
-      end
-    end
-    @slide = Slide.new(slide_params)
+    @slide = params[:id].blank? ? Slide.new : Slide.find(params[:id])
+    @slide.attributes = slide_params
+
     @slide.remove_background! if slide_params[:remove_background] == '1'
     @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
+
     render :preview, layout: 'application'
   rescue ActionView::Template::Error
     render status: :unprocessable_entity, nothing: true
@@ -137,7 +132,7 @@ class SlidesController < ApplicationController
         :foreground_cache,
         :remove_foreground,
         :device_ids => [],
-        :scheduled_items_attributes => [:id, :_destroy, :date, :time, :image, :content, :admission, :audience, :image_cache, :remove_image]
+        :scheduled_items_attributes => [:id, :_destroy, :date, :time, :image, :content, :admission, :audience, :image_cache, :remove_image, :name]
         )
     end
 end
