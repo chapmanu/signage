@@ -14,6 +14,8 @@
   <!-- First Fieldset -->
 
   <fieldset>
+    <%= hidden_field_tag :id, @slide.id %>
+
     <div class="field">
       <%= f.label :menu_name, "Name (appears on menu)" %>
       <%= f.text_field :menu_name %>
@@ -59,7 +61,7 @@
 
       <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
         <%= f.label :organizer, "Organizer/Sponsor" %>
-        <%= f.select :organizer, organizer_options.map{|f| [f, f] } %>
+        <%= f.select :organizer, organizer_options.map{|f| [f, f] }, {} %>
       </div>
 
       <div class="field" data-show-when="#slide_template==standard">
@@ -75,25 +77,12 @@
       <div class="field" data-show-when="#slide_template==standard">
         <%= f.label :content %>
         <%= f.text_area :content, :class => "tinymce", :rows => 16, :cols => 120 %>
-        <script>
-          tinyMCE.init({
-            menubar:        false,
-            content_style: 'p { font-size: 16px; }',
-            selector:      '.tinymce',
-            setup: function (editor) {
-              editor.on('blur', function () {
-                tinyMCE.triggerSave();
-                $('textarea.tinymce').trigger('change');
-              });
-            }
-          });
-        </script>
       </div>
 
       <div data-show-when="#slide_template==standard">
       <div class="field">
         <%= f.label :background_type %>
-        <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]} %>
+        <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]}, {} %>
       </div>
 
       <div class="field" data-show-when="#slide_background_type==^(?!none)">
@@ -107,7 +96,7 @@
 
       <div class="field" >
         <%= f.label :foreground_type %>
-        <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]} %>
+        <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]}, {} %>
       </div>
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
@@ -121,13 +110,13 @@
 
       <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
         <%= f.label :foreground_sizing %>
-        <%= f.select :foreground_sizing, Slide.foreground_sizings %>
+        <%= f.select :foreground_sizing, Slide.foreground_sizings, {} %>
       </div>
       </div>
 
       <div class="field" data-show-when="#slide_template==directory">
         <%= f.label :directory_feed, "Show Faculty In" %>
-        <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] } %>
+        <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] }, {} %>
       </div>
 
 
@@ -178,9 +167,14 @@
       </div>
     </div>
     <div class="slide-live-preview">
-      <div class="slide-preview js-sticky-slide-preview">
-        <div class="slide-preview-wrapper">
-          <%= content_tag  :iframe, nil, src: nil, id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
+      <div class="js-sticky-slide-preview">
+        <div class="slide-preview">
+          <div class="slide-preview-wrapper">
+            <%= content_tag  :iframe, nil, src: nil, id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
+          </div>
+        </div>
+        <div style="margin-top: 30px; text-align: center;">
+          <%= link_to 'Refresh Preview', 'javascript:Admin.Slides.livePreviewAjax();' %>
         </div>
       </div>
     </div>
