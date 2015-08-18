@@ -6,8 +6,8 @@ module DynamicFieldsHelper
       : link_to_dynamic_fields_without_block(*args)
   end
 
-  def link_to_remove_dynamic_fields(text, form)
-    form.hidden_field(:_destroy) + link_to(text, 'javascript:;', data: { behavior: "remove-dynamic-fields" })
+  def link_to_remove_dynamic_fields(text, form, options = {})
+    form.hidden_field(:_destroy) + link_to(text, 'javascript:;', options.deep_merge(data: { behavior: "remove-dynamic-fields" }))
   end
 
   def render_dynamic_fields(form, association, object, partial)
