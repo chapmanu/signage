@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818162225) do
+ActiveRecord::Schema.define(version: 20150818232457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(version: 20150818162225) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "slide_id"
+    t.datetime "play_on"
+    t.datetime "stop_on"
   end
 
   add_index "scheduled_items", ["slide_id"], name: "index_scheduled_items_on_slide_id", using: :btree

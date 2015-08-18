@@ -4,7 +4,8 @@
 <div class="ui-slide-collection" on-pointerdown="delayAutoScroll" on-mousewheel="delayAutoScroll">
   <div class="ui-slide-collection-inset">
     <% slide.scheduled_items.each do |item| %>
-      <% next if item.marked_for_destruction? %>
+      <% next if !item.active? || item.marked_for_destruction? %>
+
       <article class="ui-event">
         <div class="ui-event-body">
           <%= image_tag item.image.url, class: 'ui-event-image' unless item.image.url.blank? %>
