@@ -18,6 +18,9 @@ class AdminController < ApplicationController
     redirect_to admin_emergency_path, alert: "All emergency messages have been cleared"
   end
 
+  def sessions
+  end
+
   private
     def emergency_params
       params.permit(:emergency, :emergency_detail)
