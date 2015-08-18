@@ -9,10 +9,11 @@
 <table>
   <thead>
     <tr>
+      <th style="width: 80px;"></th>
       <th style="width: 30%">Name</th>
       <th>Location</th>
       <th>Type</th>
-      <th style="text-align: center">Number of Slides</th>
+      <th style="text-align: center;">Number of Slides</th>
       <th style="text-align: center">Actions</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
   <tbody>
     <% @devices.each do |device| %>
       <tr>
+        <td style="text-align: center;"><%= content_tag :div, nil, class: (device.active? ? 'device-active' : 'device-inactive') %></td>
         <td><%= link_to device.name, edit_device_path(device) %></td>
         <td><%= device.location %></td>
         <td><%= device.menu.try(:humanize) %>

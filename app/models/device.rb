@@ -28,4 +28,12 @@ class Device < ActiveRecord::Base
   def emergency?
     !emergency.blank? || !emergency_detail.blank?
   end
+
+  def touch_last_ping
+    update_column(:last_ping, Time.zone.now)
+  end
+
+  def active?
+    last_ping && (Time.zone.now - 8.seconds) <= last_ping  # The poll is every 5 seconds (3 second delay is fine)
+  end
 end
