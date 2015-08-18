@@ -67,5 +67,6 @@ group :test do
   gem 'webmock', '1.21.0'
   gem 'vcr', '2.9.3'
   gem 'minitest-reporters'
+  gem 'capybara', '2.4.4'
 end
 
