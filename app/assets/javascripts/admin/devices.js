@@ -9,7 +9,6 @@ Utils.fireWhenReady(['devices#edit', 'devices#update'], function(e) {
   $('#js-sortable-slides').sortable({
     update: Admin.Devices.updateSlideOrder,
     containment: 'parent',
-    tolerance: 'pointer',
-    revert: 150
+    tolerance: 'pointer'
   });
 });
