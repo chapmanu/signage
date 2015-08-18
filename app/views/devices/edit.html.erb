@@ -42,7 +42,7 @@
       </div>
     </div>
   <% end %>
-  <%= link_to "+ Add Slide", new_slide_path %>
+  <%= link_to "+ Add Slide", new_slide_path, id: 'add-slide-link' %>
 </div>
 
 <%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_device_path(@device) } %>
