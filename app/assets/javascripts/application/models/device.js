@@ -26,11 +26,13 @@ Device.initialize = function(config) {
 }
 
 Device.play = function() {
+  if (Device.slides.length === 0) return;
   Device.currentSlide().play();
   Device._queueNextSlide();
 };
 
 Device.stop = function() {
+  if (Device.slides.length === 0) return;
   Device.currentSlide().stop();
   clearTimeout(Device.timeout_id)
 }
