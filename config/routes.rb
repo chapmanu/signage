@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   get 'admin/emergency'
   get 'admin/devices'
+  get 'admin/sessions'
   post 'admin/update_emergency'
   post 'admin/clear_emergency'
 
