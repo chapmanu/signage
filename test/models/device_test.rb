@@ -6,6 +6,15 @@ class DeviceTest < ActiveSupport::TestCase
     @slide  = slides(:one)
   end
 
+  test 'fixtures are safe' do
+    assert @device.valid?
+  end
+
+  test 'validates name presence' do
+    @device.name = nil
+    assert_not @device.valid?
+  end
+
   test "#active_slides removes hidden slides" do
     @slide.update(show: false)
     @device.slides << @slide
