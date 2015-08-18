@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class ScheduledItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  include SchedulableInterfaceTest
+
+  setup do
+    @scheduled_item = @object = ScheduledItem.new
+  end
 end
