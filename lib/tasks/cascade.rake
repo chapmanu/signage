@@ -1,6 +1,5 @@
 namespace :cascade do
-  desc "Fetch data from Cascade"
-
+  desc "Fetch device from Cascade"
   task sync: :environment do
     puts "Fetching data from cascade"
     cascade = Rails.application.config_for :cascade
@@ -10,5 +9,4 @@ namespace :cascade do
       FetchDeviceDataJob.perform_now(url: url)
     end
   end
-
 end
