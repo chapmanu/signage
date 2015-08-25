@@ -8,12 +8,6 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
     end
   end
 
-  test "it saves people" do
-    assert_difference 'Person.count', 71 do
-      perform_job_with_people
-    end
-  end
-
   test "it saves scheduled items" do
     assert_difference 'ScheduledItem.count', 4 do
       perform_job_with_scheduled_items
@@ -26,6 +20,22 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
     assert_equal('standard', s.template)
     assert_equal('dark', s.theme)
     assert_equal('right', s.layout)
+  end
+
+  test "it saves the directory feed field" do
+    skip "Don't have the data from Mandy Yet"
+  end
+
+  test "it saves the expired at time" do
+    skip "Don't have the data from Mandy Yet"
+  end
+
+  test "it saves the start playing at time" do
+    skip "Don't have the data from Mandy Yet"
+  end
+
+  test "it saves the start and stop time of scheduled items" do
+    skip "Don't have the data from Mandy Yet"
   end
 
   private
