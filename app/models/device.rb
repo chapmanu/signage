@@ -25,8 +25,20 @@ class Device < ActiveRecord::Base
     template.to_s[/(\w+)(\.mustache)?$/, 1].underscore
   end
 
+  def any_emergency?
+    emergency? || panther_alert?
+  end
+
   def emergency?
-    !emergency.blank? || !emergency_detail.blank?
+    [emergency, emergency_detail].any? do |field|
+      !field.blank?
+    end
+  end
+
+  def panther_alert?
+    [panther_alert, panther_alert_detail].any? do |field|
+      !field.blank?
+    end
   end
 
   def touch_last_ping

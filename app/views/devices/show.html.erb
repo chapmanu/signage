@@ -12,4 +12,4 @@
   </main>
 </div>
 
-<%= render 'emergency' if @device.emergency? %>
+<%= render 'emergency' if @device.any_emergency? %>

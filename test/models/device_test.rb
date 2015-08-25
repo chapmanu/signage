@@ -79,4 +79,24 @@ class DeviceTest < ActiveSupport::TestCase
     @device.last_ping = nil
     assert_not @device.active?
   end
+
+  test '#any_emergency? when all nil' do
+    assert_not Device.new.any_emergency?
+  end
+
+  test '#any_emergency? when empty string' do
+    assert_not Device.new(emergency: '').any_emergency?
+  end
+
+  test '#any_emergency? when panther alert' do
+    assert Device.new(panther_alert: 'hi').any_emergency?
+  end
+
+  test '#any_emergency? when panther alert detail' do
+    assert Device.new(panther_alert_detail: 'hi').any_emergency?
+  end
+
+  test '#any_emergency? when panther alert detail empty string' do
+    assert_not Device.new(panther_alert_detail: '  ').any_emergency?
+  end
 end
