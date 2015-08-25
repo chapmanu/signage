@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818232457) do
+ActiveRecord::Schema.define(version: 20150824221112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,22 @@ ActiveRecord::Schema.define(version: 20150818232457) do
   end
 
   add_index "devices", ["slug"], name: "index_devices_on_slug", unique: true, using: :btree
+
+  create_table "faculties", force: :cascade do |t|
+    t.integer  "datatel_id"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "full_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "building_name"
+    t.string   "office_name"
+    t.string   "building_name_2"
+    t.string   "office_name_2"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "thumbnail"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
