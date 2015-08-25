@@ -1,7 +1,6 @@
 class Slide < ActiveRecord::Base
   has_many :device_slides, dependent: :destroy
   has_many :devices, through: :device_slides
-  has_and_belongs_to_many :people
   has_many :scheduled_items, dependent: :destroy
 
   after_save :touch_devices
