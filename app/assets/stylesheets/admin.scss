@@ -144,3 +144,16 @@
 .device-inactive {
   background-color: $light-gray
 }
+
+#error_explanation {
+  padding: $base-spacing;
+  background-color: #f39c12;
+  margin-bottom: $base-spacing;
+  border: 1px solid darken(#f39c12, 10%);
+  border-radius: $base-border-radius;
+
+  ul {
+    list-style-type: disc;
+    margin-left: $base-spacing;
+  }
+}
