@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rss.blackboardconnect.com/138874/digital-signage/feed.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache,max-age=300
+      Content-Type:
+      - text/xml;charset=utf-8
+      Last-Modified:
+      - Mon, 21 Jul 2014 23:25:00 GMT
+      Accept-Ranges:
+      - bytes
+      Etag:
+      - '"df3b9fd3aa5cf1:0"'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      X-Powered-By:
+      - ASP.NET
+      Date:
+      - Tue, 25 Aug 2015 15:37:03 GMT
+      Content-Length:
+      - '530'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48cnNz
+        IHZlcnNpb249IjIuMCI+PGNoYW5uZWw+PHRpdGxlPkRpZ2l0YWwgU2lnbmFn
+        ZTwvdGl0bGU+PGxpbms+aHR0cDovL3Jzcy5ibGFja2JvYXJkY29ubmVjdC5j
+        b20vMTM4ODc0L2RpZ2l0YWwtc2lnbmFnZS9mZWVkLnhtbDwvbGluaz48ZGVz
+        Y3JpcHRpb24+U2NyZWVucyBvbiBjYW1wdXM8L2Rlc2NyaXB0aW9uPjxsYXN0
+        QnVpbGREYXRlPk1vbiwgMjEgSnVsIDIwMTQgMjM6MjU6MDAgR01UPC9sYXN0
+        QnVpbGREYXRlPjxsYW5ndWFnZT5lbi1VczwvbGFuZ3VhZ2U+PGltYWdlPjx1
+        cmw+aHR0cHM6Ly93d3cuYmxhY2tib2FyZGNvbm5lY3RlZC5jb20vaW1hZ2Vz
+        L2luc3RpdHV0aW9ubG9nb3MvbG9nb18xMzg4NzQuZ2lmPC91cmw+PHRpdGxl
+        PkRpZ2l0YWwgU2lnbmFnZTwvdGl0bGU+PGxpbms+aHR0cDovL3Jzcy5ibGFj
+        a2JvYXJkY29ubmVjdC5jb20vMTM4ODc0L2RpZ2l0YWwtc2lnbmFnZS9mZWVk
+        LnhtbDwvbGluaz48L2ltYWdlPjwvY2hhbm5lbD48L3Jzcz4=
+    http_version: 
+  recorded_at: Tue, 25 Aug 2015 15:37:03 GMT
+recorded_with: VCR 2.9.3
