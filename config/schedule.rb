@@ -26,3 +26,7 @@ end
 every 6.hours do
   rake 'faculty:sync'
 end
+
+every 1.minute do
+  rake 'panther_alert:check'
+end
