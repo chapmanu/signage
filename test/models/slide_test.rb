@@ -31,4 +31,10 @@ class SlideTest < ActiveSupport::TestCase
     slide.save
     assert_not_equal(device_updated, device.reload.updated_at)
   end
+
+  test 'duration must be larger than 4 seconds' do
+    slide = slides(:one)
+    slide.duration = 4
+    assert_not slide.valid?
+  end
 end

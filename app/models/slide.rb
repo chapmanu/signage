@@ -14,6 +14,7 @@ class Slide < ActiveRecord::Base
 
   validates :menu_name, presence: true
   validates :template,  presence: true
+  validates :duration,  numericality: { greater_than_or_equal_to: 5 }
 
   include SlideFormOptions
   include Schedulable
