@@ -6,7 +6,7 @@ one:
   menu_name: MyString
   organizer: MyString
   organizer_id: MyString
-  duration: 1
+  duration: 5
   heading: MyString
   subheading: MyString
   datetime: 2015-07-24 11:49:42
@@ -25,7 +25,7 @@ two:
   menu_name: MyString
   organizer: MyString
   organizer_id: MyString
-  duration: 1
+  duration: 5
   heading: MyString
   subheading: MyString
   datetime: 2015-07-24 11:49:42
