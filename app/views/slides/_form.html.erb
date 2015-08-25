@@ -80,43 +80,43 @@
       </div>
 
       <div data-show-when="#slide_template==standard">
-      <div class="field">
-        <%= f.label :background_type %>
-        <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]}, {} %>
-      </div>
+        <div class="field">
+          <%= f.label :background_type %>
+          <%= f.select :background_type, Slide.background_types.map{|t| [t.humanize, t]}, {} %>
+        </div>
 
-      <div class="field" data-show-when="#slide_background_type==^(?!none)">
-        <%= f.label :background %>
-        <%= f.file_field :background %>
-        <%= f.hidden_field :background_cache %>
-        <%= f.label :remove_background do %>
-          <%= f.check_box :remove_background %> Remove background
-        <% end %>
-      </div>
+        <div class="field" data-show-when="#slide_background_type==^(?!none)">
+          <%= f.label :background %>
+          <%= f.file_field :background %>
+          <%= f.hidden_field :background_cache %>
+          <%= f.label :remove_background do %>
+            <%= f.check_box :remove_background %> Remove background
+          <% end %>
+        </div>
 
-      <div class="field" >
-        <%= f.label :foreground_type %>
-        <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]}, {} %>
-      </div>
+        <div class="field" >
+          <%= f.label :foreground_type %>
+          <%= f.select :foreground_type, Slide.foreground_types.map{|t| [t.humanize, t]}, {} %>
+        </div>
 
-      <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
-        <%= f.label :foreground %>
-        <%= f.file_field :foreground %>
-        <%= f.hidden_field :foreground_cache %>
-        <%= f.label :remove_foreground do %>
-          <%= f.check_box :remove_foreground %> Remove foreground
-        <% end %>
-      </div>
+        <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
+          <%= f.label :foreground %>
+          <%= f.file_field :foreground %>
+          <%= f.hidden_field :foreground_cache %>
+          <%= f.label :remove_foreground do %>
+            <%= f.check_box :remove_foreground %> Remove foreground
+          <% end %>
+        </div>
 
-      <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
-        <%= f.label :foreground_sizing %>
-        <%= f.select :foreground_sizing, Slide.foreground_sizings, {} %>
-      </div>
+        <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
+          <%= f.label :foreground_sizing %>
+          <%= f.select :foreground_sizing, Slide.foreground_sizings, {} %>
+        </div>
       </div>
 
       <div class="field" data-show-when="#slide_template==directory">
         <%= f.label :directory_feed, "Show Faculty In" %>
-        <%= f.select :directory_feed, Slide.directory_feeds.map{|f| [f, f] }, {} %>
+        <%= f.select :directory_feed, Faculty.all_building_names.map{|n| [n, n] }, {} %>
       </div>
 
 
