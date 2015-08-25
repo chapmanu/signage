@@ -1,4 +1,11 @@
 <article id="js-emergency-slide" class="ui-slide ui-slide--emergency">
-  <h1 class="ui-slide-heading"><%= @device.emergency %></h1>
-  <p class="ui-slide-content"><%= @device.emergency_detail %></p>
+
+  <% if @device.emergency? # A manual emergency takes presedence over panther alert %>
+    <h1 class="ui-slide-heading"><%= @device.emergency %></h1>
+    <p class="ui-slide-content"><%= @device.emergency_detail %></p>
+  <% elsif %>
+    <h1 class="ui-slide-heading"><%= @device.panther_alert %></h1>
+    <p class="ui-slide-content"><%= @device.panther_alert_detail %></p>
+  <% end %>
+
 </article>
