@@ -29,7 +29,6 @@ class FetchDeviceDataJob < ActiveJob::Base
         # The easy stuff where it maps directly
         item.except(*excluded_keys).each { |k, v| slide[k.underscore] = v }
         # The association stuff
-        slide.people          = save_people(item['collection'] || [])          if slide.people_slide?
         slide.scheduled_items = save_scheduled_items(item['collection'] || []) if slide.schedule_slide?
         # The custom attribute processing
         slide_type_parts = slide.template.to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
@@ -44,15 +43,6 @@ class FetchDeviceDataJob < ActiveJob::Base
           puts "Failed to Save #{slide.inspect}"
         end
         slide
-      end
-    end
-
-    def save_people(data)
-      data.map do |item|
-        person = Person.where(email: item['email']).first_or_initialize
-        item.except(*excluded_keys).each { |k, v| person[k.underscore] = v }
-        person.save!
-        person
       end
     end
 
