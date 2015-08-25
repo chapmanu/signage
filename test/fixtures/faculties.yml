@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  datatel_id: 1
+  last_name: Kerr
+  first_name: James
+  full_name: Dr. James Kerr
+  email: kerr@chapman.edu
+  phone: 714-309-6756
+  building_name: Dodge College
+  office_name: '300'
+  building_name_2:
+  office_name_2:
+
+two:
+  datatel_id: 2
+  last_name: Staples
+  first_name: Clive
+  full_name: Rev. Clive Staples
+  email: clive@chapman.edu
+  phone: 232-334-3345
+  building_name: Crean Hall
+  office_name: '100'
+  building_name_2: Dodge College
+  office_name_2: '200'
