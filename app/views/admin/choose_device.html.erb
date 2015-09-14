@@ -1,0 +1,14 @@
+<div class="admin-site-title">
+  <h1>Choose a Device to Play</h1>
+  <p>Click on one of the devices below to begin playing it on this screen.</p>
+  <br />
+</div>
+
+<% @devices.each do |device| %>
+  <%= link_to device do %>
+    <div class="play-device-row">
+      <%= image_tag 'play3.png', size: '64x64' %>
+      <h2><%= device.name %> <span class="slide-count">(<%= pluralize(device.slides.length, "slides") %>)</span></h2>
+    </div>
+  <% end %>
+<% end %>

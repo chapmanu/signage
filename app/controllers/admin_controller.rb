@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   layout 'admin'
+  skip_before_action :authenticate_user!, only: [:choose_device]
 
   def index
   end
@@ -19,6 +20,10 @@ class AdminController < ApplicationController
   end
 
   def sessions
+  end
+
+  def choose_device
+    @devices = Device.all.order(:name)
   end
 
   private
