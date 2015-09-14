@@ -9,6 +9,55 @@
 @import "jquery.datetimepicker";
 @import "refills/*";
 
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.navbar {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid $light-gray;
+  background-color: darken(white, 2%);
+  padding: 0;
+
+  .navbar-left {
+    float: left;
+    a {
+      color: $base-font-color;
+    }
+
+    img {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 10px 10px 10px $base-spacing;
+      float: left;
+    }
+
+    h1 {
+      font-family: $base-font-family;
+      display: inline-block;
+      font-size: 18px;
+      font-weight: normal;
+    }
+  }
+
+  .navbar-right {
+    float: right;
+    a {
+      display: inline-block;
+      padding: 0 $base-spacing;
+      background-color: $blue;
+      color: white;
+    }
+    p {
+      display: inline-block;
+      padding: 0 $base-spacing;
+    }
+  }
+}
+
 .home-button {
   display: block;
   margin-bottom: $base-spacing;
@@ -16,6 +65,7 @@
 
 .admin-content {
   @include outer-container;
+  padding: 0 5px;
   margin-top: 100px;
   margin-bottom: 100px;
 }
@@ -156,4 +206,9 @@
     list-style-type: disc;
     margin-left: $base-spacing;
   }
+}
+
+.sign-in-form {
+  max-width: 35em;
+  margin: 0 auto;
 }
