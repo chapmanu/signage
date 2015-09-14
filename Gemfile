@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+gem 'net-ldap', '0.11'
+gem 'devise', '3.5.2'
 gem 'bugsnag', '2.8.12'
 gem 'whenever', '0.9.4', :require => false
 gem 'jquery-ui-rails', '5.0.5'
@@ -51,6 +52,7 @@ gem 'capistrano-rvm',      '0.1.2',    group: :development
 gem 'capistrano-passenger', '0.1.1',    group: :development
 
 group :development, :test do
+  gem 'better_errors', '2.1.1'
   gem 'guard', '2.12.9'
   gem 'guard-minitest', '2.4.4'
 

@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
+  # Devise
+  devise_for :users
 
-  patch 'slides/live_preview'
-  post 'slides/live_preview'
-  resources :slides do
-    get  'preview', on: :member
-  end
-
+  # Admin
   get 'admin', to: 'admin#index'
   get 'admin/index'
   get 'admin/emergency'
@@ -14,12 +11,25 @@ Rails.application.routes.draw do
   post 'admin/update_emergency'
   post 'admin/clear_emergency'
 
+  # Devices
   resources :devices do
     get 'poll',   on: :member
     post 'order', on: :member
   end
 
-  root 'admin#index'
+  # Slides
+  patch 'slides/live_preview'
+  post 'slides/live_preview'
+  resources :slides do
+    get  'preview', on: :member
+  end
+
+  # Users
+  resources :users
+
+
+
+  root 'devices#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
