@@ -1,6 +1,7 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:poll, :show, :edit, :update, :destroy]
   layout 'admin', except: [:show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def order
     params[:device_slide_ids].each_with_index do |id, index|
