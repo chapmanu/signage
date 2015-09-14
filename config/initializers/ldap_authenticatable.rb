@@ -3,9 +3,7 @@ module Devise
     class LdapAuthenticatable < Authenticatable
 
       def authenticate!
-        fail(:invalid_login) unless params[:user]
-
-        if valid_credentials?("#{user_name}@chapman.edu".downcase, params[:user][:password])
+        if valid_credentials?("#{user_name}@chapman.edu", password)
           identity_info = JSON.parse(::ChapmanIdentities.fetch(user_name))
 
           if valid_identity_info?(identity_info)
@@ -14,6 +12,8 @@ module Devise
             notify_bugsnag(response: identity_info)
             user = User.where(email: identity_info['email']).first ? success!(user) : fail(:invalid_login)
           end
+        else
+          fail(:invalid_login)
         end
       end
 
@@ -23,7 +23,7 @@ module Devise
           ldap.host = 'bind.chapman.edu'
           ldap.port = 389
           ldap.auth email, password
-          !password.empty? && !email.empty? && ldap.bind
+          password.present? && email.present? && ldap.bind
         end
 
         def valid_identity_info?(info)
@@ -38,8 +38,16 @@ module Devise
           user
         end
 
+        def email
+          params[:user][:email]
+        end
+
+        def password
+          params[:user][:password]
+        end
+
         def user_name
-          /^([\w]*)@?.*$/.match(params[:user][:email].downcase)[1]
+          /^([\w]*)@?.*$/.match(email.downcase)[1]
         end
 
         def notify_bugsnag(options)

@@ -31,7 +31,7 @@ body {
       display: inline-block;
       width: 30px;
       height: 30px;
-      margin: 10px 10px 10px $base-spacing;
+      margin: 10px $base-spacing 10px $base-spacing;
       float: left;
     }
 
@@ -40,21 +40,23 @@ body {
       display: inline-block;
       font-size: 18px;
       font-weight: normal;
+      margin-right: $base-spacing;
     }
   }
 
   .navbar-right {
     float: right;
-    a {
-      display: inline-block;
-      padding: 0 $base-spacing;
-      background-color: $blue;
-      color: white;
-    }
     p {
       display: inline-block;
       padding: 0 $base-spacing;
     }
+  }
+
+  .navbar-button {
+    display: inline-block;
+    padding: 0 $base-spacing;
+    background-color: $blue;
+    color: white !important;
   }
 }
 
@@ -211,4 +213,27 @@ body {
 .sign-in-form {
   max-width: 35em;
   margin: 0 auto;
+}
+
+.play-device-row {
+  border: 1px solid $light-gray;
+  background-color: darken(white, 2%);
+  padding: $base-spacing;
+  margin: 10px 0;
+  min-height: em(64px) + ($base-spacing * 2);
+  img {
+    float: left;
+  }
+
+  h2 {
+    color: $base-font-color;
+    display: inline-block;
+    font-size: 24px;
+    margin: 17px 0px 0px $base-spacing;
+  }
+  .slide-count {
+    font-size: 14px;
+    font-weight: normal;
+    font-family: $base-font-family;
+  }
 }
