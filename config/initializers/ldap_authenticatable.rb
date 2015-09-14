@@ -1,9 +1,7 @@
-require 'net/ldap'
-require 'devise/strategies/authenticatable'
-
 module Devise
   module Strategies
     class LdapAuthenticatable < Authenticatable
+
       def authenticate!
         fail(:invalid_login) unless params[:user]
 
@@ -19,33 +17,34 @@ module Devise
         end
       end
 
-      def valid_credentials?(email, password)
-        ldap = Net::LDAP.new
-        ldap.host = 'bind.chapman.edu'
-        ldap.port = 389
-        ldap.auth email, password
-        !password.empty? && !email.empty? && ldap.bind
-      end
+      private
+        def valid_credentials?(email, password)
+          ldap = Net::LDAP.new
+          ldap.host = 'bind.chapman.edu'
+          ldap.port = 389
+          ldap.auth email, password
+          !password.empty? && !email.empty? && ldap.bind
+        end
 
-      def valid_identity_info?(info)
-        %w(email firstname lastname).all? { |key| info.has_key?(key) }
-      end
+        def valid_identity_info?(info)
+          %w(email firstname lastname).all? { |key| info.has_key?(key) }
+        end
 
-      def upsert_user(info)
-        user = User.where(email: info['email']).first_or_initialize
-        user.first_name = info['firstname']
-        user.last_name  = info['lastname']
-        user.save
-        user
-      end
+        def upsert_user(info)
+          user = User.where(email: info['email']).first_or_initialize
+          user.first_name = info['firstname']
+          user.last_name  = info['lastname']
+          user.save
+          user
+        end
 
-      def user_name
-        /^([\w]*)@?.*$/.match(params[:user][:email].downcase)[1]
-      end
+        def user_name
+          /^([\w]*)@?.*$/.match(params[:user][:email].downcase)[1]
+        end
 
-      def notify_bugsnag(options)
-        Bugsnag.notify(RuntimeError.new("Chapman Identity Server Failed"), options)
-      end
+        def notify_bugsnag(options)
+          Bugsnag.notify(RuntimeError.new("Chapman Identity Server Failed"), options)
+        end
     end
   end
 end

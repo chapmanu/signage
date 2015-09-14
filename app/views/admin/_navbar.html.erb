@@ -1,0 +1,16 @@
+<div class="navbar">
+  <div class="navbar-left">
+    <a href="<%= root_url %>">
+      <%= image_tag 'cu-window.png' %>
+      <h1>Digital Signage</h1>
+    </a>
+  </div>
+
+  <div class="navbar-right">
+    <% if current_user %>
+      <p>Signed in as <%= current_user.first_name %></p> <%= link_to "Sign Out", destroy_user_session_path, method: 'delete'%>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path %>
+    <% end %>
+  </div>
+</div>
