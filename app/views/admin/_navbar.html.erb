@@ -4,13 +4,14 @@
       <%= image_tag 'cu-window.png' %>
       <h1>Digital Signage</h1>
     </a>
+    <%= link_to "Admin Panel", admin_index_path, class: 'navbar-button' %>
   </div>
 
   <div class="navbar-right">
     <% if current_user %>
-      <p>Signed in as <%= current_user.first_name %></p> <%= link_to "Sign Out", destroy_user_session_path, method: 'delete'%>
+      <p>Signed in as <%= current_user.first_name %></p> <%= link_to "Sign Out", destroy_user_session_path, method: 'delete', class: 'navbar-button' %>
     <% else %>
-      <%= link_to "Sign In", new_user_session_path %>
+      <%= link_to "Sign In", new_user_session_path, class: 'navbar-button' %>
     <% end %>
   </div>
 </div>
