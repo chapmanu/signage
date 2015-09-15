@@ -9,6 +9,57 @@
 @import "jquery.datetimepicker";
 @import "refills/*";
 
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.navbar {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid $light-gray;
+  background-color: darken(white, 2%);
+  padding: 0;
+
+  .navbar-left {
+    float: left;
+    a {
+      color: $base-font-color;
+    }
+
+    img {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin: 10px $base-spacing 10px $base-spacing;
+      float: left;
+    }
+
+    h1 {
+      font-family: $base-font-family;
+      display: inline-block;
+      font-size: 18px;
+      font-weight: normal;
+      margin-right: $base-spacing;
+    }
+  }
+
+  .navbar-right {
+    float: right;
+    p {
+      display: inline-block;
+      padding: 0 $base-spacing;
+    }
+  }
+
+  .navbar-button {
+    display: inline-block;
+    padding: 0 $base-spacing;
+    background-color: $blue;
+    color: white !important;
+  }
+}
+
 .home-button {
   display: block;
   margin-bottom: $base-spacing;
@@ -16,6 +67,7 @@
 
 .admin-content {
   @include outer-container;
+  padding: 0 5px;
   margin-top: 100px;
   margin-bottom: 100px;
 }
@@ -155,5 +207,33 @@
   ul {
     list-style-type: disc;
     margin-left: $base-spacing;
+  }
+}
+
+.sign-in-form {
+  max-width: 35em;
+  margin: 0 auto;
+}
+
+.play-device-row {
+  border: 1px solid $light-gray;
+  background-color: darken(white, 2%);
+  padding: $base-spacing;
+  margin: 10px 0;
+  min-height: em(64px) + ($base-spacing * 2);
+  img {
+    float: left;
+  }
+
+  h2 {
+    color: $base-font-color;
+    display: inline-block;
+    font-size: 24px;
+    margin: 17px 0px 0px $base-spacing;
+  }
+  .slide-count {
+    font-size: 14px;
+    font-weight: normal;
+    font-family: $base-font-family;
   }
 }
