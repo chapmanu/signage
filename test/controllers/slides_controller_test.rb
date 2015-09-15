@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class SlidesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @slide = slides(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do
