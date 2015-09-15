@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914185759) do
+ActiveRecord::Schema.define(version: 20150915153518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 20150914185759) do
 
   add_index "device_slides", ["device_id"], name: "index_device_slides_on_device_id", using: :btree
   add_index "device_slides", ["slide_id"], name: "index_device_slides_on_slide_id", using: :btree
+
+  create_table "device_users", force: :cascade do |t|
+    t.integer  "device_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "device_users", ["device_id"], name: "index_device_users_on_device_id", using: :btree
+  add_index "device_users", ["user_id"], name: "index_device_users_on_user_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
@@ -132,11 +142,14 @@ ActiveRecord::Schema.define(version: 20150914185759) do
     t.datetime "updated_at",                       null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "roll"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "device_slides", "devices"
   add_foreign_key "device_slides", "slides"
+  add_foreign_key "device_users", "devices"
+  add_foreign_key "device_users", "users"
   add_foreign_key "scheduled_items", "slides"
 end
