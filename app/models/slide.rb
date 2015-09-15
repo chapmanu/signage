@@ -11,6 +11,7 @@ class Slide < ActiveRecord::Base
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
 
+  validates :devices,   presence: true
   validates :menu_name, presence: true
   validates :template,  presence: true
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }

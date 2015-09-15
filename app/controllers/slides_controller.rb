@@ -1,7 +1,7 @@
 class SlidesController < ApplicationController
-  before_action :set_slide,              only: [:preview, :show, :edit, :update, :destroy]
-  before_action :set_devices,            only: [:new, :edit, :create, :update]
-  before_action :set_parent_device_path, only: [:new, :edit]
+  before_action :set_slide,                 only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_devices,               only: [:new, :edit, :create, :update]
+  before_action :set_parent_device_path,    only: [:new, :edit]
   layout 'admin', except: [:preview]
 
   def preview
@@ -22,7 +22,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.search(params[:search]).order(:name).page params[:page]
+    @slides = current_user.slides.search(params[:search]).page params[:page]
   end
 
   # GET /slides/1
@@ -88,7 +88,7 @@ class SlidesController < ApplicationController
     end
 
     def set_devices
-      @devices = Device.all.order(:name)
+      @devices = current_user.devices.order(:name)
     end
 
     def set_parent_device_path
