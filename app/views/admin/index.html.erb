@@ -20,19 +20,23 @@
       <p>Add, update, and delete individual slides.</p>
     </a>
 
+    <% if can? :broadcast_emergency, Device %>
     <a href="<%= admin_emergency_path%>" class="grid-item">
       <%= image_tag 'feed.png', alt: 'Emergency' %>
 
       <h1>Broadcast an Emergency</h1>
       <p>Send an emergency notification to one, several, or all deivces.</p>
     </a>
+    <% end %>
 
+    <% if can? :manage, User %>
     <a href="<%= users_path %>" class="grid-item">
       <%= image_tag 'users.png', alt: 'Users' %>
 
       <h1>Manage User Permissions</h1>
       <p>Allow users to manage devices and slides.</p>
     </a>
+    <% end %>
 
     <div class="right-cover"></div>
     <div class="bottom-cover"></div>

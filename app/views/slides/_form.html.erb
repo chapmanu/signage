@@ -145,7 +145,7 @@
       </div>
 
       <div class="field">
-        <%= f.label :device_ids %>
+        <%= f.label :device_ids, "Devices this slide should play on" %>
         <%= f.select :device_ids, @devices.map{|d| [d.name, d.id] }, {}, multiple: true, size: 8 %>
       </div>
 
