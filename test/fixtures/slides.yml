@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  template: MyString
+  name: one
+  template: standard
   menu_name: MyString
   organizer: MyString
   organizer_id: MyString
@@ -20,8 +20,8 @@ one:
   foreground_sizing: MyString
 
 two:
-  name: MyString
-  template: MyString
+  name: two
+  template: standard
   menu_name: MyString
   organizer: MyString
   organizer_id: MyString

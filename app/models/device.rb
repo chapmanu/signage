@@ -2,6 +2,9 @@ class Device < ActiveRecord::Base
   has_many :device_slides, dependent: :destroy
   has_many :slides, through: :device_slides
 
+  has_many :device_users, dependent: :destroy
+  has_many :users, through: :device_users
+
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
 
   validates :name, presence: true

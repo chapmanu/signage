@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'cancancan', '1.12.0'
 gem 'net-ldap', '0.11'
 gem 'devise', '3.5.2'
 gem 'bugsnag', '2.8.12'

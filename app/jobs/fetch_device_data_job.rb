@@ -7,9 +7,8 @@ class FetchDeviceDataJob < ActiveJob::Base
     data     = JSON.parse(response.body)
 
     Device.transaction do
-      device         = save_device(data)
-      device.slides  = save_slides(data['collection'] || [])
-      device.save!
+      device = save_device(data)
+      save_slides(device, data['collection'] || [])
     end
   end
 
@@ -22,9 +21,10 @@ class FetchDeviceDataJob < ActiveJob::Base
       device
     end
 
-    def save_slides(data)
+    def save_slides(device, data)
       data.map do |item|
         slide = Slide.where(name: item['id']).first_or_initialize
+        slide.devices << device
 
         slide_type_parts            = item['template'].to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
         slide.template              = slide_type_parts[0]

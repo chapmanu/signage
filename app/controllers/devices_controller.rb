@@ -1,7 +1,7 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: [:poll, :show, :edit, :update, :destroy]
   layout 'admin', except: [:show]
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [:show, :poll]
 
   def order
     params[:device_slide_ids].each_with_index do |id, index|
@@ -19,7 +19,7 @@ class DevicesController < ApplicationController
   # GET /devices
   # GET /devices.json
   def index
-    @devices = Device.includes(:slides).search(params[:search]).order(:name)
+    @devices = current_user.devices.includes(:slides).search(params[:search]).order(:name)
   end
 
   # GET /devices/1
@@ -43,6 +43,7 @@ class DevicesController < ApplicationController
 
     respond_to do |format|
       if @device.save
+        current_user.devices << @device
         format.html { redirect_to edit_device_path @device; flash[:notice] = 'Device was successfully created.' }
         format.json { render :show, status: :created, location: @device }
       else
