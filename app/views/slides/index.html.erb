@@ -7,28 +7,21 @@
 
 <%= search_form slides_path  %>
 
+<br />
 <% if @slides.empty? %>
-  <br />
   <p>No slides to display</p>
 <% else %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
+  <table class="slides-listing-table">
     <tbody>
       <% @slides.each do |slide| %>
         <tr>
-          <td><%= render 'preview_iframe', slide: slide %></td>
-          <td style="text-align: left; vertical-align: top; padding-left: 16px;">
-            <br />
+          <td style="vertical-align: top; border: none;"><%= render 'preview_iframe', slide: slide %></td>
+          <td style="text-align: left; vertical-align: top; padding-left: 16px; border: none;">
             <h4><%= slide.menu_name %></h4>
             <%= link_to 'Show', slide %> |
             <%= link_to 'Edit', edit_slide_path(slide) %> |
             <%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= render 'slide_info_table', slide: slide %>
           </td>
         </tr>
       <% end %>

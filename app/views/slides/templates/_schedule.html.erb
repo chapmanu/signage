@@ -12,7 +12,7 @@
 
           <h1 class="ui-event-name"><%= item.name %></h1>
 
-          <div class="ui-event-content"><%= item.content.html_safe %></div>
+          <div class="ui-event-content"><%= item.content.try(:html_safe) %></div>
         </div>
 
         <div class="ui-event-date-time-location">
