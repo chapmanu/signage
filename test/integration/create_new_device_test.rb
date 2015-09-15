@@ -2,8 +2,11 @@ require 'test_helper'
 
 class CreateNewDeviceTest < ActionDispatch::IntegrationTest
   include Capybara::DSL
+  include Warden::Test::Helpers
+  Warden.test_mode!
 
   test "createing a new device" do
+    login_as(users(:one), scope: :user)
     visit admin_path
     click_link 'manage-devices-link'
     click_link 'new-device-link'
