@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class DevicesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @device = devices(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do
