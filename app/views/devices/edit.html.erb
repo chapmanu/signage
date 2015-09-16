@@ -45,4 +45,21 @@
   <%= link_to "+ Add Slide", new_slide_path, id: 'add-slide-link' %>
 </div>
 
+<div class="device-editors">
+  <h4>Editors</h4>
+  <p>These are the users that are able to edit this slide.</p>
+
+  <div id="js-device-editors-container">
+    <%= render 'editors', device: @device %>
+  </div>
+
+  <div class="add-device-editors-container">
+    <%= form_tag add_user_device_path(@device), remote: true do %>
+      <label for="user_id">Add more editors</label>
+      <%= select_tag :user_id, options_from_collection_for_select(User.all, :id, :full_name), :prompt => "Search users..." %>
+      <%= submit_tag "Add" %>
+    <% end %>
+  </div>
+</div>
+
 <%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_device_path(@device) } %>

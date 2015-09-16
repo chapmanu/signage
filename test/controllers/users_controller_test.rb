@@ -49,4 +49,14 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+
+  test "should lookup user from chapman identities" do
+    VCR.use_cassette(:lookup_kerr105) do
+      get :lookup, username: 'kerr105'
+    end
+    data = JSON.parse(response.body)
+    assert_equal 'kerr105@mail.chapman.edu', data['email']
+    assert_equal 'James', data['first_name']
+    assert_equal 'Kerr', data['last_name']
+  end
 end
