@@ -2,6 +2,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   layout 'admin'
 
+  def search
+  end
+
+  def lookup
+    render json: User.create_or_update_from_active_directory(params[:username])
+  end
+
   # GET /users
   # GET /users.json
   def index

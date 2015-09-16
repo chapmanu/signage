@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'selectize-rails', '0.12.1'
 gem 'cancancan', '1.12.0'
 gem 'net-ldap', '0.11'
 gem 'devise', '3.5.2'
@@ -68,6 +69,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest-stub_any_instance', '1.0.1'
   gem 'webmock', '1.21.0'
   gem 'vcr', '2.9.3'
   gem 'minitest-reporters'

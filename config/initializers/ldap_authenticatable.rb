@@ -3,18 +3,14 @@ module Devise
     class LdapAuthenticatable < Authenticatable
 
       def authenticate!
-        if valid_credentials?("#{user_name}@chapman.edu", password)
-          identity_info = JSON.parse(::ChapmanIdentities.fetch(user_name))
-
-          if valid_identity_info?(identity_info)
-            success!(upsert_user(identity_info))
-          else
-            notify_bugsnag(response: identity_info)
-            user = User.where(email: identity_info['email']).first ? success!(user) : fail(:invalid_login)
-          end
+        if valid_credentials?("#{username}@chapman.edu", password)
+          success! User.create_or_update_from_active_directory(username)
         else
           fail(:invalid_login)
         end
+
+      rescue UnexpectedActiveDirectoryFormat, ChapmanIdentityNotFound
+        fail(:invalid_login)
       end
 
       private
@@ -26,18 +22,6 @@ module Devise
           password.present? && email.present? && ldap.bind
         end
 
-        def valid_identity_info?(info)
-          %w(email firstname lastname).all? { |key| info.has_key?(key) }
-        end
-
-        def upsert_user(info)
-          user = User.where(email: info['email']).first_or_initialize
-          user.first_name = info['firstname']
-          user.last_name  = info['lastname']
-          user.save
-          user
-        end
-
         def email
           params[:user][:email]
         end
@@ -46,7 +30,7 @@ module Devise
           params[:user][:password]
         end
 
-        def user_name
+        def username
           /^([\w]*)@?.*$/.match(email.downcase)[1]
         end
 

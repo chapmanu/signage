@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include ActiveDirectoryLookups
+
   has_many :device_users, dependent: :destroy
   has_many :devices, through: :device_users
   has_many :slides, -> { uniq }, through: :devices
@@ -15,5 +17,9 @@ class User < ActiveRecord::Base
 
   def slides
     super_admin? ? Slide.all : super
+  end
+
+  def full_name
+    "#{first_name} #{last_name}".strip
   end
 end
