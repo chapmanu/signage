@@ -4,6 +4,7 @@ class DeviceTest < ActiveSupport::TestCase
   setup do
     @device = devices(:one)
     @slide  = slides(:one) # The fixures already relate @device and @slide
+    @user   = users(:one)
   end
 
   test 'fixtures are safe' do
@@ -93,5 +94,19 @@ class DeviceTest < ActiveSupport::TestCase
 
   test 'any_emergency? when panther alert detail empty string' do
     assert_not Device.new(panther_alert_detail: '  ').any_emergency?
+  end
+
+  test 'add_user' do
+    assert_not @device.users.include?(@user)
+    @device.add_user(@user)
+    @device.add_user(@user)
+    assert_equal 1, @device.users.length
+  end
+
+  test 'remove_user' do
+    assert @device.users.empty?
+    @device.add_user(@user)
+    @device.users.delete(@user)
+    assert @device.users.empty?
   end
 end
