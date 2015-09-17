@@ -8,7 +8,6 @@ module Devise
         else
           fail(:invalid_login)
         end
-
       rescue UnexpectedActiveDirectoryFormat, ChapmanIdentityNotFound
         fail(:invalid_login)
       end
