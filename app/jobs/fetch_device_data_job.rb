@@ -24,7 +24,7 @@ class FetchDeviceDataJob < ActiveJob::Base
     def save_slides(device, data)
       data.map do |item|
         slide = Slide.where(name: item['id']).first_or_initialize
-        slide.devices << device
+        slide.devices << device unless slide.devices.include?(device)
 
         slide_type_parts            = item['template'].to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
         slide.template              = slide_type_parts[0]
