@@ -4,11 +4,11 @@ class DevicesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show, :poll]
 
   def add_user
-    @device.users << User.find([params[:user_id]])
+    @device.add_user User.find(params[:user_id])
   end
 
   def remove_user
-    @device.users.delete(User.find(params[:user_id]))
+    @device.remove_user User.find(params[:user_id])
   end
 
   def order
