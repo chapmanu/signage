@@ -4,5 +4,5 @@
 james = User.where(email: 'jkerr@chapman.edu').first_or_initialize
 james.first_name = 'James'
 james.last_name  = 'Kerr'
-james.roll = :super_admin
+james.role = :super_admin
 james.save

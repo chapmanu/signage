@@ -4,7 +4,7 @@
     <th>Email</th>
     <th></th>
   </tr>
-  <% if device.users.empty? %>
+  <% if device.users.count == 0 %>
     <tr>
       <td>No users have permission to edit this device.</td>
       <td></td>

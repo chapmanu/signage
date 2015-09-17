@@ -5,7 +5,7 @@ class Device < ActiveRecord::Base
   has_many :device_users, dependent: :destroy
   has_many :users, through: :device_users
 
-  scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
+  scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search.present? }
 
   validates :name, presence: true
 
@@ -18,6 +18,10 @@ class Device < ActiveRecord::Base
 
   def add_user(user)
     users << user unless users.include?(user)
+  end
+
+  def remove_user(user)
+    users.delete(user)
   end
 
   def active_slides
