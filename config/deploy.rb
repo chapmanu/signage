@@ -48,4 +48,15 @@ namespace :deploy do
     end
   end
 
+  desc "Invoke rake task"
+  task :task do
+    on roles(:web) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, ENV['task']
+        end
+      end
+    end
+  end
 end
+
