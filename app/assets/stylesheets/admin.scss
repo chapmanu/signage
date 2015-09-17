@@ -8,6 +8,8 @@
 @import "neat";
 @import "jquery.datetimepicker";
 @import "refills/*";
+@import "selectize";
+@import "selectize.default";
 
 body {
   padding: 0;
@@ -236,4 +238,23 @@ body {
     font-weight: normal;
     font-family: $base-font-family;
   }
+}
+
+.admin-device-slides-preview {
+  margin-bottom: $base-spacing * 2;
+}
+
+.device-editors {
+  .selectize-control {
+    display: inline-block;
+    width: 50%;
+    @include span-columns(10);
+  }
+  input[type="submit"] {
+    @include span-columns(2);
+  }
+}
+
+.add-device-editors-container {
+  margin-top: $base-spacing;
 }
