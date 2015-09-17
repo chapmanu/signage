@@ -12,7 +12,7 @@
   <% if !@device.slides.empty? %>
     <div class="vertical-tabs-container">
       <div class="vertical-tabs" id="js-sortable-slides">
-        <% @device.device_slides.each_with_index do |device_slide, index| %>
+        <% @device.device_slides.order(:order).each_with_index do |device_slide, index| %>
           <% slide = device_slide.slide %>
           <% classes = 'js-vertical-tab vertical-tab' %>
           <% classes += ' is-active' if index == 0 %>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="vertical-tab-content-container">
-        <% @device.slides.each_with_index do |slide, index| %>
+        <% @device.slides.ordered.each_with_index do |slide, index| %>
             <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
             <% classes += ' is-active' if index == 0 %>
             <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>

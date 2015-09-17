@@ -23,7 +23,7 @@ class AdminController < ApplicationController
   end
 
   def choose_device
-    @devices = Device.all.order(:name)
+    @devices = Device.includes(:slides).order(:name)
   end
 
   private
