@@ -5,8 +5,9 @@ class Slide < ActiveRecord::Base
 
   after_save :touch_devices
 
-  scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search }
-  scope :shown,  -> { where(show: true) }
+  scope :search, -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
+  scope :shown,  -> { where("slides.show" => true) }
+  scope :ordered, -> { order("device_slides.order") }
 
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader

@@ -7,6 +7,7 @@
 //= require tinymce-jquery
 //= require turbolinks
 //= require moment
+//= require selectize
 
 
 /* APP */

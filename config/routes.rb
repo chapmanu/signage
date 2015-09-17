@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
   # Devices
   resources :devices do
-    get 'poll',   on: :member
-    post 'order', on: :member
+    get    'poll',        on: :member
+    post   'order',       on: :member
+    delete 'remove_user', on: :member
+    post   'add_user',    on: :member
   end
 
   # Slides
@@ -25,7 +27,9 @@ Rails.application.routes.draw do
   end
 
   # Users
-  resources :users
+  resources :users do
+    get 'lookup', on: :collection
+  end
 
 
 
