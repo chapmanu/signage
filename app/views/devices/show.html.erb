@@ -8,7 +8,7 @@
   <%= render "devices/menus/#{@device.menu}" %>
 
   <main class="owl-carousel" role="main" >
-    <%= render(@device.active_slides) %>
+    <%= render(@device.active_slides.ordered) %>
   </main>
 </div>
 

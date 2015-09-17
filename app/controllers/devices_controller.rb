@@ -1,7 +1,15 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:poll, :show, :edit, :update, :destroy]
+  before_action :set_device, only: [:add_user, :remove_user, :poll, :show, :edit, :update, :destroy]
   layout 'admin', except: [:show]
   skip_before_action :authenticate_user!, only: [:show, :poll]
+
+  def add_user
+    @device.add_user User.find(params[:user_id])
+  end
+
+  def remove_user
+    @device.remove_user User.find(params[:user_id])
+  end
 
   def order
     params[:device_slide_ids].each_with_index do |id, index|
@@ -85,6 +93,6 @@ class DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name, :template, :location, :emergency, :emergency_detail, :updated_at)
+      params.require(:device).permit(:name, :template, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
     end
 end

@@ -5,3 +5,9 @@ one:
 
 two:
   email: 'two@chapman.edu'
+
+super_admin:
+  first_name: 'powerful'
+  last_name: 'user'
+  email: 'allthepower@chapman.edu'
+  role: <%= User.roles[:super_admin] %>
