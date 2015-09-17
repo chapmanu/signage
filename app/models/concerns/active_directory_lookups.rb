@@ -21,7 +21,7 @@ module ActiveDirectoryLookups
     private
 
       def valid_identity_info?(info)
-        %w(email firstname lastname).all? { |key| info.has_key?(key) }
+        %w(email firstname lastname).all? { |key| info.has_key?(key) && info[key].present? }
       end
 
       def request(username)

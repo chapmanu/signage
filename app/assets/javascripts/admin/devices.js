@@ -12,12 +12,19 @@ Admin.Devices.updateEditorsTable = function(html) {
   $(Admin.Devices.editors_container).html(html);
 };
 
+Admin.selectizeUserFormat = function (user) {
+  return {
+    text: user.first_name + ' ' + user.last_name + ' ('+ user.email +')',
+    value: user.id
+  }
+};
+
 Utils.fireWhenReady(['devices#edit', 'devices#update'], function(e) {
   $('#user_id').selectize({
       sortField: 'text',
       load: function(query, callback) {
         if (!query.length) return callback();
-        console.log('sup')
+        $.get('/users/lookup.json?username='+query, function(item) { callback([Admin.selectizeUserFormat(item)]); });
       }
   });
 

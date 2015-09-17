@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :rememberable, :trackable
 
-  enum roll: { super_admin: 0 }
+  enum role: { super_admin: 0 }
+
+  scope :search, -> (search) { where("users.email ILIKE ?", "%#{search}%") if search.present? }
 
   attr_accessor :encrypted_password # Just to make :database_authenticatable work
 
@@ -21,5 +23,9 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}".strip
+  end
+
+  def full_name_with_email
+    "#{first_name} #{last_name} (#{email})"
   end
 end
