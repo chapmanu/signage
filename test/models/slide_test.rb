@@ -26,7 +26,7 @@ class SlideTest < ActiveSupport::TestCase
   test "touches devices when save" do
     slide  = slides(:one)
     device = devices(:one)
-    slide.devices << device
+    slide.devices << device unless slide.devices.include?(device)
     device_updated = device.updated_at
     slide.save
     assert_not_equal(device_updated, device.reload.updated_at)
