@@ -45,7 +45,7 @@ SlideBehaviors['autoscrollable'] = {
 
   _scrollToItem: function(index) {
     var $child = this.$container.find(this.items).eq(index);
-    console.log("Scrolling to ", $child.text())
+    if ($child.length == 0) return; // There is no items to scroll to;
     this.$container.animate({
       scrollTop: $child.offset().top - this.$container.offset().top + this.$container.scrollTop()
     });
