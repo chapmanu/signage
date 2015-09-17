@@ -49,4 +49,17 @@ class DevicesControllerTest < ActionController::TestCase
 
     assert_redirected_to devices_path
   end
+
+  test "should add a user" do
+    length = @device.users.length
+    post :add_user, id: @device, format: :js, user_id: users(:one).id
+    assert_equal length + 1, @device.users.count
+  end
+
+  test 'should remove a user' do
+    @device.add_user(users(:one))
+    length = @device.users.length
+    delete :remove_user, id: @device, format: :js, user_id: users(:one).id
+    assert_equal length - 1, @device.users.count
+  end
 end
