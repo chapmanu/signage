@@ -1,8 +1,12 @@
 <%= home_button %>
 <header class="admin-page-header">
-  <h1 class="admin-page-title">Devices</h1>
-  <%= link_to "+ New Device", new_device_path, id: 'new-device-link' %>
+  <h1 class="admin-page-title">Your Digital Signs</h1>
+  <%= link_to "+ New Sign", new_device_path, id: 'new-device-link' %>
 </header>
+
+<% if @devices.empty? %>
+  <p>Looks like you haven't created any digital signs yet.  <%= link_to "+ Create one.", new_device_path %></p>
+<% else %>
 
 <%= search_form devices_path %>
 
@@ -33,3 +37,5 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>

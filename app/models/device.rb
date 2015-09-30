@@ -1,9 +1,8 @@
 class Device < ActiveRecord::Base
-  has_many :device_slides, dependent: :destroy
-  has_many :slides, through: :device_slides
 
-  has_many :device_users, dependent: :destroy
-  has_many :users, through: :device_users
+  include UniqueHasManyThrough
+  unique_has_many_through :users,  :device_users
+  unique_has_many_through :slides, :device_slides
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search.present? }
 
@@ -14,14 +13,6 @@ class Device < ActiveRecord::Base
 
   def self.menus
     @_menus ||= Dir[Rails.root.join('app', 'views', 'devices', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
-  end
-
-  def add_user(user)
-    users << user unless users.include?(user)
-  end
-
-  def remove_user(user)
-    users.delete(user)
   end
 
   def active_slides

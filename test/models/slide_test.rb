@@ -2,9 +2,11 @@ require 'test_helper'
 
 class SlideTest < ActiveSupport::TestCase
   include SchedulableInterfaceTest
+  include UniqueHasManyThroughTest
 
   setup do
     @slide = @object = Slide.new
+    @user = users(:one)
   end
 
   test 'fixture is valid' do
