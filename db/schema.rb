@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917210536) do
+ActiveRecord::Schema.define(version: 20150930215700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 20150917210536) do
 
   add_index "scheduled_items", ["slide_id"], name: "index_scheduled_items_on_slide_id", using: :btree
 
+  create_table "slide_users", force: :cascade do |t|
+    t.integer  "slide_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "slide_users", ["slide_id"], name: "index_slide_users_on_slide_id", using: :btree
+  add_index "slide_users", ["user_id"], name: "index_slide_users_on_user_id", using: :btree
+
   create_table "slides", force: :cascade do |t|
     t.string   "name"
     t.string   "template"
@@ -152,4 +162,6 @@ ActiveRecord::Schema.define(version: 20150917210536) do
   add_foreign_key "device_users", "devices"
   add_foreign_key "device_users", "users"
   add_foreign_key "scheduled_items", "slides"
+  add_foreign_key "slide_users", "slides"
+  add_foreign_key "slide_users", "users"
 end

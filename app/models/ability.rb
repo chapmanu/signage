@@ -5,6 +5,18 @@ class Ability
     if user.super_admin?
         can :manage, :all
     end
+
+    can :manage, Device do |device|
+        device.users.include?(user)
+    end
+
+    can :manage, Slide do |slide|
+        slide.users.include?(user)
+    end
+
+    # All users can do these things
+    can [:read, :create], Device
+    can [:read, :create], Slide
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

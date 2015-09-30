@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 
   has_many :device_users, dependent: :destroy
   has_many :devices, through: :device_users
+
+  has_many :slide_users, dependent: :destroy
+  has_many :users, through: :slide_users
+
   has_many :slides, -> { uniq }, through: :devices
 
   devise :database_authenticatable, :rememberable, :trackable
