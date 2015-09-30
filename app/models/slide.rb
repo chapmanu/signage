@@ -1,6 +1,9 @@
 class Slide < ActiveRecord::Base
-  has_many :device_slides, dependent: :destroy
-  has_many :devices, through: :device_slides
+
+  include UniqueHasManyThrough
+  unique_has_many_through :devices, :device_slides
+  unique_has_many_through :users,   :slide_users
+
   has_many :scheduled_items, dependent: :destroy
 
   after_save :touch_devices
