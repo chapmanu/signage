@@ -26,12 +26,12 @@
     <% @devices.each do |device| %>
       <tr>
         <td style="text-align: center;"><%= content_tag :div, nil, class: (device.active? ? 'device-active' : 'device-inactive') %></td>
-        <td><%= link_to device.name, edit_device_path(device) %></td>
+        <td><%= link_to device.name, device %></td>
         <td><%= device.location %></td>
         <td><%= device.menu.try(:humanize) %>
         <td style="text-align: center"><%= device.slides.length %></td>
         <td style="text-align: center">
-          <%= link_to "Play", device %>
+          <%= link_to "Play", play_device_path(device) %>
         </td>
       </tr>
     <% end %>

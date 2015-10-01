@@ -13,10 +13,12 @@ Rails.application.routes.draw do
 
   # Devices
   resources :devices do
+    get    'play',        on: :member
     get    'poll',        on: :member
     post   'order',       on: :member
     delete 'remove_user', on: :member
     post   'add_user',    on: :member
+    get    'settings',    on: :member
   end
 
   # Slides

@@ -48,6 +48,7 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.save
+        current_user.slides << @slide
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
         format.json { render :show, status: :created, location: @slide }
       else
@@ -92,7 +93,7 @@ class SlidesController < ApplicationController
     end
 
     def set_parent_device_path
-      if id = request.referrer.to_s[/devices\/([^\/]+)\/.*/, 1]
+      if id = request.referrer.to_s[/devices\/([^\/]+)/, 1]
         session[:parent_device_id]   = id
         session[:parent_device_path] = edit_device_path(id)
       else

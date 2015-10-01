@@ -1,15 +1,50 @@
-<div class="js-device-meta"
-     data-id="<%= @device.id %>"
-     data-poll-device-path="<%= poll_device_path @device %>"
-     data-updated-at="<%= @device.updated_at %>"></div>
+<%= link_to '<< All Signs', devices_path, class: 'home-button' %>
+<p style="float: right;"><%= link_to "Edit", edit_device_path(@device) %> |
+<%= link_to "Play", play_device_path(@device) %> | <%= link_to "Settings", settings_device_path(@device) %></p>
+<h1 class="admin-page-title"><%= @device.name %></h1>
+<p><%= @device.location %></p>
+<p><%= @device.template %></p>
+<hr/>
 
-<div id="ui-feed" class="ui-feed ui-feed--show-mouse">
 
-  <%= render "devices/menus/#{@device.menu}" %>
 
-  <main class="owl-carousel" role="main" >
-    <%= render(@device.active_slides.ordered) %>
-  </main>
+<div class="admin-device-slides-preview">
+
+  <h4>Slides on this Device</h4>
+  <% if !@device.slides.empty? %>
+    <div class="vertical-tabs-container">
+      <div class="vertical-tabs" id="js-sortable-slides">
+        <% @device.device_slides.order(:order).each_with_index do |device_slide, index| %>
+          <% slide = device_slide.slide %>
+          <% classes = 'js-vertical-tab vertical-tab' %>
+          <% classes += ' is-active' if index == 0 %>
+          <%= link_to "javascript:void(0)", id: "device_slide_ids-#{device_slide.id}", class: classes, rel: "tab#{index}" do %>
+            <%= slide.menu_name %>
+            <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
+            <%= content_tag :small, '(expired)' if slide.expired? %>
+            <%= content_tag :small, '(hidden)' unless slide.show? %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="vertical-tab-content-container">
+        <% @device.slides.ordered.each_with_index do |slide, index| %>
+            <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
+            <% classes += ' is-active' if index == 0 %>
+            <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
+            <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
+              <p>
+                <%= link_to "Show", slide %> |
+                <%= link_to "Edit", edit_slide_path(slide) %> |
+                <%= link_to "Full Preview", preview_slide_path(slide), target: '_blank' %>
+                </p>
+              <%= render "slides/preview_iframe", slide: slide %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "+ Add Slide", new_slide_path, id: 'add-slide-link' %>
 </div>
 
-<%= render 'emergency' if @device.any_emergency? %>
+<%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_device_path(@device) } %>
