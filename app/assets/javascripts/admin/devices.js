@@ -19,7 +19,7 @@ Admin.selectizeUserFormat = function (user) {
   }
 };
 
-Utils.fireWhenReady(['devices#edit', 'devices#update'], function(e) {
+Utils.fireWhenReady(['devices#settings'], function(e) {
   $('#user_id').selectize({
       sortField: 'text',
       load: function(query, callback) {
@@ -27,7 +27,9 @@ Utils.fireWhenReady(['devices#edit', 'devices#update'], function(e) {
         $.get('/users/lookup.json?username='+query, function(item) { callback([Admin.selectizeUserFormat(item)]); });
       }
   });
+});
 
+Utils.fireWhenReady(['devices#show'], function(e) {
   $('#js-sortable-slides').sortable({
     update: Admin.Devices.updateSlideOrder,
     containment: 'parent',

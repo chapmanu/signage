@@ -1,13 +1,9 @@
 class User < ActiveRecord::Base
   include ActiveDirectoryLookups
 
-  has_many :device_users, dependent: :destroy
-  has_many :devices, through: :device_users
-
-  has_many :slide_users, dependent: :destroy
-  has_many :users, through: :slide_users
-
-  has_many :slides, -> { uniq }, through: :devices
+  include UniqueHasManyThrough
+  unique_has_many_through :devices, :device_users
+  unique_has_many_through :slides, :slide_users
 
   devise :database_authenticatable, :rememberable, :trackable
 
@@ -19,10 +15,6 @@ class User < ActiveRecord::Base
 
   def devices
     super_admin? ? Device.all : super
-  end
-
-  def slides
-    super_admin? ? Slide.all : super
   end
 
   def full_name
