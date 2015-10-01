@@ -1,4 +1,4 @@
-Utils.fireWhenReady(['devices#show'], function(e) {
+Utils.fireWhenReady(['devices#play'], function(e) {
   Device.initialize({
     menu: $('.ui-menu-list'),
     slides: $('main')
