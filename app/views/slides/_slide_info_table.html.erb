@@ -22,4 +22,8 @@
     <td>Menu Name:</td>
     <th><%= slide.menu_name %></th>
   </tr>
+  <tr>
+    <td>Owners:</td>
+    <th><%= slide.users.map(&:full_name_with_email).to_sentence %>
+  </tr>
 </table>
