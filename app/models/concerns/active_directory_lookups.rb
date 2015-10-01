@@ -5,7 +5,7 @@ module ActiveDirectoryLookups
 
     def create_or_update_from_active_directory(username)
       data = lookup_in_active_directory(username)
-      user = User.where(email: data['email']).first_or_initialize
+      user = where(email: data['email']).first_or_initialize
       user.first_name = data['firstname']
       user.last_name  = data['lastname']
       user.save
