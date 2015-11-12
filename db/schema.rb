@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112003432) do
+ActiveRecord::Schema.define(version: 20151112182949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20151112003432) do
     t.datetime "last_ping"
     t.string   "panther_alert"
     t.string   "panther_alert_detail"
+    t.string   "transition"
   end
 
   add_index "signs", ["slug"], name: "index_signs_on_slug", unique: true, using: :btree

@@ -102,6 +102,6 @@ class SignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sign_params
-      params.require(:sign).permit(:name, :template, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
+      params.require(:sign).permit(:name, :template, :transition, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
     end
 end

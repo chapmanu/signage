@@ -1,50 +1,34 @@
-<%= link_to '<< All Signs', signs_path, class: 'home-button' %>
-<p style="float: right;"><%= link_to "Edit", edit_sign_path(@device) %> |
-<%= link_to "Play", play_sign_path(@device) %> | <%= link_to "Settings", settings_sign_path(@device) %></p>
-<h1 class="admin-page-title"><%= @device.name %></h1>
-<p><%= @device.location %></p>
-<p><%= @device.template %></p>
-<hr/>
+<div class="show-sign-container">
 
+  <div class="sign-info">
 
+    <label>Sign name</label>
+    <p><%= @sign.name %></p>
 
-<div class="admin-device-slides-preview">
+    <label>Physical location</label>
+    <p><%= @sign.location %></p>
 
-  <h4>Slides on this Device</h4>
-  <% if !@device.slides.empty? %>
-    <div class="vertical-tabs-container">
-      <div class="vertical-tabs" id="js-sortable-slides">
-        <% @device.device_slides.order(:order).each_with_index do |device_slide, index| %>
-          <% slide = device_slide.slide %>
-          <% classes = 'js-vertical-tab vertical-tab' %>
-          <% classes += ' is-active' if index == 0 %>
-          <%= link_to "javascript:void(0)", id: "device_slide_ids-#{device_slide.id}", class: classes, rel: "tab#{index}" do %>
-            <%= slide.menu_name %>
-            <%= content_tag :small, '(upcoming)' if slide.upcoming? %>
-            <%= content_tag :small, '(expired)' if slide.expired? %>
-            <%= content_tag :small, '(hidden)' unless slide.show? %>
-          <% end %>
-        <% end %>
-      </div>
+    <label>Template</label>
+    <p><%= @sign.template %></p>
 
-      <div class="vertical-tab-content-container">
-        <% @device.slides.ordered.each_with_index do |slide, index| %>
-            <% classes = 'js-vertical-tab-accordion-heading vertical-tab-accordion-heading' %>
-            <% classes += ' is-active' if index == 0 %>
-            <%= link_to slide.menu_name, "javascript:void(0)", class: classes, rel: "tab#{index}" %>
-            <div id="tab<%=index%>" class="js-vertical-tab-content vertical-tab-content">
-              <p>
-                <%= link_to "Show", slide %> |
-                <%= link_to "Edit", edit_slide_path(slide) %> |
-                <%= link_to "Full Preview", preview_slide_path(slide), target: '_blank' %>
-                </p>
-              <%= render "slides/preview_iframe", slide: slide %>
-            </div>
-        <% end %>
-      </div>
+    <label>Transition type</label>
+    <p><%= @sign.transition %> effect</p>
+
+    <label>Owners</label>
+    <ul class="owners-list">
+      <% @sign.users.each do |owner| %>
+        <li><div class="chip"><%= owner.full_name %></div></li>
+      <% end %>
+    </ul>
+
+    <div class="actions">
+      <%= link_to "Edit", edit_sign_path(@sign) %>
     </div>
-  <% end %>
-  <%= link_to "+ Add Slide", new_slide_path, id: 'add-slide-link' %>
-</div>
+  </div>
 
-<%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_sign_path(@device) } %>
+  <div class="sign-slides">
+    <div class="sign-slides-listing">
+      <%= render partial: 'slide', collection: @sign.slides %>
+    </div>
+  </div>
+</div>
