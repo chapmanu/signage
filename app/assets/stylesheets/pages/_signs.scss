@@ -32,17 +32,9 @@
 .sign-list-item-actions {
   @include span-columns(4);
   text-align: right;
-  a {
-    display: block;
-    font-weight: bold;
-    color: $dark-gray;
-    margin-bottom: 8px;
-    img {
-      width: 16px;
-      margin-right: 8px;
-    }
-  }
 }
+
+
 
 .sign-inactive, .sign-active {
   display: inline-block;
@@ -62,3 +54,73 @@
 .sign-inactive {
   background-color: $light-gray
 }
+
+/* Sign Show */
+.show-sign-container {
+  @include outer-container;
+  padding-top: $base-spacing*2;
+
+  .sign-info {
+    @include span-columns(6);
+
+    .title {
+      font-size: 24px;
+      font-weight: 100;
+      margin-bottom: 8px;
+    }
+    .info {
+      color: $light-gray;
+      font-size: 11px;
+      margin-bottom: 0;
+    }
+  }
+  .sign-slides {
+    @include span-columns(6);
+  }
+}
+
+.sign-slide-list-item {
+  @include clearfix;
+  width: 100%;
+  margin-bottom: $base-spacing*2;
+
+  .left-actions, .screenshot, .right-actions {
+    float: left;
+    height: 100px;
+  }
+
+  .left-actions{
+    position: relative;
+    width: $base-spacing;
+    svg {
+      width: 14px;
+      position: absolute;
+      left: 0;
+    }
+    .destroy-sign-slide { top: 0; }
+    .reorder-handle     { bottom: 0; cursor: move; }
+  }
+  .screenshot {
+    background: $dark-gray;
+  }
+  .right-actions {
+    p { margin-bottom: 8px; }
+    padding-left: $base-spacing;
+  }
+}
+
+/* Sign Form */
+
+.sign-form-container {
+  @include outer-container;
+  padding-top: $base-spacing*2;
+
+  form {
+    @include span-columns(5);
+  }
+  .sign-slides-listing {
+    @include span-columns(6);
+    @include shift(1);
+  }
+}
+

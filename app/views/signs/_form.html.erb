@@ -1,36 +1,54 @@
-<%= form_for(@device) do |f| %>
-  <% if @device.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@device.errors.count, "error") %> prohibited this device from being saved:</h2>
+<div class="sign-form-container">
+  <%= form_for(@sign) do |f| %>
+    <% if @sign.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@sign.errors.count, "error") %> prohibited this sign from being saved:</h2>
 
-      <ul>
-      <% @device.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <ul>
+        <% @sign.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>p
+      </div>
+    <% end %>
+
+    <div class="input-field">
+      <%= f.text_field :name %>
+      <%= f.label      :name, "Sign name" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.text_field :location %>
+      <%= f.label      :location, "Physical location" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.select :template, Sign.menus.map{|m| [m.humanize, m] } %>
+      <%= f.label :template, "Template" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.select :transition, Sign.transitions.map{|m| [m.humanize, m] } %>
+      <%= f.label :transition, "Transition type" %>
+    </div>
+
+
+    <label>Owners</label>
+    <ul class="owners-list">
+      <% @sign.users.push(current_user) if @sign.users.empty? %>
+      <% @sign.users.each do |owner| %>
+        <li><div class="chip"><%= owner.full_name %></div></li>
       <% end %>
-      </ul>p
+    </ul>
+
+
+
+    <div class="actions">
+      <%= f.submit class: 'btn' %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label      :name, "Name this device (this name becomes the url)" %>
-    <%= f.text_field :name %>
+  <div class="sign-slides-listing">
+    <%= render partial: 'slide', collection: @sign.slides %>
   </div>
-
-  <div class="field">
-    <%= f.label      :location, "Physical device location (displayed on the menu bar)" %>
-    <%= f.text_field :location %>
-  </div>
-
-  <div class="field">
-    <%= f.label :template, "Select from the two types of menu bars" %>
-    <div class="field-description">
-      <p><strong>Default:</strong> red bar, with Chapman University logo</p>
-      <p><strong>Dodge:</strong> black bar, with Dodge College logo</p>
-    </div>
-    <%= f.select :template, Device.menus.map{|m| [m.humanize, m] } %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

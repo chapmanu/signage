@@ -1,0 +1,12 @@
+.bold-actions {
+  a {
+    display: block;
+    font-weight: bold;
+    color: $dark-gray;
+    margin-bottom: 8px;
+    img {
+      width: 16px;
+      margin-right: 8px;
+    }
+  }
+}
