@@ -53,9 +53,12 @@ class Slide < ActiveRecord::Base
     classes.join(' ')
   end
 
-  def save_screenshot
+  def take_screenshot
     f = Screencap::Fetcher.new(Rails.application.routes.url_helpers.preview_slide_url(self))
-    self.screenshot = f.fetch output: Rails.root.join('tmp', "screenshot_of_slide_#{id}.png")
+    file  = f.fetch output: Rails.root.join('tmp', "screenshot_of_slide_#{id}.png")
+    image = MiniMagick::Image.open(file)
+    image.trim
+    self.screenshot = image
     save!
   end
 

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'mini_magick'
 gem 'inline_svg', '0.6.1'
 gem 'screencap', '0.1.4'
 gem 'materialize-sass', '0.97.1'
