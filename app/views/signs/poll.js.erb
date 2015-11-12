@@ -1,5 +1,5 @@
 <% if @refresh %>
-  window.location = '<%= j device_path(@device) %>';
+  window.location = '<%= j sign_path(@device) %>';
 <% end %>
 
 var $current_emergency = $('#js-emergency-slide');

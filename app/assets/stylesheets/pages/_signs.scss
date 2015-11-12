@@ -1,0 +1,64 @@
+/* Listing Signs */
+
+.sign-list-item {
+  @include outer-container;
+  padding: $base-spacing;
+  border-top: 1px solid lighten($light-gray, 30%);
+}
+
+.sign-list-item-status {
+  @include span-columns(1);
+  text-align: center;
+}
+
+.sign-list-item-info {
+  @include span-columns(6);
+  .title {
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 8px;
+  }
+  .slides img {
+    width: 40px;
+    height: auto;
+  }
+  .slides p {
+    display: inline-block;
+    font-size: 11px;
+    color: $light-gray;
+  }
+}
+
+.sign-list-item-actions {
+  @include span-columns(4);
+  text-align: right;
+  a {
+    display: block;
+    font-weight: bold;
+    color: $dark-gray;
+    margin-bottom: 8px;
+    img {
+      width: 16px;
+      margin-right: 8px;
+    }
+  }
+}
+
+.sign-inactive, .sign-active {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.sign-active {
+  width: 8px;
+  height: 8px;
+  background-color: $green;
+  box-shadow: 0 0 5px 5px $green;
+}
+
+.sign-inactive {
+  background-color: $light-gray
+}

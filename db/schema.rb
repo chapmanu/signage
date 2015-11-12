@@ -11,49 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930215700) do
+ActiveRecord::Schema.define(version: 20151112003432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "device_slides", force: :cascade do |t|
-    t.integer  "order"
-    t.integer  "device_id"
-    t.integer  "slide_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "device_slides", ["device_id"], name: "index_device_slides_on_device_id", using: :btree
-  add_index "device_slides", ["slide_id"], name: "index_device_slides_on_slide_id", using: :btree
-
-  create_table "device_users", force: :cascade do |t|
-    t.integer  "device_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "device_users", ["device_id"], name: "index_device_users_on_device_id", using: :btree
-  add_index "device_users", ["user_id"], name: "index_device_users_on_user_id", using: :btree
-
-  create_table "devices", force: :cascade do |t|
-    t.string   "name"
-    t.string   "template"
-    t.string   "location"
-    t.string   "notification"
-    t.string   "notification_detail"
-    t.string   "emergency"
-    t.string   "emergency_detail"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.string   "slug"
-    t.datetime "last_ping"
-    t.string   "panther_alert"
-    t.string   "panther_alert_detail"
-  end
-
-  add_index "devices", ["slug"], name: "index_devices_on_slug", unique: true, using: :btree
 
   create_table "faculties", force: :cascade do |t|
     t.integer  "datatel_id"
@@ -102,6 +63,45 @@ ActiveRecord::Schema.define(version: 20150930215700) do
 
   add_index "scheduled_items", ["slide_id"], name: "index_scheduled_items_on_slide_id", using: :btree
 
+  create_table "sign_slides", force: :cascade do |t|
+    t.integer  "order"
+    t.integer  "sign_id"
+    t.integer  "slide_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sign_slides", ["sign_id"], name: "index_sign_slides_on_sign_id", using: :btree
+  add_index "sign_slides", ["slide_id"], name: "index_sign_slides_on_slide_id", using: :btree
+
+  create_table "sign_users", force: :cascade do |t|
+    t.integer  "sign_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sign_users", ["sign_id"], name: "index_sign_users_on_sign_id", using: :btree
+  add_index "sign_users", ["user_id"], name: "index_sign_users_on_user_id", using: :btree
+
+  create_table "signs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "template"
+    t.string   "location"
+    t.string   "notification"
+    t.string   "notification_detail"
+    t.string   "emergency"
+    t.string   "emergency_detail"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "slug"
+    t.datetime "last_ping"
+    t.string   "panther_alert"
+    t.string   "panther_alert_detail"
+  end
+
+  add_index "signs", ["slug"], name: "index_signs_on_slug", unique: true, using: :btree
+
   create_table "slide_users", force: :cascade do |t|
     t.integer  "slide_id"
     t.integer  "user_id"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20150930215700) do
     t.datetime "stop_on"
     t.boolean  "show",              default: true, null: false
     t.string   "datetime"
+    t.string   "screenshot"
   end
 
   create_table "users", force: :cascade do |t|
@@ -157,11 +158,11 @@ ActiveRecord::Schema.define(version: 20150930215700) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  add_foreign_key "device_slides", "devices"
-  add_foreign_key "device_slides", "slides"
-  add_foreign_key "device_users", "devices"
-  add_foreign_key "device_users", "users"
   add_foreign_key "scheduled_items", "slides"
+  add_foreign_key "sign_slides", "signs"
+  add_foreign_key "sign_slides", "slides"
+  add_foreign_key "sign_users", "signs"
+  add_foreign_key "sign_users", "users"
   add_foreign_key "slide_users", "slides"
   add_foreign_key "slide_users", "users"
 end

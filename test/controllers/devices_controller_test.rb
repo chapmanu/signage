@@ -47,7 +47,7 @@ class DevicesControllerTest < ActionController::TestCase
       delete :destroy, id: @device
     end
 
-    assert_redirected_to devices_path
+    assert_redirected_to signs_path
   end
 
   test "should add a user" do

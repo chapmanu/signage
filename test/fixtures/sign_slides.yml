@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  device_id: device_one
-  user_id: user_one
+  order: 1
+  sign: one
+  slide: one
 
 two:
-  device_id:
-  user_id:
+  order: 1
+  sign: two
+  slide: two

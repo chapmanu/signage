@@ -1,7 +1,9 @@
 class SlidesController < ApplicationController
   before_action :set_slide,                 only: [:preview, :show, :edit, :update, :destroy]
   before_action :set_devices,               only: [:new, :edit, :create, :update]
-  before_action :set_parent_device_path,    only: [:new, :edit]
+  before_action :set_parent_sign_path,    only: [:new, :edit]
+
+  skip_before_action :authenticate_user!, only: [:preview]
   layout 'admin', except: [:preview]
 
   def preview
@@ -92,13 +94,13 @@ class SlidesController < ApplicationController
       @devices = current_user.devices.order(:name)
     end
 
-    def set_parent_device_path
+    def set_parent_sign_path
       if id = request.referrer.to_s[/devices\/([^\/]+)/, 1]
         session[:parent_device_id]   = id
-        session[:parent_device_path] = edit_device_path(id)
+        session[:parent_sign_path] = edit_sign_path(id)
       else
         session[:parent_device_id]   = nil
-        session[:parent_device_path] = nil
+        session[:parent_sign_path] = nil
       end
     end
 

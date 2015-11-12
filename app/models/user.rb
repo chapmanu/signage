@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include ActiveDirectoryLookups
 
   include UniqueHasManyThrough
-  unique_has_many_through :devices, :device_users
+  unique_has_many_through :signs, :sign_users
   unique_has_many_through :slides, :slide_users
 
   devise :database_authenticatable, :rememberable, :trackable
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   attr_accessor :encrypted_password # Just to make :database_authenticatable work
 
   def devices
-    super_admin? ? Device.all : super
+    super_admin? ? Sign.all : super
   end
 
   def full_name

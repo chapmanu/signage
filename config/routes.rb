@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'admin/clear_emergency'
 
   # Devices
-  resources :devices do
+  resources :signs do
     get    'play',        on: :member
     get    'poll',        on: :member
     post   'order',       on: :member

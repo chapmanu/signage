@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
+@import 'materialize';
 @import "fonts";
 @import "bourbon";
 @import "base/base";
@@ -10,68 +13,17 @@
 @import "refills/*";
 @import "selectize";
 @import "selectize.default";
+@import "components/*";
+@import "pages/*";
 
 body {
   padding: 0;
   margin: 0;
 }
 
-.navbar {
-  height: 50px;
-  line-height: 50px;
-  border-bottom: 1px solid $light-gray;
-  background-color: darken(white, 2%);
-  padding: 0;
-
-  .navbar-left {
-    float: left;
-    a {
-      color: $base-font-color;
-    }
-
-    img {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin: 10px $base-spacing 10px $base-spacing;
-      float: left;
-    }
-
-    h1 {
-      font-family: $base-font-family;
-      display: inline-block;
-      font-size: 18px;
-      font-weight: normal;
-      margin-right: $base-spacing;
-    }
-  }
-
-  .navbar-right {
-    float: right;
-    p {
-      display: inline-block;
-      padding: 0 $base-spacing;
-    }
-  }
-
-  .navbar-button {
-    display: inline-block;
-    padding: 0 $base-spacing;
-    background-color: $blue;
-    color: white !important;
-  }
-}
-
 .home-button {
   display: block;
   margin-bottom: $base-spacing;
-}
-
-.admin-content {
-  @include outer-container;
-  padding: 0 5px;
-  margin-top: 100px;
-  margin-bottom: 100px;
 }
 
 .admin-site-title {
@@ -153,8 +105,11 @@ body {
 }
 
 .admin-content .actions {
+  margin-top: $base-spacing;
   margin-bottom: $base-spacing;
 }
+
+.remb
 
 .slide-time-range {
   .field {
@@ -179,24 +134,6 @@ body {
   border-left: 3px $action-color solid !important;
   border-right: 3px $action-color solid !important;
   opacity: 0.9;
-}
-
-.device-inactive, .device-active {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.device-active {
-  width: 8px;
-  height: 8px;
-  background-color: #4CE737;
-  box-shadow: 0 0 5px 5px #4CE737;
-}
-
-.device-inactive {
-  background-color: $light-gray
 }
 
 #error_explanation {

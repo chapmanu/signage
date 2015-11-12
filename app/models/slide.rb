@@ -1,12 +1,12 @@
 class Slide < ActiveRecord::Base
 
   include UniqueHasManyThrough
-  unique_has_many_through :devices, :device_slides
-  unique_has_many_through :users,   :slide_users
+  unique_has_many_through :signs, :sign_slides
+  unique_has_many_through :users, :slide_users
 
   has_many :scheduled_items, dependent: :destroy
 
-  after_save :touch_devices
+  after_save :touch_signs
 
   scope :search, -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,  -> { where("slides.show" => true) }
@@ -14,8 +14,9 @@ class Slide < ActiveRecord::Base
 
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
+  mount_uploader :screenshot, ImageUploader
 
-  validates :devices,   presence: true
+  validates :signs,   presence: true
   validates :menu_name, presence: true
   validates :template,  presence: true
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }
@@ -52,8 +53,14 @@ class Slide < ActiveRecord::Base
     classes.join(' ')
   end
 
+  def save_screenshot
+    f = Screencap::Fetcher.new(Rails.application.routes.url_helpers.preview_slide_url(self))
+    self.screenshot = f.fetch output: Rails.root.join('tmp', "screenshot_of_slide_#{id}.png")
+    save!
+  end
+
   private
-    def touch_devices
-      devices.update_all(updated_at: Time.now)
+    def touch_signs
+      signs.update_all(updated_at: Time.now)
     end
 end

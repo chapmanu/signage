@@ -8,6 +8,7 @@
 //= require turbolinks
 //= require moment
 //= require selectize
+//= require materialize-sprockets
 
 
 /* APP */

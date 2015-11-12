@@ -1,5 +1,5 @@
-<% if session[:parent_device_path] %>
-  <%= link_to '<< Back to Device', session[:parent_device_path], class: 'home-button' %>
+<% if session[:parent_sign_path] %>
+  <%= link_to '<< Back to Device', session[:parent_sign_path], class: 'home-button' %>
 <% else %>
   <%= link_to '<< All Slides', slides_path, class: 'home-button' %>
 <% end %>
