@@ -1,0 +1,22 @@
+<div class="sign-slide-list-item">
+  <div class="left-actions">
+    <%= link_to inline_svg('close.svg'), '#', class: 'destroy-slide-sign' %>
+    <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
+  </div>
+
+  <div class="screenshot">
+    <%= image_tag slide.screenshot.url, height: 100 %>
+  </div>
+
+  <div class="right-actions">
+    <p><%= slide.menu_name %></p>
+    <div class="bold-actions">
+      <%= link_to slide do %>
+        <%= image_tag('play_dark.svg') %> Play
+      <% end %>
+      <%= link_to edit_slide_path(slide) do %>
+        <%= image_tag('gear_dark.svg') %> Edit
+      <% end %>
+    </div>
+  </div>
+</div>
