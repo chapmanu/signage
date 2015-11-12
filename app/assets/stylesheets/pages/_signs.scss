@@ -62,27 +62,26 @@
 
   .sign-info {
     @include span-columns(6);
-
-    .title {
-      font-size: 24px;
-      font-weight: 100;
-      margin-bottom: 8px;
-    }
-    .info {
-      color: $light-gray;
-      font-size: 11px;
-      margin-bottom: 0;
-    }
   }
+
   .sign-slides {
     @include span-columns(6);
+  }
+}
+
+.sign-slides-listing {
+  text-align: center;
+  .add-new-slide {
+    width: 300px;
   }
 }
 
 .sign-slide-list-item {
   @include clearfix;
   width: 100%;
-  margin-bottom: $base-spacing*2;
+  padding: $base-spacing 0;
+  background-color: white;
+  text-align: left;
 
   .left-actions, .screenshot, .right-actions {
     float: left;
@@ -91,7 +90,7 @@
 
   .left-actions{
     position: relative;
-    width: $base-spacing;
+    width: 32px;
     svg {
       width: 14px;
       position: absolute;

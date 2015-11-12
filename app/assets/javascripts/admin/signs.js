@@ -4,8 +4,7 @@ Admin.Devices.editors_container = '#js-device-editors-container';
 Admin.Devices.sortable_slides   = '#js-sortable-slides';
 
 Admin.Devices.updateSlideOrder = function(event, ui) {
-  var ids = $(Admin.Devices.sortable_slides).sortable('serialize');
-  $.post($('#js-device-meta').data('sort-path'), ids);
+
 };
 
 Admin.Devices.updateEditorsTable = function(html) {
@@ -29,16 +28,16 @@ Utils.fireWhenReady(['signs#settings'], function(e) {
   });
 });
 
-Utils.fireWhenReady(['signs#show'], function(e) {
-  $('#js-sortable-slides').sortable({
-    update: Admin.Devices.updateSlideOrder,
-    containment: 'parent',
-    tolerance: 'pointer'
-  });
-});
+;
 
 /* New */
+
 var AdminSigns = {};
+
+AdminSigns.updateSlideOrder = function() {
+  var ids = $('#js-sortable-slides').sortable('serialize');
+  $.post($('#js-sign-meta').data('sort-path'), ids);
+};
 
 AdminSigns.refreshList = function(e) {
   var search   = $('#search').val();
@@ -56,9 +55,16 @@ AdminSigns.filterClicked = function(e) {
   AdminSigns.refreshList();
 };
 
-
+/* ON READY EVENTS */
 
 Utils.fireWhenReady(['signs#index'], function(e) {
   $('#search').on('keyup', AdminSigns.refreshList);
   $('#signs-filters a').on('click', AdminSigns.filterClicked);
 });
+
+Utils.fireWhenReady(['signs#show', 'signs#edit', 'signs#update'], function(e) {
+  $('#js-sortable-slides').sortable({
+    update: AdminSigns.updateSlideOrder,
+    tolerance: 'pointer'
+  });
+})

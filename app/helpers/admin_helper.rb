@@ -4,14 +4,13 @@ module AdminHelper
   end
 
   def display_flashes
-    html = ''.html_safe
-    flash.each do |type, message|
-      # We have styles for when type = 'success', 'error', 'notice', and 'alert'
-      html += content_tag :div, class: "flash-#{type}" do
-        content_tag :span, message
+    content_tag :script do
+      html = ''.html_safe
+      flash.each do |type, message|
+         html += "Materialize.toast(\"#{message}\", 4000);".html_safe
       end
+      html
     end
-    html
   end
 
   def search_form(path)
