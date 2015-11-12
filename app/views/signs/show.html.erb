@@ -1,6 +1,6 @@
-<%= link_to '<< All Signs', devices_path, class: 'home-button' %>
-<p style="float: right;"><%= link_to "Edit", edit_device_path(@device) %> |
-<%= link_to "Play", play_device_path(@device) %> | <%= link_to "Settings", settings_device_path(@device) %></p>
+<%= link_to '<< All Signs', signs_path, class: 'home-button' %>
+<p style="float: right;"><%= link_to "Edit", edit_sign_path(@device) %> |
+<%= link_to "Play", play_sign_path(@device) %> | <%= link_to "Settings", settings_sign_path(@device) %></p>
 <h1 class="admin-page-title"><%= @device.name %></h1>
 <p><%= @device.location %></p>
 <p><%= @device.template %></p>
@@ -47,4 +47,4 @@
   <%= link_to "+ Add Slide", new_slide_path, id: 'add-slide-link' %>
 </div>
 
-<%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_device_path(@device) } %>
+<%= content_tag :div, nil, id: 'js-device-meta', data: { sort_path: order_sign_path(@device) } %>

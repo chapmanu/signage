@@ -6,25 +6,25 @@
 
   <div class="sign-in-form">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email, "Chapman Username" %>
+      <div class="input-field">
         <%= f.text_field :email, autofocus: true %>
+        <%= f.label :email, "Chapman Username" %>
       </div>
 
-      <div class="field">
-        <%= f.label :password %>
+      <div class="input-field">
         <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.label :password %>
       </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div class="field">
+        <p class="remember-me">
           <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, style: 'display: inline;' %>
-        </div>
+          <%= f.label :remember_me %>
+        </p>
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in" %>
+        <%= f.submit "Log in", class: 'btn' %>
       </div>
     <% end %>
 

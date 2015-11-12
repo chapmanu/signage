@@ -19,7 +19,7 @@ Admin.selectizeUserFormat = function (user) {
   }
 };
 
-Utils.fireWhenReady(['devices#settings'], function(e) {
+Utils.fireWhenReady(['signs#settings'], function(e) {
   $('#user_id').selectize({
       sortField: 'text',
       load: function(query, callback) {
@@ -29,10 +29,36 @@ Utils.fireWhenReady(['devices#settings'], function(e) {
   });
 });
 
-Utils.fireWhenReady(['devices#show'], function(e) {
+Utils.fireWhenReady(['signs#show'], function(e) {
   $('#js-sortable-slides').sortable({
     update: Admin.Devices.updateSlideOrder,
     containment: 'parent',
     tolerance: 'pointer'
   });
+});
+
+/* New */
+var AdminSigns = {};
+
+AdminSigns.refreshList = function(e) {
+  var search   = $('#search').val();
+  var filter   = $('#filter-mine').hasClass('active') ? 'mine' : 'all';
+  var query    = '?search='+search+'&filter='+filter;
+  $.get(location.pathname + '.js' + encodeURI(query) );
+};
+
+AdminSigns.filterClicked = function(e) {
+  e.preventDefault();
+  $('#signs-filters a').removeClass('active');
+  $(this).addClass('active');
+  var url = window.location.pathname+'?filter='+$(this).data('value');
+  window.history.replaceState({path:url},'',url);
+  AdminSigns.refreshList();
+};
+
+
+
+Utils.fireWhenReady(['signs#index'], function(e) {
+  $('#search').on('keyup', AdminSigns.refreshList);
+  $('#signs-filters a').on('click', AdminSigns.filterClicked);
 });

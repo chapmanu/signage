@@ -9,7 +9,7 @@
   </div>
 
   <div class="add-device-editors-container">
-    <%= form_tag add_user_device_path(@device), remote: true do %>
+    <%= form_tag add_user_sign_path(@device), remote: true do %>
       <label for="user_id">Add more editors</label>
       <%= select_tag :user_id, options_from_collection_for_select(User.order(:last_name).all, :id, :full_name_with_email), :prompt => "Search by username..." %>
       <%= submit_tag "Add" %>

@@ -1,0 +1,28 @@
+.search-filters-container {
+  @include outer-container;
+  padding: $base-spacing*2 0;
+
+  .search {
+    @include span-columns(6);
+  }
+
+  .filter {
+    @include span-columns(4);
+    text-align: center;
+    margin-top: 26px;
+    label {
+      display: inline-block;
+      font-size: 1rem;
+    }
+    .pill-buttons {
+      display: inline-block;
+      font-weight: normal;
+    }
+  }
+
+  .new {
+    margin-top: 26px;
+    @include span-columns(2);
+    text-align: center;
+  }
+}
