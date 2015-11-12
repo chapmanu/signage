@@ -3,7 +3,7 @@
     <td>Devices playing this slide:</td>
     <th>
       <%= "None" if slide.devices.empty? %>
-      <%= slide.devices.order(:name).map{|d| link_to d.name, edit_device_path(d) }.join('<br />').try(:html_safe) %>
+      <%= slide.devices.order(:name).map{|d| link_to d.name, edit_sign_path(d) }.join('<br />').try(:html_safe) %>
     </th>
   </tr>
   <tr>

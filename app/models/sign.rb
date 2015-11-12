@@ -1,8 +1,8 @@
-class Device < ActiveRecord::Base
+class Sign < ActiveRecord::Base
 
   include UniqueHasManyThrough
-  unique_has_many_through :users,  :device_users
-  unique_has_many_through :slides, :device_slides
+  unique_has_many_through :users,  :sign_users
+  unique_has_many_through :slides, :sign_slides
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search.present? }
 

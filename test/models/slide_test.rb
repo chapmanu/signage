@@ -25,13 +25,13 @@ class SlideTest < ActiveSupport::TestCase
     assert_not slide.valid?
   end
 
-  test "touches devices when save" do
+  test "touches signs when save" do
     slide  = slides(:one)
-    device = devices(:one)
-    slide.devices << device unless slide.devices.include?(device)
-    device_updated = device.updated_at
+    sign = signs(:one)
+    slide.signs << sign unless slide.signs.include?(sign)
+    sign_updated = sign.updated_at
     slide.save
-    assert_not_equal(device_updated, device.reload.updated_at)
+    assert_not_equal(sign_updated, sign.reload.updated_at)
   end
 
   test 'duration must be larger than 4 seconds' do

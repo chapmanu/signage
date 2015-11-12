@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: device_one
+  name: sign_one
   template: default
   location: MyString
   notification: MyString
@@ -10,7 +10,7 @@ one:
   emergency_detail: MyString
 
 two:
-  name: device_two
+  name: sign_two
   template: dodge
   location: MyString
   notification: MyString

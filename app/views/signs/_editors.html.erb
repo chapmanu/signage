@@ -16,7 +16,7 @@
       <td><%= user.full_name %></td>
       <td><%= user.email %></td>
       <td>
-        <%= link_to "Remove", remove_user_device_path(device, user_id: user.id), method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{user.full_name} from being able to edit this device?" } %>
+        <%= link_to "Remove", remove_user_sign_path(device, user_id: user.id), method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{user.full_name} from being able to edit this device?" } %>
       </td>
     </tr>
   <% end %>

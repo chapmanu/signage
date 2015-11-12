@@ -1,0 +1,26 @@
+.new-button {
+  position: relative;
+  display: inline-block;
+  color: white;
+  background: $green;
+  border-radius: 5px;
+  line-height: 24px;
+  padding: 0 1.5em;
+  font-weight: bold;
+  box-shadow:  0 3px 0 0 darken($green, 10%);
+
+  svg {
+    display: inline;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover, &:focus {
+    color: white;
+  }
+  &:active {
+    box-shadow: none;
+    top: 3px;
+  }
+}
