@@ -41,14 +41,13 @@
       <% end %>
     </ul>
 
-
-
+    <br />
     <div class="actions">
-      <%= f.submit class: 'btn' %>
+      <%= f.button class: 'happy-button' %>
     </div>
   <% end %>
 
-  <div class="sign-slides-listing">
+  <div class="sign-slides-listing" id="js-sortable-slides">
     <%= render partial: 'slide', collection: @sign.slides %>
   </div>
 </div>

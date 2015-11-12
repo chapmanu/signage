@@ -1,7 +1,6 @@
 <div class="show-sign-container">
 
   <div class="sign-info">
-
     <label>Sign name</label>
     <p><%= @sign.name %></p>
 
@@ -20,15 +19,22 @@
         <li><div class="chip"><%= owner.full_name %></div></li>
       <% end %>
     </ul>
-
-    <div class="actions">
-      <%= link_to "Edit", edit_sign_path(@sign) %>
+    <br />
+    <div class="actions bold-actions">
+      <%= link_to play_sign_path(@sign) do %>
+        <%= image_tag('play_dark.svg') %> Play
+      <% end %>
+      <%= link_to edit_sign_path(@sign) do %>
+        <%= image_tag('gear_dark.svg') %> Edit
+      <% end %>
     </div>
   </div>
 
   <div class="sign-slides">
-    <div class="sign-slides-listing">
+    <div class="sign-slides-listing" id="js-sortable-slides">
       <%= render partial: 'slide', collection: @sign.slides %>
+      <%= link_to "+ Add Slide", new_slide_path, class: 'pill-button add-new-slide' %>
     </div>
   </div>
 </div>
+<%= content_tag :div, nil, id: 'js-sign-meta', data: { sort_path: order_sign_path(@sign) } %>

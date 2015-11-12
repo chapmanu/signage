@@ -1,0 +1,54 @@
+
+/* HAPPY BUTTON */
+
+.happy-button {
+  position: relative;
+  display: inline-block;
+  color: white;
+  background: $green;
+  border-radius: 5px;
+  line-height: 24px;
+  padding: 0 35px 0 16px;
+  font-weight: bold;
+  box-shadow:  0 3px 0 0 darken($green, 10%);
+  border: none;
+
+  svg {
+    display: inline;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover, &:focus {
+    color: white;
+  }
+  &:active {
+    box-shadow: none;
+    top: 3px;
+  }
+
+  &::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-image: image-url('smiley.svg');
+    position: absolute;
+    right: 14px;
+    top: 3px;
+    z-index: 1;
+  }
+}
+
+
+/* PILL BUTTON */
+
+.pill-button {
+  @extend .chip;
+  background-color: transparent;
+  border: 1px solid $blue;
+  color: $blue;
+  text-align: center;
+  min-width: 90px;
+  font-size: 14px;
+}

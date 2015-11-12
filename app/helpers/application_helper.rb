@@ -20,8 +20,8 @@ module ApplicationHelper
     link_to(text, "?filter=#{value}", class: classes, data: { value: value })
   end
 
-  def new_button(text, href)
-    link_to(href, class: 'new-button') do
+  def happy_button(text, href)
+    link_to(href, class: 'happy-button') do
       "#{text} &nbsp;".html_safe + inline_svg('smiley.svg')
     end
   end

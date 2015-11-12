@@ -1,4 +1,4 @@
-<div class="sign-slide-list-item">
+<div class="sign-slide-list-item" id="sign_slide_ids-<%=slide.id%>">
   <div class="left-actions">
     <%= link_to inline_svg('close.svg'), '#', class: 'destroy-slide-sign' %>
     <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
@@ -12,7 +12,7 @@
     <p><%= slide.menu_name %></p>
     <div class="bold-actions">
       <%= link_to slide do %>
-        <%= image_tag('play_dark.svg') %> Play
+        <%= image_tag('more_info.svg') %> More info
       <% end %>
       <%= link_to edit_slide_path(slide) do %>
         <%= image_tag('gear_dark.svg') %> Edit
