@@ -6,7 +6,7 @@
   </subhead>
 
   <div class="ui-buttons">
-    <% @device.directory_slides.each do |slide| %>
+    <% @sign.directory_slides.each do |slide| %>
       <a href="#<%= slide.slug %>">
         <button class="ui-button-directory"><span><%= slide.menu_name %></span></button>
       </a>
@@ -15,7 +15,7 @@
 
   <nav class="ui-menu" role="navigation">
     <ul class="ui-menu-list">
-      <% @device.slides.each do |slide| %>
+      <% @sign.slides.each do |slide| %>
         <li class="ui-menu-item" data-hash="<%= slide.slug %>">
           <a href="#<%= slide.slug %>"><span><%= slide.menu_name %></span></a>
         </li>

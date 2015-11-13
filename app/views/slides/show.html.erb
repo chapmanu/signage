@@ -5,7 +5,7 @@
       <%= link_to @slide do %>
         <%= inline_svg('send_dark.svg') %> Send to my sign
       <% end %>
-      <%= link_to @slide do %>
+      <%= link_to preview_slide_path(@slide) do %>
         <%= inline_svg('play_dark.svg') %> Preview
       <% end %>
       <%= link_to edit_slide_path(@slide) do %>
