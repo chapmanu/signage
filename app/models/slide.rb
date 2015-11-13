@@ -60,6 +60,7 @@ class Slide < ActiveRecord::Base
     image.trim
     self.screenshot = image
     save!
+    File.delete(file)
   end
 
   private
