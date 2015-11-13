@@ -1,12 +1,1 @@
-<% if session[:parent_sign_path] %>
-  <%= link_to '<< Back to Device', session[:parent_sign_path], class: 'home-button' %>
-<% else %>
-  <%= link_to '<< All Slides', slides_path, class: 'home-button' %>
-<% end %>
-
-<h1 class="admin-page-title">Editing Slide</h1>
-
 <%= render 'form' %>
-
-<%= link_to 'Show', @slide %> |
-<%= link_to 'Back', slides_path %>

@@ -106,3 +106,28 @@
     font-size: 36px;
   }
 }
+
+/* FORM */
+
+.slide-form-container {
+  @include outer-container;
+  padding-top: $base-spacing*2;
+
+  .essential-fields {
+    margin: 0 auto;
+    width: 50%;
+    padding-bottom: $base-spacing*2;
+  }
+
+  .tinymce-container {
+    padding-bottom: $base-spacing;
+  }
+
+  .radio-button-group {
+    padding: $base-spacing 0;
+    .group-label {
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+  }
+}

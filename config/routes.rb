@@ -33,9 +33,7 @@ Rails.application.routes.draw do
     get 'lookup', on: :collection
   end
 
-
-
-  root 'admin#choose_device'
+  root 'signs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
