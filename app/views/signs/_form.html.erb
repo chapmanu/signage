@@ -48,6 +48,6 @@
   <% end %>
 
   <div class="sign-slides-listing" id="js-sortable-slides">
-    <%= render partial: 'slide', collection: @sign.slides %>
+    <%= render partial: 'slide', collection: @sign.slides.ordered %>
   </div>
 </div>

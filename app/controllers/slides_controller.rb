@@ -1,6 +1,6 @@
 class SlidesController < ApplicationController
   before_action :set_slide,                 only: [:preview, :show, :edit, :update, :destroy]
-  before_action :set_devices,               only: [:new, :edit, :create, :update]
+  before_action :set_signs,               only: [:new, :edit, :create, :update]
   before_action :set_parent_sign_path,    only: [:new, :edit]
 
   skip_before_action :authenticate_user!, only: [:preview]
@@ -24,7 +24,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    @slides = current_user.slides.search(params[:search]).page params[:page]
+    @slides = Slide.search(params[:search]).page params[:page]
   end
 
   # GET /slides/1
@@ -35,8 +35,8 @@ class SlidesController < ApplicationController
   # GET /slides/new
   def new
     @slide = Slide.new
-    device = Device.friendly.find(session[:parent_device_id]) if session[:parent_device_id]
-    @slide.devices << device if device
+    sign = Sign.friendly.find(session[:parent_sign_id]) if session[:parent_sign_id]
+    @slide.signs << sign if sign
   end
 
   # GET /slides/1/edit
@@ -90,16 +90,16 @@ class SlidesController < ApplicationController
       @slide = Slide.find(params[:id])
     end
 
-    def set_devices
-      @devices = current_user.devices.order(:name)
+    def set_signs
+      @signs = current_user.signs.order(:name)
     end
 
     def set_parent_sign_path
-      if id = request.referrer.to_s[/devices\/([^\/]+)/, 1]
-        session[:parent_device_id]   = id
+      if id = request.referrer.to_s[/signs\/([^\/]+)/, 1]
+        session[:parent_sign_id]   = id
         session[:parent_sign_path] = edit_sign_path(id)
       else
-        session[:parent_device_id]   = nil
+        session[:parent_sign_id]   = nil
         session[:parent_sign_path] = nil
       end
     end
@@ -134,7 +134,7 @@ class SlidesController < ApplicationController
         :background_cache,
         :foreground_cache,
         :remove_foreground,
-        :device_ids => [],
+        :sign_ids => [],
         :scheduled_items_attributes => [
           :id,
           :_destroy,

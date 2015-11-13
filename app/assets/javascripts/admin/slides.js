@@ -107,4 +107,20 @@ Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
 $(document).on('dynamic_fields_added', function($fields) {
   Admin.Slides.initTinyMCE();
   Admin.Slides.initDateTimePickers();
-})
+});
+
+Utils.fireWhenReady(['slides#index'], function(e) {
+  $('html').on('click', function() {
+    $('.js-admin-slide.selected').removeClass('selected');
+  });
+
+  $('.js-admin-slide').on('click', function(e) {
+    e.stopPropagation();
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+    } else {
+      $('.js-admin-slide.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+});

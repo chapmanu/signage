@@ -145,8 +145,8 @@
       </div>
 
       <div class="field">
-        <%= f.label :device_ids, "Devices this slide should play on" %>
-        <%= f.select :device_ids, @devices.map{|d| [d.name, d.id] }, {}, multiple: true, size: 8 %>
+        <%= f.label :sign_ids, "Devices this slide should play on" %>
+        <%= f.select :sign_ids, @signs.map{|d| [d.name, d.id] }, {}, multiple: true, size: 8 %>
       </div>
 
       <div class="slide-time-range">
