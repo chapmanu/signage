@@ -10,7 +10,7 @@ class Slide < ActiveRecord::Base
 
   scope :search, -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,  -> { where("slides.show" => true) }
-  scope :ordered, -> { order("device_slides.order") }
+  scope :ordered, -> { order("sign_slides.order") }
 
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
@@ -26,7 +26,7 @@ class Slide < ActiveRecord::Base
 
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 
-  paginates_per 10
+  paginates_per 24
 
   def people_slide?
     !!(template.downcase =~ /directory/)

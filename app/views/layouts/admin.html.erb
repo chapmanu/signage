@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="<%=controller.controller_name %>">
 <head>
   <title>Admin | Digital Signage</title>
   <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
@@ -9,18 +9,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body data-controller-action="<%= controller_action %>">
-<%= render 'admin/navbar' %>
+<div class="body-wrapper">
+  <%= render 'admin/navbar' %>
 
-<%= display_flashes %>
+  <%= display_flashes %>
 
-<div class="admin-content">
-  <%= yield %>
+  <div class="admin-content">
+    <%= yield %>
+  </div>
+
+  <div class="admin-footer">
+    <p><strong>Digital Signage:</strong> A web product by Chapman University</p>
+    <p>Report bugs to <a href="mailto:jkerr@chapman.edu">James (jkerr@chapman.edu)</a></p>
+  </div>
 </div>
-
-<div class="admin-footer">
-  <p><strong>Digital Signage:</strong> A web product by Chapman University</p>
-  <p>Report bugs to <a href="mailto:jkerr@chapman.edu">James (jkerr@chapman.edu)</a></p>
-</div>
-
 </body>
 </html>
