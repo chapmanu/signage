@@ -1,15 +1,15 @@
 <div class="js-device-meta"
-     data-id="<%= @device.id %>"
-     data-poll-device-path="<%= poll_sign_path @device %>"
-     data-updated-at="<%= @device.updated_at %>"></div>
+     data-id="<%= @sign.id %>"
+     data-poll-device-path="<%= poll_sign_path @sign %>"
+     data-updated-at="<%= @sign.updated_at %>"></div>
 
 <div id="ui-feed" class="ui-feed ui-feed--show-mouse">
 
-  <%= render "devices/menus/#{@device.menu}" %>
+  <%= render "signs/menus/#{@sign.menu}" %>
 
   <main class="owl-carousel" role="main" >
-    <%= render(@device.active_slides.ordered) %>
+    <%= render(@sign.active_slides.ordered) %>
   </main>
 </div>
 
-<%= render 'emergency' if @device.any_emergency? %>
+<%= render 'emergency' if @sign.any_emergency? %>

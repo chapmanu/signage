@@ -1,4 +1,4 @@
-Utils.fireWhenReady(['devices#play'], function(e) {
+Utils.fireWhenReady(['signs#play'], function(e) {
   Device.initialize({
     menu: $('.ui-menu-list'),
     slides: $('main')
@@ -8,6 +8,6 @@ Utils.fireWhenReady(['devices#play'], function(e) {
 
   // Listen for 5 clicks on the chapman Logo
   $('#chapman-logo').on('click', function(event) {
-    if (event.originalEvent.detail === 5) { window.location = '/devices'; }
+    if (event.originalEvent.detail === 5) { window.location = '/signs'; }
   });
 });
