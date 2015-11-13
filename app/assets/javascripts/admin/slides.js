@@ -27,6 +27,7 @@ Admin.Slides.livePreviewAjax = function() {
 
 Admin.Slides.livePreviewSuccess = function(data) {
   var iframe_doc = $('#slide-live-preview').contents()[0];
+  console.log(iframe_doc);
   iframe_doc.open();
   iframe_doc.write(data);
   iframe_doc.close();
@@ -74,6 +75,9 @@ Admin.Slides.initLivePreview = function() {
     Admin.Slides.livePreviewAjax();
     $('.js-sticky-slide-preview').sticky('update');
   });
+  $(':input, :checkbox, :radio').on('blur', function() {
+    Admin.Slides.livePreviewAjax();
+  });
   Admin.Slides.livePreviewAjax();
 };
 
@@ -102,6 +106,7 @@ Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
   tinyMCE.remove();
   Admin.Slides.initLivePreview();
   Admin.Slides.initTinyMCE();
+  $('.datepicker').pickadate();
 });
 
 $(document).on('dynamic_fields_added', function($fields) {
