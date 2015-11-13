@@ -1,0 +1,36 @@
+<% slide = admin_slide %>
+
+<div class="slide-list-item js-admin-slide">
+  <div class="screenshot">
+    <%= image_tag slide.screenshot %>
+    <div class="slide-actions">
+      <%= inline_svg('close_light.svg', class: 'close') %>
+      <div>
+        <div class="action-link">
+          <%= link_to slide do %>
+            <%= inline_svg('send_light.svg') %> Send to my sign
+          <% end %>
+        </div>
+
+        <div class="action-link">
+          <%= link_to slide do %>
+            <%= inline_svg('play_light.svg') %> Preview
+          <% end %>
+        </div>
+
+        <div class="action-link">
+          <%= link_to slide do %>
+            <%= inline_svg('more_info_light.svg') %> More info
+          <% end %>
+        </div>
+
+        <div class="action-link">
+          <%= link_to edit_slide_path(slide) do %>
+            <%= inline_svg('gear_light.svg') %> Edit
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="name"><%= slide.menu_name %></p>
+</div>

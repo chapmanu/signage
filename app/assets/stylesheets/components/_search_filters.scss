@@ -2,12 +2,8 @@
   @include outer-container;
   padding: $base-spacing*2 0;
 
-  .search {
-    @include span-columns(6);
-  }
-
-  .filter {
-    @include span-columns(4);
+  // The Styles
+  .filter, .sort {
     text-align: center;
     margin-top: 26px;
     label {
@@ -22,7 +18,26 @@
 
   .new {
     margin-top: 26px;
-    @include span-columns(2);
     text-align: center;
+  }
+
+  // The sizes of the columns
+  .search {
+    .signs &  { @include span-columns(6); }
+    .slides & { @include span-columns(3) }
+  }
+
+  .filter {
+    .signs &  { @include span-columns(4); }
+    .slides & { @include span-columns(3) }
+  }
+
+  .sort {
+    .slides & { @include span-columns(4) }
+  }
+
+  .new {
+    .signs & { @include span-columns(2); }
+    .slides & { @include span-columns(2) }
   }
 }
