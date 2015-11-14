@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  controller :marketing do
+    get :home
+  end
+
   # Devise
   devise_for :users
 
