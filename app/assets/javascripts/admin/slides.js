@@ -95,6 +95,45 @@ Admin.Slides.initTinyMCE = function() {
   });
 };
 
+/* Index Page */
+var AdminSlides = {};
+
+AdminSlides.refreshList = function(e) {
+  var search   = $('#search').val();
+  var filter   = $('#filters .active').data('value');
+  var sort     = $('#sort .active').data('value');
+  var query    = '?search='+search+'&filter='+filter+'&sort='+sort;
+  $.get('/slides.js' + encodeURI(query) );
+};
+
+AdminSlides.filterClicked = function(e) {
+  e.preventDefault();
+  $(this).parent().find('a').removeClass('active');
+  $(this).addClass('active');
+  var filter   = $('#filters .active').data('value');
+  var sort     = $('#sort .active').data('value');
+  var query    = '?filter='+filter+'&sort='+sort;
+  var url      = window.location.pathname + query;
+  window.history.replaceState({path:url},'',url);
+  AdminSlides.refreshList();
+};
+
+AdminSlides.initSlideActionMenus = function() {
+  $('html').on('click', function() {
+    $('.js-admin-slide.selected').removeClass('selected');
+  });
+
+  $('.js-admin-slide').on('click', function(e) {
+    e.stopPropagation();
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+    } else {
+      $('.js-admin-slide.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+};
+
 
 /**
  * The code that runs on document.ready
@@ -115,17 +154,9 @@ $(document).on('dynamic_fields_added', function($fields) {
 });
 
 Utils.fireWhenReady(['slides#index'], function(e) {
-  $('html').on('click', function() {
-    $('.js-admin-slide.selected').removeClass('selected');
-  });
+  AdminSlides.initSlideActionMenus();
 
-  $('.js-admin-slide').on('click', function(e) {
-    e.stopPropagation();
-    if ($(this).hasClass('selected')) {
-      $(this).removeClass('selected');
-    } else {
-      $('.js-admin-slide.selected').removeClass('selected');
-      $(this).addClass('selected');
-    }
-  });
+  $('#search').on('keyup', AdminSlides.refreshList);
+  $('#filters a, #sort a').on('click', AdminSlides.filterClicked);
+
 });

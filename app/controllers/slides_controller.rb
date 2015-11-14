@@ -24,7 +24,16 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.search(params[:search]).page params[:page]
+    query = Slide
+    query = query.owned_by(current_user) if params['filter'] == 'mine'
+    if params['sort'] == 'popular'
+      query = query.popular
+    elsif params['sort'] == 'alpha'
+      query = query.alpha
+    else
+      query = query.newest
+    end
+    @slides = query.search(params[:search]).page params[:page]
   end
 
   # GET /slides/1
