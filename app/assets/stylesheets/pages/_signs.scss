@@ -17,6 +17,12 @@
     font-size: 24px;
     font-weight: 100;
     margin-bottom: 8px;
+    a {
+      color: $dark-gray;
+      &:hover, &:focus {
+        color: $blue;
+      }
+    }
   }
   .slides img {
     width: 40px;
@@ -70,8 +76,9 @@
 }
 
 .sign-slides-listing {
-  text-align: center;
+  text-align: left;
   .add-new-slide {
+    margin-top: $base-spacing;
     width: 300px;
   }
 }

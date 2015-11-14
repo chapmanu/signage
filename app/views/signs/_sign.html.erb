@@ -4,7 +4,7 @@
   </div>
 
   <div class="sign-list-item-info">
-    <h2 class="title"><%= sign.name %></h2>
+    <h2 class="title"><%= link_to sign.name, sign %></h2>
     <div class="slides">
       <% sign.slides.take(8).each do |slide| %>
         <%= image_tag slide.screenshot.url %>

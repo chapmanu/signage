@@ -8,10 +8,10 @@
     <p><%= @sign.location %></p>
 
     <label>Template</label>
-    <p><%= @sign.menu.titleize %></p>
+    <p><%= @sign.menu.try(:titleize) %></p>
 
     <label>Transition type</label>
-    <p><%= @sign.transition.capitalize %> effect</p>
+    <p><%= @sign.transition.try(:capitalize) %> effect</p>
 
     <label>Owners</label>
     <ul class="owners-list">
@@ -33,7 +33,7 @@
   <div class="sign-slides">
     <div class="sign-slides-listing" id="js-sortable-slides">
       <%= render partial: 'slide', collection: @sign.slides.ordered %>
-      <%= link_to "+ Add Slide", new_slide_path, class: 'pill-button add-new-slide' %>
+      <%= link_to "+ New Slide", new_slide_path, class: 'pill-button add-new-slide', id: 'add-slide-link' %>
     </div>
   </div>
 </div>
