@@ -15,8 +15,9 @@ module ApplicationHelper
     controller.controller_name == 'slides'
   end
 
-  def filter_pill_link(text, value)
+  def filter_pill_link(text, value, options = {})
     classes = params['filter'] == value ? 'active' : ''
+    classes = 'active' if options[:default]
     link_to(text, "?filter=#{value}", class: classes, data: { value: value })
   end
 
