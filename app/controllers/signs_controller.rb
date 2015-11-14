@@ -7,8 +7,9 @@ class SignsController < ApplicationController
   # GET /signs
   # GET /signs.json
   def index
-    query  = params['fitler'] == 'mine' ? current_user.signs : Sign
-    @signs = query.includes(:slides).search(params[:search]).order(:name)
+    query  = Sign.includes(:slides)
+    query  = query.owned_by(current_user) if params['filter'] == 'mine'
+    @signs = query.search(params['search']).order(:name)
   end
 
   # GET /signs/1

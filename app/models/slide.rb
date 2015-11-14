@@ -11,6 +11,10 @@ class Slide < ActiveRecord::Base
   scope :search, -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,  -> { where("slides.show" => true) }
   scope :ordered, -> { order("sign_slides.order") }
+  scope :owned_by, -> (user) { joins(:slide_users).where('slide_users.user_id' => user.id) }
+  scope :popular, -> { order(signs_count: :desc, menu_name: :asc) }
+  scope :newest, -> { order(created_at: :desc) }
+  scope :alpha,  -> { order(menu_name: :asc) }
 
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader

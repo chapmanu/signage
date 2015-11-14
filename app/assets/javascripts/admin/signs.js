@@ -3,10 +3,6 @@ Admin.Devices = {};
 Admin.Devices.editors_container = '#js-device-editors-container';
 Admin.Devices.sortable_slides   = '#js-sortable-slides';
 
-Admin.Devices.updateSlideOrder = function(event, ui) {
-
-};
-
 Admin.Devices.updateEditorsTable = function(html) {
   $(Admin.Devices.editors_container).html(html);
 };
@@ -41,14 +37,14 @@ AdminSigns.updateSlideOrder = function() {
 
 AdminSigns.refreshList = function(e) {
   var search   = $('#search').val();
-  var filter   = $('#filter-mine').hasClass('active') ? 'mine' : 'all';
+  var filter   = $('#filters .active').data('value');
   var query    = '?search='+search+'&filter='+filter;
-  $.get(location.pathname + '.js' + encodeURI(query) );
+  $.get('/signs.js' + encodeURI(query) );
 };
 
 AdminSigns.filterClicked = function(e) {
   e.preventDefault();
-  $('#signs-filters a').removeClass('active');
+  $('#filters a').removeClass('active');
   $(this).addClass('active');
   var url = window.location.pathname+'?filter='+$(this).data('value');
   window.history.replaceState({path:url},'',url);
@@ -59,7 +55,7 @@ AdminSigns.filterClicked = function(e) {
 
 Utils.fireWhenReady(['signs#index'], function(e) {
   $('#search').on('keyup', AdminSigns.refreshList);
-  $('#signs-filters a').on('click', AdminSigns.filterClicked);
+  $('#filters a').on('click', AdminSigns.filterClicked);
 });
 
 Utils.fireWhenReady(['signs#show', 'signs#edit', 'signs#update'], function(e) {

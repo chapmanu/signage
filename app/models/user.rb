@@ -13,10 +13,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :encrypted_password # Just to make :database_authenticatable work
 
-  def devices
-    super_admin? ? Sign.all : super
-  end
-
   def full_name
     "#{first_name} #{last_name}".strip
   end
