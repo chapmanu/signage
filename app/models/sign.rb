@@ -5,7 +5,7 @@ class Sign < ActiveRecord::Base
   unique_has_many_through :slides, :sign_slides
 
   scope :search, -> (search) { where("name ILIKE ?", "%#{search}%") if search.present? }
-
+  scope :owned_by, -> (user) { joins(:sign_users).where('sign_users.user_id' => user.id) }
   validates :name, presence: true
 
   extend FriendlyId
