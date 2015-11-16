@@ -3,8 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+@import "materialize/components/color";
+@import "base/variables";
+
+$primary-color: $green;
+$secondary-color: $blue;
+$radio-empty-color: $light-gray;
 
 @import 'materialize';
+
 @import "fonts";
 @import "bourbon";
 @import "base/base";
@@ -20,6 +27,7 @@ html, body {
   padding: 0;
   margin: 0;
   height: 100%;
+  min-width: 1100px;
 }
 .body-wrapper {
   min-height: 100%;
