@@ -7,7 +7,7 @@
   color: white;
   background: $green;
   border-radius: 5px;
-  line-height: 24px;
+  line-height: 32px;
   padding: 0 35px 0 16px;
   font-weight: bold;
   box-shadow:  0 3px 0 0 darken($green, 10%);
@@ -35,7 +35,7 @@
     background-image: image-url('smiley.svg');
     position: absolute;
     right: 14px;
-    top: 3px;
+    top: 7px;
     z-index: 1;
   }
 }

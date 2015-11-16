@@ -7,7 +7,7 @@
     <h2 class="title"><%= link_to sign.name, sign %></h2>
     <div class="slides">
       <% sign.slides.take(8).each do |slide| %>
-        <%= image_tag slide.screenshot.url %>
+        <%= image_tag slide.screenshot %>
       <% end %>
       <p>
         <%= '...' if sign.slides.length > 8 %>

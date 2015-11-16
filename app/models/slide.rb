@@ -44,6 +44,17 @@ class Slide < ActiveRecord::Base
     id.to_s
   end
 
+  def hide?
+    !show?
+  end
+
+  def status
+    return 'hidden'   if hide?
+    return 'active'   if active?
+    return 'upcoming' if upcoming?
+    return 'expired'  if expired?
+  end
+
   def css_classes
     classes = ['ui-slide']
     classes << 'ui-slide--standard'       if template =~ /standard/
