@@ -1,0 +1,16 @@
+<!-- HIDDEN FORM -->
+<div class="modal modal-fixed-footer" id="send-slide-<%= slide.id %>">
+  <%= form_for slide do |f| %>
+    <div class="modal-content">
+        <%= f.collection_check_boxes :sign_ids, Sign.order(:name), :id, :name do |b| %>
+          <p>
+            <%= b.check_box id: "slide_#{slide.id}_sign_#{b.object.id}" %>
+            <%= b.label for: "slide_#{slide.id}_sign_#{b.object.id}" %>
+          </p>
+        <% end %>
+    </div>
+    <div class="modal-footer">
+      <%= f.button "Send", class: 'happy-button' %>
+    </div>
+  <% end %>
+</div>

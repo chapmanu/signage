@@ -212,7 +212,7 @@
 
         <div class="input-field">
           <%= f.select :sign_ids, @signs.map{|d| [html_escape_once(d.name), html_escape_once(d.id)] }, {}, multiple: '' %>
-          <%= f.label :sign_ids, "Devices this slide should play on" %>
+          <%= f.label :sign_ids, "Signs this slide should play on" %>
         </div>
 
         <div class="actions" data-show-when="#slide_template==(standard|directory|schedule)">
