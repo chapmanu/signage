@@ -7,7 +7,7 @@
       <%= inline_svg('close_light.svg', class: 'close') %>
       <div>
         <div class="action-link">
-          <%= link_to slide do %>
+          <%= link_to "#send-slide-#{slide.id}", class: 'modal-trigger' do %>
             <%= inline_svg('send_light.svg') %> Send to my sign
           <% end %>
         </div>
@@ -33,4 +33,7 @@
     </div>
   </div>
   <p class="name"><%= slide.menu_name %></p>
+
+  <%= render 'send_to_sign' slide: slide %>
 </div>
+
