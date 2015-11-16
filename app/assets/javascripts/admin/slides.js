@@ -119,6 +119,7 @@ AdminSlides.filterClicked = function(e) {
 };
 
 AdminSlides.initSlideActionMenus = function() {
+  $('.modal-trigger').leanModal();
   $('html').on('click', function() {
     $('.js-admin-slide.selected').removeClass('selected');
   });
@@ -155,8 +156,10 @@ $(document).on('dynamic_fields_added', function($fields) {
 
 Utils.fireWhenReady(['slides#index'], function(e) {
   AdminSlides.initSlideActionMenus();
-
   $('#search').on('keyup', AdminSlides.refreshList);
   $('#filters a, #sort a').on('click', AdminSlides.filterClicked);
+});
 
+Utils.fireWhenReady(['slides#show'], function() {
+  $('.modal-trigger').leanModal();
 });

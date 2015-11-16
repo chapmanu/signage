@@ -2,7 +2,7 @@
   <div class="left-column">
     <%= image_tag @slide.screenshot.url %>
     <div class="bold-actions">
-      <%= link_to @slide do %>
+      <%= link_to "#send-slide-#{@slide.id}", class: 'modal-trigger' do %>
         <%= inline_svg('send_dark.svg') %> Send to my sign
       <% end %>
       <%= link_to preview_slide_path(@slide) do %>
@@ -51,4 +51,6 @@
       <% end %>
     </ul>
   </div>
+
 </div>
+<%= render 'send_to_sign', slide: @slide %>
