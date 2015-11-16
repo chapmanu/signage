@@ -78,8 +78,10 @@
 .sign-slides-listing {
   text-align: left;
   .add-new-slide {
+    text-align: center;
     margin-top: $base-spacing;
-    width: 300px;
+    margin-left: 32px;
+    width: 178px;
   }
 }
 
@@ -92,7 +94,7 @@
 
   .left-actions, .screenshot, .right-actions {
     float: left;
-    height: 100px;
+    height: 115px;
   }
 
   .left-actions{
@@ -108,6 +110,19 @@
   }
   .screenshot {
     background: $dark-gray;
+    img { display: block; }
+  }
+  .status {
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    &.hidden   { background-color: $light-gray; }
+    &.expired  { background-color: $red; }
+    &.active   { background-color: $green; }
+    &.upcoming { background-color: $blue; }
   }
   .right-actions {
     p { margin-bottom: 8px; }

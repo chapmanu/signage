@@ -6,6 +6,7 @@
 
   <div class="screenshot">
     <%= image_tag slide.screenshot.url, height: 100 %>
+    <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %></div>
   </div>
 
   <div class="right-actions">
