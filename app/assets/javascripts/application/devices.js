@@ -8,6 +8,6 @@ Utils.fireWhenReady(['signs#play'], function(e) {
 
   // Listen for 5 clicks on the chapman Logo
   $('#chapman-logo').on('click', function(event) {
-    if (event.originalEvent.detail === 5) { window.location = '/signs'; }
+    if (event.originalEvent.detail === 5) { window.location = Device.meta('edit-url'); }
   });
 });
