@@ -18,6 +18,7 @@ var Device = {
 Device.initialize = function(config) {
   if (!config.menu)   console.error('Need to pass in {menu: $element}');
   if (!config.slides) console.error('Need to pass in {slides: $element}');
+  Device._initializeTransition();
   Device._initializeMenu(config.menu);
   Device._initializeSlides(config.slides);
   Device._startClock();
@@ -58,6 +59,24 @@ Device.meta = function(key) {
  * PRIVATE (Don't rely on these methods outside this file)
  */
 
+Device._initializeTransition = function() {
+  var in_out = ['fadeIn', 'fadeOut']; // Defaults
+  var transition = Device.meta('transition');
+
+  if (transition === 'fade') {
+    in_out = ['fadeIn', 'fadeOut'];
+  } else if (transition === 'drop') {
+    in_out = ['fadeInDown', 'fadeOutDown'];
+  } else if (transition === 'swipe') {
+    in_out = ['slideInRight', 'slideOutLeft'];
+  } else if (transition === 'rotate') {
+    in_out = ['rotateInDownLeft', 'rotateOutDownLeft'];
+  }
+
+  this.animate_in  = in_out[0];
+  this.animate_out = in_out[1];
+};
+
 Device._initializeMenu = function(menu) {
   menu.owlCarousel({
     center:    true,
@@ -70,8 +89,8 @@ Device._initializeMenu = function(menu) {
 
 Device._initializeSlides = function(slides) {
   var owl = slides.owlCarousel({
-    animateOut: 'fadeOutDown',
-    animateIn:  'fadeInDown',
+    animateOut: this.animate_out,
+    animateIn:  this.animate_in,
     items: 1,
     URLhashListener: true,
     onInitialized: function(evt) {
