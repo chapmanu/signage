@@ -18,7 +18,7 @@
   .title {
     font-size: 24px;
     font-weight: 100;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     a {
       color: $dark-gray;
       &:hover, &:focus {
@@ -38,7 +38,8 @@
 }
 
 .sign-list-item-actions {
-  @include span-columns(4);
+  float: right;
+  padding-right: 28px;
   text-align: right;
 }
 
