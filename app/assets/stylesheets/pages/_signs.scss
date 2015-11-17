@@ -3,11 +3,13 @@
 .sign-list-item {
   @include outer-container;
   padding: $base-spacing;
+  padding-left: 0;
   border-top: 1px solid lighten($light-gray, 30%);
 }
 
 .sign-list-item-status {
   @include span-columns(1);
+  width: auto;
   text-align: center;
 }
 
