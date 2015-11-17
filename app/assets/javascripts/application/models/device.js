@@ -113,7 +113,7 @@ Device._queueNextSlide = function() {
 
 Device._startPolling = function() {
   var path = Device.meta('poll-device-path');
-  var data = { device: {updated_at: Device.meta('updated-at')}};
+  var data = { sign: {updated_at: Device.meta('updated-at')}};
   setInterval(function() {
     $.get(path, data);
   }, Device.emergency_poll_interval);
