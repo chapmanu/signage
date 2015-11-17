@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114005209) do
+ActiveRecord::Schema.define(version: 20151117225732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,28 +119,28 @@ ActiveRecord::Schema.define(version: 20151114005209) do
     t.string   "menu_name"
     t.string   "organizer"
     t.string   "organizer_id"
-    t.integer  "duration",          default: 20,   null: false
+    t.integer  "duration",          default: 20,      null: false
     t.string   "heading"
     t.string   "subheading"
     t.string   "location"
     t.text     "content"
     t.string   "background"
-    t.string   "background_type"
+    t.string   "background_type",   default: "none"
     t.string   "background_sizing"
     t.string   "foreground"
-    t.string   "foreground_type"
-    t.string   "foreground_sizing"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "theme"
-    t.string   "layout"
-    t.string   "directory_feed"
+    t.string   "foreground_type",   default: "none"
+    t.string   "foreground_sizing", default: "cover"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "theme",             default: "light"
+    t.string   "layout",            default: "left"
+    t.string   "building_name"
     t.datetime "play_on"
     t.datetime "stop_on"
-    t.boolean  "show",              default: true, null: false
+    t.boolean  "show",              default: true,    null: false
     t.string   "datetime"
     t.string   "screenshot"
-    t.integer  "signs_count",       default: 0,    null: false
+    t.integer  "signs_count",       default: 0,       null: false
   end
 
   create_table "users", force: :cascade do |t|

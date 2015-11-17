@@ -27,7 +27,6 @@ Admin.Slides.livePreviewAjax = function() {
 
 Admin.Slides.livePreviewSuccess = function(data) {
   var iframe_doc = $('#slide-live-preview').contents()[0];
-  console.log(iframe_doc);
   iframe_doc.open();
   iframe_doc.write(data);
   iframe_doc.close();
@@ -61,8 +60,13 @@ Admin.Slides.initShowWhen = function() {
     var pattern = new RegExp(info[1]);
 
     var listener = function() {
-      var val = $el.val();
-      (pattern.test(val)) ? $this.show() : $this.hide();
+      var val;
+      if ($el.prop('type') === 'radio') {
+        val = $($el.selector + ':checked').val();
+      } else {
+        val = $el.val();
+      }
+      (pattern.test(val)) ? $this.fadeIn(250) : $this.hide();
     };
 
     $el.on('change', listener);
@@ -140,7 +144,7 @@ AdminSlides.initSlideActionMenus = function() {
  * The code that runs on document.ready
  */
 
-Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
+Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#update'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
   tinyMCE.remove();
