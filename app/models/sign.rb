@@ -16,7 +16,7 @@ class Sign < ActiveRecord::Base
   end
 
   def self.transitions
-    @_transitions ||= ['fade', 'swipe', 'drop']
+    @_transitions ||= ['fade', 'swipe', 'drop', 'rotate']
   end
 
   def active_slides
