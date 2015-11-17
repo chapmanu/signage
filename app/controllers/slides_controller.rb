@@ -125,7 +125,7 @@ class SlidesController < ApplicationController
         :play_on,
         :stop_on,
         :show,
-        :directory_feed,
+        :building_name,
         :menu_name,
         :organizer,
         :organizer_id,

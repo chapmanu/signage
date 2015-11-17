@@ -101,10 +101,10 @@
             </p>
           </div>
 
-          <div data-show-when="#slide_background_type==^(?!none)">
+          <div data-show-when="input[name='slide[background_type]']==(image|video)">
             <div class="input-field file-field">
               <div class="btn">
-                <span>Background Image</span>
+                <span>Background Media</span>
                 <%= f.file_field :background %>
                 <%= f.hidden_field :background_cache %>
               </div>
@@ -134,10 +134,10 @@
             </p>
           </div>
 
-          <div class="field" data-show-when="#slide_foreground_type==^(?!none)">
+          <div class="field" data-show-when="input[name='slide[foreground_type]']==(image|video)">
             <div class="input-field file-field">
               <div class="btn">
-                <span>Foreground Image</span>
+                <span>Foreground Media</span>
                 <%= f.file_field :foreground %>
                 <%= f.hidden_field :foreground_cache %>
               </div>
@@ -151,26 +151,26 @@
             </p>
           </div>
 
-          <div class="radio-button-group" data-show-when="#slide_foreground_type==^(?!none)">
+          <div class="radio-button-group" data-show-when="input[name='slide[foreground_type]']==(image|video)">
             <label class="group-label">Foreground positioning</label>
             <p>
               <%= f.radio_button :foreground_sizing, 'auto' %>
-              <%= f.label :foreground_type_auto, 'Exact Size' %>
+              <%= f.label :foreground_sizing_auto, 'Exact Size' %>
             </p>
             <p>
               <%= f.radio_button :foreground_sizing, 'cover' %>
-              <%= f.label :foreground_type_cover, 'Fill Screen' %>
+              <%= f.label :foreground_sizing_cover, 'Fill Screen' %>
             </p>
             <p>
-              <%= f.radio_button :foreground_sizing, 'contiain' %>
-              <%= f.label :foreground_type_contain, 'Fill Screen (do not crop)' %>
+              <%= f.radio_button :foreground_sizing, 'contain' %>
+              <%= f.label :foreground_sizing_contain, 'Fill Screen (do not crop)' %>
             </p>
           </div>
         </div>
 
         <div class="input-field" data-show-when="#slide_template==directory">
-          <%= f.select :directory_feed, Faculty.all_building_names.map{|n| [n, n] }, {prompt: 'Select faculty'} %>
-          <%= f.label :directory_feed, "Show Faculty In" %>
+          <%= f.select :building_name, Faculty.all_building_names.map{|n| [n, n] }, {prompt: 'Select faculty'} %>
+          <%= f.label :building_name, "Show Faculty In" %>
         </div>
 
 
@@ -183,7 +183,9 @@
           </div>
           <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items %>
         </div>
-
+        <br />
+        <br />
+        <br />
         <h4>Slide Settings</h4>
         <div class="switch">
           <label>
@@ -211,7 +213,7 @@
         </div>
 
         <div class="input-field">
-          <%= f.select :sign_ids, @signs.map{|d| [html_escape_once(d.name), html_escape_once(d.id)] }, {}, multiple: '' %>
+          <%= f.select :sign_ids, @signs.map{|d| [html_escape_once(d.name), html_escape_once(d.id)] }, {prompt: 'Choose signs'}, multiple: '' %>
           <%= f.label :sign_ids, "Signs this slide should play on" %>
         </div>
 
