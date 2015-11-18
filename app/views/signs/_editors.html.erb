@@ -4,19 +4,19 @@
     <th>Email</th>
     <th></th>
   </tr>
-  <% if device.users.count == 0 %>
+  <% if sign.users.count == 0 %>
     <tr>
-      <td>No users have permission to edit this device.</td>
+      <td>No users have permission to edit this sign.</td>
       <td></td>
       <td></td>
     </tr>
   <% end %>
-  <% device.users.each do |user| %>
+  <% sign.users.each do |user| %>
     <tr id="js-user-id-<%= user.id %>">
       <td><%= user.full_name %></td>
       <td><%= user.email %></td>
       <td>
-        <%= link_to "Remove", remove_user_sign_path(device, user_id: user.id), method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{user.full_name} from being able to edit this device?" } %>
+        <%= link_to "Remove", remove_user_sign_path(sign, user_id: user.id), method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{user.full_name} from being able to edit this sign?" } %>
       </td>
     </tr>
   <% end %>

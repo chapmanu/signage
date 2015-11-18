@@ -23,6 +23,7 @@ class FetchDeviceDataJob < ActiveJob::Base
 
     def save_slides(sign, data)
       data.map do |item|
+        item.each { |k, v| v.try(:strip!) }
         slide = Slide.where(name: item['id']).first_or_initialize
         slide.signs << sign unless slide.signs.include?(sign)
 
