@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  controller :marketing do
+    get :home
+  end
+
   # Devise
   devise_for :users
 
@@ -12,11 +16,13 @@ Rails.application.routes.draw do
   post 'admin/clear_emergency'
 
   # Devices
-  resources :devices do
+  resources :signs do
+    get    'play',        on: :member
     get    'poll',        on: :member
     post   'order',       on: :member
     delete 'remove_user', on: :member
     post   'add_user',    on: :member
+    get    'settings',    on: :member
   end
 
   # Slides
@@ -31,9 +37,7 @@ Rails.application.routes.draw do
     get 'lookup', on: :collection
   end
 
-
-
-  root 'admin#choose_device'
+  root 'signs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

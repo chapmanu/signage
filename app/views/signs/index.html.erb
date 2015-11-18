@@ -1,0 +1,19 @@
+<div class="search-filters-container">
+  <div class="search input-field">
+    <input id="search" type="text">
+    <label for="search">Search</label>
+  </div>
+  <div class="filter">
+    <label>Filter:</label>
+    <div class="pill-buttons" id="filters">
+      <%= filter_pill_link('All', 'all', default: true) %><%= filter_pill_link('Mine', 'mine') %>
+    </div>
+  </div>
+  <div class="new">
+    <%= link_to "New", new_sign_path, class: 'happy-button' %>
+  </div>
+</div>
+
+<div id="signs-listing">
+  <%= render @signs %>
+</div>

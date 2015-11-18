@@ -5,7 +5,7 @@
 </div>
 
 <% @devices.each do |device| %>
-  <%= link_to device do %>
+  <%= link_to play_sign_path(device) do %>
     <div class="play-device-row">
       <%= image_tag 'play3.png', size: '64x64' %>
       <h2><%= device.name %> <span class="slide-count">(<%= pluralize(device.slides.length, "slides") %>)</span></h2>

@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html class="<%=controller.controller_name %>">
 <head>
   <title>Admin | Digital Signage</title>
+
+  <script src="https://use.typekit.net/tnm5mls.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script>
+
   <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
-  <script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ca5cbe0ec20f792ddfa8549a8abf9b2d"></script>
-  <script>Bugsnag.releaseStage = "<%= Rails.env %>";</script>
+  <% unless Rails.env.development? %>
+    <script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ca5cbe0ec20f792ddfa8549a8abf9b2d"></script>
+    <script>Bugsnag.releaseStage = "<%= Rails.env %>";</script>
+  <% end %>
+
   <%= csrf_meta_tags %>
 </head>
 <body data-controller-action="<%= controller_action %>">
-<%= render 'admin/navbar' %>
+<div class="body-wrapper">
+  <%= render 'admin/navbar' %>
 
-<%= display_flashes %>
+  <%= display_flashes %>
 
-<div class="admin-content">
-  <%= yield %>
+  <div class="admin-content">
+    <%= yield %>
+  </div>
+
+  <div class="admin-footer">
+    <p><strong>Digital Signage:</strong> A web product by Chapman University</p>
+    <p>Report bugs to <a href="mailto:jkerr@chapman.edu">James (jkerr@chapman.edu)</a></p>
+  </div>
 </div>
-
 </body>
 </html>

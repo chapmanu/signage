@@ -5,9 +5,9 @@
 //= require jquery.sticky
 //= require jquery-ui/sortable
 //= require tinymce-jquery
-//= require turbolinks
 //= require moment
 //= require selectize
+//= require materialize-sprockets
 
 
 /* APP */
@@ -21,10 +21,12 @@ Admin = {};
 /**
  *Fires on every single admin page
  */
-$(document).on('ready page:load', function(e) {
+$(document).on('ready', function(e) {
   //Fire all the stuff for the controllers
   var controller_action = $('body').data('controller-action');
   Utils.ready(controller_action);
 
   $('.js-sticky-slide-preview').sticky({topSpacing: 64});
+
+  $('select').not('.disabled').material_select();
 });

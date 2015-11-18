@@ -1,6 +1,6 @@
 // Typography
-$base-font-family: 'Rooney Sans';
-$heading-font-family: 'Futura Bold';
+$base-font-family: 'proxima-nova-soft', 'sans-serif';
+$heading-font-family: 'proxima-nova', 'sans-serif';
 
 // Font Sizes
 $base-font-size: 1em;
@@ -16,10 +16,12 @@ $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #477dca;
-$dark-gray: #333;
-$medium-gray: #999;
-$light-gray: #ddd;
+$blue:   #4A90E2;
+$green:  #7ED321;
+$red:    #D0021B;
+$orange: #F5A623;
+$dark-gray:  #4A4A4A;
+$light-gray: #9B9B9B;
 
 // Font Colors
 $base-background-color: #fff;

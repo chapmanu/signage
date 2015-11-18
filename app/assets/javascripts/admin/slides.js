@@ -60,8 +60,14 @@ Admin.Slides.initShowWhen = function() {
     var pattern = new RegExp(info[1]);
 
     var listener = function() {
-      var val = $el.val();
-      (pattern.test(val)) ? $this.show() : $this.hide();
+      var val;
+      if ($el.prop('type') === 'radio') {
+        val = $($el.selector + ':checked').val();
+      } else {
+        val = $el.val();
+      }
+      console.log(val);
+      (pattern.test(val)) ? $this.fadeIn(250) : $this.hide();
     };
 
     $el.on('change', listener);
@@ -73,6 +79,9 @@ Admin.Slides.initLivePreview = function() {
   $('#slide_template').on('change', function() {
     Admin.Slides.livePreviewAjax();
     $('.js-sticky-slide-preview').sticky('update');
+  });
+  $(':input, :checkbox, :radio').on('blur', function() {
+    Admin.Slides.livePreviewAjax();
   });
   Admin.Slides.livePreviewAjax();
 };
@@ -91,20 +100,74 @@ Admin.Slides.initTinyMCE = function() {
   });
 };
 
+/* Index Page */
+var AdminSlides = {};
+
+AdminSlides.refreshList = function(e) {
+  var search   = $('#search').val();
+  var filter   = $('#filters .active').data('value');
+  var sort     = $('#sort .active').data('value');
+  var query    = '?search='+search+'&filter='+filter+'&sort='+sort;
+  $.get('/slides.js' + encodeURI(query) );
+};
+
+AdminSlides.filterClicked = function(e) {
+  e.preventDefault();
+  $(this).parent().find('a').removeClass('active');
+  $(this).addClass('active');
+  var filter   = $('#filters .active').data('value');
+  var sort     = $('#sort .active').data('value');
+  var query    = '?filter='+filter+'&sort='+sort;
+  var url      = window.location.pathname + query;
+  window.history.replaceState({path:url},'',url);
+  AdminSlides.refreshList();
+};
+
+AdminSlides.initSlideActionMenus = function() {
+  $('.modal-trigger').leanModal();
+  $('html').on('click', function() {
+    $('.js-admin-slide.selected').removeClass('selected');
+  });
+
+  $('.js-admin-slide').on('click', function(e) {
+    e.stopPropagation();
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+    } else {
+      $('.js-admin-slide.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+};
+
 
 /**
  * The code that runs on document.ready
  */
 
-Utils.fireWhenReady(['slides#new', 'slides#edit'], function(e) {
+Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#update'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
   tinyMCE.remove();
   Admin.Slides.initLivePreview();
   Admin.Slides.initTinyMCE();
+  $('.datepicker').pickadate();
 });
 
-$(document).on('dynamic_fields_added', function($fields) {
+$(document).on('dynamic_fields_added', function(event, $fields) {
   Admin.Slides.initTinyMCE();
   Admin.Slides.initDateTimePickers();
-})
+  console.log($fields);
+  $fields.find('select').not('.disabled').material_select();
+  $fields.find('.datepicker').pickadate();
+});
+
+Utils.fireWhenReady(['slides#index'], function(e) {
+  AdminSlides.initSlideActionMenus();
+  $('#search').on('keyup', AdminSlides.refreshList);
+  $('#filters a, #sort a').on('click', AdminSlides.filterClicked);
+});
+
+Utils.fireWhenReady(['slides#show'], function() {
+  $('.modal-trigger').leanModal();
+});

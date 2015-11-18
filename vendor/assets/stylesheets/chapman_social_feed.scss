@@ -1,0 +1,333 @@
+/****************************
+* STYLES FOR POST CONTAINER *
+*****************************/
+$font-stack-body: "proxima-nova-soft", "Helvetica Neue", "Microsoft Sans Serif", sans-serif;
+$font-stack-heading: "proxima-nova", "Helvetica Neue", "Microsoft Sans Serif", sans-serif;
+$gutter_width: 20px;
+$tile_width: 335px;
+
+#content {
+  min-height: 650px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 80px;
+  width: $tile_width + $gutter_width;
+  position: relative;
+  overflow: visible;
+  -ms-overflow-style:none;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+@media screen and (min-width: 900px) {
+  #content {
+    margin-top: 0;
+  }
+}
+
+.column {
+  float: left;
+  width: $tile_width + $gutter_width;
+}
+
+// 2 Columns
+$content_width: 2 * $tile_width + 1 * $gutter_width;
+
+@media screen and (min-width: $content_width + $gutter_width) {
+  #content {
+    width: $content_width + $gutter_width;
+  }
+}
+
+// 3 Columns
+$content_width: 3 * $tile_width + 2 * $gutter_width;
+
+@media screen and (min-width: $content_width + $gutter_width) {
+  #content {
+    width: $content_width + $gutter_width;
+  }
+}
+
+// 4 Columns
+$content_width: 4 * $tile_width + 3 * $gutter_width;
+
+@media screen and (min-width: $content_width + $gutter_width) {
+  #content {
+    width: $content_width + $gutter_width;
+  }
+}
+
+/****************************
+* STYLES IF THERE ARE NO POSTS *
+*****************************/
+.no_posts {
+  outline: 1px solid white;
+  margin-top: 100px;
+  font-size: 1em;
+  color: #353430;
+  display: inline-block;
+  padding: 30px;
+  background: white;
+  box-shadow: 2px 2px 6px 1px rgba(0,0,0,0.2);
+}
+
+.new_ribbon {
+  background: #A82439;
+  color: white;
+  font-size: 10px;
+  height: 20px;
+  line-height: 20px;
+  margin: 4px -10px 10px 10px;
+  padding: 0 10px 0 10px;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  &:after {
+    border-color: #801B2B transparent transparent #801B2B;
+    border-style: solid;
+    border-width: 2px 5px;
+    content: ' ';
+    height: 0;
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    width: 0;
+  }
+
+  &:before {
+    border-color: #a82439 transparent;
+    border-style: solid;
+    border-width: 10px 3px;
+    content: ' ';
+    height: 0;
+    left: -3px;
+    position: absolute;
+    top: 0px;
+    width: 0;
+  }
+}
+
+.post_tile {
+  background: #FFF;
+  box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.2);
+  color: #353430;
+  display: inline-block;
+  margin: 10px;
+  opacity: 1;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  transition: opacity .5s;
+  vertical-align: top;
+  width: 335px;
+  word-break: break-word;
+
+  .message {
+    background: rgba(255, 255, 255, 1);
+    border-radius: 0px;
+    box-sizing: border-box;
+    display: table;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+    padding: 18px 14px;
+    position: relative;
+    width: 100%;
+
+    p {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .avatar {
+    display: table-cell;
+    vertical-align: top;
+    width: 56px;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .text {
+    display: table-cell;
+    padding-left: 14px;
+    vertical-align: top;
+
+    h2 {
+      font: bold 14px/20px $font-stack-heading;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: #98012e;
+    }
+  }
+
+  .youtube {
+    height: 187px;
+  }
+
+  footer {
+    background: #f7f6f0;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: table;
+    font-size: 12px;
+    font-weight: normal;
+    height: 40px;
+    line-height: 20px;
+    padding: 0 10px;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  .author {
+    display: table-cell;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 12px;
+    margin: 0;
+    max-width: 200px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.15);
+    vertical-align: middle;
+    a { color: inherit; }
+    a:hover {color: #a82439}
+    a p { font-size: inherit; line-height: inherit; margin: 0 0 0 14px; }
+
+    svg { width: 1em; height: 1em; display: block; float: left; }
+  }
+
+  .meta {
+    display: table-cell;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: right;
+    vertical-align: middle;
+
+    a {
+      color: #353430;
+    }
+  }
+}
+
+//---------------------------
+// BLOG
+//---------------------------
+.post_tile.blog,
+.post_tile.blog_photo {
+  border-radius: 3px;
+
+  .message {
+    border-radius: 3px 3px 0 0;
+  }
+
+  .message .title {
+    font: bold 24px/28px $font-stack-body;
+    margin: 14px 0 10px 0;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a:hover {
+      color: #a82439;
+    }
+  }
+
+  .message time {
+    font: regular 14px/14px 'proxima-nova-soft';
+  }
+
+  .message .tag {
+    background: #f7f6f0;
+    border-left: 5px solid #a82439;
+    border-radius: 3px;
+    color: #62605a;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 0 0 -19px;
+    padding: 3px 10px 3px 14px;
+    text-decoration: none;
+    transition: padding 0.1s ease-out;
+
+    &:hover {
+      background: #eceadf;
+      color: #a82439;
+      padding-left: 25px;
+    }
+  }
+
+  .photo {
+    max-height: 180px;
+    overflow: hidden;
+  }
+
+  .photo img {
+    display: block; width: 335px;
+  }
+
+  footer {
+    border-radius: 0 0 3px 3px;
+  }
+
+  .share {
+    svg {
+      height: 1.2em;
+      width: 1.2em;
+    }
+  }
+}
+
+//---------------------------
+// POST WITH PICTURE
+//---------------------------
+.post_tile.post_photo {
+  .photo img { display: block; width: 335px; }
+
+  .view_message {
+    bottom: 40px;
+    color: white;
+    height: 1.5em;
+    padding: 15px;
+    position: absolute;
+    right: 0px;
+    width: 1.5em;
+
+    svg {
+      fill: white;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .message {
+    bottom: 40px;
+    display: none;
+    left: 0;
+    position: absolute;
+  }
+}
+
+.post_tile .hidden {
+  display: none;
+}
+
+.loading {
+  bottom: 12px;
+  color: #B3B3B3;
+  display: none;
+  font-size: 18px;
+  position: fixed;
+  right: 12px;
+  text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+}

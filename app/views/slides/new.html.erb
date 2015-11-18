@@ -1,11 +1,1 @@
-<% if session[:parent_device_path] %>
-  <%= link_to '<< Back to Device', session[:parent_device_path], class: 'home-button' %>
-<% else %>
-  <%= link_to '<< All Slides', slides_path, class: 'home-button' %>
-<% end %>
-
-<header class="admin-page-header">
-  <h1 class="admin-page-title">New Slide</h1>
-</header>
-
 <%= render 'form' %>

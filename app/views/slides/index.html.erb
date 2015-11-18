@@ -1,34 +1,30 @@
-<%= home_button %>
+<div class="search-filters-container">
 
-<header class="admin-page-header">
-  <h1 class="admin-page-title">Slides </h1>
-  <%= link_to '+ New Slide', new_slide_path %>
-</header>
+  <div class="search input-field">
+    <input id="search" type="text">
+    <label for="search">Search</label>
+  </div>
 
-<%= search_form slides_path  %>
+  <div class="filter">
+    <label>Filter:</label>
+    <div class="pill-buttons" id="filters">
+      <%= filter_pill_link('All', 'all', default: true) %><%= filter_pill_link('Mine', 'mine') %>
+    </div>
+  </div>
 
-<br />
-<% if @slides.empty? %>
-  <p>No slides to display</p>
-<% else %>
-  <table class="slides-listing-table">
-    <tbody>
-      <% @slides.each do |slide| %>
-        <tr>
-          <td style="vertical-align: top; border: none;"><%= render 'preview_iframe', slide: slide %></td>
-          <td style="text-align: left; vertical-align: top; padding-left: 16px; border: none;">
-            <h4><%= slide.menu_name %></h4>
-            <%= link_to 'Show', slide %> |
-            <%= link_to 'Edit', edit_slide_path(slide) %> |
-            <%= link_to 'Destroy', slide, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%= render 'slide_info_table', slide: slide %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+  <div class="sort">
+    <label>Sort:</label>
+    <div class="pill-buttons" id="sort">
+      <%= filter_pill_link('Newest', 'newest', default: true) %><%= filter_pill_link('Popular', 'popular') %><%= filter_pill_link('A-Z', 'alpha') %>
+    </div>
+  </div>
+
+  <div class="new">
+    <%= link_to "New", new_slide_path, class: 'happy-button' %>
+  </div>
+</div>
+
+<div class="slide-listing-container" id="slides-listing">
+  <%= render partial: 'admin_slide', collection: @slides %>
+</div>
 <%= paginate @slides %>
-
-<br>
-
