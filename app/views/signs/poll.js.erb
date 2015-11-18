@@ -1,15 +1,11 @@
 <% if @refresh %>
-  window.location = '<%= j sign_path(@sign) %>';
+  window.location = '<%= j play_sign_path(@sign) %>';
 <% end %>
 
 var $current_emergency = $('#js-emergency-slide');
 
 <%  if @sign.emergency? %>
   var $new_emergency = $('<%=j render("emergency") %>');
-
-  console.log('new', $new_emergency.text());
-  console.log('old', $current_emergency.text());
-
 
   if ($new_emergency.text() !== $current_emergency.text()) {
     $current_emergency.remove();
