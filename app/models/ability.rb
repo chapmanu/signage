@@ -6,8 +6,8 @@ class Ability
         can :manage, :all
     end
 
-    can :manage, Device do |device|
-        device.users.include?(user)
+    can :manage, Sign do |sign|
+        sign.users.include?(user)
     end
 
     can :manage, Slide do |slide|
@@ -15,7 +15,7 @@ class Ability
     end
 
     # All users can do these things
-    can [:read, :create], Device
+    can [:read, :create], Sign
     can [:read, :create], Slide
     # Define abilities for the passed in user here. For example:
     #
