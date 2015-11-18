@@ -5,7 +5,7 @@ class SlideTest < ActiveSupport::TestCase
   include UniqueHasManyThroughTest
 
   setup do
-    @slide = @object = Slide.new
+    @slide = @object = slides(:one)
     @user = users(:one)
   end
 

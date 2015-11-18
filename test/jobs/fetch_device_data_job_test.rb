@@ -22,15 +22,17 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
     assert_equal('right', s.layout)
   end
 
-  test "it saves the directory feed field" do
-    skip "Don't have the data from Mandy Yet"
+  test "it saves the building_name" do
+    perform_job_with_people
+    s = Slide.where(menu_name: 'OH Faculty').first
+    assert_equal('Oliphant Hall', s.building_name)
   end
 
   test "it saves play_on and stop_on" do
     perform_job_with_people
-    s = Slide.where(name: 'digital-signage/slides/smc/follow-us').first
-    assert_equal(DateTime.new(2015, 8, 26), s.play_on)
-    assert_equal(DateTime.new(2015, 9, 11, 23, 59), s.stop_on)
+    s = Slide.where(name: 'digital-signage/slides/copa/11nov15-saxophone-ensemble').first
+    assert_equal(DateTime.new(2015, 11, 16), s.play_on)
+    assert_equal(DateTime.new(2015, 11, 19, 23, 59), s.stop_on)
   end
 
   test "its saves scheduled items play_on and stop_on" do
@@ -42,9 +44,9 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
 
   test "it saves play_on as nil if it is blank" do
     perform_job_with_people
-    s = Slide.where(name: 'digital-signage/slides/copa/faculty-directory-bertea').first
-    assert_equal(nil, s.play_on)
-    assert_equal(nil, s.stop_on)
+    slide = Slide.where(menu_name: '16-17 Audition Dates').first
+    assert_equal(nil, slide.play_on)
+    assert_equal(nil, slide.stop_on)
   end
 
   private
