@@ -1,17 +1,22 @@
 <div class="navbar">
   <div class="navbar-left">
     <a href="<%= root_url %>">
-      <%= image_tag 'cu-window.png' %>
-      <h1>Digital Signage</h1>
+      <%= image_tag 'cu_window.svg' %>
+      <h1>Digital <strong>Signage</strong></h1>
     </a>
-    <%= link_to "Admin Panel", admin_index_path, class: 'navbar-button' %>
   </div>
 
   <div class="navbar-right">
     <% if current_user %>
       <p>Signed in as <%= current_user.first_name %></p> <%= link_to "Sign Out", destroy_user_session_path, method: 'delete', class: 'navbar-button' %>
     <% else %>
-      <%= link_to "Sign In", new_user_session_path, class: 'navbar-button' %>
+      <%= link_to "Sign In", new_user_session_path, class: "sign-in" %>
     <% end %>
+  </div>
+
+  <div class="navbar-center">
+    <div class="pill-buttons">
+      <%= link_to "Signs", signs_path, class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : ''%>
+    </div>
   </div>
 </div>

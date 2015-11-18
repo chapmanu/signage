@@ -4,6 +4,26 @@ module ApplicationHelper
   end
 
   def format_date(date)
-    date.strftime('%B %d, %Y %l:%M %P') if date
+    date.strftime('%e %B, %Y') if date
+  end
+
+  def signs_controller?
+    controller.controller_name == 'signs'
+  end
+
+  def slides_controller?
+    controller.controller_name == 'slides'
+  end
+
+  def filter_pill_link(text, value, options = {})
+    classes = params['filter'] == value ? 'active' : ''
+    classes = 'active' if options[:default]
+    link_to(text, "?filter=#{value}", class: classes, data: { value: value })
+  end
+
+  def happy_button(text, href)
+    link_to(href, class: 'happy-button') do
+      "#{text} &nbsp;".html_safe + inline_svg('smiley.svg')
+    end
   end
 end

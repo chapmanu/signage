@@ -1,0 +1,150 @@
+/* Listing Signs */
+
+.sign-list-item {
+  @include outer-container;
+  padding: $base-spacing;
+  padding-left: 0;
+  border-top: 1px solid lighten($light-gray, 30%);
+}
+
+.sign-list-item-status {
+  @include span-columns(1);
+  width: auto;
+  text-align: center;
+}
+
+.sign-list-item-info {
+  @include span-columns(6);
+  .title {
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 16px;
+    a {
+      color: $dark-gray;
+      &:hover, &:focus {
+        color: $blue;
+      }
+    }
+  }
+  .slides img {
+    width: 40px;
+    height: auto;
+  }
+  .slides p {
+    display: inline-block;
+    font-size: 11px;
+    color: $light-gray;
+  }
+}
+
+.sign-list-item-actions {
+  float: right;
+  padding-right: 28px;
+  text-align: right;
+}
+
+
+
+.sign-inactive, .sign-active {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.sign-active {
+  width: 8px;
+  height: 8px;
+  background-color: $green;
+  box-shadow: 0 0 5px 5px $green;
+}
+
+.sign-inactive {
+  background-color: $light-gray
+}
+
+/* Sign Show */
+.show-sign-container {
+  @include outer-container;
+  padding-top: $base-spacing*2;
+
+  .sign-info {
+    @include span-columns(6);
+  }
+
+  .sign-slides {
+    @include span-columns(6);
+  }
+}
+
+.sign-slides-listing {
+  text-align: left;
+  .add-new-slide {
+    text-align: center;
+    margin-top: $base-spacing;
+    margin-left: 32px;
+    width: 178px;
+  }
+}
+
+.sign-slide-list-item {
+  @include clearfix;
+  width: 100%;
+  padding: $base-spacing 0;
+  background-color: white;
+  text-align: left;
+
+  .left-actions, .screenshot, .right-actions {
+    float: left;
+    height: 115px;
+  }
+
+  .left-actions{
+    position: relative;
+    width: 32px;
+    svg {
+      width: 14px;
+      position: absolute;
+      left: 0;
+    }
+    .destroy-sign-slide { top: 0; }
+    .reorder-handle     { bottom: 0; cursor: move; }
+  }
+  .screenshot {
+    background: $dark-gray;
+    img { display: block; }
+  }
+  .status {
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+    &.hidden   { background-color: $light-gray; }
+    &.expired  { background-color: $red; }
+    &.active   { background-color: $green; }
+    &.upcoming { background-color: $blue; }
+  }
+  .right-actions {
+    p { margin-bottom: 8px; }
+    padding-left: $base-spacing;
+  }
+}
+
+/* Sign Form */
+
+.sign-form-container {
+  @include outer-container;
+  padding-top: $base-spacing*2;
+
+  form {
+    @include span-columns(5);
+  }
+  .sign-slides-listing {
+    @include span-columns(6);
+    @include shift(1);
+  }
+}
+

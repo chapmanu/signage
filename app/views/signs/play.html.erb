@@ -1,0 +1,17 @@
+<div class="js-device-meta"
+     data-id="<%= @sign.id %>"
+     data-poll-device-path="<%= poll_sign_path @sign %>"
+     data-edit-url="<%= edit_sign_path @sign %>"
+     data-transition="<%= @sign.transition %>"
+     data-updated-at="<%= @sign.updated_at %>"></div>
+
+<div id="ui-feed" class="ui-feed ui-feed--show-mouse">
+
+  <%= render "signs/menus/#{@sign.menu}" %>
+
+  <main class="owl-carousel" role="main" >
+    <%= render(@sign.active_slides.ordered) %>
+  </main>
+</div>
+
+<%= render 'emergency' if @sign.any_emergency? %>

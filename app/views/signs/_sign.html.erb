@@ -1,0 +1,27 @@
+<div class="sign-list-item">
+  <div class="sign-list-item-status">
+    <%= content_tag :div, nil, class: (sign.active? ? 'sign-active' : 'sign-inactive') %>
+  </div>
+
+  <div class="sign-list-item-info">
+    <h2 class="title"><%= link_to sign.name, sign %></h2>
+    <div class="slides">
+      <% sign.slides.take(8).each do |slide| %>
+        <%= image_tag slide.screenshot %>
+      <% end %>
+      <p>
+        <%= '...' if sign.slides.length > 8 %>
+        <%= pluralize(sign.slides.length, "slide") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="sign-list-item-actions bold-actions">
+    <%= link_to play_sign_path(sign) do %>
+      <%= inline_svg('play_dark.svg') %> Play
+    <% end %>
+    <%= link_to edit_sign_path(sign) do %>
+      <%= inline_svg('gear_dark.svg') %> Edit
+    <% end %>
+  </div>
+</div>

@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   include ActiveDirectoryLookups
 
-  has_many :device_users, dependent: :destroy
-  has_many :devices, through: :device_users
-  has_many :slides, -> { uniq }, through: :devices
+  include UniqueHasManyThrough
+  unique_has_many_through :signs, :sign_users
+  unique_has_many_through :slides, :slide_users
 
   devise :database_authenticatable, :rememberable, :trackable
 
@@ -12,14 +12,6 @@ class User < ActiveRecord::Base
   scope :search, -> (search) { where("users.email ILIKE ?", "%#{search}%") if search.present? }
 
   attr_accessor :encrypted_password # Just to make :database_authenticatable work
-
-  def devices
-    super_admin? ? Device.all : super
-  end
-
-  def slides
-    super_admin? ? Slide.all : super
-  end
 
   def full_name
     "#{first_name} #{last_name}".strip

@@ -1,0 +1,24 @@
+<h1 class="admin-page-title">Settings for: <%= @device.name %></h1>
+
+<div class="device-editors">
+  <h4>Editors</h4>
+  <p>These are the users that are able to edit this sign.</p>
+
+  <div id="js-device-editors-container">
+    <%= render 'editors', device: @device %>
+  </div>
+
+  <div class="add-device-editors-container">
+    <%= form_tag add_user_sign_path(@device), remote: true do %>
+      <label for="user_id">Add more editors</label>
+      <%= select_tag :user_id, options_from_collection_for_select(User.order(:last_name).all, :id, :full_name_with_email), :prompt => "Search by username..." %>
+      <%= submit_tag "Add" %>
+    <% end %>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<%= link_to "Save", @device %>

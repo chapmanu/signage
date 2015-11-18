@@ -14,7 +14,7 @@ class CheckPantherAlertJob < ActiveJob::Base
       updates[:panther_alert_detail] = messages[0]["description"]
     end
 
-    Device.update_all(updates)
+    Sign.update_all(updates)
     updates
   end
 end

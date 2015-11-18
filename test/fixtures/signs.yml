@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: sign_one
+  template: default
+  location: MyString
+  notification: MyString
+  notification_detail: MyString
+  emergency: MyString
+  emergency_detail: MyString
+
+two:
+  name: sign_two
+  template: dodge
+  location: MyString
+  notification: MyString
+  notification_detail: MyString
+  emergency: MyString
+  emergency_detail: MyString

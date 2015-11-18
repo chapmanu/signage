@@ -7,20 +7,20 @@
   </div>
 
   <div class="grid-items-lines">
-    <a id="manage-devices-link" href="<%= devices_path %>" class="grid-item">
-      <%= image_tag 'screen.png', alt: 'Devices' %>
-      <h1>Manage Your Devices</h1>
+    <a id="manage-devices-link" href="<%= signs_path %>" class="grid-item">
+      <%= image_tag 'screen.png', alt: 'Signs' %>
+      <h1>Your Digital Signs</h1>
       <p>Add, update, and delete digital signage devices.</p>
     </a>
 
     <a id="manage-slides-link" href="<%= slides_path %>" class="grid-item">
       <%= image_tag 'film.png', alt: 'Slides' %>
 
-      <h1>Manage Your Slides</h1>
+      <h1>Your Slides</h1>
       <p>Add, update, and delete individual slides.</p>
     </a>
 
-    <% if can? :broadcast_emergency, Device %>
+    <% if can? :broadcast_emergency, Sign %>
     <a href="<%= admin_emergency_path%>" class="grid-item">
       <%= image_tag 'feed.png', alt: 'Emergency' %>
 
