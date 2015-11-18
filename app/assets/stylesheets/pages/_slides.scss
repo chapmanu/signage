@@ -134,4 +134,17 @@
   .file-field {
     margin-top: 0;
   }
+
+  .scheduled-item-fields {
+    margin: 0 $base-spacing $base-spacing*2;
+    padding: 0 $base-spacing $base-spacing;
+    border-left: 3px solid $blue;
+    border-top: 3px solid $blue;
+    border-bottom: 3px solid $blue;
+    border: 2px solid $blue;
+  }
+
+  h4 {
+    font-weight: bold;
+  }
 }
