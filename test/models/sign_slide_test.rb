@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class DeviceSlideTest < ActiveSupport::TestCase
+class SignSlideTest < ActiveSupport::TestCase
   include UniqueHasManyThroughJoinTableTest
 
   setup do
-    @left_object  = devices(:one)
+    @left_object  = signs(:one)
     @right_object = slides(:one)
   end
 end
