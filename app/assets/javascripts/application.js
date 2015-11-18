@@ -16,8 +16,11 @@
 //= require turbolinks
 //= require owl.carousel
 //= require moment
+//= require timeago
+//= require faye_client
 //= require jquery.scroll_into_view
 //= require jquery.throttle_debounce
+//= require jquery.chapman_social_feed
 
 /* APP */
 //= require_self

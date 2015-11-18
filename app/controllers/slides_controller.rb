@@ -24,7 +24,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    query = Slide
+    query = Slide.includes(:signs)
     query = query.owned_by(current_user) if params['filter'] == 'mine'
     if params['sort'] == 'popular'
       query = query.popular
@@ -135,6 +135,7 @@ class SlidesController < ApplicationController
         :datetime,
         :location,
         :content,
+        :feed_url,
         :background,
         :background_type,
         :background_sizing,

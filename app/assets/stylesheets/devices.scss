@@ -658,6 +658,30 @@ subhead {
   text-overflow: ellipsis;
 }
 
+/* slide: social_feed
+   =============================================================================
+*/
+
+.ui-slide--social_feed {
+  padding: 40px;
+  width: 100%;
+  position: static;
+  text-align: center;
+
+  .ui-slide-heading {
+    text-align: center;
+  }
+  .social-feed-container {
+    margin: 0 auto;
+    width: 1420px;
+    &:before, &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+
 /* slide: emergency
 */
 
