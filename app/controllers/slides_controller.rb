@@ -33,6 +33,7 @@ class SlidesController < ApplicationController
     else
       query = query.newest
     end
+    @signs  = Sign.order(:name)
     @slides = query.search(params[:search]).page params[:page]
   end
 
