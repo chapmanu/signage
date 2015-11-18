@@ -1,5 +1,5 @@
 class SignsController < ApplicationController
-  before_action :set_sign, only: [:add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings]
+  before_action :set_sign, only: [:add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
   layout 'admin', except: [:play]
   skip_before_action :authenticate_user!, only: [:play, :poll]
 
@@ -84,8 +84,9 @@ class SignsController < ApplicationController
 
   def order
     params[:sign_slide_ids].each_with_index do |id, index|
-      SignSlide.find(id).update(order: index)
+      SignSlide.find(id).update(order: index+1)
     end
+    @sign.touch
     render nothing: true
   end
 
