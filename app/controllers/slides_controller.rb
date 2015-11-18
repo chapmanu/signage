@@ -59,8 +59,8 @@ class SlidesController < ApplicationController
 
     respond_to do |format|
       if @slide.save
-        @slide.take_screenshot unless Rails.env.development? || Rails.env.test?
-        current_user.slides << @slide
+        @slide.take_screenshot
+        current_user.add_slide(@slide)
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
         format.json { render :show, status: :created, location: @slide }
       else
@@ -75,7 +75,7 @@ class SlidesController < ApplicationController
   def update
     respond_to do |format|
       if @slide.update(slide_params)
-        @slide.take_screenshot unless Rails.env.development? || Rails.env.test?
+        @slide.take_screenshot
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }
       else
