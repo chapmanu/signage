@@ -1,0 +1,14 @@
+
+<h1 class="ui-slide-heading"><%= slide.heading %></h1>
+
+<div class="social-feed-container" id="social-feed"></div>
+
+<script>
+  $("#social-feed").chapmanSocialFeed({
+    url: "<%= slide.feed_url %>",
+    per: 20,
+    max_columns: 4,
+    realtime: true,
+    realtime_server_url: 'https://social.chapman.edu:8000/faye'
+  });
+</script>

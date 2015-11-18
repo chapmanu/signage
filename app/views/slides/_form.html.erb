@@ -23,18 +23,23 @@
       </div>
 
       <div class="input-field">
-        <%= f.select :template, Slide.templates.map{|t| [t.humanize, t] }, { include_blank: 'Select your template'} %>
+        <%= f.select :template, Slide.templates.map{|t| [t.titleize, t] }, { include_blank: 'Select your template'} %>
         <%= f.label :template, "Select slide template" %>
       </div>
     </div>
 
     <!-- Second Fieldset -->
 
-    <div data-show-when="#slide_template==(standard|directory|schedule)">
+    <div data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
       <div class="slide-fields">
-        <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule)">
+        <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
           <%= f.text_field :heading %>
           <%= f.label :heading %>
+        </div>
+
+        <div class="input-field" data-show-when="#slide_template==social_feed">
+          <%= f.text_field :feed_url %>
+          <%= f.label :feed_url %>
         </div>
 
         <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule)">
@@ -173,15 +178,14 @@
           <%= f.label :building_name, "Show Faculty In" %>
         </div>
 
-
         <div data-show-when="#slide_template==schedule" >
-          <label>Listing of Events to Show on Slide</label>
+          <h4>Listing of Events to Show on Slide</h4>
           <div data-behavior="dynamic-fields-parent" >
             <%= f.fields_for :scheduled_items do |ff| %>
               <%= render 'scheduled_item_fields', f: ff %>
             <% end %>
           </div>
-          <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items %>
+          <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items, class: 'btn' %>
         </div>
         <br />
         <br />
@@ -217,7 +221,7 @@
           <%= f.label :sign_ids, "Signs this slide should play on" %>
         </div>
 
-        <div class="actions" data-show-when="#slide_template==(standard|directory|schedule)">
+        <div class="actions" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
           <%= f.button class: 'happy-button' %>
         </div>
       </div>

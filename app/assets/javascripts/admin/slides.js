@@ -66,6 +66,7 @@ Admin.Slides.initShowWhen = function() {
       } else {
         val = $el.val();
       }
+      console.log(val);
       (pattern.test(val)) ? $this.fadeIn(250) : $this.hide();
     };
 
@@ -153,9 +154,12 @@ Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#updat
   $('.datepicker').pickadate();
 });
 
-$(document).on('dynamic_fields_added', function($fields) {
+$(document).on('dynamic_fields_added', function(event, $fields) {
   Admin.Slides.initTinyMCE();
   Admin.Slides.initDateTimePickers();
+  console.log($fields);
+  $fields.find('select').not('.disabled').material_select();
+  $fields.find('.datepicker').pickadate();
 });
 
 Utils.fireWhenReady(['slides#index'], function(e) {
