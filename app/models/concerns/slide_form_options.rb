@@ -14,10 +14,6 @@ module SlideFormOptions
       @_layouts ||= ['left', 'right'] # We are in America peeps, left then right
     end
 
-    def directory_feeds
-      @_directory_feeds ||= ['Beckman Hall', 'Moulton Hall', 'Musco Center for the Arts']
-    end
-
     def background_types
       @_background_types ||= ['none', 'image', 'video']
     end

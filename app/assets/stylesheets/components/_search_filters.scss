@@ -1,0 +1,44 @@
+.search-filters-container {
+  @include outer-container;
+  padding: $base-spacing*2 0;
+
+  // The Styles
+  .filter, .sort {
+    text-align: center;
+    margin-top: 26px;
+    label {
+      display: inline-block;
+      font-size: 1rem;
+      margin-right: 8px;
+    }
+    .pill-buttons {
+      display: inline-block;
+      font-weight: normal;
+    }
+  }
+
+  .new {
+    margin-top: 26px;
+    text-align: center;
+  }
+
+  // The sizes of the columns
+  .search {
+    .signs &  { @include span-columns(6); }
+    .slides & { @include span-columns(3) }
+  }
+
+  .filter {
+    .signs &  { @include span-columns(4); }
+    .slides & { @include span-columns(3) }
+  }
+
+  .sort {
+    .slides & { @include span-columns(4) }
+  }
+
+  .new {
+    .signs & { @include span-columns(2); }
+    .slides & { @include span-columns(2) }
+  }
+}

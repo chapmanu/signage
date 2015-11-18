@@ -1,0 +1,53 @@
+<div class="sign-form-container">
+  <%= form_for(@sign) do |f| %>
+    <% if @sign.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@sign.errors.count, "error") %> prohibited this sign from being saved:</h2>
+
+        <ul>
+        <% @sign.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>p
+      </div>
+    <% end %>
+
+    <div class="input-field">
+      <%= f.text_field :name %>
+      <%= f.label      :name, "Sign name" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.text_field :location %>
+      <%= f.label      :location, "Physical location" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.select :template, Sign.menus.map{|m| [m.humanize, m] } %>
+      <%= f.label :template, "Template" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.select :transition, Sign.transitions.map{|m| [m.humanize, m] } %>
+      <%= f.label :transition, "Transition type" %>
+    </div>
+
+
+    <label>Owners</label>
+    <ul class="owners-list">
+      <% @sign.users.push(current_user) if @sign.users.empty? %>
+      <% @sign.users.each do |owner| %>
+        <li><div class="chip"><%= owner.full_name %></div></li>
+      <% end %>
+    </ul>
+
+    <br />
+    <div class="actions">
+      <%= f.button class: 'happy-button' %>
+    </div>
+  <% end %>
+
+  <div class="sign-slides-listing" id="js-sortable-slides">
+    <%= render partial: 'slide', collection: @sign.slides.ordered %>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.navbar {
+  height: 55px;
+  line-height: 55px;
+  border-bottom: 1px solid $light-gray;
+  background: white;
+  padding: 0;
+  @include clearfix;
+
+  .navbar-left {
+    float: left;
+    a {
+      color: $base-font-color;
+    }
+
+    img {
+      display: inline-block;
+      width: 31px;
+      height: 31px;
+      margin: 12px;
+      float: left;
+    }
+
+    h1 {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 100;
+      margin-right: $base-spacing;
+    }
+  }
+
+  .navbar-center {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .navbar-right {
+    float: right;
+    padding-right: $base-spacing;
+    p {
+      display: inline-block;
+      padding: 0 $base-spacing;
+    }
+    .sign-in {
+      color: $dark-gray;
+      margin-right: 12px;
+      font-weight: 100;
+    }
+  }
+}

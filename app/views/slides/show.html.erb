@@ -1,16 +1,56 @@
-<% if session[:parent_device_path] %>
-  <%= link_to '<< Back to Device', session[:parent_device_path], class: 'home-button' %>
-<% else %>
-  <%= link_to '<< All Slides', slides_path, class: 'home-button' %>
-<% end %>
+<div class="show-slide-container">
+  <div class="left-column">
+    <%= image_tag @slide.screenshot.url %>
+    <div class="bold-actions">
+      <%= link_to "#send-slide-#{@slide.id}", class: 'modal-trigger' do %>
+        <%= inline_svg('send_dark.svg') %> Send to my sign
+      <% end %>
+      <%= link_to preview_slide_path(@slide) do %>
+        <%= inline_svg('play_dark.svg') %> Preview
+      <% end %>
+      <%= link_to edit_slide_path(@slide) do %>
+        <%= inline_svg('gear_dark.svg') %> Edit
+      <% end %>
+    </div>
+  </div>
 
-<h1 class="admin-page-title"><%= @slide.menu_name %></h1>
+  <div class="right-column">
+    <h1 class="name"><%= @slide.menu_name %></h1>
+    <table>
+      <tr>
+        <td><label>Visibility:</label></td>
+        <th><%= @slide.show ? 'Visible' : 'Hidden' %></th>
+      </tr>
+      <tr>
+        <td><label>Duration:</label></td>
+        <th><%= @slide.duration.to_s + " second".pluralize(@slide.duration) %></th>
+      </tr>
+      <tr>
+        <td><label>Date range:</label></td>
+        <th>From <%= @slide.play_on ? format_date(@slide.play_on) : 'the beginning of time' %> until <%= @slide.stop_on ? format_date(@slide.stop_on) : 'infinity and beyond' %></th>
+      </tr>
+    </table>
+    <br />
+    <label>Owners:</label>
+    <ul class="owners-list">
+      <% @slide.users.push current_user if @slide.users.empty? %>
+      <% @slide.users.each do |owner| %>
+        <li><div class="chip"><%= owner.full_name %></div></li>
+      <% end %>
+    </ul>
+    <br />
+    <label>Shown on <%= pluralize(@slide.signs.length, 'sign')%>:</label>
+    <ul class="signs-list">
+      <% @slide.signs.each do |sign| %>
+        <li>
+          <div class="sign-list-item-status">
+            <%= content_tag :div, nil, class: (sign.active? ? 'sign-active' : 'sign-inactive') %>
+          </div>
+          <p><%= link_to sign.name, sign %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-<p><%= link_to "Edit", edit_slide_path(@slide) %> |
-<%= link_to "Full Screen Preview", preview_slide_path(@slide) %></p>
-
-<%= render 'preview_iframe', slide: @slide %>
-
-<div class="show-slide-settings">
-  <%= render 'slide_info_table', slide: @slide %>
 </div>
+<%= render 'send_to_sign', slide: @slide %>

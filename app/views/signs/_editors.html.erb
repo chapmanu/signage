@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% if sign.users.count == 0 %>
+    <tr>
+      <td>No users have permission to edit this sign.</td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  <% sign.users.each do |user| %>
+    <tr id="js-user-id-<%= user.id %>">
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <%= link_to "Remove", remove_user_sign_path(sign, user_id: user.id), method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{user.full_name} from being able to edit this sign?" } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

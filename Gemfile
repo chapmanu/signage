@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'mini_magick'
+gem 'inline_svg', '0.6.1'
+gem 'screencap', '0.1.4'
+gem 'materialize-sass', '0.97.2'
 gem 'selectize-rails', '0.12.1'
 gem 'cancancan', '1.12.0'
 gem 'net-ldap', '0.11'
@@ -57,6 +61,7 @@ group :development, :test do
   gem 'better_errors', '2.1.1'
   gem 'guard', '2.12.9'
   gem 'guard-minitest', '2.4.4'
+  gem 'guard-livereload', '2.5.1'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

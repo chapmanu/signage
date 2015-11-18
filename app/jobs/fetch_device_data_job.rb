@@ -6,25 +6,26 @@ class FetchDeviceDataJob < ActiveJob::Base
     response = RestClient.get args[:url]
     data     = JSON.parse(response.body)
 
-    Device.transaction do
-      device = save_device(data)
-      save_slides(device, data['collection'] || [])
+    Sign.transaction do
+      sign = save_sign(data)
+      save_slides(sign, data['collection'] || [])
     end
   end
 
   private
-    def save_device(data)
-      device = Device.where(name: data['id'].parameterize).first_or_initialize
-      device.template = data['template']
-      device.location = data['location']
-      device.save!
-      device
+    def save_sign(data)
+      sign = Sign.where(name: data['id'].parameterize).first_or_initialize
+      sign.template = data['template']
+      sign.location = data['location']
+      sign.save!
+      sign
     end
 
-    def save_slides(device, data)
+    def save_slides(sign, data)
       data.map do |item|
+        item.each { |k, v| v.try(:strip!) }
         slide = Slide.where(name: item['id']).first_or_initialize
-        slide.devices << device unless slide.devices.include?(device)
+        slide.signs << sign unless slide.signs.include?(sign)
 
         slide_type_parts            = item['template'].to_s[/(\w+)\.mustache$/, 1].underscore.split('_')
         slide.template              = slide_type_parts[0]
@@ -44,7 +45,7 @@ class FetchDeviceDataJob < ActiveJob::Base
         slide.background_sizing     = item['backgroundSizing']
         slide.foreground_type       = item['foregroundType']
         slide.foreground_sizing     = item['foregroundSizing']
-        slide.directory_feed        = nil # To be determined
+        slide.building_name         = item['buildingName']
         slide.play_on               = item['start_slide_on'].blank?  ? nil : parse_date(item['start_slide_on'])
         slide.stop_on               = item['end_slide_after'].blank? ? nil : parse_datetime(item['end_slide_after'])
         slide.show                  = item['show_slide'] == 'Yes'
