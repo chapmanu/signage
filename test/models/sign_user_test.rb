@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class DeviceUserTest < ActiveSupport::TestCase
+class SignUserTest < ActiveSupport::TestCase
   include UniqueHasManyThroughJoinTableTest
 
   setup do
-    @left_object  = devices(:one)
+    @left_object  = signs(:one)
     @right_object = users(:one)
   end
 end
