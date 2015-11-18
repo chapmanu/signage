@@ -32,6 +32,7 @@ module UniqueHasManyThroughTest
       @object.send(assoc).clear
       @object.send(add_method_sym(assoc), item)
       @object.send(remove_method_sym(assoc), item)
+      @object.reload
       assert @object.send(assoc).empty?
     end
   end

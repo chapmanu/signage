@@ -13,8 +13,8 @@ module UniqueHasManyThrough
       # I want to save the association for testing purposes
       unique_has_many_through_reflections << association
 
-      has_many join_table, dependent: :destroy
-      has_many association, through: join_table
+      has_many join_table
+      has_many association, through: join_table, dependent: :destroy
 
       define_method "add_#{association.to_s.singularize}" do |item|
         send(association).push(item) unless send(association).include?(item)
