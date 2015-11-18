@@ -1,4 +1,5 @@
-<div class="sign-slide-list-item" id="sign_slide_ids-<%=slide.id%>">
+<% slide = sign_slide.slide %>
+<div class="sign-slide-list-item" id="sign_slide_ids-<%= sign_slide.id %>">
   <div class="left-actions">
     <%= link_to inline_svg('close.svg'), '#', class: 'destroy-slide-sign' %>
     <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
