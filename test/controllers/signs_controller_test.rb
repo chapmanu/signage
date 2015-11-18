@@ -50,6 +50,20 @@ class SignsControllerTest < ActionController::TestCase
     assert_redirected_to signs_path
   end
 
+  test "should reorder sign_slides" do
+    signs(:one).add_slide(slides(:one))
+    signs(:one).add_slide(slides(:two))
+    before_order = signs(:one).sign_slides.order(:order).ids
+
+    post :order, id: @sign, sign_slide_ids: before_order.reverse
+    assert_equal before_order.reverse, assigns(:sign).sign_slides.order(:order).ids
+  end
+
+  test "reorder should touch sign updated at" do
+    post :order, id: @sign, sign_slide_ids: []
+    assert @sign.updated_at < assigns(:sign).updated_at
+  end
+
   test "should add a user" do
     length = @sign.users.length
     post :add_user, id: @sign, format: :js, user_id: users(:one).id
