@@ -1,0 +1,13 @@
+<% if @new_owner %>
+
+  var $item = $('<%= j render("ownable/owner_item", owner: @owner, owned: @owned_object, removable: true) %>').hide();;
+  $('.owners-list').append($item);
+  $item.fadeIn();
+  $('#search_users').val('');
+  Materialize.toast("Added <%= @owner.first_name %> as an owner of this sign", 4000);
+
+<% else %>
+
+  Materialize.toast("<%= @owner.first_name %> is already an owner of this sign", 4000);
+
+<% end %>

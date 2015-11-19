@@ -1,25 +1,13 @@
 class SlidesController < ApplicationController
-  before_action :set_slide,                 only: [:preview, :show, :edit, :update, :destroy]
-  before_action :set_signs,               only: [:new, :edit, :create, :update]
-  before_action :set_parent_sign_path,    only: [:new, :edit]
+  include Ownable
+
+  before_action :set_slide,                  only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_signs,                  only: [:new, :edit, :create, :update]
+  before_action :set_parent_sign_path,       only: [:new, :edit]
 
   skip_before_action :authenticate_user!, only: [:preview]
+
   layout 'admin', except: [:preview]
-
-  def preview
-  end
-
-  def live_preview
-    @slide = params[:id].blank? ? Slide.new : Slide.find(params[:id])
-    @slide.attributes = slide_params
-
-    @slide.remove_background! if slide_params[:remove_background] == '1'
-    @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
-
-    render :preview, layout: 'application'
-  rescue ActionView::Template::Error
-    render status: :unprocessable_entity, nothing: true
-  end
 
   # GET /slides
   # GET /slides.json
@@ -40,6 +28,21 @@ class SlidesController < ApplicationController
   # GET /slides/1
   # GET /slides/1.json
   def show
+  end
+
+  def preview
+  end
+
+  def live_preview
+    @slide = params[:id].blank? ? Slide.new : Slide.find(params[:id])
+    @slide.attributes = slide_params
+
+    @slide.remove_background! if slide_params[:remove_background] == '1'
+    @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
+
+    render :preview, layout: 'application'
+  rescue ActionView::Template::Error
+    render status: :unprocessable_entity, nothing: true
   end
 
   # GET /slides/new
@@ -114,6 +117,15 @@ class SlidesController < ApplicationController
         session[:parent_sign_id]   = nil
         session[:parent_sign_path] = nil
       end
+    end
+
+    def lookup_in_active_directory
+      User.create_or_update_from_active_directory(params[:term])
+    rescue UnexpectedActiveDirectoryFormat
+    end
+
+    def set_owned_object
+      @owned_object = Slide.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
