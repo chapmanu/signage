@@ -1,10 +1,11 @@
 require 'test_helper'
 
 class SlidesControllerTest < ActionController::TestCase
+  include OwnableControllerTest
   include Devise::TestHelpers
 
   setup do
-    @slide = slides(:one)
+    @slide = @owned_object = slides(:one)
     sign_in users(:one)
   end
 
