@@ -1,8 +1,11 @@
 class SignsController < ApplicationController
+  include Ownable
+
   before_action :set_sign, only: [:add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
-  layout 'admin', except: [:play]
+
   skip_before_action :authenticate_user!, only: [:play, :poll]
 
+  layout 'admin', except: [:play]
 
   # GET /signs
   # GET /signs.json
@@ -71,17 +74,6 @@ class SignsController < ApplicationController
     end
   end
 
-  def settings
-  end
-
-  def add_user
-    @sign.add_user User.find(params[:user_id])
-  end
-
-  def remove_user
-    @sign.remove_user User.find(params[:user_id])
-  end
-
   def order
     params[:sign_slide_ids].each_with_index do |id, index|
       SignSlide.find(id).update(order: index+1)
@@ -105,5 +97,9 @@ class SignsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sign_params
       params.require(:sign).permit(:name, :template, :transition, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
+    end
+
+    def set_owned_object
+      @owned_object = Sign.friendly.find(params[:id])
     end
 end

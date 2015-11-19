@@ -15,10 +15,15 @@
 
     <label>Owners</label>
     <ul class="owners-list">
-      <% @sign.users.each do |owner| %>
-        <li><div class="chip"><%= owner.full_name %></div></li>
-      <% end %>
+      <%= render partial: 'ownable/owner_item', collection: @sign.users, as: :owner, locals: { removable: true, owned: @sign } %>
     </ul>
+
+    <%= form_tag add_owner_sign_path(@sign), remote: true do %>
+      <%= hidden_field_tag :user_id, id: 'user_id' %>
+      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_signs_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner' %>
+      <%= submit_tag "Add", class: 'btn' %>
+    <% end %>
+
     <br />
     <div class="actions bold-actions">
       <%= link_to play_sign_path(@sign) do %>
@@ -32,9 +37,10 @@
 
   <div class="sign-slides">
     <div class="sign-slides-listing" id="js-sortable-slides">
-      <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order) %>
+      <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order).eager_load(:slide) %>
       <%= link_to "+ New Slide", new_slide_path, class: 'happy-button add-new-slide', id: 'add-slide-link' %>
     </div>
   </div>
 </div>
+
 <%= content_tag :div, nil, id: 'js-sign-meta', data: { sort_path: order_sign_path(@sign) } %>

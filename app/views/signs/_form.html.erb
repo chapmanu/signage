@@ -32,22 +32,9 @@
       <%= f.label :transition, "Transition type" %>
     </div>
 
-
-    <label>Owners</label>
-    <ul class="owners-list">
-      <% @sign.users.push(current_user) if @sign.users.empty? %>
-      <% @sign.users.each do |owner| %>
-        <li><div class="chip"><%= owner.full_name %></div></li>
-      <% end %>
-    </ul>
-
     <br />
     <div class="actions">
       <%= f.button class: 'happy-button' %>
     </div>
   <% end %>
-
-  <div class="sign-slides-listing" id="js-sortable-slides">
-    <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order) %>
-  </div>
 </div>

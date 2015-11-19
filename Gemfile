@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rails4-autocomplete'
 gem 'mini_magick'
 gem 'inline_svg', '0.6.1'
 gem 'screencap', '0.1.4'

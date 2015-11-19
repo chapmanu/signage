@@ -31,13 +31,18 @@
       </tr>
     </table>
     <br />
+
     <label>Owners:</label>
     <ul class="owners-list">
-      <% @slide.users.push current_user if @slide.users.empty? %>
-      <% @slide.users.each do |owner| %>
-        <li><div class="chip"><%= owner.full_name %></div></li>
-      <% end %>
+      <%= render partial: 'ownable/owner_item', collection: @slide.users, as: :owner, locals: { removable: true, owned: @slide } %>
     </ul>
+
+    <%= form_tag add_owner_slide_path(@slide), remote: true do %>
+      <%= hidden_field_tag :user_id, id: 'user_id' %>
+      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_slides_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner' %>
+      <%= submit_tag "Add", class: 'btn' %>
+    <% end %>
+
     <br />
     <label>Shown on <%= pluralize(@slide.signs.length, 'sign')%>:</label>
     <ul class="signs-list">
