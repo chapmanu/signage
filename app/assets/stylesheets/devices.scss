@@ -371,6 +371,19 @@ subhead {
   width: 100%;
 }
 
+.ui-feed--preview:after { // A placeholder for the bar
+  text-align: center;
+  color: #000;
+  content: '';
+  position: absolute;
+  bottom: 54px;
+  right: 0;
+  left: 0;
+  height: 124px;
+  background-color: rgba(152,30,50,0.85);
+  opacity: 0.8;
+}
+
 
 
 /* slide: standard
