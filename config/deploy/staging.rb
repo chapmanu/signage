@@ -31,7 +31,6 @@ server 'dev-signage.chapman.edu', user: 'charles', roles: %w{app db web}
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-set :branch, :development
 
 
 # Custom SSH Options
@@ -60,3 +59,17 @@ set :branch, :development
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+def red(str)
+  "\e[31m#{str}\e[0m"
+end
+
+# Figure out the name of the current local branch
+def current_git_branch
+  branch = `git symbolic-ref HEAD 2> /dev/null`.strip.gsub(/^refs\/heads\//, '')
+  puts "Deploying branch #{red branch}"
+  branch
+end
+
+# Set the deploy branch to the current branch
+set :branch, current_git_branch
