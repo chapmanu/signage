@@ -3,11 +3,12 @@
 //= require jquery_ujs
 //= require jquery.datetimepicker
 //= require jquery.sticky
-//= require jquery-ui/sortable
+//= require jquery-ui
 //= require tinymce-jquery
 //= require moment
 //= require selectize
 //= require materialize-sprockets
+//= require autocomplete-rails
 
 
 /* APP */

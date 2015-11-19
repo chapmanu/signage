@@ -1,0 +1,8 @@
+<% remove_url = send("remove_owner_#{owned.class.name.underscore}_path", owned, user_id: owner.id) if removable %>
+
+<li id="js-owner-id-<%= owner.id %>">
+  <div class="chip">
+    <%= owner.full_name_with_email %>
+    <%= link_to(inline_svg('close.svg'), remove_url, method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{owner.full_name} from being able to edit this sign?" }) if removable %>
+  </div>
+</li>
