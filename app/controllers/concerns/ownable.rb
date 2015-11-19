@@ -28,7 +28,7 @@ module Ownable
 
     def lookup_in_active_directory
       User.create_or_update_from_active_directory(params[:term])
-    rescue UnexpectedActiveDirectoryFormat
+    rescue UnexpectedActiveDirectoryFormat, ChapmanIdentityNotFound
     end
 
     def set_owned_object
