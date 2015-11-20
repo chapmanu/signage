@@ -7,6 +7,7 @@ require 'webmock/minitest'
 require 'vcr'
 require 'minitest/reporters'
 require 'capybara/rails'
+require 'public_activity/testing'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -14,9 +15,16 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = "test/vcr_cassettes"
   config.hook_into :webmock
 end
 
+PublicActivity.enabled = false
+
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+

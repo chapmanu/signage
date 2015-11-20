@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'public_activity', '1.4.2'
 gem 'rails4-autocomplete', '1.1.1'
 gem 'mini_magick'
 gem 'inline_svg', '0.6.1'

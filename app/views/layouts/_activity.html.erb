@@ -1,0 +1,8 @@
+<% owner = a.owner || UnknownUser.new %>
+<div class="activity-item">
+  <%= yield %>
+  <p class="timestamp">
+    <time class="timeago" title="<%= a.created_at %>"><%= time_ago_in_words a.created_at %> ago</time>
+    by <%= owner.full_name %>
+  </p>
+</div>
