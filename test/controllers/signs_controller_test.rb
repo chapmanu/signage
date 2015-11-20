@@ -1,10 +1,11 @@
 require 'test_helper'
 
 class SignsControllerTest < ActionController::TestCase
+  include OwnableControllerTest
   include Devise::TestHelpers
 
   setup do
-    @sign = signs(:one)
+    @sign = @owned_object = signs(:one)
     sign_in users(:one)
   end
 
@@ -62,18 +63,5 @@ class SignsControllerTest < ActionController::TestCase
   test "reorder should touch sign updated at" do
     post :order, id: @sign, sign_slide_ids: []
     assert @sign.updated_at < assigns(:sign).updated_at
-  end
-
-  test "should add a user" do
-    length = @sign.users.length
-    post :add_user, id: @sign, format: :js, user_id: users(:one).id
-    assert_equal length + 1, @sign.users.count
-  end
-
-  test 'should remove a user' do
-    @sign.add_user(users(:one))
-    length = @sign.users.length
-    delete :remove_user, id: @sign, format: :js, user_id: users(:one).id
-    assert_equal length - 1, @sign.users.count
   end
 end
