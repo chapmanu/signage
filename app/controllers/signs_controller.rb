@@ -1,7 +1,7 @@
 class SignsController < ApplicationController
   include Ownable
 
-  before_action :set_sign, only: [:add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
+  before_action :set_sign, only: [:remove_slide, :add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
 
   skip_before_action :authenticate_user!, only: [:play, :poll]
 
@@ -80,6 +80,11 @@ class SignsController < ApplicationController
     end
     @sign.touch
     render nothing: true
+  end
+
+  def remove_slide
+    @slide = Slide.find(params[:slide_id])
+    @sign.remove_slide(@slide)
   end
 
   def poll
