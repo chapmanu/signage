@@ -11,6 +11,9 @@ class Sign < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   def self.menus
     @_menus ||= Dir[Rails.root.join('app', 'views', 'signs', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
   end

@@ -21,3 +21,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name} (#{email})"
   end
 end
+
+# An unknown user
+class UnknownUser
+  def full_name
+    "Unknown user"
+  end
+end
