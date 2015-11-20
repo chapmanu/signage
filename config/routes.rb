@@ -26,9 +26,10 @@ Rails.application.routes.draw do
 
   # Signs
   resources :signs, concerns: :ownable do
-    get    'play',        on: :member
-    get    'poll',        on: :member
-    post   'order',       on: :member
+    get    'play',         on: :member
+    get    'poll',         on: :member
+    post   'order',        on: :member
+    delete 'remove_slide', on: :member
   end
 
   # Slides

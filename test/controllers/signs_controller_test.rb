@@ -63,4 +63,12 @@ class SignsControllerTest < ActionController::TestCase
     post :order, id: @sign, sign_slide_ids: []
     assert @sign.updated_at < assigns(:sign).updated_at
   end
+
+  test "remove a slide from the sign" do
+    @sign.slides.clear
+    @sign.add_slide slides(:one)
+    assert_equal 1, @sign.slides.count
+    delete :remove_slide, id: @sign, slide_id: slides(:one).id, format: :js
+    assert_equal 0, @sign.slides.count
+  end
 end
