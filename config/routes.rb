@@ -15,20 +15,24 @@ Rails.application.routes.draw do
   post 'admin/update_emergency'
   post 'admin/clear_emergency'
 
-  # Devices
-  resources :signs do
+
+  concern :ownable do
+    post   'add_owner',    on: :member
+    delete 'remove_owner', on: :member
+    get    'autocomplete_user_email', on: :collection
+  end
+
+  # Signs
+  resources :signs, concerns: :ownable do
     get    'play',        on: :member
     get    'poll',        on: :member
     post   'order',       on: :member
-    delete 'remove_user', on: :member
-    post   'add_user',    on: :member
-    get    'settings',    on: :member
   end
 
   # Slides
   patch 'slides/live_preview'
   post 'slides/live_preview'
-  resources :slides do
+  resources :slides, concerns: :ownable do
     get  'preview', on: :member
   end
 

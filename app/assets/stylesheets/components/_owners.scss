@@ -1,0 +1,19 @@
+.owners-list {
+  .chip {
+    margin-bottom: $base-spacing / 2;
+  }
+  a {
+    display: inline-block;
+    margin-left: 16px;
+  }
+  svg {
+    height: 10px;
+    width: 10px;
+    position: relative;
+    top: 1px;
+    left: 0;
+  }
+}
+input.add-owner {
+  width: 70%;
+}
