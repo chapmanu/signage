@@ -8,6 +8,9 @@ class Slide < ActiveRecord::Base
 
   after_save :touch_signs
 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,    -> { where("slides.show" => true) }
   scope :ordered,  -> { order("sign_slides.order") }
@@ -26,6 +29,8 @@ class Slide < ActiveRecord::Base
 
   include SlideFormOptions
   include Schedulable
+
+
 
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 

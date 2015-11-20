@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
+
   controller :marketing do
     get :home
   end

@@ -1,0 +1,30 @@
+.notifications-container {
+  padding-top: $base-spacing*2;
+  @include outer-container;
+
+  h4 {
+    font-weight: 300;
+  }
+}
+
+.notifications-listing {
+  @include span-columns(6);
+}
+
+.activities-listing {
+  @include span-columns(6);
+}
+
+.activity-item {
+  p {
+    margin: 0;
+  }
+  a {
+    font-weight: bold;
+  }
+  padding: $base-spacing 2px;
+  .timestamp {
+    color: $light-gray;
+    font-size: 12px;
+  }
+}
