@@ -1,7 +1,7 @@
 <% slide = sign_slide.slide %>
-<div class="sign-slide-list-item" id="sign_slide_ids-<%= sign_slide.id %>">
+<div class="sign-slide-list-item" id="sign_slide_ids-<%= sign_slide.id %>" data-slide-id="<%= slide.id %>">
   <div class="left-actions">
-    <%= link_to inline_svg('close.svg'), '#', class: 'destroy-slide-sign' %>
+    <%= link_to inline_svg('close.svg'), remove_slide_sign_path(@sign, slide_id: slide.id), class: 'destroy-slide-sign', remote: true, method: 'delete', data: {confirm: 'Are you sure you want to remove this slide from this sign?'} %>
     <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
   </div>
 
