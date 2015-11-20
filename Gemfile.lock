@@ -340,7 +340,7 @@ DEPENDENCIES
   net-ldap (= 0.11)
   pg (= 0.18.2)
   rails (= 4.2.3)
-  rails4-autocomplete
+  rails4-autocomplete (= 1.1.1)
   refills
   remotipart (~> 1.2)
   rest-client (= 1.8.0)
