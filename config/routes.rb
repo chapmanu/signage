@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get    'autocomplete_user_email', on: :collection
   end
 
-  # Devices
+  # Signs
   resources :signs, concerns: :ownable do
     get    'play',        on: :member
     get    'poll',        on: :member

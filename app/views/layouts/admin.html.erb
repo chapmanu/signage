@@ -6,8 +6,8 @@
   <script src="https://use.typekit.net/tnm5mls.js"></script>
   <script>try{Typekit.load({ async: false });}catch(e){}</script>
 
-  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= javascript_include_tag 'admin' %>
   <% unless Rails.env.development? %>
     <script src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js" data-apikey="ca5cbe0ec20f792ddfa8549a8abf9b2d"></script>
     <script>Bugsnag.releaseStage = "<%= Rails.env %>";</script>
