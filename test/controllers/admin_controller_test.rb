@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class AdminControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
 
   setup do
     sign_in users(:one)
