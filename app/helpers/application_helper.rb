@@ -7,6 +7,10 @@ module ApplicationHelper
     date.strftime('%e %B, %Y') if date
   end
 
+  def format_time(date)
+    date.strftime('%l:%M %P') if date
+  end
+
   def signs_controller?
     controller.controller_name == 'signs'
   end

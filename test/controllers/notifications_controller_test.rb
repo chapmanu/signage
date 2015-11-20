@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class AdminControllerTest < ActionController::TestCase
+class NotificationsControllerTest < ActionController::TestCase
 
   setup do
-    sign_in users(:one)
+    sign_in users(:two)
   end
 
   test "should get index" do
