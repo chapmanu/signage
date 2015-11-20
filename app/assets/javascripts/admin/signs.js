@@ -63,4 +63,5 @@ Utils.fireWhenReady(['signs#show', 'signs#edit', 'signs#update'], function(e) {
     update: AdminSigns.updateSlideOrder,
     tolerance: 'pointer'
   });
+  $('.modal-trigger').leanModal();
 })
