@@ -2,7 +2,6 @@ require 'test_helper'
 
 class SignsControllerTest < ActionController::TestCase
   include OwnableControllerTest
-  include Devise::TestHelpers
 
   setup do
     @sign = @owned_object = signs(:one)

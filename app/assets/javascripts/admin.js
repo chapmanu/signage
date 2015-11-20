@@ -6,6 +6,7 @@
 //= require jquery-ui
 //= require tinymce-jquery
 //= require moment
+//= require timeago
 //= require selectize
 //= require materialize-sprockets
 //= require autocomplete-rails
@@ -30,4 +31,5 @@ $(document).on('ready', function(e) {
   $('.js-sticky-slide-preview').sticky({topSpacing: 64});
 
   $('select').not('.disabled').material_select();
+  $("abbr.timeago").timeago();
 });
