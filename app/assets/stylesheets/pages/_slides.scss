@@ -134,7 +134,6 @@
   .file-field {
     margin-top: 0;
   }
-
   .scheduled-item-fields {
     margin: 0 $base-spacing $base-spacing*2;
     padding: 0 $base-spacing $base-spacing;
@@ -146,5 +145,14 @@
 
   h4 {
     font-weight: bold;
+  }
+}
+
+.send-to-slide-modal {
+  label strong {
+    color: $dark-gray;
+  }
+  .modal-footer {
+    text-align: center;
   }
 }
