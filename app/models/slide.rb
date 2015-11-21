@@ -1,5 +1,4 @@
 class Slide < ActiveRecord::Base
-
   include UniqueHasManyThrough
   unique_has_many_through :signs, :sign_slides
   unique_has_many_through :users, :slide_users
@@ -13,6 +12,7 @@ class Slide < ActiveRecord::Base
 
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,    -> { where("slides.show" => true) }
+  scope :approved, -> { where("sign_slides.approved" => true)}
   scope :ordered,  -> { order("sign_slides.order") }
   scope :owned_by, -> (user) { includes(:slide_users).where('slide_users.user_id' => user.id) }
   scope :popular,  -> { order(signs_count: :desc, menu_name: :asc) }
@@ -29,8 +29,7 @@ class Slide < ActiveRecord::Base
 
   include SlideFormOptions
   include Schedulable
-
-
+  include OwnableModel
 
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 

@@ -1,11 +1,11 @@
 <!-- HIDDEN FORM -->
-<div class="modal modal-fixed-footer" id="send-slide-<%= slide.id %>">
+<div class="modal modal-fixed-footer send-to-slide-modal" id="send-slide-<%= slide.id %>">
   <%= form_for slide do |f| %>
     <div class="modal-content">
-        <%= f.collection_check_boxes :sign_ids, signs, :id, :name do |b| %>
+        <% signs.each do |sign| %>
           <p>
-            <%= b.check_box id: "slide_#{slide.id}_sign_#{b.object.id}" %>
-            <%= b.label for: "slide_#{slide.id}_sign_#{b.object.id}" %>
+            <%= f.check_box :sign_ids, id: "slide_#{slide.id}_sign_#{sign.id}" %>
+            <%= f.label :sign_ids, sign_name_with_approval_details(sign), for: "slide_#{slide.id}_sign_#{sign.id}" %>
           </p>
         <% end %>
     </div>
