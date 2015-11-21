@@ -39,12 +39,19 @@ Rails.application.routes.draw do
     get  'preview', on: :member
   end
 
+  # Sign Slide
+  resources :sign_slides, only: [] do
+    post   'approve', on: :member
+    delete 'reject',  on: :member
+  end
+
+
   # Users
   resources :users do
     get 'lookup', on: :collection
   end
 
-  root 'signs#index'
+  root 'notifications#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
