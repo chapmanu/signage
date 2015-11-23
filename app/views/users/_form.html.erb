@@ -11,9 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br>
+  <div class="input-field">
     <%= f.text_field :email %>
+    <%= f.label :email %>
+  </div>
+
+  <div class="input-field">
+  <%= f.select :role, User.roles.keys.map{|k| [k.titleize, k] }, include_blank: true %>
+  <%= f.label :role %>
   </div>
   <div class="actions">
     <%= f.submit %>

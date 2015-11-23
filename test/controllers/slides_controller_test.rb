@@ -43,6 +43,8 @@ class SlidesControllerTest < ActionController::TestCase
   end
 
   test "should check sign slide approvals" do
+    @slide.signs.clear
+    users(:one).signs.clear
     sign_ids = Sign.create([{name: 'one'}, {name: 'two'}, {name: 'three'}]).map(&:id) # creating some random signs
     users(:one).add_sign(Sign.find(sign_ids[0])) # current_user now owns 1 of the signs
 
