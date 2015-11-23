@@ -27,12 +27,6 @@ a {
   transition: color 0.1s linear;
 
   &:active,
-  &:focus,
-  &:hover {
-    color: darken($action-color, 15%);
-  }
-
-  &:active,
   &:focus {
     outline: none;
   }
@@ -50,4 +44,8 @@ img,
 picture {
   margin: 0;
   max-width: 100%;
+}
+
+strong {
+  font-weight: bold;
 }
