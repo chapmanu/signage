@@ -28,3 +28,22 @@
     font-size: 12px;
   }
 }
+
+
+.unapproved-sign-slide {
+  padding: $base-spacing 2px;
+  @include clearfix;
+
+  .screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .approve-sign-slide {
+    float: left;
+  }
+  .reject-sign-slide {
+    float: right;
+  }
+}

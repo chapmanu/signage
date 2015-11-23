@@ -4,10 +4,11 @@
     <h4>Notifications</h4>
     <% @unapproved_sign_slides.each do |ss| %>
       <div id="unapproved-sign-slide-<%= ss.id %>" class="unapproved-sign-slide">
-        <p><%=link_to ss.slide.menu_name, ss.slide %> needs to be approved to go on <%= link_to ss.sign.name, ss.sign %></p>
+        <p><%= image_tag ss.slide.screenshot, class: 'screenshot' %></p>
+        <p>The slide <%=link_to ss.slide.menu_name, ss.slide %> needs to be approved to go on the sign <%= link_to ss.sign.name, ss.sign %>.</p>
         <p>
-          <%= link_to 'Approve', approve_sign_slide_path(ss), remote: true, method: :post %>
-          <a href="#">Reject</a>
+          <%= link_to 'Approve', approve_sign_slide_path(ss), remote: true, method: :post, class: 'approve-sign-slide btn green' %>
+          <%= link_to 'Reject', reject_sign_slide_path(ss), remote: true, method: :delete, class: 'reject-sign-slide btn red' %>
         </p>
       </div>
     <% end %>
