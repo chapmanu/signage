@@ -78,7 +78,7 @@ class SlidesController < ApplicationController
   # PATCH/PUT /slides/1.json
   def update
     respond_to do |format|
-      if @slide.update(slide_params)
+      if UpdateSlide.execute(@slide, slide_params, current_user)
         @slide.take_screenshot
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }
@@ -106,7 +106,7 @@ class SlidesController < ApplicationController
     end
 
     def set_signs
-      @signs = current_user.signs.order(:name)
+      @signs = Sign.includes(:users).order(:name)
     end
 
     def set_parent_sign_path

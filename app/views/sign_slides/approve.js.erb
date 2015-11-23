@@ -1,0 +1,2 @@
+$('#unapproved-sign-slide-<%= @sign_slide.id %>').fadeOut(200);
+Materialize.toast("<%= @sign_slide.slide.menu_name %> is now approved on <%= @sign_slide.sign.name %>", 4000);

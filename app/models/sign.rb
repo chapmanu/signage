@@ -14,6 +14,8 @@ class Sign < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  include OwnableModel
+
   def self.menus
     @_menus ||= Dir[Rails.root.join('app', 'views', 'signs', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
   end
@@ -22,12 +24,12 @@ class Sign < ActiveRecord::Base
     @_transitions ||= ['fade', 'swipe', 'drop', 'rotate']
   end
 
-  def active_slides
-    slides.shown.active
+  def playable_slides
+    slides.shown.active.approved.ordered
   end
 
   def directory_slides
-    active_slides.where('template ILIKE ?', '%directory%')
+    playable_slides.where('template ILIKE ?', '%directory%')
   end
 
   def menu
