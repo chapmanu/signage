@@ -27,12 +27,6 @@ a {
   transition: color 0.1s linear;
 
   &:active,
-  &:focus,
-  &:hover {
-    color: darken($action-color, 15%);
-  }
-
-  &:active,
   &:focus {
     outline: none;
   }
