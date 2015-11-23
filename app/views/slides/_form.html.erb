@@ -217,7 +217,7 @@
         </div>
 
         <div class="input-field">
-          <%= f.select :sign_ids, @signs.map{|d| [html_escape_once(d.name), html_escape_once(d.id)] }, {prompt: 'Choose signs'}, multiple: '' %>
+          <%= f.select :sign_ids, @signs.map{|sign| [sign_name_with_approval_details(sign), html_escape_once(sign.id)] }, {prompt: 'Choose signs'}, multiple: '' %>
           <%= f.label :sign_ids, "Signs this slide should play on" %>
         </div>
 

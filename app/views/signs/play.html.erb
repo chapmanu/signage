@@ -10,7 +10,7 @@
   <%= render "signs/menus/#{@sign.menu}" %>
 
   <main class="owl-carousel" role="main" >
-    <%= render(@sign.active_slides.ordered) %>
+    <%= render(@sign.playable_slides) %>
   </main>
 </div>
 

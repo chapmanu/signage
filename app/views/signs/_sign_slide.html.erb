@@ -7,7 +7,7 @@
 
   <div class="screenshot">
     <%= image_tag slide.screenshot.url, height: 100 %>
-    <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %></div>
+    <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %> - <%= sign_slide.approved ? 'T' : 'F'%></div>
   </div>
 
   <div class="right-actions">
