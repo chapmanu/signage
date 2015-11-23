@@ -45,14 +45,19 @@ class SlidesControllerTest < ActionController::TestCase
   test "should check sign slide approvals" do
     sign_ids = Sign.create([{name: 'one'}, {name: 'two'}, {name: 'three'}]).map(&:id) # creating some random signs
     users(:one).add_sign(Sign.find(sign_ids[0])) # current_user now owns 1 of the signs
-    patch :update, id: @slide, slide: { sign_ids: sign_ids }
+
+    assert_difference('ActionMailer::Base.deliveries.length', 2) do
+      patch :update, id: @slide, slide: { sign_ids: sign_ids }
+    end
+
     assert_equal 1, @slide.sign_slides.where(approved: true).count
     assert_equal 2, @slide.sign_slides.where(approved: false).count
     assert_equal 2, ActionMailer::Base.deliveries.length
 
     # When you do it again, no more emails get sent
-    patch :update, id: @slide, slide: { sign_ids: sign_ids }
-    assert_equal 2, ActionMailer::Base.deliveries.length
+    assert_no_difference('ActionMailer::Base.deliveries.length') do
+      patch :update, id: @slide, slide: { sign_ids: sign_ids }
+    end
   end
 
   test "took screenshot after update" do
