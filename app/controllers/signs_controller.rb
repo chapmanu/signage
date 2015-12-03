@@ -40,6 +40,7 @@ class SignsController < ApplicationController
 
     respond_to do |format|
       if @sign.save
+        @sign.create_activity(:create, owner: current_user)
         current_user.signs << @sign
         format.html { redirect_to @sign; flash[:notice] = 'Sign was successfully created.' }
         format.json { render :show, status: :created, location: @sign }
@@ -55,6 +56,7 @@ class SignsController < ApplicationController
   def update
     respond_to do |format|
       if @sign.update(sign_params)
+        @sign.create_activity(:update, owner: current_user)
         format.html { redirect_to @sign; flash[:notice] = 'Sign was successfully updated.' }
         format.json { render :show, status: :ok, location: @sign }
       else
@@ -67,6 +69,7 @@ class SignsController < ApplicationController
   # DELETE /signs/1
   # DELETE /signs/1.json
   def destroy
+    @sign.create_activity(:destroy, owner: current_user)
     @sign.destroy
     respond_to do |format|
       format.html { redirect_to signs_url, notice: 'Sign was successfully destroyed.' }

@@ -7,8 +7,7 @@ class Slide < ActiveRecord::Base
 
   after_save :touch_signs
 
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
+  include PublicActivity::Common
 
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :shown,    -> { where("slides.show" => true) }

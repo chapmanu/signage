@@ -24,7 +24,7 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-PublicActivity.enabled = false
+PublicActivity.enabled = true
 
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
 
