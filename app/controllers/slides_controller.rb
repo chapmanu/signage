@@ -9,6 +9,7 @@ class SlidesController < ApplicationController
 
   layout 'admin', except: [:preview]
 
+
   # GET /slides
   # GET /slides.json
   def index
@@ -60,10 +61,10 @@ class SlidesController < ApplicationController
   # POST /slides.json
   def create
     @slide = Slide.new(slide_params)
-
     respond_to do |format|
       if @slide.save
         @slide.take_screenshot
+        @slide.create_activity(:create, owner: current_user)
         current_user.add_slide(@slide)
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
         format.json { render :show, status: :created, location: @slide }
@@ -80,6 +81,7 @@ class SlidesController < ApplicationController
     respond_to do |format|
       if UpdateSlide.execute(@slide, slide_params, current_user)
         @slide.take_screenshot
+        @slide.create_activity(:update, owner: current_user)
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }
       else
@@ -92,6 +94,7 @@ class SlidesController < ApplicationController
   # DELETE /slides/1
   # DELETE /slides/1.json
   def destroy
+    @slide.create_activity(:destroy, owner: current_user)
     @slide.destroy
     respond_to do |format|
       format.html { redirect_to slides_url, notice: 'Slide was successfully destroyed.' }
