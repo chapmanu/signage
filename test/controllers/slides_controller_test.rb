@@ -54,7 +54,6 @@ class SlidesControllerTest < ActionController::TestCase
 
     assert_equal 1, @slide.sign_slides.where(approved: true).count
     assert_equal 2, @slide.sign_slides.where(approved: false).count
-    assert_equal 2, ActionMailer::Base.deliveries.length
 
     # When you do it again, no more emails get sent
     assert_no_difference('ActionMailer::Base.deliveries.length') do
@@ -67,6 +66,24 @@ class SlidesControllerTest < ActionController::TestCase
     assert_match /dev-screenshot/, assigns(:slide).reload.screenshot.url
   end
 
+  test "updating a slide produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      patch :update, id: @slide, slide: { menu_name: 'Show me on the activity page!'}
+    end
+  end
+
+    test "creating a slide produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      patch :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, organizer: @slide.organizer, organizer_id: @slide.organizer_id, subheading: @slide.subheading, template: @slide.template }
+    end
+  end
+
+  test "destorying a slide produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      delete :destroy, id: @slide
+    end
+  end
+
   test "should destroy slide" do
     assert_difference('Slide.count', -1) do
       delete :destroy, id: @slide
@@ -74,4 +91,5 @@ class SlidesControllerTest < ActionController::TestCase
 
     assert_redirected_to slides_path
   end
+
 end
