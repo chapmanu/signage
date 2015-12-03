@@ -42,14 +42,6 @@ class SignsControllerTest < ActionController::TestCase
     assert_redirected_to assigns(:sign)
   end
 
-  test "should destroy sign" do
-    assert_difference('Sign.count', -1) do
-      delete :destroy, id: @sign
-    end
-
-    assert_redirected_to signs_path
-  end
-
   test "should reorder sign_slides" do
     signs(:one).add_slide(slides(:one))
     signs(:one).add_slide(slides(:two))
@@ -71,4 +63,31 @@ class SignsControllerTest < ActionController::TestCase
     delete :remove_slide, id: @sign, slide_id: slides(:one).id, format: :js
     assert_equal 0, @sign.slides.count
   end
+
+  test "creating a slide produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      post :create, sign: { emergency: @sign.emergency, emergency_detail: @sign.emergency_detail, location: @sign.location, name: @sign.name, template: @sign.template, updated_at: @sign.updated_at }
+    end
+  end
+
+  test "updating a sign produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      patch :update, id: @sign, sign: { menu_name: 'Show me on the activity page!'}
+    end
+  end
+
+  test "destorying a slide produces 1 new activity record" do
+    assert_difference('PublicActivity::Activity.count', 1) do
+      patch :destroy, id: @sign, sign: { menu_name: 'Show me on the activity page!'}
+    end
+  end
+
+  test "should destroy sign" do
+    assert_difference('Sign.count', -1) do
+      delete :destroy, id: @sign
+    end
+
+    assert_redirected_to signs_path
+  end
 end
+
