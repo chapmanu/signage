@@ -139,6 +139,8 @@ GEM
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    has_many_prevent_dups (0.0.3)
+      rails (>= 4.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_parser.rb (0.6.0)
@@ -332,6 +334,7 @@ DEPENDENCIES
   guard (= 2.12.9)
   guard-livereload (= 2.5.1)
   guard-minitest (= 2.4.4)
+  has_many_prevent_dups (= 0.0.3)
   inline_svg (= 0.6.1)
   jbuilder (~> 2.0)
   jquery-rails
@@ -362,3 +365,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   webmock (= 1.21.0)
   whenever (= 0.9.4)
+
+BUNDLED WITH
+   1.10.6

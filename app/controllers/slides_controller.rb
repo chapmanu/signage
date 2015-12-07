@@ -65,7 +65,8 @@ class SlidesController < ApplicationController
       if @slide.save
         @slide.take_screenshot
         @slide.create_activity(:create, owner: current_user)
-        current_user.add_slide(@slide)
+        byebug
+        current_user.slides << @slide
         format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
         format.json { render :show, status: :created, location: @slide }
       else
