@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'has_many_prevent_dups', '0.0.3'
 gem 'public_activity', '1.4.2'
 gem 'rails4-autocomplete', '1.1.1'
 gem 'mini_magick'
