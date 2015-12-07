@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   include ActiveDirectoryLookups
 
-  include UniqueHasManyThrough
-  unique_has_many_through :signs, :sign_users
-  unique_has_many_through :slides, :slide_users
+  has_many :sign_users
+  has_many :signs, through: :sign_users, dependent: :destroy, prevent_dups: true
+
+  has_many :slide_users
+  has_many :slides, through: :slide_users, dependent: :destroy, prevent_dups: true
 
   devise :database_authenticatable, :rememberable, :trackable
 

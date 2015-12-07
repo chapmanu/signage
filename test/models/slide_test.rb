@@ -2,7 +2,6 @@ require 'test_helper'
 
 class SlideTest < ActiveSupport::TestCase
   include SchedulableInterfaceTest
-  include UniqueHasManyThroughTest
 
   setup do
     @slide = @object = slides(:one)

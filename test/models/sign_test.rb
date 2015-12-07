@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class SignTest < ActiveSupport::TestCase
-  include UniqueHasManyThroughTest
 
   setup do
     @sign = @object = signs(:one)
