@@ -3,7 +3,7 @@
     <%= image_tag @slide.screenshot.url %>
     <div class="bold-actions">
       <%= link_to "#send-slide-#{@slide.id}", class: 'modal-trigger' do %>
-        <%= inline_svg('send_dark.svg') %> Send to my sign
+        <%= inline_svg('send_dark.svg') %> Send to signs
       <% end %>
       <%= link_to preview_slide_path(@slide) do %>
         <%= inline_svg('play_dark.svg') %> Preview
