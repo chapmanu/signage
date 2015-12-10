@@ -6,7 +6,7 @@
   <div class="filter">
     <label>Filter:</label>
     <div class="pill-buttons" id="filters">
-      <%= filter_pill_link('All', 'all', default: true) %><%= filter_pill_link('Mine', 'mine') %>
+      <%= search_filter(:filter, 'All', 'all', default: true) %><%= search_filter(:filter, 'Mine', 'mine') %>
     </div>
   </div>
   <div class="new">
