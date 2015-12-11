@@ -87,7 +87,7 @@ class SignsController < ApplicationController
 
   def remove_slide
     @slide = Slide.find(params[:slide_id])
-    @sign.remove_slide(@slide)
+    @sign.slides.delete(@slide)
   end
 
   def poll
