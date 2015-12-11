@@ -12,8 +12,8 @@ class NotificationsControllerTest < ActionController::TestCase
   end
 
   test "should assign unapproved sign slides" do
-    users(:two).add_sign(signs(:one))
-    signs(:one).add_slide(slides(:two))
+    users(:two).signs << signs(:one)
+    signs(:one).slides << slides(:two)
     assert_equal 1, users(:two).signs.count
 
     get :index
