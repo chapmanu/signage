@@ -43,8 +43,8 @@ class SignsControllerTest < ActionController::TestCase
   end
 
   test "should reorder sign_slides" do
-    signs(:one).add_slide(slides(:one))
-    signs(:one).add_slide(slides(:two))
+    signs(:one).slides << slides(:one)
+    signs(:one).slides << slides(:two)
     before_order = signs(:one).sign_slides.order(:order).ids
 
     post :order, id: @sign, sign_slide_ids: before_order.reverse
@@ -58,7 +58,7 @@ class SignsControllerTest < ActionController::TestCase
 
   test "remove a slide from the sign" do
     @sign.slides.clear
-    @sign.add_slide slides(:one)
+    @sign.slides << slides(:one)
     assert_equal 1, @sign.slides.count
     delete :remove_slide, id: @sign, slide_id: slides(:one).id, format: :js
     assert_equal 0, @sign.slides.count

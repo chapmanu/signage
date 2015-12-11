@@ -11,12 +11,12 @@ module Ownable
 
   def add_owner
     @new_owner = !@owned_object.users.include?(@owner)
-    @owned_object.add_user @owner
+    @owned_object.users << @owner
     render 'ownable/add_owner'
   end
 
   def remove_owner
-    @owned_object.remove_user User.find(params[:user_id])
+    @owned_object.users.delete User.find(params[:user_id])
     render 'ownable/remove_owner'
   end
 

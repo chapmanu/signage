@@ -1,7 +1,10 @@
 class Slide < ActiveRecord::Base
-  include UniqueHasManyThrough
-  unique_has_many_through :signs, :sign_slides
-  unique_has_many_through :users, :slide_users
+  
+  has_many :sign_slides
+  has_many :signs, through: :sign_slides, dependent: :destroy, prevent_dups: true
+
+  has_many :slide_users
+  has_many :users, through: :slide_users, dependent: :destroy, prevent_dups: true
 
   has_many :scheduled_items, dependent: :destroy
 
