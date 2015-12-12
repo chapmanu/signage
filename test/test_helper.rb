@@ -19,10 +19,21 @@ class ActionController::TestCase
   include Devise::TestHelpers
 end
 
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+  include IntegrationHelpers
+
+  def submit_form
+    find('input[name="commit"]').click
+  end
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = "test/vcr_cassettes"
   config.hook_into :webmock
 end
+
+
 
 PublicActivity.enabled = true
 

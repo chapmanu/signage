@@ -12,7 +12,7 @@ class SessionsControllerTest < ActionController::TestCase
       Net::LDAP.stub_any_instance(:bind, true) do
         post :create, user: { email: 'kerr105@chapman.edu', password: 'blahblahbalah' }
       end
-      assert_redirected_to signs_path
+      assert_redirected_to root_path
     end
   end
 
