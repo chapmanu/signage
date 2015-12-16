@@ -7,7 +7,7 @@
   <div class="ui-slide-collection-inset">
     <% faculty.each do |f| %>
       <article class="ui-member">
-        <%= image_tag f.thumbnail, alt: f.full_name, class: 'ui-member-image' %>
+        <%= image_tag (f.thumbnail || 'default-profile.png' ), alt: f.full_name, class: 'ui-member-image' %>
 
         <h1 class="ui-member-name"><%= f.full_name %></h1>
         <p class="ui-member-location">Office <%= f.office_name %></p>
