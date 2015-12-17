@@ -1,1 +1,7 @@
-<p>Sign Created: <%= link_to a.trackable.name, a.trackable %></p>
+<p>
+  <% if a.trackable %>
+    Sign Created: <%= link_to a.trackable.name, a.trackable %>
+  <% else %> 
+    Sign Created: <%= a.parameters[:name] %> (since deleted)
+  <% end %>
+</p>

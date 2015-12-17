@@ -1,1 +1,7 @@
-<p>Slide Created: <%= link_to a.trackable.menu_name, a.trackable %></p>
+<p>
+  <% if a.trackable %>
+    Slide Created: <%= link_to a.trackable.menu_name, a.trackable %>
+  <% else %> 
+    Slide Created: <%= a.parameters[:name] %> (since deleted)
+  <% end %>
+</p>
