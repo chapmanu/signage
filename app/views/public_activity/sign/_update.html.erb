@@ -1,1 +1,7 @@
-<p>Sign Updated: <%= link_to a.trackable.name, a.trackable %></p>
+<p>
+  <% if a.trackable %>
+    Sign Updated: <%= link_to a.trackable.name, a.trackable %>
+  <% else %>
+    Sign Updated: <%= a.parameters[:name] %> (since deleted)
+  <% end %>
+</p>
