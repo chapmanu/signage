@@ -30,5 +30,10 @@ module Signage
     config.to_prepare do
       Devise::SessionsController.layout "admin"
     end
+
+    # Override the rails field errors wrappers
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      html_tag
+    }
   end
 end
