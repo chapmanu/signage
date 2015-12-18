@@ -138,19 +138,6 @@ html, body {
   border: 1px dashed $blue;
 }
 
-#error_explanation {
-  padding: $base-spacing;
-  background-color: #f39c12;
-  margin-bottom: $base-spacing;
-  border: 1px solid darken(#f39c12, 10%);
-  border-radius: $base-border-radius;
-
-  ul {
-    list-style-type: disc;
-    margin-left: $base-spacing;
-  }
-}
-
 .play-device-row {
   border: 1px solid $light-gray;
   background-color: darken(white, 2%);
