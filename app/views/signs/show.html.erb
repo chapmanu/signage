@@ -26,7 +26,7 @@
 
     <br />
     <div class="actions bold-actions">
-      <%= link_to play_sign_path(@sign) do %>
+      <%= link_to play_sign_path(@sign), target: '_blank' do %>
         <%= image_tag('play_dark.svg') %> Play
       <% end %>
       <%= link_to edit_sign_path(@sign) do %>
