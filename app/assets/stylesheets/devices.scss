@@ -286,6 +286,17 @@ subhead {
 
 .ui-slide-content {
   font: 20px/1.5 "Rooney Sans";
+  ul, ol {
+    margin-left: 1em;
+    margin-bottom: 1em;
+  }
+  ul li {
+    list-style-type: disc;
+  }
+  ol li {
+    list-style-type: decimal;
+  }
+
 }
 
 .ui-event-admission-icon,
