@@ -8,7 +8,7 @@
 
       <article class="ui-event">
         <div class="ui-event-body">
-          <%= image_tag item.image.url, class: 'ui-event-image' unless item.image.url.blank? %>
+          <%= image_tag item.image.url, class: 'ui-event-image' if item.image.file %>
 
           <h1 class="ui-event-name"><%= item.name %></h1>
 
