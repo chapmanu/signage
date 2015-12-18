@@ -1,0 +1,19 @@
+#error_explanation {
+  background-color: lighten($orange, 40%);
+  border-left: 5px solid $orange;
+  color: $dark-gray;
+  padding: $base-spacing / 2;
+  @include box-shadow;
+  @include border-radius;
+  h2 {
+    font-size: $base-font-size;
+    font-weight: bold;
+  }
+  ul {
+    margin-left: $base-spacing;
+    margin-bottom: 0px;
+  }
+  li {
+    list-style-type: disc;
+  }
+}
