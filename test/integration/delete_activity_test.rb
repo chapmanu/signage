@@ -6,6 +6,10 @@ class DeleteActivityTest < ActionDispatch::IntegrationTest
     sign_in users(:james)
   end
 
+  teardown do
+    sign_out
+  end
+
   test "creating and deleting a slide" do
     assert_difference 'PublicActivity::Activity.count', 2 do
       post slides_path, slide: { menu_name: 'Yo', template: 'standard' }
