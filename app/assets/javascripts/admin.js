@@ -4,7 +4,7 @@
 //= require jquery.datetimepicker
 //= require jquery.sticky
 //= require jquery-ui
-//= require tinymce-jquery
+//= require trix
 //= require moment
 //= require timeago
 //= require selectize
