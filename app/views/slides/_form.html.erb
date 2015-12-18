@@ -57,9 +57,9 @@
           <%= f.label :location, "Secondary info line 2" %>
         </div>
 
-        <div class="tinymce-container" data-show-when="#slide_template==standard">
+        <div class="input-field" data-show-when="#slide_template==standard">
           <%= f.label :content %>
-          <%= f.text_area :content, :class => "tinymce", :rows => 16, :cols => 120 %>
+          <%= f.trix_editor :content%>
         </div>
 
         <div class="radio-button-group" data-show-when="#slide_template==(standard|directory|schedule)">
