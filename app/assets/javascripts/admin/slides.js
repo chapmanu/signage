@@ -66,7 +66,6 @@ Admin.Slides.initShowWhen = function() {
       } else {
         val = $el.val();
       }
-      console.log(val);
       (pattern.test(val)) ? $this.fadeIn(250) : $this.hide();
     };
 
@@ -84,20 +83,6 @@ Admin.Slides.initLivePreview = function() {
     Admin.Slides.livePreviewAjax();
   });
   Admin.Slides.livePreviewAjax();
-};
-
-Admin.Slides.initTinyMCE = function() {
-  tinyMCE.init({
-    menubar:        false,
-    content_style: 'p { font-size: 16px; }',
-    selector:      '.tinymce',
-    setup: function (editor) {
-      editor.on('blur', function () {
-        tinyMCE.triggerSave();
-        $('textarea.tinymce').trigger('change');
-      });
-    }
-  });
 };
 
 /* Index Page */
@@ -148,16 +133,12 @@ AdminSlides.initSlideActionMenus = function() {
 Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#update'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
-  tinyMCE.remove();
   Admin.Slides.initLivePreview();
-  Admin.Slides.initTinyMCE();
   $('.datepicker').pickadate();
 });
 
 $(document).on('dynamic_fields_added', function(event, $fields) {
-  Admin.Slides.initTinyMCE();
   Admin.Slides.initDateTimePickers();
-  console.log($fields);
   $fields.find('select').not('.disabled').material_select();
   $fields.find('.datepicker').pickadate();
 });

@@ -1,0 +1,12 @@
+.formatted_content {
+  ul, li {
+    margin-left: $base-spacing/2;
+    margin-bottom: $base-spacing/2;
+  }
+  ul li {
+    list-style-type: disc;
+  }
+  ol ul {
+    list-style-type: decimal;
+  }
+}
