@@ -125,6 +125,12 @@ AdminSlides.initSlideActionMenus = function() {
   });
 };
 
+AdminSlides.initSavingFeedback = function() {
+  $('form').on('submit', function() {
+    $('#saving-feedback').show();
+  });
+};
+
 
 /**
  * The code that runs on document.ready
@@ -134,6 +140,7 @@ Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#updat
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
   Admin.Slides.initLivePreview();
+  AdminSlides.initSavingFeedback();
   $('.datepicker').pickadate();
 });
 
