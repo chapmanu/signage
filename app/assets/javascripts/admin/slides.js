@@ -1,6 +1,7 @@
 /**
  * Setting up the namespace
  */
+
 Admin.Slides = {};
 
 /**
@@ -10,9 +11,12 @@ Admin.Slides = {};
 Admin.Slides.livePreviewAjax = function() {
   if (!Admin.Slides.currently_ajaxing) {
     Admin.Slides.currently_ajaxing  = true;
+    
+    var $form     = $('#slide_form');
     var form_data = new FormData($('#slide_form')[0]);
+    
     $.ajax({
-        url:        '/slides/live_preview',
+        url:        $form.data('draft-url'),
         type:       'POST',
         data:        form_data,
         success:     Admin.Slides.livePreviewSuccess,
@@ -26,14 +30,8 @@ Admin.Slides.livePreviewAjax = function() {
 };
 
 Admin.Slides.livePreviewSuccess = function(data) {
-  var iframe_doc = $('#slide-live-preview').contents()[0];
-  iframe_doc.open();
-  iframe_doc.write(data);
-  iframe_doc.close();
-  setTimeout(function() {
-    $(iframe_doc.body).hide();
-    $(iframe_doc.body).show(300);
-  }, 100);
+  $iframe = $('#slide-live-preview');
+  $iframe[0].contentDocument.location.reload(true);
 };
 
 Admin.Slides.livePreivewError = function(error) {
@@ -42,6 +40,16 @@ Admin.Slides.livePreivewError = function(error) {
 
 Admin.Slides.livePreviewComplete = function(data) {
   Admin.Slides.currently_ajaxing = false;
+};
+
+Admin.Slides.inputBlur = function() {
+  var current_value = $(this).val();
+  var prev_value    = $(this).data('prev-value');
+
+  if (current_value !== prev_value) {
+    $(this).data('prev-value', current_value);  
+    Admin.Slides.livePreviewAjax();
+  }
 };
 
 Admin.Slides.initDateTimePickers = function() {
@@ -75,14 +83,14 @@ Admin.Slides.initShowWhen = function() {
 };
 
 Admin.Slides.initLivePreview = function() {
-  $('#slide_template').on('change', function() {
-    Admin.Slides.livePreviewAjax();
-    $('.js-sticky-slide-preview').sticky('update');
+  $(':input').each(function() {
+    $(this).data('prev-value', $(this).val());
   });
-  $(':input, :checkbox, :radio').on('blur', function() {
-    Admin.Slides.livePreviewAjax();
-  });
-  Admin.Slides.livePreviewAjax();
+
+  $('.live-preview-triggers').on('blur', ':input', Admin.Slides.inputBlur);
+  $('.live-preview-triggers').on('change', 'select, :file, :checkbox, :radio', Admin.Slides.livePreviewAjax);
+  
+  setTimeout(function() { Admin.Slides.livePreviewAjax(); }, 10);
 };
 
 /* Index Page */
@@ -125,22 +133,14 @@ AdminSlides.initSlideActionMenus = function() {
   });
 };
 
-AdminSlides.initSavingFeedback = function() {
-  $('form').on('submit', function() {
-    $('#saving-feedback').show();
-  });
-};
-
-
 /**
  * The code that runs on document.ready
  */
 
-Utils.fireWhenReady(['slides#new', 'slides#create', 'slides#edit', 'slides#update'], function(e) {
+Utils.fireWhenReady(['slides#edit', 'slides#update'], function(e) {
   Admin.Slides.initDateTimePickers();
   Admin.Slides.initShowWhen();
   Admin.Slides.initLivePreview();
-  AdminSlides.initSavingFeedback();
   $('.datepicker').pickadate();
 });
 
