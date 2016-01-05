@@ -24,7 +24,7 @@ class SlidesControllerTest < ActionController::TestCase
       post :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, organizer: @slide.organizer, organizer_id: @slide.organizer_id, subheading: @slide.subheading, template: @slide.template }
     end
     assert_match /dev-screenshot/, assigns(:slide).reload.screenshot.url
-    assert_redirected_to slide_path(assigns(:slide))
+    assert_redirected_to edit_slide_path(assigns(:slide))
   end
 
   test "should show slide" do
