@@ -10,9 +10,10 @@ Admin.Slides = {};
 Admin.Slides.livePreviewAjax = function() {
   if (!Admin.Slides.currently_ajaxing) {
     Admin.Slides.currently_ajaxing  = true;
+    var $form = $('#slide_form');
     var form_data = new FormData($('#slide_form')[0]);
     $.ajax({
-        url:        '/slides/live_preview',
+        url:        $form.data('draft-url'),
         type:       'POST',
         data:        form_data,
         success:     Admin.Slides.livePreviewSuccess,
@@ -26,14 +27,10 @@ Admin.Slides.livePreviewAjax = function() {
 };
 
 Admin.Slides.livePreviewSuccess = function(data) {
-  var iframe_doc = $('#slide-live-preview').contents()[0];
-  iframe_doc.open();
-  iframe_doc.write(data);
-  iframe_doc.close();
-  setTimeout(function() {
-    $(iframe_doc.body).hide();
-    $(iframe_doc.body).show(300);
-  }, 100);
+  $iframe = $('#slide-live-preview');
+  $iframe.fadeOut();
+  $iframe[0].contentDocument.location.reload(true);
+  $iframe.fadeIn();
 };
 
 Admin.Slides.livePreivewError = function(error) {
@@ -80,9 +77,14 @@ Admin.Slides.initLivePreview = function() {
     $('.js-sticky-slide-preview').sticky('update');
   });
   $(':input, :checkbox, :radio').on('blur', function() {
-    Admin.Slides.livePreviewAjax();
+    if (Admin.Slides.formChanged()) {
+      Admin.Slides.livePreviewAjax();
+    }
   });
-  Admin.Slides.livePreviewAjax();
+};
+
+Admin.Slides.formChanged = function() {
+  return true;
 };
 
 /* Index Page */
@@ -129,6 +131,12 @@ AdminSlides.initSavingFeedback = function() {
   $('form').on('submit', function() {
     $('#saving-feedback').show();
   });
+};
+
+AdminSlides.initLiveDraft = function() {
+  $(':input, :checkbox, :radio').on('blur', function() {
+    $('')
+  })
 };
 
 
