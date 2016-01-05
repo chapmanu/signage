@@ -1,7 +1,8 @@
 class SlidesController < ApplicationController
   include Ownable
 
-  before_action :set_slide,                  only: [:preview, :show, :edit, :update, :destroy]
+  before_action :set_slide,                  only: [:draft, :show, :edit, :update, :destroy]
+  before_action :set_slide_or_draft,         only: [:preview]
   before_action :set_signs,                  only: [:new, :edit, :create, :update]
   before_action :set_parent_sign_path,       only: [:new, :edit]
 
@@ -32,6 +33,14 @@ class SlidesController < ApplicationController
   end
 
   def preview
+  end
+
+  def draft
+    @draft = @slide.find_or_create_draft
+    @draft.scheduled_items.clear
+    @draft.update(slide_params)
+    @draft.signs.clear
+    render nothing: true
   end
 
   def live_preview
@@ -66,7 +75,7 @@ class SlidesController < ApplicationController
         @slide.take_screenshot
         @slide.create_activity(:create, owner: current_user, parameters: { name: @slide.menu_name })
         current_user.slides << @slide
-        format.html { redirect_to @slide, notice: 'Slide was successfully created.' }
+        format.html { redirect_to edit_slide_path(@slide) }
         format.json { render :show, status: :created, location: @slide }
       else
         format.html { render :new }
@@ -106,6 +115,11 @@ class SlidesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_slide
       @slide = Slide.find(params[:id])
+    end
+
+    def set_slide_or_draft
+      # I don't want the possibility of a draft being able to be editted or viewed.
+      @slide = Slide.unscoped.find(params[:id])
     end
 
     def set_signs

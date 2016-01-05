@@ -1,1 +1,36 @@
-<%= render 'form' %>
+<div class="slide-form-container">
+  <%= form_for @slide do |f| %>
+
+
+
+  <div class="essential-fields">
+
+    <% if @slide.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
+
+        <ul>
+        <% @slide.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+      <br />
+    <% end %>
+
+    <div class="input-field">
+      <%= f.text_field :menu_name %>
+      <%= f.label :menu_name, "Slide name" %>
+    </div>
+
+    <div class="input-field">
+      <%= f.select :template, Slide.templates.map{|t| [t.titleize, t] }, { include_blank: 'Select your template'} %>
+      <%= f.label :template, "Select slide template" %>
+    </div>
+
+    <%= f.submit "Next", class: 'btn' %>
+  <% end %>
+  <div class="essential-fields">
+</div>
+
+<%= render 'admin/loading_feedback', message: 'Loading editor...' %>

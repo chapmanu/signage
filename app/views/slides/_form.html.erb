@@ -1,5 +1,14 @@
 <div class="slide-form-container">
-  <%= form_for @slide, html: { multipart: true, id: 'slide_form' } do |f| %>
+  
+  <%= form_for @slide, 
+    html: { 
+      multipart: true, 
+      id: 'slide_form', 
+      data: { 
+        draft_url: draft_slide_path(@slide) 
+      } 
+    } do |f| %>
+
     <% if @slide.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
@@ -230,7 +239,7 @@
         <div class="js-sticky-slide-preview">
           <div class="slide-preview">
             <div class="slide-preview-wrapper">
-              <%= content_tag  :iframe, nil, src: nil, id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
+              <%= content_tag  :iframe, nil, src: preview_slide_path(@slide.find_or_create_draft), id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
             </div>
           </div>
           <div style="margin-top: 30px; text-align: center;">
@@ -240,6 +249,6 @@
       </div>
     </div>
   <% end %>
-</div>
+</div> 
 
-<%= render 'admin/saving_feedback' %>
+<%= render 'admin/loading_feedback', message: 'Saving...' %>
