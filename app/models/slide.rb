@@ -11,7 +11,7 @@ class Slide < ActiveRecord::Base
 
   include PublicActivity::Common
 
-  default_scope { where('slides.id > 0') }
+  scope :nondraft, -> { where('slides.id > 0') }
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :owned_by, -> (user) { includes(:slide_users).where('slide_users.user_id' => user.id) }
   scope :shown,    -> { where("slides.show" => true) }
@@ -38,7 +38,7 @@ class Slide < ActiveRecord::Base
   paginates_per 24
 
   def find_or_create_draft
-    if draft = Slide.unscoped.where(id: draft_id).first
+    if draft = Slide.where(id: draft_id).first
       draft
     else
       draft = dup
