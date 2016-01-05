@@ -1,5 +1,14 @@
 <div class="slide-form-container">
-  <%= form_for @slide, html: { multipart: true, id: 'slide_form' } do |f| %>
+  
+  <%= form_for @slide, 
+    html: { 
+      multipart: true, 
+      id: 'slide_form', 
+      data: { 
+        draft_url: draft_slide_path(@slide) 
+      } 
+    } do |f| %>
+
     <% if @slide.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@slide.errors.count, "error") %> prohibited this slide from being saved:</h2>
@@ -14,7 +23,7 @@
 
     <!-- First Fieldset -->
 
-    <div class="essential-fields">
+    <div class="essential-fields live-preview-triggers">
       <%= hidden_field_tag :id, @slide.id %>
 
       <div class="input-field">
@@ -32,160 +41,162 @@
 
     <div data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
       <div class="slide-fields">
-        <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
-          <%= f.text_field :heading %>
-          <%= f.label :heading %>
-        </div>
+        <div class="live-preview-triggers">
+          <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
+            <%= f.text_field :heading %>
+            <%= f.label :heading %>
+          </div>
 
-        <div class="input-field" data-show-when="#slide_template==social_feed">
-          <%= f.text_field :feed_url %>
-          <%= f.label :feed_url %>
-        </div>
+          <div class="input-field" data-show-when="#slide_template==social_feed">
+            <%= f.text_field :feed_url %>
+            <%= f.label :feed_url %>
+          </div>
 
-        <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule)">
-          <%= f.label :subheading %>
-          <%= f.text_field :subheading %>
-        </div>
+          <div class="input-field" data-show-when="#slide_template==(standard|directory|schedule)">
+            <%= f.label :subheading %>
+            <%= f.text_field :subheading %>
+          </div>
 
-        <div class="input-field" data-show-when="#slide_template==standard">
-          <%= f.text_field :datetime %>
-          <%= f.label :datetime, "Secondary info line 1" %>
-        </div>
+          <div class="input-field" data-show-when="#slide_template==standard">
+            <%= f.text_field :datetime %>
+            <%= f.label :datetime, "Secondary info line 1" %>
+          </div>
 
-        <div class="input-field" data-show-when="#slide_template==standard">
-          <%= f.text_field :location %>
-          <%= f.label :location, "Secondary info line 2" %>
-        </div>
+          <div class="input-field" data-show-when="#slide_template==standard">
+            <%= f.text_field :location %>
+            <%= f.label :location, "Secondary info line 2" %>
+          </div>
 
-        <div class="input-field" data-show-when="#slide_template==standard">
-          <%= f.label :content %>
-          <%= f.trix_editor :content%>
-        </div>
+          <div class="input-field" data-show-when="#slide_template==standard">
+            <%= f.label :content %>
+            <%= f.trix_editor :content%>
+          </div>
 
-        <div class="radio-button-group" data-show-when="#slide_template==(standard|directory|schedule)">
-          <p>
-            <%= f.radio_button :theme, 'light' %>
-            <%= f.label :theme_light, 'Light color theme' %>
-          </p>
-          <p>
-            <%= f.radio_button :theme, 'dark' %>
-            <%= f.label :theme_dark, 'Dark color theme' %>
-          </p>
-        </div>
-
-        <div class="radio-button-group" data-show-when="#slide_template==standard">
-          <p>
-            <%= f.radio_button :layout, 'left' %>
-            <%= f.label :layout_left, 'Left align text' %>
-          </p>
-          <p>
-            <%= f.radio_button :layout, 'right' %>
-            <%= f.label :layout_right, 'Right align text' %>
-          </p>
-        </div>
-
-        <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
-          <%= f.label :organizer, "Organizer/Sponsor" %>
-          <%= f.select :organizer, organizer_options.map{|f| [f, f] }, {} %>
-        </div>
-
-        <div data-show-when="#slide_template==standard">
-          <div class="radio-button-group">
-            <label class="group-label">Background style</label>
+          <div class="radio-button-group" data-show-when="#slide_template==(standard|directory|schedule)">
             <p>
-              <%= f.radio_button :background_type, 'none' %>
-              <%= f.label :background_type_none, 'Simple background' %>
+              <%= f.radio_button :theme, 'light' %>
+              <%= f.label :theme_light, 'Light color theme' %>
             </p>
             <p>
-              <%= f.radio_button :background_type, 'image' %>
-              <%= f.label :background_type_image, 'Image background' %>
-            </p>
-            <p>
-              <%= f.radio_button :background_type, 'video' %>
-              <%= f.label :background_type_video, 'Video background' %>
+              <%= f.radio_button :theme, 'dark' %>
+              <%= f.label :theme_dark, 'Dark color theme' %>
             </p>
           </div>
 
-          <div data-show-when="input[name='slide[background_type]']==(image|video)">
-            <div class="input-field file-field">
-              <div class="btn">
-                <span>Background Media</span>
-                <%= f.file_field :background %>
-                <%= f.hidden_field :background_cache %>
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
+          <div class="radio-button-group" data-show-when="#slide_template==standard">
+            <p>
+              <%= f.radio_button :layout, 'left' %>
+              <%= f.label :layout_left, 'Left align text' %>
+            </p>
+            <p>
+              <%= f.radio_button :layout, 'right' %>
+              <%= f.label :layout_right, 'Right align text' %>
+            </p>
+          </div>
+
+          <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+            <%= f.label :organizer, "Organizer/Sponsor" %>
+            <%= f.select :organizer, organizer_options.map{|f| [f, f] }, {} %>
+          </div>
+
+          <div data-show-when="#slide_template==standard">
+            <div class="radio-button-group">
+              <label class="group-label">Background style</label>
+              <p>
+                <%= f.radio_button :background_type, 'none' %>
+                <%= f.label :background_type_none, 'Simple background' %>
+              </p>
+              <p>
+                <%= f.radio_button :background_type, 'image' %>
+                <%= f.label :background_type_image, 'Image background' %>
+              </p>
+              <p>
+                <%= f.radio_button :background_type, 'video' %>
+                <%= f.label :background_type_video, 'Video background' %>
+              </p>
             </div>
-            <p>
-              <%= f.check_box :remove_background %>
-              <%= f.label :remove_background, "Remove background image" %>
-            </p>
-          </div>
-          <br />
-          <div class="radio-button-group">
-            <label class="group-label">Foreground style</label>
-            <p>
-              <%= f.radio_button :foreground_type, 'none' %>
-              <%= f.label :foreground_type_none, 'Simple foreground' %>
-            </p>
-            <p>
-              <%= f.radio_button :foreground_type, 'image' %>
-              <%= f.label :foreground_type_image, 'Image foreground' %>
-            </p>
-            <p>
-              <%= f.radio_button :foreground_type, 'video' %>
-              <%= f.label :foreground_type_video, 'Video foreground' %>
-            </p>
-          </div>
 
-          <div class="field" data-show-when="input[name='slide[foreground_type]']==(image|video)">
-            <div class="input-field file-field">
-              <div class="btn">
-                <span>Foreground Media</span>
-                <%= f.file_field :foreground %>
-                <%= f.hidden_field :foreground_cache %>
+            <div data-show-when="input[name='slide[background_type]']==(image|video)">
+              <div class="input-field file-field">
+                <div class="btn">
+                  <span>Background Media</span>
+                  <%= f.file_field :background %>
+                  <%= f.hidden_field :background_cache %>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
               </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
+              <p>
+                <%= f.check_box :remove_background %>
+                <%= f.label :remove_background, "Remove background image" %>
+              </p>
             </div>
-            <p>
-              <%= f.check_box :remove_foreground %>
-              <%= f.label :remove_foreground, "Remove foreground image" %>
-            </p>
+            <br />
+            <div class="radio-button-group">
+              <label class="group-label">Foreground style</label>
+              <p>
+                <%= f.radio_button :foreground_type, 'none' %>
+                <%= f.label :foreground_type_none, 'Simple foreground' %>
+              </p>
+              <p>
+                <%= f.radio_button :foreground_type, 'image' %>
+                <%= f.label :foreground_type_image, 'Image foreground' %>
+              </p>
+              <p>
+                <%= f.radio_button :foreground_type, 'video' %>
+                <%= f.label :foreground_type_video, 'Video foreground' %>
+              </p>
+            </div>
+
+            <div class="field" data-show-when="input[name='slide[foreground_type]']==(image|video)">
+              <div class="input-field file-field">
+                <div class="btn">
+                  <span>Foreground Media</span>
+                  <%= f.file_field :foreground %>
+                  <%= f.hidden_field :foreground_cache %>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+              </div>
+              <p>
+                <%= f.check_box :remove_foreground %>
+                <%= f.label :remove_foreground, "Remove foreground image" %>
+              </p>
+            </div>
+
+            <div class="radio-button-group" data-show-when="input[name='slide[foreground_type]']==(image|video)">
+              <label class="group-label">Foreground positioning</label>
+              <p>
+                <%= f.radio_button :foreground_sizing, 'auto' %>
+                <%= f.label :foreground_sizing_auto, 'Exact Size' %>
+              </p>
+              <p>
+                <%= f.radio_button :foreground_sizing, 'cover' %>
+                <%= f.label :foreground_sizing_cover, 'Fill Screen' %>
+              </p>
+              <p>
+                <%= f.radio_button :foreground_sizing, 'contain' %>
+                <%= f.label :foreground_sizing_contain, 'Fill Screen (do not crop)' %>
+              </p>
+            </div>
           </div>
 
-          <div class="radio-button-group" data-show-when="input[name='slide[foreground_type]']==(image|video)">
-            <label class="group-label">Foreground positioning</label>
-            <p>
-              <%= f.radio_button :foreground_sizing, 'auto' %>
-              <%= f.label :foreground_sizing_auto, 'Exact Size' %>
-            </p>
-            <p>
-              <%= f.radio_button :foreground_sizing, 'cover' %>
-              <%= f.label :foreground_sizing_cover, 'Fill Screen' %>
-            </p>
-            <p>
-              <%= f.radio_button :foreground_sizing, 'contain' %>
-              <%= f.label :foreground_sizing_contain, 'Fill Screen (do not crop)' %>
-            </p>
+          <div class="input-field" data-show-when="#slide_template==directory">
+            <%= f.select :building_name, Faculty.all_building_names.map{|n| [n, n] }, {prompt: 'Select faculty'} %>
+            <%= f.label :building_name, "Show Faculty In" %>
           </div>
-        </div>
 
-        <div class="input-field" data-show-when="#slide_template==directory">
-          <%= f.select :building_name, Faculty.all_building_names.map{|n| [n, n] }, {prompt: 'Select faculty'} %>
-          <%= f.label :building_name, "Show Faculty In" %>
-        </div>
-
-        <div data-show-when="#slide_template==schedule" >
-          <h4>Listing of Events to Show on Slide</h4>
-          <div data-behavior="dynamic-fields-parent" >
-            <%= f.fields_for :scheduled_items do |ff| %>
-              <%= render 'scheduled_item_fields', f: ff %>
-            <% end %>
+          <div data-show-when="#slide_template==schedule" >
+            <h4>Listing of Events to Show on Slide</h4>
+            <div data-behavior="dynamic-fields-parent" >
+              <%= f.fields_for :scheduled_items do |ff| %>
+                <%= render 'scheduled_item_fields', f: ff %>
+              <% end %>
+            </div>
+            <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items, class: 'btn' %>
           </div>
-          <%= link_to_add_dynamic_fields "+ Add Event", f, :scheduled_items, class: 'btn' %>
         </div>
         <br />
         <br />
@@ -230,7 +241,7 @@
         <div class="js-sticky-slide-preview">
           <div class="slide-preview">
             <div class="slide-preview-wrapper">
-              <%= content_tag  :iframe, nil, src: nil, id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
+              <%= content_tag  :iframe, nil, src: preview_slide_path(@slide.find_or_create_draft), id: 'slide-live-preview', frameborder: 0, allowfullscreen: true %>
             </div>
           </div>
           <div style="margin-top: 30px; text-align: center;">
@@ -240,6 +251,6 @@
       </div>
     </div>
   <% end %>
-</div>
+</div> 
 
-<%= render 'admin/saving_feedback' %>
+<%= render 'admin/loading_feedback', message: 'Saving...' %>

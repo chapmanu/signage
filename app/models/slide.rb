@@ -1,5 +1,4 @@
 class Slide < ActiveRecord::Base
-  
   has_many :sign_slides
   has_many :signs, through: :sign_slides, dependent: :destroy, prevent_dups: true
 
@@ -12,11 +11,12 @@ class Slide < ActiveRecord::Base
 
   include PublicActivity::Common
 
+  scope :nondraft, -> { where('slides.id > 0') }
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
+  scope :owned_by, -> (user) { includes(:slide_users).where('slide_users.user_id' => user.id) }
   scope :shown,    -> { where("slides.show" => true) }
   scope :approved, -> { where("sign_slides.approved" => true)}
   scope :ordered,  -> { order("sign_slides.order") }
-  scope :owned_by, -> (user) { includes(:slide_users).where('slide_users.user_id' => user.id) }
   scope :popular,  -> { order(signs_count: :desc, menu_name: :asc) }
   scope :newest,   -> { order(created_at: :desc) }
   scope :alpha,    -> { order(menu_name: :asc) }
@@ -36,6 +36,20 @@ class Slide < ActiveRecord::Base
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 
   paginates_per 24
+
+  def find_or_create_draft
+    if draft = Slide.where(id: draft_id).first
+      draft
+    else
+      draft = dup
+      draft.update(id: draft_id)
+      draft
+    end
+  end
+
+  def draft_id
+    -id
+  end
 
   def people_slide?
     !!(template.downcase =~ /directory/)

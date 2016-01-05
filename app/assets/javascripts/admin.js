@@ -31,5 +31,10 @@ $(document).on('ready', function(e) {
   $('.js-sticky-slide-preview').sticky({topSpacing: 64});
 
   $('select').not('.disabled').material_select();
+
   $("abbr.timeago").timeago();
+  
+  $('form').on('submit', function() {
+    $('#saving-feedback').show();
+  });
 });

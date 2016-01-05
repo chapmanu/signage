@@ -1,4 +1,4 @@
-<% faculty = Faculty.in_building(slide.building_name) %>
+<% faculty = slide.building_name.blank? ? Faculty.none : Faculty.in_building(slide.building_name) %>
 
 <h1 class="ui-slide-heading"><%= slide.heading %></h1>
 <subhead class="ui-slide-subheading"><%= slide.subheading %></subhead>
