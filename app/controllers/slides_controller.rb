@@ -14,7 +14,7 @@ class SlidesController < ApplicationController
   # GET /slides
   # GET /slides.json
   def index
-    query = Slide.includes(:signs)
+    query = Slide.includes(:signs).nondraft
     query = query.owned_by(current_user) if params['filter'] == 'mine'
     if params['sort'] == 'popular'
       query = query.popular
@@ -114,12 +114,12 @@ class SlidesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slide
-      @slide = Slide.find(params[:id])
+      @slide = Slide.nondraft.find(params[:id])
     end
 
     def set_slide_or_draft
       # I don't want the possibility of a draft being able to be editted or viewed.
-      @slide = Slide.unscoped.find(params[:id])
+      @slide = Slide.find(params[:id])
     end
 
     def set_signs
