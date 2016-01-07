@@ -1,5 +1,6 @@
 module SlidesHelper
   ORGANIZER_ICONS = {
+    'None' => 'none',
     'Department of Art' => 'wilkinson',
     'Argyros Career Services' => 'business',
     'Argyros School of Business and Economics' => 'business',
