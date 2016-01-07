@@ -87,6 +87,13 @@ subhead {
   background-color: rgba(0,0,0,0.85);
 }
 
+.ui-head.wacubo {
+ background-color: rgba(38,50,71,0.9); 
+ padding-left: 260px;
+ padding-top: 16px;
+ padding-bottom: 16px;
+}
+
 .ui-head > * {
   display: table-cell;
   vertical-align: middle;
@@ -111,9 +118,25 @@ subhead {
   height: 55px;
 }
 
+.ui-logo-wacubo {
+  top: -108px;
+  left: 54px;
+  position: absolute;
+  background: image-url('wacubo-logo.jpg') 0 0 / 100% 100%;
+  width: 180px;
+  height: 230px;
+  border-radius: 2px;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,0.3);
+}
+
 /* ui-locality
    =============================================================================
 */
+
+.wacubo .ui-location {
+  border-left: 2px solid white;
+  padding: 16px
+}
 
 .ui-location-name, .ui-location-time {
   display: block;
