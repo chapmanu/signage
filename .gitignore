@@ -14,6 +14,5 @@
 
 /public/uploads/*
 
-config/secrets.yml
 config/database.yml
 .env
