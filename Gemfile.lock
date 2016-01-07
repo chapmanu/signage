@@ -116,6 +116,10 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.0.2)
+    dotenv-rails (2.0.2)
+      dotenv (= 2.0.2)
+      railties (~> 4.0)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -335,6 +339,7 @@ DEPENDENCIES
   carrierwave (= 0.10.0)
   coffee-rails (~> 4.1.0)
   devise (= 3.5.2)
+  dotenv-rails
   friendly_id (~> 5.1.0)
   guard (= 2.12.9)
   guard-livereload (= 2.5.1)
