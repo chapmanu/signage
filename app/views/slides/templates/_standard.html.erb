@@ -9,7 +9,7 @@
 </div>
 
 <% if slide.background_type == 'video' %>
-  <video id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" loop></video>
+  <video id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" autoplay loop></video>
 <% end %>
 
 <% if slide.background_type == 'image' %>
@@ -17,7 +17,7 @@
 <% end %>
 
 <% if slide.foreground_type == 'video' %>
-  <video id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" loop style="width: 100%; height: 100%;"></video>
+  <video id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" autoplay loop style="width: 100%; height: 100%;"></video>
 <% end %>
 
 <% if slide.foreground_type == 'image' %>
