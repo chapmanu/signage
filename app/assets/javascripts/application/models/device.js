@@ -109,6 +109,7 @@ Device._initializeSlides = function(slides) {
 }
 
 Device._refreshMenu = function() {
+  if (!Device.owl_menu) return;
   Device.owl_menu.$element.trigger('to.owl.carousel', this.currentIndex());
   Device.owl_menu.$element.find('.ui-menu-item--active').removeClass('ui-menu-item--active');
   Device.owl_menu.$element.find('.owl-item.center').addClass('ui-menu-item--active');
