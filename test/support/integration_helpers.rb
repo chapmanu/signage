@@ -2,12 +2,16 @@ module IntegrationHelpers
   def sign_in(user)
     Net::LDAP.stub_any_instance(:bind, true) do
       VCR.use_cassette("#{user.email}_sign_in") do
-        post_via_redirect new_user_session_path, 'user[email]' => user.email, 'user[password]' => 'anything'
+        visit new_user_session_path
+        fill_in 'Chapman Username', with: user.email
+        fill_in 'Password', with: 'anything'
+        click_button 'Log in'
       end
     end
   end
 
   def sign_out
-    delete destroy_user_session_path
+    visit root_url
+    click_link 'Sign Out'
   end
 end
