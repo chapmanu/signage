@@ -112,6 +112,7 @@
 .slide-form-container {
   @include outer-container;
   padding-top: $base-spacing*2;
+  position: relative;
 
   .essential-fields {
     margin: 0 auto;
@@ -142,7 +143,16 @@
   h4 {
     font-weight: bold;
   }
+
+  .delete-slide {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: $red;
+  }
 }
+
+
 
 .send-to-slide-modal {
   label strong {

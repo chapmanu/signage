@@ -62,10 +62,9 @@ gem 'capistrano-rvm',      '0.1.2',    group: :development
 gem 'capistrano-passenger', '0.1.1',    group: :development
 
 group :development, :test do
-  gem 'better_errors', '2.1.1'
-  gem 'guard', '2.12.9'
-  gem 'guard-minitest', '2.4.4'
-  gem 'guard-livereload', '2.5.1'
+  gem 'better_errors'
+  gem 'guard'
+  gem 'guard-minitest'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -78,10 +77,11 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest-stub_any_instance', '1.0.1'
-  gem 'webmock', '1.21.0'
-  gem 'vcr', '2.9.3'
+  gem 'minitest-stub_any_instance'
+  gem 'webmock'
+  gem 'vcr'
   gem 'minitest-reporters'
-  gem 'capybara', '2.4.4'
+  gem 'minitest-rails-capybara'
+  gem 'simplecov', require: false
 end
 

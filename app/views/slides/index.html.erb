@@ -8,14 +8,14 @@
   <div class="filter">
     <label>Filter:</label>
     <div class="pill-buttons" id="filters">
-      <%= filter_pill_link('All', 'all', default: true) %><%= filter_pill_link('Mine', 'mine') %>
+      <%= search_filter(:filter, 'All', 'all') %><%= search_filter(:filter, 'Mine', 'mine') %>
     </div>
   </div>
 
   <div class="sort">
     <label>Sort:</label>
     <div class="pill-buttons" id="sort">
-      <%= filter_pill_link('Newest', 'newest', default: true) %><%= filter_pill_link('Popular', 'popular') %><%= filter_pill_link('A-Z', 'alpha') %>
+      <%= search_filter(:sort, 'Newest', 'newest') %><%= search_filter(:sort, 'Popular', 'popular') %><%= search_filter('sort', 'A-Z', 'alpha') %>
     </div>
   </div>
 

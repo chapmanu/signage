@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start 'rails' unless ENV['NO_COVERAGE']
+
 ENV['RAILS_ENV'] ||= 'test'
 Dir[Rails.root.join("test/support/**/*")].each { |f| require f }
 require File.expand_path('../../config/environment', __FILE__)
@@ -6,26 +9,20 @@ require 'minitest/mock'
 require 'webmock/minitest'
 require 'vcr'
 require 'minitest/reporters'
-require 'capybara/rails'
+require 'minitest/rails/capybara'
 require 'public_activity/testing'
 
+
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  # Add more helper methods to be used by all tests here...
 end
 
 class ActionController::TestCase
   include Devise::TestHelpers
 end
 
-class ActionDispatch::IntegrationTest
-  include Capybara::DSL
+class Capybara::Rails::TestCase
   include IntegrationHelpers
-
-  def submit_form
-    find('input[name="commit"]').click
-  end
 end
 
 VCR.configure do |config|
@@ -33,9 +30,6 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-
-
 PublicActivity.enabled = true
 
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
-
