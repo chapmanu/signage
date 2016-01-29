@@ -32,6 +32,9 @@
       <%= link_to edit_sign_path(@sign) do %>
         <%= image_tag('gear_dark.svg') %> Edit
       <% end %>
+      <%= link_to @sign, method: :delete, data: { confirm: 'Are you sure you want to delete this sign?'} do %>
+        <%= image_tag('close.svg') %> Delete
+      <% end %>
     </div>
   </div>
 

@@ -1,48 +1,59 @@
 require 'test_helper'
 
-class DeleteActivityTest < ActionDispatch::IntegrationTest
+class DeleteActivityTest < Capybara::Rails::TestCase
   
   setup do
     sign_in users(:james)
   end
 
   teardown do
-    sign_out
+    # sign_out
   end
 
   test "creating and deleting a slide" do
     assert_difference 'PublicActivity::Activity.count', 2 do
-      post slides_path, slide: { menu_name: 'Yo', template: 'standard' }
-      delete slide_path(Slide.last)
+      visit new_slide_path
+      fill_in 'slide_menu_name', with: 'yo'
+      select 'Standard', from: 'slide_template'
+      click_button 'Next'
+      click_link 'Delete'
     end
-    get notifications_index_path
-    assert_response :success
+    visit notifications_index_path
+    assert_equal 200, page.status_code
   end
 
   test "updating and deleteing a slide" do
     assert_difference 'PublicActivity::Activity.count', 2 do
-      put slide_path(slides(:one)), slide: { menu_name: 'updated', template: 'standard' }
-      delete slide_path(slides(:one))
+      visit edit_slide_path(slides(:one))
+      fill_in 'slide_menu_name', with: 'updated'
+      select 'Standard', from: 'slide_template'
+      click_button 'Update Slide'
+      click_link 'Edit'
+      click_link 'Delete'
     end
-    get notifications_index_path
-    assert_response :success
+    visit notifications_index_path
+    assert_equal 200, page.status_code
   end
 
   test "creating and deleting a sign" do
     assert_difference 'PublicActivity::Activity.count', 2 do
-      post signs_path, sign: { name: 'created a sign' }
-      delete sign_path(Sign.last)
+      visit new_sign_path
+      fill_in 'sign_name', with: 'created a sign'
+      click_button 'Create Sign'
+      click_link 'Delete'
     end
-    get notifications_index_path
-    assert_response :success
+    visit notifications_index_path
+    assert_equal 200, page.status_code
   end
 
   test "updating and deleting a sign" do
     assert_difference 'PublicActivity::Activity.count', 2 do
-      put sign_path(signs(:one)), sign: { name: 'updated a sign' }
-      delete sign_path(signs(:one))
+      visit edit_sign_path(signs(:one))
+      fill_in 'sign_name', with: 'cupdated a sign'
+      click_button 'Update Sign'
+      click_link 'Delete'
     end
-    get notifications_index_path
-    assert_response :success
+    visit notifications_index_path
+    assert_equal 200, page.status_code
   end
 end
