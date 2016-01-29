@@ -1,7 +1,8 @@
 class SignsController < ApplicationController
   include Ownable
 
-  before_action :set_sign, only: [:remove_slide, :add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
+  before_action :set_sign,                only: [:remove_slide, :add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
+  before_action :set_search_filters,      only: [:index]
 
   skip_before_action :authenticate_user!, only: [:play, :poll]
 
@@ -95,6 +96,12 @@ class SignsController < ApplicationController
     last_updated = Time.zone.parse(sign_params[:updated_at])
     @refresh = @sign.updated_at.to_i > last_updated.to_i
   end
+
+  def set_search_filters
+    SearchFilters.new(params, cookies, {
+      filter: ['all', 'mine' ]
+  })
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.

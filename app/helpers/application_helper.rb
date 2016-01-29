@@ -19,10 +19,9 @@ module ApplicationHelper
     controller.controller_name == 'slides'
   end
 
-  def filter_pill_link(text, value, options = {})
-    classes = params['filter'] == value ? 'active' : ''
-    classes = 'active' if options[:default]
-    link_to(text, "?filter=#{value}", class: classes, data: { value: value })
+  def search_filter(key, text, value, options = {})
+    classes = params[key] == value ? 'active' : ''
+    link_to(text, "?#{key}=#{value}", class: classes, data: { value: value })
   end
 
   def happy_button(text, href)
