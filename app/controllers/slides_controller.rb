@@ -129,9 +129,9 @@ class SlidesController < ApplicationController
     end
 
     def set_parent_sign_path
-      if id = request.referrer.to_s[/signs\/([^\/]+)/, 1]
-        session[:parent_sign_id]   = id
-        session[:parent_sign_path] = edit_sign_path(id)
+      if name = request.referrer.to_s[/signs\/([^\/]+)/, 1]
+        session[:parent_sign_id]   = Sign.friendly.find(name).id
+        session[:parent_sign_path] = edit_sign_path(Sign.friendly.find(name))
       else
         session[:parent_sign_id]   = nil
         session[:parent_sign_path] = nil
