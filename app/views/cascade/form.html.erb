@@ -1,0 +1,18 @@
+<div class="cascade-import-container">
+  <h1>Import From Cascade</h1>
+  <p>This tool will import an existing digital signage device from cascade into the new system.  Paste in the url from cascade where the device is currently published.</p>
+  <p>An example cascade url looks like: <code>http://www2.chapman.edu/digital-signage/devices/hashinger-science-center-1st-floor</code></p>
+  <br/>
+  <%= form_tag controller: 'cascade', action: 'import', method: :post do %>
+    <%= content_tag(:p, @error, id: 'error_explanation') if @error %>
+    <div class="input-field">
+      <%= text_field_tag :cascade_url, params[:cascade_url] %>
+      <%= label_tag :cascade_url, 'Cascade Device URL' %>
+    </div>
+    <div class="input-field">
+      <%= submit_tag "Import", class: 'btn green' %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "admin/loading_feedback", message: 'Importing...' %>
