@@ -39,7 +39,7 @@
 
     <%= form_tag add_owner_slide_path(@slide), remote: true do %>
       <%= hidden_field_tag :user_id, id: 'user_id' %>
-      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_slides_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
+      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_slides_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
       <%= submit_tag "Add", class: 'btn' %>
     <% end %>
 
