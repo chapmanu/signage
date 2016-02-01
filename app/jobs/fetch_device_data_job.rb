@@ -1,5 +1,6 @@
 class FetchDeviceDataJob < ActiveJob::Base
   queue_as :default
+  attr_reader :sign
 
   def perform(_args)
     args     = HashWithIndifferentAccess.new(_args)
@@ -7,9 +8,10 @@ class FetchDeviceDataJob < ActiveJob::Base
     data     = JSON.parse(response.body)
 
     Sign.transaction do
-      sign = save_sign(data)
-      save_slides(sign, data['collection'] || [])
+      @sign = save_sign(data)
+      save_slides(@sign, data['collection'] || [])
     end
+    @sign
   end
 
   private
