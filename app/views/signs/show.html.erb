@@ -41,7 +41,7 @@
   <div class="sign-slides">
     <div class="sign-slides-listing" id="js-sortable-slides">
       <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order).eager_load(:slide) %>
-      <%= link_to "+ New Slide", new_slide_path, class: 'happy-button add-new-slide', id: 'add-slide-link' %>
+      <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' %>
     </div>
   </div>
 </div>
