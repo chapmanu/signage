@@ -23,10 +23,4 @@ module ApplicationHelper
     classes = params[key] == value ? 'active' : ''
     link_to(text, "?#{key}=#{value}", class: classes, data: { value: value })
   end
-
-  def happy_button(text, href)
-    link_to(href, class: 'happy-button') do
-      "#{text} &nbsp;".html_safe + inline_svg('smiley.svg')
-    end
-  end
 end
