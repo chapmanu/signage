@@ -2,6 +2,10 @@ require 'test_helper'
 
 class FetchDeviceDataJobTest < ActiveJob::TestCase
 
+  test 'returns the sign' do
+    assert perform_job_with_scheduled_items.is_a?(Sign), "#perform did not return a sign"
+  end
+
   test "it saves slides" do
     assert_difference 'Slide.count', 8 do
       perform_job_with_people
