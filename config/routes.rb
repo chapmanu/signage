@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+  get 'cascade/form'
+  post 'cascade/import'
+
   get 'notifications/index'
 
   controller :marketing do

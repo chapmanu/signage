@@ -35,5 +35,11 @@ module Signage
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       html_tag
     }
+
+    config.generators do |g|
+      g.controller_specs false 
+      g.view_specs false
+      g.helper_specs false
+    end
   end
 end
