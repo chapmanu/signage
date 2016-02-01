@@ -19,10 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 15.minutes do
-  rake 'cascade:sync'
-end
-
 every 6.hours do
   rake 'faculty:sync'
 end
