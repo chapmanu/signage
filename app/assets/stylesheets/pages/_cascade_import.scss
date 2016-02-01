@@ -1,0 +1,8 @@
+.cascade-import-container {
+  margin-top: $base-spacing*4;
+  @include outer-container;
+
+  #error_explanation {
+    margin-bottom: $base-spacing;
+  }
+}
