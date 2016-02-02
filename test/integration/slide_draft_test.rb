@@ -1,15 +1,10 @@
 require 'test_helper'
 
 class SlideDraftTest < Capybara::Rails::TestCase
-  include Rack::Test::Methods
 
-  setup do
-    sign_in users(:james)
+  before do
+    sign_in users(:james)    
     @slide = slides(:one)
-  end
-
-  teardown do
-    # sign_out
   end
 
   test "drafts have equivalent negative ids" do
@@ -20,23 +15,19 @@ class SlideDraftTest < Capybara::Rails::TestCase
   test "drafts dont have associations to signs" do
     @slide.signs << signs(:one)
     assert_equal 1, @slide.signs.length
-
     visit draft_slide_path(@slide)
     assert_equal 0, Slide.unscoped.find(@slide.draft_id).signs.length
   end
 
   scenario "updating scheduled items does not result in duplicates", :js do  
-    skip('Need to add a javascript driver to the project')
-
-    visit edit_slide_path
-
-    patch draft_slide_path(@slide), { slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] } }
-    patch draft_slide_path(@slide), { slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] } }
-  
-    assert_equal 200, page.status_code
-
+    visit edit_slide_path(@slide)
+    materialize_select 'Schedule', from: 'slide_template'
+    click_link '+ Add Event'
+    fill_in 'Date of Event', with: 'Right now'
+    fill_in 'Time Event Starts', with: 'Never'
+    wait_for_ajax
     draft = @slide.find_or_create_draft
-    assert_equal 1, draft.scheduled_items.length
+    assert_equal 1, draft.scheduled_items.count
   end
 
   test "can preview a draft" do
