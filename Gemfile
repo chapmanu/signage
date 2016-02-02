@@ -82,6 +82,7 @@ group :test do
   gem 'vcr'
   gem 'minitest-reporters'
   gem 'minitest-rails-capybara'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end
 
