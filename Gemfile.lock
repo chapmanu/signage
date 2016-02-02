@@ -94,6 +94,8 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.1.0)
@@ -268,6 +270,7 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     ruby-progressbar (1.7.5)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.4.20)
     sass-rails (5.0.3)
@@ -282,6 +285,11 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     selectize-rails (0.12.1)
+    selenium-webdriver (2.50.0)
+      childprocess (~> 0.5)
+      multi_json (~> 1.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shellany (0.0.1)
     simplecov (0.11.1)
       docile (~> 1.1.0)
@@ -326,6 +334,7 @@ GEM
     webmock (1.21.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
+    websocket (1.2.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -377,6 +386,7 @@ DEPENDENCIES
   screencap (= 0.1.4)
   sdoc (~> 0.4.0)
   selectize-rails (= 0.12.1)
+  selenium-webdriver
   simplecov
   spring
   trix
