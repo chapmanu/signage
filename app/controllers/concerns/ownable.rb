@@ -10,13 +10,16 @@ module Ownable
   end
 
   def add_owner
-    @new_owner = !@owned_object.users.include?(@owner)
+    @is_new_owner = !@owned_object.users.include?(@owner)
     @owned_object.users << @owner
+    UserMailer.send("#{@owned_object.class.name.underscore}_add_owner", {user: @owner, item: @owned_object}).deliver_now
     render 'ownable/add_owner'
   end
 
   def remove_owner
-    @owned_object.users.delete User.find(params[:user_id])
+    @old_owner = User.find(params[:user_id])
+    @owned_object.users.delete @old_owner
+    UserMailer.send("#{@owned_object.class.name.underscore}_remove_owner", {user: @old_owner, item: @owned_object}).deliver_now
     render 'ownable/remove_owner'
   end
 
