@@ -1,4 +1,4 @@
-<% if @new_owner %>
+<% if @is_new_owner %>
 
   var $item = $('<%= j render("ownable/owner_item", owner: @owner, owned: @owned_object, removable: true) %>').hide();;
   $('.owners-list').append($item);
