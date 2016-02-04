@@ -26,6 +26,16 @@ module Signage
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Link Action Mailer to the Chapman SMTP server
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.smtp_settings = {
+      address:              'smtp.chapman.edu',
+      port:                 587,
+      domain:               'chapman.edu'
+    }
+    config.action_mailer.raise_delivery_errors = true
+
     # Custom Devise Layout for Sessions
     config.to_prepare do
       Devise::SessionsController.layout "admin"
