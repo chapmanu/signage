@@ -31,8 +31,7 @@ module Signage
     config.action_mailer.perform_deliveries = true
     config.action_mailer.smtp_settings = {
       address:              'smtp.chapman.edu',
-      port:                 587,
-      domain:               'chapman.edu'
+      port:                 25
     }
     config.action_mailer.raise_delivery_errors = true
 
