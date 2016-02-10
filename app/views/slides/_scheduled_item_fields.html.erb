@@ -34,12 +34,12 @@
   </div>
 
   <div class="input-field">
-    <%= f.select :admission, Slide.admission_types.map{|t| [t, t]} %>
+    <%= f.select :admission, Slide.admission_types.map{|t| [t, t]}, include_blank: 'N/A' %>
     <%= f.label :admission %>
   </div>
 
   <div class="input-field">
-    <%= f.select :audience, Slide.audience_types.map{|t| [t, t]} %>
+    <%= f.select :audience, Slide.audience_types.map{|t| [t, t]}, include_blank: 'N/A' %>
     <%= f.label :audience %>
   </div>
 
