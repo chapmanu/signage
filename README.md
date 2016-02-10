@@ -6,6 +6,8 @@
 ```
 git clone https://github.com/chapmanu/signage.git
 cd signage
+touch .env
+# Ask a team member for the environment variables
 bundle install
 rake db:create db:migrate
 rake cascade:sync
