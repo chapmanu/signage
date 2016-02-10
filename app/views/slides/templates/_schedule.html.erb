@@ -22,12 +22,12 @@
         </div>
         <p class="ui-event-admission">
           <% unless item.admission.blank? %>
-            <img class="ui-event-admission-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-ticket<%=slide.theme =~/dark/ ? '-white' : '' %>.svg"/><%= item.admission %>
+            <img class="ui-event-admission-icon" id="ui-event-admission-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-ticket<%=slide.theme =~/dark/ ? '-white' : '' %>.svg"/><%= item.admission %>
           <% end %>
         </p>
         <p class="ui-event-audience">
           <% unless item.audience.blank? %>
-            <img class="ui-event-audience-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-audience<%=slide.theme =~/dark/ ? '-white' : '' %>.svg"/><%= item.audience %>
+            <img class="ui-event-audience-icon" id="ui-event-audience-icon" src="//www2.chapman.edu/digital-signage/_files/img/icon-audience<%=slide.theme =~/dark/ ? '-white' : '' %>.svg"/><%= item.audience %>
           <% end %>
         </p>
       </article>
