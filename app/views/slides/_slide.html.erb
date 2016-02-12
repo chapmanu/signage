@@ -8,10 +8,10 @@
     <%= render "slides/templates/#{slide.template}", slide: slide %>
   </article>
 
-  <% if slide.organizer != 'None' %>
+  <% if slide.sponsor %>
     <footer class="ui-slide-organizer">
-      <%= image_tag "organizers/icon-#{SlidesHelper::ORGANIZER_ICONS[slide.organizer] || 'chapman'}.svg", class: 'ui-slide-organizer-icon' %>
-      <%= slide.organizer %>
+      <%= image_tag "#{slide.sponsor.icon || 'chapman.svg'}", class: 'ui-slide-organizer-icon' %>
+      <%= slide.sponsor.name %>
     </footer>
   <% end %>
 </div>
