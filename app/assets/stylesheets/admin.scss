@@ -37,6 +37,8 @@ html, body {
 }
 
 .admin-content {
+  @include outer-container;
+  margin-top: $base-spacing*4;
   padding-bottom: $base-spacing*4;
 }
 
