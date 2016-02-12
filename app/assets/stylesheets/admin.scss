@@ -37,8 +37,6 @@ html, body {
 }
 
 .admin-content {
-  @include outer-container;
-  margin-top: $base-spacing*4;
   padding-bottom: $base-spacing*4;
 }
 
@@ -181,4 +179,9 @@ html, body {
 
 .add-device-editors-container {
   margin-top: $base-spacing;
+}
+
+.content-container {
+  margin-top: $base-spacing*4;
+  @include outer-container;
 }
