@@ -1,5 +1,4 @@
-<div>
-<div>
+<div class="content-container">
   <p>
   	<strong>Name:</strong>
   	<%= @sponsor.name %>
@@ -8,6 +7,6 @@
   	<strong>Icon:</strong>
   	<%= @sponsor.icon %>
   </p>
+  <%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
+  <%= link_to 'Back', sponsors_path %>
 </div>
-<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
-<%= link_to 'Back', sponsors_path %>
