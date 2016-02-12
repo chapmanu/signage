@@ -24,7 +24,7 @@ class SlideDraftTest < Capybara::Rails::TestCase
     materialize_select 'Schedule', from: 'slide_template'
     click_link '+ Add Event'
     fill_in 'Date of Event', with: 'Right now'
-    fill_in 'Time Event Starts', with: 'Never'
+    fill_in 'Time Event Starts', with: ''
     wait_for_ajax
     draft = @slide.find_or_create_draft
     assert_equal 1, draft.scheduled_items.count
