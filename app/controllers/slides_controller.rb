@@ -166,8 +166,6 @@ class SlidesController < ApplicationController
         :show,
         :building_name,
         :menu_name,
-        :organizer,
-        :organizer_id,
         :duration,
         :heading,
         :subheading,
@@ -185,6 +183,7 @@ class SlidesController < ApplicationController
         :background_cache,
         :foreground_cache,
         :remove_foreground,
+        :sponsor_id,
         :sign_ids => [],
         :scheduled_items_attributes => [
           :id,

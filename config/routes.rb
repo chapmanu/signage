@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     get 'lookup', on: :collection
   end
 
+  # Sponsors
+  resources :sponsors
+
   root 'notifications#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
