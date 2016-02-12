@@ -180,3 +180,8 @@ html, body {
 .add-device-editors-container {
   margin-top: $base-spacing;
 }
+
+.content-container {
+  margin-top: $base-spacing*4;
+  @include outer-container;
+}
