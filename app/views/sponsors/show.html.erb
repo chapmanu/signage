@@ -1,0 +1,13 @@
+<div>
+<div>
+  <p>
+  	<strong>Name:</strong>
+  	<%= @sponsor.name %>
+  </p>
+  <p>
+  	<strong>Icon:</strong>
+  	<%= @sponsor.icon %>
+  </p>
+</div>
+<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
+<%= link_to 'Back', sponsors_path %>

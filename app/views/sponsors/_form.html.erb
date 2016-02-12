@@ -1,0 +1,13 @@
+<div class="sponsor-form-container">
+  <%= form_for @sponsor do |f| %>
+    <div class="input-field">
+	  <%= f.label :name %>
+	  <%= f.text_field :name %>
+	</div>
+	<div class="input-field">
+	  <%= f.label :icon %>
+	  <%= f.text_field :icon %>
+	</div>
+	<%= f.submit %>
+  <% end %>
+</div>
