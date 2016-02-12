@@ -1,9 +1,10 @@
 class AddSponsorsToSlides < ActiveRecord::Migration
 
   def up
-
   	Slide.find_each do |slide|
   		name = slide.organizer
+      next if name == "None"
+
   		icon_path = "organizers/icon-#{SlidesHelper::ORGANIZER_ICONS[name] || 'chapman'}.svg"
   		sponsor = Sponsor.find_or_create_by(name: name, icon: icon_path)
   		slide.sponsor = sponsor
