@@ -7,6 +7,8 @@ class Slide < ActiveRecord::Base
 
   has_many :scheduled_items, dependent: :destroy
 
+  belongs_to :sponsor
+
   after_save :touch_signs
 
   include PublicActivity::Common
