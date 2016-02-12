@@ -21,7 +21,7 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "should create slide" do
     assert_difference('Slide.count') do
-      post :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, organizer: @slide.organizer, organizer_id: @slide.organizer_id, subheading: @slide.subheading, template: @slide.template }
+      post :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, subheading: @slide.subheading, template: @slide.template }
     end
     assert_match /dev-screenshot/, assigns(:slide).reload.screenshot.url
     assert_redirected_to edit_slide_path(assigns(:slide))
@@ -38,7 +38,7 @@ class SlidesControllerTest < ActionController::TestCase
   end
 
   test "should update slide" do
-    patch :update, id: @slide, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, organizer: @slide.organizer, organizer_id: @slide.organizer_id, subheading: @slide.subheading, template: @slide.template }
+    patch :update, id: @slide, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, subheading: @slide.subheading, template: @slide.template }
     assert_redirected_to slide_path(assigns(:slide))
   end
 
@@ -74,7 +74,7 @@ class SlidesControllerTest < ActionController::TestCase
 
     test "creating a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
-      patch :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, organizer: @slide.organizer, organizer_id: @slide.organizer_id, subheading: @slide.subheading, template: @slide.template }
+      patch :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, subheading: @slide.subheading, template: @slide.template }
     end
   end
 

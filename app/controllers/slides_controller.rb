@@ -158,8 +158,6 @@ class SlidesController < ApplicationController
     def slide_params
       params.require(:slide).permit(
         :name,
-        :organizer,
-        :organizer_id,
         :template,
         :theme,
         :layout,
