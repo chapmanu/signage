@@ -4,8 +4,6 @@ one:
   name: one
   template: standard
   menu_name: MyString
-  organizer: MyString
-  organizer_id: MyString
   duration: 5
   heading: MyString
   subheading: MyString
@@ -23,8 +21,6 @@ two:
   name: two
   template: standard
   menu_name: MyString
-  organizer: MyString
-  organizer_id: MyString
   duration: 5
   heading: MyString
   subheading: MyString
