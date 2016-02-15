@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'server', to: 'server#index'
+
   get 'cascade/form'
   post 'cascade/import'
 
