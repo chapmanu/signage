@@ -49,3 +49,12 @@ picture {
 strong {
   font-weight: bold;
 }
+
+pre {
+  background-color: $dark-gray;
+  color: white;
+  font-weight: bold;
+  padding: $base-spacing;
+  border-top: $base-spacing solid lighten($dark-gray, 50%);
+  @include border-radius;
+}
