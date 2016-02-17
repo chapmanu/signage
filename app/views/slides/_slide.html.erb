@@ -10,7 +10,7 @@
 
   <% if slide.sponsor %>
     <footer class="ui-slide-organizer">
-      <%= image_tag "#{slide.sponsor.icon || 'chapman.svg'}", class: 'ui-slide-organizer-icon' unless slide.sponsor.icon.blank? %>
+      <%= image_tag slide.sponsor.icon, class: 'ui-slide-organizer-icon' unless slide.sponsor.icon.blank? %>
       <%= slide.sponsor.name %>
     </footer>
   <% end %>
