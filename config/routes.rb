@@ -39,8 +39,6 @@ Rails.application.routes.draw do
   end
 
   # Slides
-  patch 'slides/live_preview'
-  post 'slides/live_preview'
   resources :slides, concerns: :ownable do
     get   'preview', on: :member
     get   'draft', on: :member

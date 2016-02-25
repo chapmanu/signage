@@ -4,8 +4,8 @@ var Slide = function($element) {
 
   if (/directory/.test(this.meta('template'))) {
     this.addBehavior('autoscrollable', {
-      container:        '.ui-slide-collection',
-      items:            '.ui-member',
+      container:       '.ui-slide-collection',
+      items:           '.ui-member',
       visible_rows:    4,
       items_per_row:   4,
       rows_per_scroll: 2,
@@ -14,8 +14,8 @@ var Slide = function($element) {
 
   } else if (/schedule/.test(this.meta('template'))) {
     this.addBehavior('autoscrollable', {
-      container:        '.ui-slide-collection',
-      items:            '.ui-event',
+      container:       '.ui-slide-collection',
+      items:           '.ui-event',
       visible_rows:    4,
       items_per_row:   1,
       rows_per_scroll: 1,
