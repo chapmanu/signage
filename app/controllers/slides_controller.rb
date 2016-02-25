@@ -45,18 +45,6 @@ class SlidesController < ApplicationController
     render nothing: true
   end
 
-  def live_preview
-    @slide = params[:id].blank? ? Slide.new : Slide.find(params[:id])
-    @slide.attributes = slide_params
-
-    @slide.remove_background! if slide_params[:remove_background] == '1'
-    @slide.remove_foreground! if slide_params[:remove_foreground] == '1'
-
-    render :preview, layout: 'application'
-  rescue ActionView::Template::Error
-    render status: :unprocessable_entity, nothing: true
-  end
-
   # GET /slides/new
   def new
     @slide = Slide.new
