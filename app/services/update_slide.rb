@@ -21,7 +21,7 @@ class UpdateSlide
           if ss.sign.owned_by?(current_user)
             ss.update(approved: true)
           else
-            UserMailer.sign_slide_request(sign_slide: ss, requestor: current_user).deliver_later
+            UserMailer.sign_slide_request(sign_slide: ss, requestor: current_user).deliver_now
           end
         end
         true
