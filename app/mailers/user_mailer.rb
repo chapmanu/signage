@@ -17,9 +17,11 @@ class UserMailer < ApplicationMailer
   end
 
   def sign_slide_rejected(args)
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    @rejector     = args[:rejector]
+    @sign         = args[:sign_slide].sign
+    @slide        = args[:sign_slide].slide
+    @slide_owners = @slide.owners
+    mail to: @slide_owners.map(&:email), subject: "Slide Rejected to Play on #{@sign.name}"
   end
 
   def sign_remove_owner(args)
