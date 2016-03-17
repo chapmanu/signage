@@ -46,12 +46,12 @@
     <br />
     <label>Shown on <%= pluralize(@slide.signs.length, 'sign')%>:</label>
     <ul class="signs-list">
-      <% @slide.signs.each do |sign| %>
+      <% @slide.sign_slides.each do |ss| %>
         <li>
           <div class="sign-list-item-status">
-            <%= content_tag :div, nil, class: (sign.active? ? 'sign-active' : 'sign-inactive') %>
+            <%= content_tag :div, nil, class: (ss.sign.active? ? 'sign-active' : 'sign-inactive') %>
           </div>
-          <p><%= link_to sign.name, sign %></p>
+          <p><%= link_to ss.sign.name, ss.sign %> <%= "(pending approval)" unless ss.approved? %></p>
         </li>
       <% end %>
     </ul>

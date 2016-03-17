@@ -10,6 +10,7 @@ class FetchDeviceDataJob < ActiveJob::Base
     Sign.transaction do
       @sign = save_sign(data)
       save_slides(@sign, data['collection'] || [])
+      @sign.sign_slides.update_all(approved: true)
     end
     @sign
   end
