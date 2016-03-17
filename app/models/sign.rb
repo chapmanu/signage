@@ -17,6 +17,8 @@ class Sign < ActiveRecord::Base
 
   include OwnableModel
 
+  alias_method :owners, :users
+
   def self.menus
     @_menus ||= Dir[Rails.root.join('app', 'views', 'signs', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
   end

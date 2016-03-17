@@ -1,9 +1,11 @@
 class UserMailer < ApplicationMailer
 
   def sign_slide_request(args)
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    @requestor = args[:requestor]
+    @sign      = args[:sign_slide].sign
+    @slide     = args[:sign_slide].slide
+    @owners    = @sign.owners
+    mail to: @owners.map(&:email), subject: "Play Slide Request: #{@slide.menu_name}"
   end
 
   def sign_slide_approved(args)
