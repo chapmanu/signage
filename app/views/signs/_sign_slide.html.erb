@@ -5,9 +5,9 @@
     <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
   </div>
 
-  <div class="screenshot">
+  <div class="screenshot <%= 'pending-approval' unless sign_slide.approved? %>">
     <%= image_tag slide.screenshot.url, height: 100 %>
-    <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %> - <%= sign_slide.approved ? 'T' : 'F'%></div>
+    <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %></div>
   </div>
 
   <div class="right-actions">
