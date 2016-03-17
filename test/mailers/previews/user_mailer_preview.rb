@@ -9,4 +9,8 @@ class UserMailerPreview < ActionMailer::Preview
   def sign_slide_approved
     UserMailer.sign_slide_approved(approver: User.take, sign_slide: SignSlide.take)
   end
+
+  def sign_slide_rejected
+    UserMailer.sign_slide_rejected(rejector: User.take, sign_slide: SignSlide.take)
+  end
 end
