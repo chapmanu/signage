@@ -27,24 +27,24 @@ class UserMailer < ApplicationMailer
   def sign_remove_owner(args)
     @user = args[:user]
     @sign = args[:item]
-    mail(to: @user.email, subject: "You have been removed as an owner of the sign '#{@sign.name}'")
+    mail(to: @user.email, subject: "You've been removed as an owner of the #{@sign.name} sign")
   end
 
   def sign_add_owner(args)
     @user = args[:user]
     @sign = args[:item]
-    mail(to: @user.email, subject: "You have been added as an owner of the sign '#{@sign.name}'")
+    mail(to: @user.email, subject: "You've been added as an owner of the #{@sign.name} sign")
   end
 
   def slide_remove_owner(args)
     @user = args[:user]
     @slide = args[:item]
-    mail(to: @user.email, subject: "You have been removed as an owner of the slide '#{@slide.name}'")
+    mail(to: @user.email, subject: "You've been removed as an owner of the #{@slide.menu_name} slide")
   end
 
   def slide_add_owner(args)
     @user = args[:user]
     @slide = args[:item]
-    mail(to: @user.email, subject: "You have been added as an owner of the slide '#{@slide.name}'")
+    mail(to: @user.email, subject: "You've been added as an owner of the #{@slide.menu_name} slide")
   end
 end
