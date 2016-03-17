@@ -10,9 +10,7 @@
       <%= label_tag :cascade_url, 'Cascade Device URL' %>
     </div>
     <div class="input-field">
-      <%= submit_tag "Import", class: 'btn green' %>
+      <%= submit_tag "Import", class: 'btn green', data: { feedback: 'Importing...' } %>
     </div>
   <% end %>
 </div>
-
-<%= render "admin/loading_feedback", message: 'Importing...' %>

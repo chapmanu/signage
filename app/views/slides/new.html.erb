@@ -30,8 +30,6 @@
 
     <%= f.hidden_field :sign_ids, multiple: true, value: session[:parent_sign_id] %>
 
-    <%= f.submit "Next", class: 'btn' %>
+    <%= f.submit "Next", class: 'btn', data: { feedback: 'Loading editor...' } %>
   <% end %>
 </div>
-
-<%= render 'admin/loading_feedback', message: 'Loading editor...' %>
