@@ -6,4 +6,7 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.sign_slide_request(sign_slide: SignSlide.take, requestor: User.take)
   end
 
+  def sign_slide_approved
+    UserMailer.sign_slide_approved(approver: User.take, sign_slide: SignSlide.take)
+  end
 end
