@@ -1,5 +1,9 @@
-<h1>UserMailer#sign_slide_request</h1>
+<h1>Chapman Digital Signage</h1>
 
-<p>
-  <%= @greeting %>, find me in app/views/user_mailer/sign_slide_request.html.erb
-</p>
+<p>Hi <%= @owners.map(&:first_name).to_sentence %>,</p>
+
+<p><%= @requestor.full_name_with_email %> is requesting that their slide <strong><%= @slide.menu_name %></strong> be played on your sign <strong><%= @sign.name %></strong>.</p>
+
+<p><%= image_tag @slide.screenshot.url, alt: @slide.menu_name %></p>
+
+<p><%= link_to "Log in to Approve or Reject", root_url %></p>
