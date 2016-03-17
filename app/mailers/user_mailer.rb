@@ -9,9 +9,11 @@ class UserMailer < ApplicationMailer
   end
 
   def sign_slide_approved(args)
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    @approver     = args[:approver]
+    @sign         = args[:sign_slide].sign
+    @slide        = args[:sign_slide].slide
+    @slide_owners = @slide.owners
+    mail to: @slide_owners.map(&:email), subject: "Slide Approved to Play on #{@sign.name}"
   end
 
   def sign_slide_rejected(args)
