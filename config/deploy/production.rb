@@ -30,7 +30,7 @@ server 'signage.chapman.edu', user: 'charles', roles: %w{app db web}
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-set :branch, :master
+set :branch, ENV["BRANCH"] || "master"
 
 
 # Custom SSH Options
