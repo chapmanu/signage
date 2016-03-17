@@ -20,4 +20,14 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ["no-reply@mail.chapman.edu"], mail.from
     assert_match "was approved by James", mail.body.encoded
   end
+
+  test "sign_slide_rejected" do
+    slides(:one).owners << users(:ross)
+    signs(:one).owners << users(:james)
+    mail = UserMailer.sign_slide_rejected(sign_slide: sign_slides(:one), rejector: users(:james))
+    assert_equal "Slide Rejected to Play on sign_one", mail.subject
+    assert_equal ["loehner@chapman.edu"], mail.to
+    assert_equal ["no-reply@mail.chapman.edu"], mail.from
+    assert_match /James .* chose not to display/, mail.body.encoded
+  end
 end
