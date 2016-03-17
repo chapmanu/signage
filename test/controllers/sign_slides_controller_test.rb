@@ -13,7 +13,7 @@ class SignSlidesControllerTest < ActionController::TestCase
     assert @sign_slide.reload.approved?, "It did not approve the slide"
   end
 
-  test 'approving a sign sends and email' do
+  test 'approving a sign sends an email' do
     assert_difference('ActionMailer::Base.deliveries.length', 1) do
       post :approve, id: @sign_slide, format: :js
     end

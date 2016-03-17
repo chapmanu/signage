@@ -11,7 +11,7 @@ module IntegrationHelpers
   end
 
   def sign_out
-    visit root_url
+    visit root_path
     click_link 'Sign Out'
   end
 
