@@ -1,0 +1,19 @@
+$row-color: darken(white, 5%);
+
+td, th {
+  border-radius: 0;
+  padding: 1em $base-spacing;
+}
+
+table {
+  tbody {
+    tr:nth-child(even) {
+      background-color: $row-color;
+      border-radius: 0;
+    }    
+  }
+  thead tr {
+    background-color: $dark-gray;
+    color: white;
+  }
+}

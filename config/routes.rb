@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get 'admin/devices'
   get 'admin/sessions'
   post 'admin/update_emergency'
-  post 'admin/clear_emergency'
+  post 'admin/clear_single_emergency'
+  post 'admin/clear_all_emergencies'
 
 
   concern :ownable do
