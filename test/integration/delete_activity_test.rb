@@ -6,10 +6,6 @@ class DeleteActivityTest < Capybara::Rails::TestCase
     sign_in users(:james)
   end
 
-  teardown do
-    # sign_out
-  end
-
   test "creating and deleting a slide" do
     assert_difference 'PublicActivity::Activity.count', 2 do
       visit new_slide_path

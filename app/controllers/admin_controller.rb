@@ -14,7 +14,12 @@ class AdminController < ApplicationController
     redirect_to admin_emergency_path, alert: "Emergency message was successfully broadcasted"
   end
 
-  def clear_emergency
+  def clear_single_emergency
+    Sign.find(params[:id]).update(emergency_params)
+    redirect_to admin_emergency_path, alert: "Emergency message successfully cleared"
+  end
+
+  def clear_all_emergencies
     Sign.all.update_all(emergency: nil, emergency_detail: nil)
     redirect_to admin_emergency_path, alert: "All emergency messages have been cleared"
   end
