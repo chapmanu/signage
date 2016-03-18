@@ -115,6 +115,22 @@
     background: $dark-gray;
     img { display: block; }
   }
+
+  .pending-approval {
+    position: relative;
+    
+    &:after {
+      padding: $base-spacing;
+      text-align: center;
+      color: white;
+      position: absolute;
+      font-weight: bold;
+      content: 'Pending Approval';
+      background-color: rgba(0,0,0,0.7);
+      top: 0; bottom: 0; right: 0; left: 0;
+    }
+  }
+
   .status {
     height: 15px;
     line-height: 15px;

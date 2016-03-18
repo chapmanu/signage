@@ -34,7 +34,10 @@ $(document).on('ready', function(e) {
 
   $("abbr.timeago").timeago();
   
-  $('form').on('submit', function() {
-    $('#saving-feedback').show();
+  $("[data-feedback]").on("click", function() {
+    var message = $(this).data('feedback');
+    $feedback = $("#feedback");
+    $feedback.find('.message').text(message);
+    $feedback.show();
   });
 });

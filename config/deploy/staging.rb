@@ -72,4 +72,4 @@ def current_git_branch
 end
 
 # Set the deploy branch to the current branch
-set :branch, current_git_branch
+set :branch, ENV["BRANCH"] || current_git_branch

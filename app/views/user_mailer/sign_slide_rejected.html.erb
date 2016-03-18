@@ -1,5 +1,7 @@
-<h1>UserMailer#sign_slide_rejected</h1>
+<h1>Chapman Digital Signage</h1>
 
-<p>
-  <%= @greeting %>, find me in app/views/user_mailer/sign_slide_rejected.html.erb
-</p>
+<p>Hi <%= @slide_owners.map(&:first_name).to_sentence %>,</p>
+
+<p><%= @rejector.full_name_with_email %> chose not to display your slide <strong><%= @slide.menu_name %></strong> on their sign <strong><%= @sign.name %></strong>.</p>
+
+<p>For more information, please email them directly: <%=link_to @rejector.email, "mailto:#{@rejector.email}"%></p>

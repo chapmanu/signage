@@ -79,7 +79,6 @@ class SlidesController < ApplicationController
   def update
     respond_to do |format|
       if UpdateSlide.execute(@slide, slide_params, current_user)
-        @slide.take_screenshot
         @slide.create_activity(:update, owner: current_user, parameters: { name: @slide.menu_name })
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }

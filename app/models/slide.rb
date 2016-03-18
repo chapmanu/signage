@@ -35,6 +35,8 @@ class Slide < ActiveRecord::Base
   include Schedulable
   include OwnableModel
 
+  alias_method :owners, :users
+
   accepts_nested_attributes_for :scheduled_items, allow_destroy: true
 
   paginates_per 24
