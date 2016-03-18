@@ -233,7 +233,7 @@
         </div>
 
         <div class="actions" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
-          <%= f.button class: 'btn green' %>
+          <%= f.button class: 'btn green', data: { feedback: 'Saving...' } %>
         </div>
       </div>
       <div class="slide-live-preview">
@@ -252,5 +252,3 @@
     <%= link_to "Delete", @slide, class: 'delete-slide', method: :delete, data: { confirm: 'Are you sure you want to delete this slide?'} %>
   <% end %>
 </div> 
-
-<%= render 'admin/loading_feedback', message: 'Saving...' %>

@@ -1,3 +1,5 @@
-<h1>Hello <%= @user.first_name %></h1>
+<h1>Chapman Digital Signage</h1>
 
-<p>You have been removed as an owner of the slide '<%= @slide.name %>'</p>
+<p>Hi <%= @user.first_name %>,</p>
+
+<p>You have been removed as an owner of the slide <%= link_to @slide.menu_name, slide_url(@slide) %>.</p>
