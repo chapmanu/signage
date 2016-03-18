@@ -5,6 +5,7 @@ class UserMailer < ApplicationMailer
     @sign      = args[:sign_slide].sign
     @slide     = args[:sign_slide].slide
     @owners    = @sign.owners
+    attachments.inline['screenshot.png'] = File.read(@slide.screenshot.path)
     mail to: @owners.map(&:email), subject: "Play Slide Request: #{@slide.menu_name}"
   end
 

@@ -4,6 +4,6 @@
 
 <p><%= @requestor.full_name_with_email %> is requesting that their slide <strong><%= @slide.menu_name %></strong> be played on your sign <strong><%= @sign.name %></strong>.</p>
 
-<p><%= image_tag @slide.screenshot.url, alt: @slide.menu_name %></p>
+<p><%= image_tag attachments['screenshot.png'].url, alt: @slide.menu_name %></p>
 
 <p><%= link_to "Log in to Approve or Reject", root_url %></p>
