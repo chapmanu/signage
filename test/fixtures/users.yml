@@ -1,18 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: 'one@chapman.edu'
+  first_name: one
+  last_name: user
+  email: one@chapman.edu
 
 two:
-  email: 'two@chapman.edu'
+  first_name: two
+  last_name: user
+  email: two@chapman.edu
 
 james:
-  first_name: 'James'
-  last_name: 'Kerr'
+  first_name: James
+  last_name: Kerr
   email: jkerr@chapman.edu
 
+ross:
+  first_name: Ross
+  last_name: Loehner
+  email: loehner@chapman.edu
+
 super_admin:
-  first_name: 'powerful'
-  last_name: 'user'
-  email: 'allthepower@chapman.edu'
+  first_name: powerful
+  last_name: user
+  email: allthepower@chapman.edu
   role: <%= User.roles[:super_admin] %>

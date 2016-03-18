@@ -19,17 +19,6 @@ class SlideDraftTest < Capybara::Rails::TestCase
     assert_equal 0, Slide.unscoped.find(@slide.draft_id).signs.length
   end
 
-  scenario "updating scheduled items does not result in duplicates", :js do  
-    visit edit_slide_path(@slide)
-    materialize_select 'Schedule', from: 'slide_template'
-    click_link '+ Add Event'
-    fill_in 'Date of Event', with: 'Right now'
-    fill_in 'Time Event Starts', with: ''
-    wait_for_ajax
-    draft = @slide.find_or_create_draft
-    assert_equal 1, draft.scheduled_items.count
-  end
-
   test "can preview a draft" do
     draft = @slide.find_or_create_draft
     visit preview_slide_path(draft)

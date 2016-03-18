@@ -42,25 +42,6 @@ class SlidesControllerTest < ActionController::TestCase
     assert_redirected_to slide_path(assigns(:slide))
   end
 
-  test "should check sign slide approvals" do
-    @slide.signs.clear
-    users(:one).signs.clear
-    sign_ids = Sign.create([{name: 'one'}, {name: 'two'}, {name: 'three'}]).map(&:id) # creating some random signs
-    users(:one).signs << Sign.find(sign_ids[0]) # current_user now owns 1 of the signs
-
-    assert_difference('ActionMailer::Base.deliveries.length', 2) do
-      patch :update, id: @slide, slide: { sign_ids: sign_ids }
-    end
-
-    assert_equal 1, @slide.sign_slides.where(approved: true).count
-    assert_equal 2, @slide.sign_slides.where(approved: false).count
-
-    # When you do it again, no more emails get sent
-    assert_no_difference('ActionMailer::Base.deliveries.length') do
-      patch :update, id: @slide, slide: { sign_ids: sign_ids }
-    end
-  end
-
   test "took screenshot after update" do
     patch :update, id: @slide, slide: { menu_name: 'something to update'}
     assert_match /dev-screenshot/, assigns(:slide).reload.screenshot.url
@@ -72,13 +53,13 @@ class SlidesControllerTest < ActionController::TestCase
     end
   end
 
-    test "creating a slide produces 1 new activity record" do
+  test "creating a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
       patch :create, slide: { background: @slide.background, background_sizing: @slide.background_sizing, background_type: @slide.background_type, content: @slide.content, datetime: @slide.datetime, duration: @slide.duration, foreground: @slide.foreground, foreground_sizing: @slide.foreground_sizing, foreground_type: @slide.foreground_type, heading: @slide.heading, location: @slide.location, menu_name: @slide.menu_name, name: @slide.name, subheading: @slide.subheading, template: @slide.template }
     end
   end
 
-  test "destorying a slide produces 1 new activity record" do
+  test "destroying a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
       delete :destroy, id: @slide
     end
@@ -90,6 +71,15 @@ class SlidesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to slides_path
+  end
+
+  test "updating draft scheduled items does not result in duplicates" do
+    patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
+    patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
+
+    assert_response :success
+    draft = @slide.find_or_create_draft
+    assert_equal 1, draft.scheduled_items.length
   end
 
 end

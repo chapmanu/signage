@@ -4,13 +4,13 @@ class SignSlidesController < ApplicationController
   def approve
     @sign_slide.update(approved: true)
     @sign_slide.sign.touch
-    UserMailer.sign_slide_approved({}).deliver_now
+    UserMailer.sign_slide_approved(sign_slide: @sign_slide, approver: current_user).deliver_now
   end
 
   def reject
     @sign_slide.destroy
     @sign_slide.sign.touch
-    UserMailer.sign_slide_rejected({}).deliver_now
+    UserMailer.sign_slide_rejected(sign_slide: @sign_slide, rejector: current_user).deliver_now
   end
 
   private
