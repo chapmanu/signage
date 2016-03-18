@@ -59,7 +59,7 @@ class SlidesControllerTest < ActionController::TestCase
     end
   end
 
-  test "destorying a slide produces 1 new activity record" do
+  test "destroying a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
       delete :destroy, id: @slide
     end
@@ -71,6 +71,15 @@ class SlidesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to slides_path
+  end
+
+  test "updating draft scheduled items does not result in duplicates" do
+    patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
+    patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
+
+    assert_response :success
+    draft = @slide.find_or_create_draft
+    assert_equal 1, draft.scheduled_items.length
   end
 
 end
