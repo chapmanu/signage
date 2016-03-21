@@ -5,7 +5,8 @@ class SlidesControllerTest < ActionController::TestCase
 
   setup do
     @slide = @owned_object = slides(:one)
-    sign_in users(:one)
+    sign_in users(:two)
+    @slide.owners << users(:two)
   end
 
   test "should get index" do

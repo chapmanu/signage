@@ -24,11 +24,13 @@
           <% end %>
         </div>
 
-        <div class="action-link">
-          <%= link_to edit_slide_path(slide) do %>
-            <%= inline_svg('gear_light.svg') %> Edit
-          <% end %>
-        </div>
+        <% if can?(:update, slide) %>
+          <div class="action-link">
+            <%= link_to edit_slide_path(slide) do %>
+              <%= inline_svg('gear_light.svg') %> Edit
+            <% end %>
+          </div>  
+        <% end %>
       </div>
     </div>
   </div>
