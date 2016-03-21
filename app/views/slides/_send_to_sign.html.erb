@@ -1,6 +1,6 @@
 <!-- HIDDEN FORM -->
 <div class="modal modal-fixed-footer send-to-slide-modal" id="send-slide-<%= slide.id %>">
-  <%= form_for slide do |f| %>
+  <%= form_for slide, url: send_to_sign_slide_path(slide) do |f| %>
     <div class="modal-content">
         <%= f.hidden_field :sign_ids, {multiple: true, value: ''} %>
         <% signs.each do |sign| %>

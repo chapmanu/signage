@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get   'preview', on: :member
     get   'draft', on: :member
     patch 'draft', on: :member
+    patch 'send_to_sign', on: :member
   end
 
   # Sign Slide
