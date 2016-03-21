@@ -1,6 +1,10 @@
 
 class SlidesController < ApplicationController
   include Ownable
+  
+  layout 'admin', except: [:preview]
+
+  skip_before_action :authenticate_user!, only: [:preview]
 
   before_action :set_slide,                  only: [:draft, :show, :edit, :update, :destroy]
   before_action :set_slide_or_draft,         only: [:preview]
@@ -8,9 +12,7 @@ class SlidesController < ApplicationController
   before_action :set_parent_sign_path,       only: [:new, :edit]
   before_action :set_search_filters,         only: [:index]
 
-  skip_before_action :authenticate_user!, only: [:preview]
-
-  layout 'admin', except: [:preview]
+  load_and_authorize_resource
 
 
   # GET /slides

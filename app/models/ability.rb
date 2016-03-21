@@ -15,8 +15,8 @@ class Ability
     end
 
     # All users can do these things
-    can [:read, :create], Sign
-    can [:read, :create], Slide
+    can [:read, :create, :play], Sign
+    can [:read, :create, :preview], Slide
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
