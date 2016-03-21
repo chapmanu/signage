@@ -18,10 +18,12 @@
       <%= render partial: 'ownable/owner_item', collection: @sign.users, as: :owner, locals: { removable: true, owned: @sign } %>
     </ul>
 
-    <%= form_tag add_owner_sign_path(@sign), remote: true do %>
-      <%= hidden_field_tag :user_id, id: 'user_id' %>
-      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_signs_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
-      <%= submit_tag "Add", class: 'btn' %>
+    <% if can? :update, @sign %>
+      <%= form_tag add_owner_sign_path(@sign), remote: true, id: 'add-owner' do %>
+        <%= hidden_field_tag :user_id, id: 'user_id' %>
+        <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_signs_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
+        <%= submit_tag "Add", class: 'btn' %>
+      <% end %> 
     <% end %>
 
     <br />
@@ -29,19 +31,23 @@
       <%= link_to play_sign_path(@sign), target: '_blank' do %>
         <%= image_tag('play_dark.svg') %> Play
       <% end %>
-      <%= link_to edit_sign_path(@sign) do %>
-        <%= image_tag('gear_dark.svg') %> Edit
+      <% if can? :update, @sign %>
+        <%= link_to edit_sign_path(@sign) do %>
+          <%= image_tag('gear_dark.svg') %> Edit
+        <% end %>
       <% end %>
-      <%= link_to @sign, method: :delete, data: { confirm: 'Are you sure you want to delete this sign?'} do %>
-        <%= image_tag('close.svg') %> Delete
+      <% if can? :delete, @sign %>
+        <%= link_to @sign, method: :delete, data: { confirm: 'Are you sure you want to delete this sign?'} do %>
+          <%= image_tag('close.svg') %> Delete
+        <% end %>
       <% end %>
     </div>
   </div>
 
   <div class="sign-slides">
-    <div class="sign-slides-listing" id="js-sortable-slides">
+    <div class="sign-slides-listing" <%= "id=js-sortable-slides" if can? :update, @sign %>>
       <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order).eager_load(:slide) %>
-      <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' %>
+      <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' if can? :update, @sign %>
     </div>
   </div>
 </div>
