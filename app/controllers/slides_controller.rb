@@ -6,7 +6,7 @@ class SlidesController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:preview]
 
-  before_action :set_slide,                  only: [:draft, :show, :edit, :update, :destroy]
+  before_action :set_slide,                  only: [:draft, :show, :edit, :update, :send_to_sign, :destroy]
   before_action :set_slide_or_draft,         only: [:preview]
   before_action :set_signs,                  only: [:new, :edit, :create, :update]
   before_action :set_parent_sign_path,       only: [:new, :edit]
@@ -89,6 +89,12 @@ class SlidesController < ApplicationController
         format.json { render json: @slide.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def send_to_sign
+    ids = params[:slide][:sign_ids]
+    UpdateSlide.execute(@slide, {sign_ids: ids}, current_user)
+    redirect_to request.referrer, notice: 'Sent to signs.'
   end
 
   # DELETE /slides/1
