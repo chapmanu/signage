@@ -5,11 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
-  def after_sign_in_path_for(resource)
-    root_url
-  end
-
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    render file: "#{Rails.root}/public/403", formats: [:html], status: 403, layout: false
   end
 end

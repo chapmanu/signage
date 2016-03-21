@@ -3,9 +3,12 @@ require 'test_helper'
 class SignsControllerTest < ActionController::TestCase
   include OwnableControllerTest
 
+  let(:user) { users(:james) }
+
   setup do
     @sign = @owned_object = signs(:one)
-    sign_in users(:one)
+    @sign.owners << user
+    sign_in user
   end
 
   test "should get index" do

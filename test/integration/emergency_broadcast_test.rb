@@ -3,7 +3,7 @@ require 'test_helper'
 class EmergencyBroadcastTest < Capybara::Rails::TestCase
 
   setup do
-    sign_in users(:james)
+    sign_in users(:super_admin)
   end
 
   test "sending emergency messages" do
