@@ -7,23 +7,9 @@ Rails.application.routes.draw do
 
   get 'notifications/index'
 
-  controller :marketing do
-    get :home
-  end
-
-  # Devise
   devise_for :users
 
-  # Admin
-  get 'admin', to: 'admin#index'
-  get 'admin/index'
-  get 'admin/emergency'
-  get 'admin/devices'
-  get 'admin/sessions'
-  post 'admin/update_emergency'
-  post 'admin/clear_single_emergency'
-  post 'admin/clear_all_emergencies'
-
+  resources :emergencies, only: [:index, :create, :destroy]
 
   concern :ownable do
     post   'add_owner',    on: :member

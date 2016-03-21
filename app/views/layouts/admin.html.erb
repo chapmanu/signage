@@ -17,7 +17,7 @@
 </head>
 <body data-controller-action="<%= controller_action %>">
 <div class="body-wrapper">
-  <%= render 'admin/navbar' %>
+  <%= render 'layouts/navbar' %>
 
   <%= display_flashes %>
 
@@ -30,7 +30,7 @@
     <p>Report bugs to <a href="mailto:loehner@chapman.edu">Ross (loehner@chapman.edu)</a></p>
   </div>
 
-  <%= render "admin/loading_feedback" %>
+  <%= render "layouts/loading_feedback" %>
 </div>
 </body>
 </html>
