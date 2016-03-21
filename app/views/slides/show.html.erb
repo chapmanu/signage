@@ -8,8 +8,10 @@
       <%= link_to preview_slide_path(@slide), target: '_blank' do %>
         <%= inline_svg('play_dark.svg') %> Preview
       <% end %>
-      <%= link_to edit_slide_path(@slide) do %>
-        <%= inline_svg('gear_dark.svg') %> Edit
+      <% if can? :update, @slide %>
+        <%= link_to edit_slide_path(@slide) do %>
+          <%= inline_svg('gear_dark.svg') %> Edit
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -36,11 +38,12 @@
     <ul class="owners-list">
       <%= render partial: 'ownable/owner_item', collection: @slide.users, as: :owner, locals: { removable: true, owned: @slide } %>
     </ul>
-
-    <%= form_tag add_owner_slide_path(@slide), remote: true do %>
-      <%= hidden_field_tag :user_id, id: 'user_id' %>
-      <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_slides_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
-      <%= submit_tag "Add", class: 'btn' %>
+    <% if can? :update, @slide %>
+      <%= form_tag add_owner_slide_path(@slide), remote: true, id: 'add-owner' do %>
+        <%= hidden_field_tag :user_id, id: 'user_id' %>
+        <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_slides_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
+        <%= submit_tag "Add", class: 'btn' %>
+      <% end %>
     <% end %>
 
     <br />
