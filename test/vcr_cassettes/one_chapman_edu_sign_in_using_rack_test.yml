@@ -41,12 +41,12 @@ http_interactions:
       Access-Control-Allow-Headers:
       - Content-Type
       Date:
-      - Sat, 12 Dec 2015 00:19:09 GMT
+      - Mon, 21 Mar 2016 22:31:21 GMT
       Content-Length:
       - '153'
     body:
       encoding: UTF-8
       string: '{"username":"one","role":null,"firstname":"Buddy","lastname":"Big Shot","email":"one@chapman.edu","staff_department":null,"faculty_department":null,"school":null,"major":null}'
     http_version: 
-  recorded_at: Sat, 12 Dec 2015 00:19:09 GMT
+  recorded_at: Mon, 21 Mar 2016 22:31:21 GMT
 recorded_with: VCR 2.9.3
