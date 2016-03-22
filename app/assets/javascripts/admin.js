@@ -15,7 +15,6 @@
 /* APP */
 //= require_self
 //= require_tree ./shared
-//= require_tree ./refills
 //= require_tree ./admin
 
 Admin = {};

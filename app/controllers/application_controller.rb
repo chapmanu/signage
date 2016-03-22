@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
-  def after_sign_in_path_for(resource)
-    root_url
+  rescue_from CanCan::AccessDenied do |exception|
+    render file: "#{Rails.root}/public/403", formats: [:html], status: 403, layout: false
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+  def authorize_as_super_admin!
+    raise CanCan::AccessDenied unless current_user.super_admin?
   end
 end

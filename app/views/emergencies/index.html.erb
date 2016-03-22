@@ -2,10 +2,10 @@
   <header class="clearfix">
     <h1 class="float-left">Emergency Broadcast</h1>
 
-    <%= link_to "Clear All Emergency Messages", admin_clear_all_emergencies_path, method: :post, class: 'btn green float-right', data: {confirm: 'Are you sure you want to clear all emergency messages?'} %>
+    <%= link_to "Clear All Emergency Messages", emergency_path(id: 'all'), method: :delete, class: 'btn green float-right', data: {confirm: 'Are you sure you want to clear all emergency messages?'} %>
   </header>
 
-  <%= form_tag action: 'update_emergency' do %>
+  <%= form_tag action: :create do %>
     <div class="emergency-message-fields">
       <div class="input-field">
         <%= label_tag :emergency, "Emergency message title" %>
@@ -49,7 +49,7 @@
             </td>
             <td>
               <% if sign.emergency? %>
-                <%= link_to "Clear", admin_clear_single_emergency_path(id: sign.id, emergency: '', emergency_detail: ''), method: :post, class: "btn green btn-small" %>
+                <%= link_to "Clear", emergency_path(id: sign.id, emergency: '', emergency_detail: ''), method: :delete, class: "btn green btn-small" %>
               <% end %>
             </td>
           </tr>
