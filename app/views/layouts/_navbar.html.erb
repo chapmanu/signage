@@ -16,7 +16,19 @@
 
   <div class="navbar-center">
     <div class="pill-buttons">
-      <%= link_to "Signs", signs_path, class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : ''%>
+      <%= link_to "Signs", signs_path,    class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : ''%>
     </div>
+
   </div>
 </div>
+
+<% if current_user.try(:super_admin?) %>
+  <div class="admin-navigation-container">
+    <div class="admin-navigation">
+    <%= link_to "Emergency Broadcast", emergencies_path %> |
+    <%= link_to "Manage Users", users_path %> |
+    <%= link_to "Manage Sponsors", sponsors_path %> |
+    <%= link_to "Server Stats", server_path %>
+    </div>
+  </div>
+<% end %>

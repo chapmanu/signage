@@ -1,12 +1,14 @@
 class SignsController < ApplicationController
   include Ownable
 
-  before_action :set_sign,                only: [:remove_slide, :add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
-  before_action :set_search_filters,      only: [:index]
+  layout 'admin', except: [:play]
 
   skip_before_action :authenticate_user!, only: [:play, :poll]
+  
+  before_action :set_sign, only: [:remove_slide, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
+  before_action :set_search_filters, only: [:index]
 
-  layout 'admin', except: [:play]
+  load_and_authorize_resource
 
   # GET /signs
   # GET /signs.json
@@ -98,10 +100,8 @@ class SignsController < ApplicationController
   end
 
   def set_search_filters
-    SearchFilters.new(params, cookies, {
-      filter: ['all', 'mine' ]
-  })
-    end
+    SearchFilters.new(params, cookies, {filter: ['all', 'mine' ]})
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -115,6 +115,6 @@ class SignsController < ApplicationController
     end
 
     def set_owned_object
-      @owned_object = Sign.friendly.find(params[:id])
+      @owned_object = @sign = Sign.friendly.find(params[:id])
     end
 end

@@ -20,8 +20,10 @@
     <%= link_to play_sign_path(sign), target: '_blank' do %>
       <%= inline_svg('play_dark.svg') %> Play
     <% end %>
-    <%= link_to edit_sign_path(sign) do %>
-      <%= inline_svg('gear_dark.svg') %> Edit
+    <% if can?(:edit, sign) %>
+      <%= link_to edit_sign_path(sign) do %>
+        <%= inline_svg('gear_dark.svg') %> Edit
+      <% end %>
     <% end %>
   </div>
 </div>

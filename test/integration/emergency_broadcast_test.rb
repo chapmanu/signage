@@ -3,11 +3,11 @@ require 'test_helper'
 class EmergencyBroadcastTest < Capybara::Rails::TestCase
 
   setup do
-    sign_in users(:james)
+    sign_in users(:super_admin)
   end
 
   test "sending emergency messages" do
-    visit admin_emergency_path
+    visit emergencies_path
     fill_in "emergency",        with: "Get to the chopper!"
     fill_in "emergency_detail", with: "Everybody down!"
     check signs(:one).name
@@ -21,7 +21,7 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
   test "clear all emergencies" do
     Sign.update_all emergency_detail: 'Clear Me'
 
-    visit admin_emergency_path
+    visit emergencies_path
     click_link "Clear All Emergency Messages"
     
     assert_empty all_emergencies, "Did not clear all emergencies"
@@ -31,7 +31,7 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
     clear_emergencies
     signs(:one).update(emergency: 'Clear just me')
 
-    visit admin_emergency_path
+    visit emergencies_path
     click_link "Clear"
     visit play_sign_path(signs(:one))
 

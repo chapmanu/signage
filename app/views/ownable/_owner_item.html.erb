@@ -3,6 +3,8 @@
 <li id="js-owner-id-<%= owner.id %>">
   <div class="chip">
     <%= owner.full_name_with_email %>
-    <%= link_to(inline_svg('close.svg'), remove_url, method: 'delete', remote: true, data: { confirm: "Are you sure you want to remove #{owner.full_name} from being able to edit this sign?" }) if removable %>
+    <% if can? :update, owned %>
+      <%= link_to(inline_svg('close.svg'), remove_url, method: 'delete', class: 'remove-owner', remote: true, data: { confirm: "Are you sure you want to remove #{owner.full_name} from being able to edit this sign?" }) if removable %>
+    <% end %>
   </div>
 </li>
