@@ -139,7 +139,7 @@ class SlidesController < ApplicationController
     end
 
     def set_owned_object
-      @owned_object = Slide.find(params[:id])
+      @owned_object = @slide = Slide.find(params[:id])
     end
 
     def set_search_filters

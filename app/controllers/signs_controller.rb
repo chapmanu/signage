@@ -5,7 +5,7 @@ class SignsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: [:play, :poll]
   
-  before_action :set_sign, only: [:remove_slide, :add_user, :remove_user, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
+  before_action :set_sign, only: [:remove_slide, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
   before_action :set_search_filters, only: [:index]
 
   load_and_authorize_resource
@@ -115,6 +115,6 @@ class SignsController < ApplicationController
     end
 
     def set_owned_object
-      @owned_object = Sign.friendly.find(params[:id])
+      @owned_object = @sign = Sign.friendly.find(params[:id])
     end
 end
