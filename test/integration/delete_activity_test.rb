@@ -4,6 +4,8 @@ class DeleteActivityTest < Capybara::Rails::TestCase
   
   setup do
     sign_in users(:james)
+    signs(:one).owners << users(:james)
+    slides(:one).owners << users(:james)
   end
 
   test "creating and deleting a slide" do

@@ -1,16 +1,18 @@
 
 class SlidesController < ApplicationController
   include Ownable
+  
+  layout 'admin', except: [:preview]
 
-  before_action :set_slide,                  only: [:draft, :show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:preview]
+
+  before_action :set_slide,                  only: [:draft, :show, :edit, :update, :send_to_sign, :destroy]
   before_action :set_slide_or_draft,         only: [:preview]
   before_action :set_signs,                  only: [:new, :edit, :create, :update]
   before_action :set_parent_sign_path,       only: [:new, :edit]
   before_action :set_search_filters,         only: [:index]
 
-  skip_before_action :authenticate_user!, only: [:preview]
-
-  layout 'admin', except: [:preview]
+  load_and_authorize_resource
 
 
   # GET /slides
@@ -89,6 +91,12 @@ class SlidesController < ApplicationController
     end
   end
 
+  def send_to_sign
+    ids = params[:slide][:sign_ids]
+    UpdateSlide.execute(@slide, {sign_ids: ids}, current_user)
+    redirect_to request.referrer, notice: 'Sent to signs.'
+  end
+
   # DELETE /slides/1
   # DELETE /slides/1.json
   def destroy
@@ -131,7 +139,7 @@ class SlidesController < ApplicationController
     end
 
     def set_owned_object
-      @owned_object = Slide.find(params[:id])
+      @owned_object = @slide = Slide.find(params[:id])
     end
 
     def set_search_filters

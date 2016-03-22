@@ -1,8 +1,10 @@
 <% slide = sign_slide.slide %>
 <div class="sign-slide-list-item" id="sign_slide_ids-<%= sign_slide.id %>" data-slide-id="<%= slide.id %>">
   <div class="left-actions">
-    <%= link_to inline_svg('close.svg'), remove_slide_sign_path(@sign, slide_id: slide.id), class: 'destroy-slide-sign', remote: true, method: 'delete', data: {confirm: 'Are you sure you want to remove this slide from this sign?'} %>
-    <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
+    <% if can? :update, sign_slide.sign %>
+      <%= link_to inline_svg('close.svg'), remove_slide_sign_path(@sign, slide_id: slide.id), class: 'destroy-slide-sign', remote: true, method: 'delete', data: {confirm: 'Are you sure you want to remove this slide from this sign?'} %>
+      <%= inline_svg('reorder.svg', class: 'reorder-handle') %>
+    <% end %>
   </div>
 
   <div class="screenshot <%= 'pending-approval' unless sign_slide.approved? %>">
@@ -16,8 +18,10 @@
       <%= link_to slide do %>
         <%= image_tag('more_info.svg') %> More info
       <% end %>
-      <%= link_to edit_slide_path(slide) do %>
-        <%= image_tag('gear_dark.svg') %> Edit
+      <% if can? :update, slide %>
+        <%= link_to edit_slide_path(slide) do %>
+          <%= image_tag('gear_dark.svg') %> Edit
+        <% end %>
       <% end %>
     </div>
   </div>

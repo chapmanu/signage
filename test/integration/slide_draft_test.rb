@@ -5,6 +5,7 @@ class SlideDraftTest < Capybara::Rails::TestCase
   before do
     sign_in users(:james)    
     @slide = slides(:one)
+    slides(:one).owners << users(:james)
   end
 
   test "drafts have equivalent negative ids" do
