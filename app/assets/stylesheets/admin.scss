@@ -29,6 +29,23 @@ html, body {
   height: 100%;
   min-width: 1100px;
 }
+
+.outer-container {
+  @include outer-container;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.clearfix {
+  @include clearfix;
+}
+
 .body-wrapper {
   min-height: 100%;
   position: relative;
