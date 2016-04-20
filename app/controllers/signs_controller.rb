@@ -100,7 +100,7 @@ class SignsController < ApplicationController
   end
 
   def set_search_filters
-    SearchFilters.new(params, cookies, {filter: ['all', 'mine' ]})
+    SearchFilters.new(params, cookies, {filter: ['mine', 'all']})
   end
 
   private

@@ -144,7 +144,7 @@ class SlidesController < ApplicationController
 
     def set_search_filters
       SearchFilters.new(params, cookies, {
-        filter: ['all', 'mine' ],
+        filter: ['mine', 'all'],
         sort:   ['newest', 'popular', 'alpha']
       })
     end
