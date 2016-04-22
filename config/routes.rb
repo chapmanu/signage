@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   get 'server', to: 'server#index'
+  get 'notifications', to: 'notifications#notifications'
 
   get 'cascade/form'
   post 'cascade/import'
@@ -44,7 +45,7 @@ Rails.application.routes.draw do
   resources :users do
     get 'lookup', on: :collection
   end
-
+  
   # Sponsors
   resources :sponsors
 
