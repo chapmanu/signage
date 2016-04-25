@@ -47,8 +47,8 @@
   <div class="sign-slides">
     <div class="sign-slides-listing" <%= "id=js-sortable-slides" if can? :update, @sign %>>
       <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order).eager_load(:slide) %>
-      <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' if can? :update, @sign %>
     </div>
+    <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' if can? :update, @sign %>
   </div>
 </div>
 
