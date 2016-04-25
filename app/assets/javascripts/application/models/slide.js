@@ -19,7 +19,7 @@ var Slide = function($element) {
       visible_rows:    4,
       items_per_row:   1,
       rows_per_scroll: 1,
-      scroll_interval: 1000
+      scroll_interval: 10000
     });
   } else if (/standard/.test(this.meta('template'))) {
     this.addBehavior('video', {});
