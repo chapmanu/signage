@@ -36,8 +36,8 @@ Rails.application.routes.draw do
 
   # Sign Slide
   resources :sign_slides, only: [] do
-    post   'approve', on: :member
-    delete 'reject',  on: :member
+    post 'approve', on: :member
+    post 'reject',  on: :member
   end
 
 
