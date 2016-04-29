@@ -13,6 +13,7 @@ class UserMailer < ApplicationMailer
     @approver     = args[:approver]
     @sign         = args[:sign_slide].sign
     @slide        = args[:sign_slide].slide
+    @message      = args[:message] unless args[:message].blank?
     @slide_owners = @slide.owners
     mail to: @slide_owners.map(&:email), subject: "Slide Approved to Play on #{@sign.name}"
   end
@@ -21,6 +22,7 @@ class UserMailer < ApplicationMailer
     @rejector     = args[:rejector]
     @sign         = args[:sign_slide].sign
     @slide        = args[:sign_slide].slide
+    @message      = args[:message] unless args[:message].blank?
     @slide_owners = @slide.owners
     mail to: @slide_owners.map(&:email), subject: "Slide Rejected to Play on #{@sign.name}"
   end
@@ -28,24 +30,28 @@ class UserMailer < ApplicationMailer
   def sign_remove_owner(args)
     @user = args[:user]
     @sign = args[:item]
+    @body = args[:body] if args[:body]
     mail(to: @user.email, subject: "You've been removed as an owner of the #{@sign.name} sign")
   end
 
   def sign_add_owner(args)
     @user = args[:user]
     @sign = args[:item]
+    @body = args[:body] if args[:body]
     mail(to: @user.email, subject: "You've been added as an owner of the #{@sign.name} sign")
   end
 
   def slide_remove_owner(args)
     @user = args[:user]
     @slide = args[:item]
+    @body = args[:body] if args[:body]
     mail(to: @user.email, subject: "You've been removed as an owner of the #{@slide.menu_name} slide")
   end
 
   def slide_add_owner(args)
     @user = args[:user]
     @slide = args[:item]
+    @body = args[:body] if args[:body]
     mail(to: @user.email, subject: "You've been added as an owner of the #{@slide.menu_name} slide")
   end
 end
