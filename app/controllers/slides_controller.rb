@@ -1,4 +1,3 @@
-
 class SlidesController < ApplicationController
   include Ownable
   
