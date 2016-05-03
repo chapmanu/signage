@@ -108,11 +108,11 @@
               </p>
               <p>
                 <%= f.radio_button :background_type, 'image' %>
-                <%= f.label :background_type_image, 'Image background' %>
+                <%= f.label :background_type_image, 'Image background (Must be smaller than 1920x1080)' %>
               </p>
               <p>
                 <%= f.radio_button :background_type, 'video' %>
-                <%= f.label :background_type_video, 'Video background' %>
+                <%= f.label :background_type_video, 'Video background (Must be smaller than 12 MB)' %>
               </p>
             </div>
 
@@ -141,11 +141,11 @@
               </p>
               <p>
                 <%= f.radio_button :foreground_type, 'image' %>
-                <%= f.label :foreground_type_image, 'Image foreground' %>
+                <%= f.label :foreground_type_image, 'Image foreground (Must be smaller than 912x1080)' %>
               </p>
               <p>
                 <%= f.radio_button :foreground_type, 'video' %>
-                <%= f.label :foreground_type_video, 'Video foreground' %>
+                <%= f.label :foreground_type_video, 'Video foreground (Must be smaller than 12 MB)' %>
               </p>
             </div>
 
