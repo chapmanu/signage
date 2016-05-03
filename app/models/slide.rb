@@ -1,4 +1,5 @@
 class Slide < ActiveRecord::Base
+  attr_accessor :skip_file_validation
   has_many :sign_slides
   has_many :signs, through: :sign_slides, dependent: :destroy, prevent_dups: true
 
@@ -30,6 +31,7 @@ class Slide < ActiveRecord::Base
   validates :menu_name, presence: true
   validates :template,  presence: true
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }
+  validate  :file_size, on: :update
 
   include SlideFormOptions
   include Schedulable
@@ -92,7 +94,8 @@ class Slide < ActiveRecord::Base
     classes.join(' ')
   end
 
-  def take_screenshot
+  def take_screenshot(opt = false)
+    @skip_file_validation = opt
     if (Rails.env.test? || Rails.env.development?)
       self.screenshot = File.open(Rails.root.join('app/assets/images/dev-screenshot.jpg'))
       save!
@@ -107,8 +110,38 @@ class Slide < ActiveRecord::Base
     end
   end
 
+  def file_size
+    if !@skip_file_validation
+      if foreground_type.present? && foreground_type != 'none'
+        self.send("#{foreground_type}_file", 'foreground' , {width: 912, height: 1080})
+      end
+
+      if background_type.present? && background_type != 'none'
+        self.send("#{background_type}_file", 'background', {width: 1920, height: 1080})
+      end
+    else
+      @skip_file_validation = false
+    end
+  end
+
   private
     def touch_signs
       signs.update_all(updated_at: Time.now)
+    end
+
+    def video_file(type, opts = nil)
+      video = File.open(self.send("#{type}").file.path)
+
+      if video.size > 12.megabytes
+        errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
+      end
+    end
+
+    def image_file(type, opts = nil)
+      file = MiniMagick::Image.open(self.send("#{type}").file.path)
+
+      if file.width > opts[:width] || file.height > opts[:height]
+        errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{opts[:width]}x#{opts[:height]}")
+      end
     end
 end
