@@ -1,7 +1,15 @@
 <div class="notifications-container">
-
-  <%= render 'notifications' %>
-
-  <%= render 'activities' if controller_action == 'notifications#index' %>
+  
+  <div class="notifications-listing <%= 'notifications-centered' if controller_action == 'notifications#index' %>">
+    <h4>Notifications</h4>
+    <%= render partial: 'notifications/notifications', collection: @unapproved_sign_slides, as: :ss %>
+  </div>
+  
+  <% if controller_action == 'home#index' %>
+    <div class="activities-listing">
+      <h4>Recent Activity</h4>
+      <%= render 'notifications/activities' %>
+    </div>
+  <% end %>
 
 </div>

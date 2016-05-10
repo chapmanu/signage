@@ -16,7 +16,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
       click_button 'Next'
       click_link 'Delete'
     end
-    visit notifications_index_path
+    visit home_index_path
     assert_equal 200, page.status_code
   end
 
@@ -29,7 +29,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
       click_link 'Edit'
       click_link 'Delete'
     end
-    visit notifications_index_path
+    visit home_index_path
     assert_equal 200, page.status_code
   end
 
@@ -40,7 +40,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
       click_button 'Create Sign'
       click_link 'Delete'
     end
-    visit notifications_index_path
+    visit home_index_path
     assert_equal 200, page.status_code
   end
 
@@ -51,7 +51,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
       click_button 'Update Sign'
       click_link 'Delete'
     end
-    visit notifications_index_path
+    visit home_index_path
     assert_equal 200, page.status_code
   end
 end
