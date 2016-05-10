@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   
   get 'server', to: 'server#index'
-  get 'notifications', to: 'notifications#notifications'
 
   get 'cascade/form'
   post 'cascade/import'
 
-  get 'notifications/index'
+  get 'home/index'
 
   devise_for :users
 
   resources :emergencies, only: [:index, :create, :destroy]
+
+  resources :notifications, only: [:index]
 
   concern :ownable do
     post   'add_owner',    on: :member
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
   # Sponsors
   resources :sponsors
 
-  root 'notifications#index'
+  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
