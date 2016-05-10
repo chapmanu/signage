@@ -128,7 +128,7 @@ class Slide < ActiveRecord::Base
 
     def validate_foreground_file
       if foreground_type.present? && foreground_type != 'none'
-        self.send("#validate_{foreground_type}_file", 'foreground')
+        self.send("validate_#{foreground_type}_file", 'foreground')
       end
     end
 
