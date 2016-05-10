@@ -4,7 +4,7 @@
 
 <p><%= @rejector.full_name_with_email %> chose not to display your slide <strong><%= @slide.menu_name %></strong> on their sign <strong><%= @sign.name %></strong>.</p>
 
-<% if @message %>
+<% if @message.present? %>
   <p><%= @rejector.first_name %> added a custom message: <%= @message %></p>
 <% end %>
 
