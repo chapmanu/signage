@@ -9,7 +9,10 @@ class CascadeController < ApplicationController
       @sign = FetchDeviceDataJob.perform_now(url: "#{params[:cascade_url]}/slideshow.json")
       @sign.slides.each{|slide| slide.owners << current_user }
       @sign.users << current_user
-      @sign.slides.each {|slide| slide.take_screenshot(true) }
+      @sign.slides.each do |slide|
+        slide.skip_file_validation = true
+        slide.take_screenshot
+      end
       redirect_to @sign, notice: "Successfully imported #{@sign.name}"
     else
       @error = "The provided url is invalid."
