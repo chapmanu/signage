@@ -8,10 +8,9 @@ require 'rails/test_help'
 require 'minitest/mock'
 require 'webmock/minitest'
 require 'vcr'
-require 'minitest/reporters'
 require 'minitest/rails/capybara'
 require 'public_activity/testing'
-
+require 'minitest/pride'
 
 class ActiveSupport::TestCase
   fixtures :all
@@ -32,5 +31,3 @@ VCR.configure do |config|
 end
 
 PublicActivity.enabled = true
-
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
