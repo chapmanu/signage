@@ -11,7 +11,6 @@ var Slide = function($element) {
       rows_per_scroll: 2,
       scroll_interval: 8000
     });
-
   } else if (/schedule/.test(this.meta('template'))) {
     this.addBehavior('autoscrollable', {
       container:       '.ui-slide-collection',

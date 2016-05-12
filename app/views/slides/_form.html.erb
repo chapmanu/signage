@@ -94,7 +94,7 @@
             </p>
           </div>
 
-          <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+          <div class="field" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
             <%= f.label :sponsor, "Organizer/Sponsor" %>
             <%= f.select :sponsor_id, options_for_select(Sponsor.all.map{|s|[s.name, s.id]}, @slide.sponsor_id), { include_blank: 'None' } %>
           </div>
