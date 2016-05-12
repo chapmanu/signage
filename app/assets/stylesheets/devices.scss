@@ -319,7 +319,6 @@ subhead {
   ol li {
     list-style-type: decimal;
   }
-
 }
 
 .ui-event-admission-icon,
@@ -331,13 +330,11 @@ subhead {
 }
 
 .ui-slide-organizer {
-  bottom: 170px;
   font: 16px/1 "Futura Bold", sans-serif;
   height: 40px;
   left: 0;
   padding: 12px 54px;
   position: absolute;
-  margin-bottom: 1em;
 }
 
 .ui-slide-organizer {
@@ -350,7 +347,6 @@ subhead {
 
 .ui-slide-organizer-icon {
   display: inline !important;
-
   fill: #FFF;
   height: 1.5em;
   margin: -0.3125em 0.5em 0 0.25em;
@@ -480,6 +476,22 @@ subhead {
 }
 
 
+/* slide: center
+   =============================================================================
+*/
+
+.ui-slide--center .ui-slide-body {
+  text-align: center;
+  margin: auto;
+  height: 100%;
+
+  .ui-slide-content { 
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* slide: right
    =============================================================================
 */
@@ -487,6 +499,7 @@ subhead {
 .ui-slide--right .ui-slide-body {
   float: right;
   max-width: 47.5%;
+  height: 100%;
 }
 
 /*
