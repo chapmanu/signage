@@ -90,6 +90,7 @@ class Slide < ActiveRecord::Base
     classes << 'ui-slide--schedule'       if template =~ /schedule/
     classes << 'ui-slide--social_feed'    if template =~ /social_feed/
     classes << 'ui-slide--right'          if layout =~ /right/
+    classes << 'ui-slide--center'         if layout =~ /center/
     classes << 'ui-slide--left'           if layout =~ /left/
     classes << 'ui-slide--dark'           if theme =~ /dark/
     classes << 'ui-slide--light'          if theme =~ /light/
