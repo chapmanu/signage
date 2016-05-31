@@ -80,12 +80,13 @@
 
 .sign-slides-listing {
   text-align: left;
-  .add-new-slide {
-    text-align: center;
-    margin-top: $base-spacing;
-    margin-left: 32px;
-    width: 178px;
-  }
+}
+
+.add-new-slide {
+  text-align: center;
+  margin-top: $base-spacing;
+  margin-left: 32px;
+  width: 178px;
 }
 
 .sign-slide-list-item {

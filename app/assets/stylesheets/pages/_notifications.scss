@@ -36,6 +36,12 @@
   @include span-columns(6);
 }
 
+.notifications-centered {
+  margin-left: 25%;
+  float: none;
+  text-align: center;
+}
+
 .activity-item {
   p {
     margin: 0;

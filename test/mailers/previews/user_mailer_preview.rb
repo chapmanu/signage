@@ -6,12 +6,20 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.sign_slide_request(sign_slide: SignSlide.take, requestor: User.take)
   end
 
-  def sign_slide_approved
+  def sign_slide_sans_message_approved
     UserMailer.sign_slide_approved(approver: User.take, sign_slide: SignSlide.take)
   end
 
-  def sign_slide_rejected
+  def sign_slide_sans_message_rejected
     UserMailer.sign_slide_rejected(rejector: User.take, sign_slide: SignSlide.take)
+  end
+
+  def sign_slide_with_message_approved
+    UserMailer.sign_slide_approved(approver: User.take, sign_slide: SignSlide.take, message: "Arbitrary approval message")
+  end
+
+  def sign_slide_with_message_rejected
+    UserMailer.sign_slide_rejected(rejector: User.take, sign_slide: SignSlide.take, message: "Arbitrary rejection message")
   end
 
   def sign_remove_owner

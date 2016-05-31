@@ -11,7 +11,6 @@ var Slide = function($element) {
       rows_per_scroll: 2,
       scroll_interval: 8000
     });
-
   } else if (/schedule/.test(this.meta('template'))) {
     this.addBehavior('autoscrollable', {
       container:       '.ui-slide-collection',
@@ -19,7 +18,7 @@ var Slide = function($element) {
       visible_rows:    4,
       items_per_row:   1,
       rows_per_scroll: 1,
-      scroll_interval: 1000
+      scroll_interval: 10000
     });
   } else if (/standard/.test(this.meta('template'))) {
     this.addBehavior('video', {});
