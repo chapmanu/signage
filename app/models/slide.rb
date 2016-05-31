@@ -1,4 +1,8 @@
 class Slide < ActiveRecord::Base
+  IMAGE_DIMENSIONS = {foreground: {width: 912, height: 1080}, background: {width: 1920, height: 1080}}
+
+  attr_accessor :skip_file_validation
+
   has_many :sign_slides
   has_many :signs, through: :sign_slides, dependent: :destroy, prevent_dups: true
 
@@ -30,6 +34,7 @@ class Slide < ActiveRecord::Base
   validates :menu_name, presence: true
   validates :template,  presence: true
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }
+  validate  :validate_file_size, on: :update
 
   include SlideFormOptions
   include Schedulable
@@ -85,6 +90,7 @@ class Slide < ActiveRecord::Base
     classes << 'ui-slide--schedule'       if template =~ /schedule/
     classes << 'ui-slide--social_feed'    if template =~ /social_feed/
     classes << 'ui-slide--right'          if layout =~ /right/
+    classes << 'ui-slide--center'         if layout =~ /center/
     classes << 'ui-slide--left'           if layout =~ /left/
     classes << 'ui-slide--dark'           if theme =~ /dark/
     classes << 'ui-slide--light'          if theme =~ /light/
@@ -107,8 +113,47 @@ class Slide < ActiveRecord::Base
     end
   end
 
+  def validate_file_size
+    if !self.skip_file_validation
+      validate_foreground_file
+      validate_background_file
+    else
+      self.skip_file_validation = false
+    end
+  end
+
   private
     def touch_signs
       signs.update_all(updated_at: Time.now)
+    end
+
+    def validate_foreground_file
+      if foreground_type.present? && foreground_type != 'none'
+        self.send("validate_#{foreground_type}_file", 'foreground')
+      end
+    end
+
+    def validate_background_file
+      if background_type.present? && background_type != 'none'
+        self.send("validate_#{background_type}_file", 'background')
+      end
+    end
+
+    def validate_video_file(type, opts = nil)
+      video = File.open(self.send("#{type}").file.path)
+
+      if video.size > 12.megabytes
+        errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
+      end
+    end
+
+    def validate_image_file(type, opts = nil)
+      file   = MiniMagick::Image.open(self.send("#{type}").file.path)
+      width  = IMAGE_DIMENSIONS[type.to_sym][:width]
+      height = IMAGE_DIMENSIONS[type.to_sym][:height]
+
+      if file.width > width || file.height > height
+        errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
+      end
     end
 end

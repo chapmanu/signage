@@ -16,7 +16,7 @@
 
   <div class="navbar-center">
     <div class="pill-buttons">
-      <%= link_to "Signs", signs_path,    class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : ''%>
+      <%= link_to "Notifications", notifications_path, class: controller_action == 'notifications#index' ? 'active' : '' %><%= link_to "Signs", signs_path, class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : '' %>
     </div>
 
   </div>

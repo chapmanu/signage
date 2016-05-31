@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   get 'cascade/form'
   post 'cascade/import'
 
-  get 'notifications/index'
+  get 'home/index'
 
   devise_for :users
 
   resources :emergencies, only: [:index, :create, :destroy]
+
+  resources :notifications, only: [:index]
 
   concern :ownable do
     post   'add_owner',    on: :member
@@ -35,8 +37,8 @@ Rails.application.routes.draw do
 
   # Sign Slide
   resources :sign_slides, only: [] do
-    post   'approve', on: :member
-    delete 'reject',  on: :member
+    post 'approve', on: :member
+    post 'reject',  on: :member
   end
 
 
@@ -44,11 +46,11 @@ Rails.application.routes.draw do
   resources :users do
     get 'lookup', on: :collection
   end
-
+  
   # Sponsors
   resources :sponsors
 
-  root 'notifications#index'
+  root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

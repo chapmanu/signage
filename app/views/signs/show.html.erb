@@ -22,7 +22,7 @@
       <%= form_tag add_owner_sign_path(@sign), remote: true, id: 'add-owner' do %>
         <%= hidden_field_tag :user_id, id: 'user_id' %>
         <%= autocomplete_field_tag :search_users, nil, autocomplete_user_email_signs_path, id_element: '#user_id', class: 'add-owner', placeholder: '+ Add owner by email', "data-autocomplete-label" => "Sorry, no users found. Try typing their chapman Chapman email address." %>
-        <%= submit_tag "Add", class: 'btn' %>
+        <%= submit_tag "Add Owner", class: 'btn' %>
       <% end %> 
     <% end %>
 
@@ -47,8 +47,8 @@
   <div class="sign-slides">
     <div class="sign-slides-listing" <%= "id=js-sortable-slides" if can? :update, @sign %>>
       <%= render partial: 'sign_slide', collection: @sign.sign_slides.order(:order).eager_load(:slide) %>
-      <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' if can? :update, @sign %>
     </div>
+    <%= link_to "+ New Slide", new_slide_path, class: 'btn green add-new-slide', id: 'add-slide-link' if can? :update, @sign %>
   </div>
 </div>
 

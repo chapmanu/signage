@@ -10,22 +10,44 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match "requesting that their slide", mail.body.encoded
   end
 
-  test "sign_slide_approved" do
+  test "sign_slide_sans_message_approved" do
     slides(:one).owners << users(:ross)
     signs(:one).owners << users(:james)
     mail = UserMailer.sign_slide_approved(sign_slide: sign_slides(:one), approver: users(:james))
     assert_equal "Slide Approved to Play on sign_one", mail.subject
     assert_equal ["loehner@chapman.edu"], mail.to
     assert_match "was approved by James", mail.body.encoded
+    refute_match "James added a custom message", mail.body.encoded
   end
 
-  test "sign_slide_rejected" do
+  test "sign_slide_sans_message_rejected" do
     slides(:one).owners << users(:ross)
     signs(:one).owners << users(:james)
     mail = UserMailer.sign_slide_rejected(sign_slide: sign_slides(:one), rejector: users(:james))
     assert_equal "Slide Rejected to Play on sign_one", mail.subject
     assert_equal ["loehner@chapman.edu"], mail.to
     assert_match /James .* chose not to display/, mail.body.encoded
+    refute_match "James added a custom message", mail.body.encoded
+  end
+
+  test "sign_slide_with_message_approved" do
+    slides(:one).owners << users(:ross)
+    signs(:one).owners << users(:james)
+    mail = UserMailer.sign_slide_approved(sign_slide: sign_slides(:one), approver: users(:james), message: "Arbitrary approval message")
+    assert_equal "Slide Approved to Play on sign_one", mail.subject
+    assert_equal ["loehner@chapman.edu"], mail.to
+    assert_match "was approved by James", mail.body.encoded
+    assert_match "James added a custom message", mail.body.encoded
+  end
+
+  test "sign_slide_with_message_rejected" do
+    slides(:one).owners << users(:ross)
+    signs(:one).owners << users(:james)
+    mail = UserMailer.sign_slide_rejected(sign_slide: sign_slides(:one), rejector: users(:james), message: "Arbitrary rejection message")
+    assert_equal "Slide Rejected to Play on sign_one", mail.subject
+    assert_equal ["loehner@chapman.edu"], mail.to
+    assert_match /James .* chose not to display/, mail.body.encoded
+    assert_match "James added a custom message", mail.body.encoded
   end
 
   test "sign_add_owner" do
