@@ -72,7 +72,7 @@
             <%= f.trix_editor :content%>
           </div>
 
-          <div class="radio-button-group" data-show-when="#slide_template==(standard|directory|schedule)">
+          <div class="radio-button-group" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
             <p>
               <%= f.radio_button :theme, 'light' %>
               <%= f.label :theme_light, 'Light color theme' %>
@@ -89,18 +89,23 @@
               <%= f.label :layout_left, 'Left align text' %>
             </p>
             <p>
+              <%= f.radio_button :layout, 'center' %>
+              <%= f.label :layout_center, 'Center align text' %>
+            </p>
+            <p>
               <%= f.radio_button :layout, 'right' %>
               <%= f.label :layout_right, 'Right align text' %>
             </p>
           </div>
 
-          <div class="field" data-show-when="#slide_template==(standard|directory|schedule)">
+          <div class="field" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
             <%= f.label :sponsor, "Organizer/Sponsor" %>
             <%= f.select :sponsor_id, options_for_select(Sponsor.all.map{|s|[s.name, s.id]}, @slide.sponsor_id), { include_blank: 'None' } %>
           </div>
 
           <div data-show-when="#slide_template==standard">
             <div class="radio-button-group">
+              <p>For image resizing needs, please visit <a href="http://dimensions.chapman.edu">dimensions.chapman.edu</a></p>
               <label class="group-label">Background style</label>
               <p>
                 <%= f.radio_button :background_type, 'none' %>
@@ -108,11 +113,11 @@
               </p>
               <p>
                 <%= f.radio_button :background_type, 'image' %>
-                <%= f.label :background_type_image, 'Image background' %>
+                <%= f.label :background_type_image, 'Image background (Must be smaller than 1920x1080)' %>
               </p>
               <p>
                 <%= f.radio_button :background_type, 'video' %>
-                <%= f.label :background_type_video, 'Video background' %>
+                <%= f.label :background_type_video, 'Video background (Must be smaller than 12 MB)' %>
               </p>
             </div>
 
@@ -141,11 +146,11 @@
               </p>
               <p>
                 <%= f.radio_button :foreground_type, 'image' %>
-                <%= f.label :foreground_type_image, 'Image foreground' %>
+                <%= f.label :foreground_type_image, 'Image foreground (Must be smaller than 912x1080)' %>
               </p>
               <p>
                 <%= f.radio_button :foreground_type, 'video' %>
-                <%= f.label :foreground_type_video, 'Video foreground' %>
+                <%= f.label :foreground_type_video, 'Video foreground (Must be smaller than 12 MB)' %>
               </p>
             </div>
 
@@ -234,6 +239,7 @@
 
         <div class="actions" data-show-when="#slide_template==(standard|directory|schedule|social_feed)">
           <%= f.button class: 'btn green', data: { feedback: 'Saving...' } %>
+          <%= link_to "Delete", @slide, class: 'delete-slide', method: :delete, data: { confirm: 'Are you sure you want to delete this slide?'} %>
         </div>
       </div>
       <div class="slide-live-preview">
@@ -249,6 +255,5 @@
         </div>
       </div>
     </div>
-    <%= link_to "Delete", @slide, class: 'delete-slide', method: :delete, data: { confirm: 'Are you sure you want to delete this slide?'} %>
   <% end %>
 </div> 

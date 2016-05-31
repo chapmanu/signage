@@ -4,4 +4,8 @@
 
 <p>Your slide <strong><%= @slide.menu_name %></strong> was approved by <%= @approver.full_name_with_email %> to play on their sign <strong><%= @sign.name %></strong>.
 
+<% if @message.present? %>
+  <p><%= @approver.first_name %> added a custom message: <%= @message %></p>
+<% end %>
+
 <p><%= link_to "View the #{@sign.name} sign", sign_url(@sign) %></p>

@@ -13,6 +13,7 @@ class UserMailer < ApplicationMailer
     @approver     = args[:approver]
     @sign         = args[:sign_slide].sign
     @slide        = args[:sign_slide].slide
+    @message      = args[:message]
     @slide_owners = @slide.owners
     mail to: @slide_owners.map(&:email), subject: "Slide Approved to Play on #{@sign.name}"
   end
@@ -21,6 +22,7 @@ class UserMailer < ApplicationMailer
     @rejector     = args[:rejector]
     @sign         = args[:sign_slide].sign
     @slide        = args[:sign_slide].slide
+    @message      = args[:message]
     @slide_owners = @slide.owners
     mail to: @slide_owners.map(&:email), subject: "Slide Rejected to Play on #{@sign.name}"
   end

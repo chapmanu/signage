@@ -19,6 +19,10 @@ module ApplicationHelper
     controller.controller_name == 'slides'
   end
 
+  def notifications_controller?
+    controller.controller_name == 'notifications'
+  end
+
   def search_filter(key, text, value, options = {})
     classes = params[key] == value ? 'active' : ''
     link_to(text, "?#{key}=#{value}", class: classes, data: { value: value })
