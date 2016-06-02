@@ -5,13 +5,15 @@
     <p class="ui-location-time"></p>
   </subhead>
 
-  <div class="ui-buttons">
-    <% @sign.directory_slides.each do |slide| %>
-      <a href="#<%= slide.slug %>">
-        <button class="ui-button-directory"><span><%= slide.menu_name %></span></button>
+
+<!-- Commented out in case we bring these back soon. -->
+<!--   <div class="ui-buttons">
+    <%# @sign.directory_slides.each do |slide| %>
+      <a href="#<%#= slide.slug %>">
+        <button class="ui-button-directory"><span><%#= slide.menu_name %></span></button>
       </a>
-    <% end %>
-  </div>
+    <%# end %>
+  </div> -->
 
   <nav class="ui-menu" role="navigation">
     <ul class="ui-menu-list">
