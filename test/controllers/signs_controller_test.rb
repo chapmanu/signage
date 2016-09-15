@@ -92,5 +92,17 @@ class SignsControllerTest < ActionController::TestCase
 
     assert_redirected_to signs_path
   end
+
+  test "should play sign" do
+    sign_out @sign.owners.first
+    get :play, id: @sign
+    assert_response :success
+  end
+
+  test "should poll sign for update" do
+    sign_out @sign.owners.first
+    xhr :get, :poll, id: @sign
+    assert_response :success
+  end
 end
 
