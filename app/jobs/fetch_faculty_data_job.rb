@@ -18,6 +18,7 @@ class FetchFacultyDataJob < ActiveJob::Base
   }
 
   def perform
+    # Currently Faculty records are not modified anywhere within the application beyond this sync job, which is why we're using `delete_all`
     Faculty.delete_all
     xml = RestClient.get(FetchFacultyDataJob::URL)
     doc = Nokogiri::XML(xml)
