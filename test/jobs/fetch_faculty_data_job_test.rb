@@ -8,7 +8,7 @@ class FetchFacultyDataJobTest < ActiveJob::TestCase
   end
 
   test 'it saves data' do
-    assert_equal @@before_count + 1117, @@after_count
+    assert_equal @@before_count + 1115, @@after_count
   end
 
   test 'it saves building info' do
@@ -71,7 +71,6 @@ class FetchFacultyDataJobTest < ActiveJob::TestCase
         "Crean Hall",
         "DeMille Hall",
         "Digital Media Arts Center",
-        "Dodge College",
         "Doti Hall",
         "Entertainment Technology Center",
         "Fish Interfaith Center",
