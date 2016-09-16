@@ -4,11 +4,11 @@ class SignsController < ApplicationController
   layout 'admin', except: [:play]
 
   skip_before_action :authenticate_user!, only: [:play, :poll]
-  
+
   before_action :set_sign, only: [:remove_slide, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
   before_action :set_search_filters, only: [:index]
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:play, :poll]
 
   # GET /signs
   # GET /signs.json
@@ -94,6 +94,8 @@ class SignsController < ApplicationController
   end
 
   def poll
+    # This is the endpoint play page polls in background to monitor for emergencies or sign
+    # updates.
     @sign.touch_last_ping
     last_updated = Time.zone.parse(sign_params[:updated_at])
     @refresh = @sign.updated_at.to_i > last_updated.to_i
