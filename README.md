@@ -51,7 +51,7 @@ Deployment is handled as expected by capistrano. To deploy a feature branch to s
 
     cap staging deploy BRANCH=my-feature-branch
 
-See another team member for server authentication information.
+See team lead for server authentication information.
 
 - Production Server: signage.chapman.edu
 - Staging Server: dev-signage.chapman.edu
