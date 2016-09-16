@@ -18,6 +18,7 @@ class FetchFacultyDataJob < ActiveJob::Base
   }
 
   def perform
+    Faculty.delete_all
     xml = RestClient.get(FetchFacultyDataJob::URL)
     doc = Nokogiri::XML(xml)
     doc.xpath('//FacultyMember').each do |node|
