@@ -99,9 +99,11 @@ class SignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should poll sign for update" do
+  test "should poll sign for updates" do
+    # Poll endpoint should not require auth. Authorization had been enabled leading to 403
+    # responses in production that were blocking updates.
     sign_out @sign.owners.first
-    xhr :get, :poll, id: @sign
+    xhr :get, :poll, id: @sign, sign: { updated_at: Time.zone.now }
     assert_response :success
   end
 end
