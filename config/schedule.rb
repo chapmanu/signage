@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 6.hours do
+every 1.day, at: '2:00 am' do
   rake 'faculty:sync'
 end
 
