@@ -1,3 +1,7 @@
+{#
+ # Attaches AJAX call to poll server in background for updates.
+ # See assets/javascripts/application/models/device.js: Device._startPolling
+ #}
 <div class="js-device-meta"
      data-id="<%= @sign.id %>"
      data-poll-device-path="<%= poll_sign_path @sign %>"
