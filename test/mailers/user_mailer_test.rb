@@ -4,10 +4,15 @@ class UserMailerTest < ActionMailer::TestCase
 
   test "sign_slide_request" do
     signs(:one).owners << users(:ross)
+    sign_slides(:one).slide.play_on = "2016-09-05 10:45:00"
+    sign_slides(:one).slide.stop_on = "2016-09-07 10:45:00"
     mail = UserMailer.sign_slide_request(sign_slide: sign_slides(:one), requestor: users(:james))
+ 
     assert_equal "Play Slide Request: MyString", mail.subject
     assert_equal ["loehner@chapman.edu"], mail.to
     assert_match "requesting that their slide", mail.body.encoded
+    assert_match (/September .* 5, 2016/), mail.body.encoded
+    assert_match (/September .* 7, 2016/), mail.body.encoded
   end
 
   test "sign_slide_sans_message_approved" do
