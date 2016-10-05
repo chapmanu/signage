@@ -17,6 +17,8 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     sign_out
     sign_in users(:ross)
     assert page.has_content?(/James Slide needs to be approved to .* Ross Sign/)
+    assert page.has_content?(/October 5, 2016/)
+    assert page.has_no_content?(/Ending on/)
     assert_difference 'sent_emails.length' do
       click_link 'Approve'
     end
