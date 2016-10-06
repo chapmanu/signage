@@ -3,10 +3,10 @@
   <p>The slide <%=link_to ss.slide.menu_name, ss.slide %> needs to be approved to go on the sign <%= link_to ss.sign.name, ss.sign %>.</p>
   <p class="daterange">
     <% if ss.slide.play_on.present? %>
-      <span><strong>Starting on: </strong><%= ss.slide.play_on.strftime("%B %e, %G") %></span>
+      <span><strong>Starting on: </strong><%= ss.slide.play_on.strftime("%B %-d, %G") %></span>
     <%end%>
     <% if ss.slide.stop_on.present? %>
-      <span><strong>Ending on: </strong><%= ss.slide.stop_on.strftime("%B %e, %G") %></span>
+      <span><strong>Ending on: </strong><%= ss.slide.stop_on.strftime("%B %-d, %G") %></span>
     <% end %>
   </p>
   <div class="input-field">
