@@ -5,8 +5,8 @@
 <p><%= @requestor.full_name_with_email %> is requesting that their slide <strong><%= @slide.menu_name %></strong> be played on your sign <strong><%= @sign.name %></strong>.</p>
 
 <p>
-	<% if @slide.play_on.present? %><strong>Starting on: </strong><%= @slide.play_on.strftime("%B %e, %G") %><% end %>
-	<% if @slide.stop_on.present? %><strong>Ending on: </strong><%= @slide.stop_on.strftime("%B %e, %G") %><% end %>
+	<% if @slide.play_on.present? %><strong>Starting on: </strong><%= @slide.play_on.strftime("%B %-d, %G") %><% end %>
+	<% if @slide.stop_on.present? %><strong>Ending on: </strong><%= @slide.stop_on.strftime("%B %-d, %G") %><% end %>
 </p>
 <p><%= image_tag attachments['screenshot.png'].url, alt: @slide.menu_name if attachments['screenshot.png'] %></p>
 
