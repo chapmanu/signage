@@ -1,6 +1,14 @@
 <div id="unapproved-sign-slide-<%= ss.id %>" class="unapproved-sign-slide">
   <p><%= image_tag ss.slide.screenshot, class: 'screenshot' %></p>
   <p>The slide <%=link_to ss.slide.menu_name, ss.slide %> needs to be approved to go on the sign <%= link_to ss.sign.name, ss.sign %>.</p>
+  <p class="daterange">
+    <% if ss.slide.play_on.present? %>
+      <span><strong>Starting on: </strong><%= ss.slide.play_on.strftime("%B %-d, %G") %></span>
+    <%end%>
+    <% if ss.slide.stop_on.present? %>
+      <span><strong>Ending on: </strong><%= ss.slide.stop_on.strftime("%B %-d, %G") %></span>
+    <% end %>
+  </p>
   <div class="input-field">
     <%= text_field_tag "message-#{ss.id}" %>
     <%= label_tag      "message-#{ss.id}", "Approve/Reject Slide Custom Message" %>
