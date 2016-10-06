@@ -11,8 +11,10 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal "Play Slide Request: MyString", mail.subject
     assert_equal ["loehner@chapman.edu"], mail.to
     assert_match "requesting that their slide", mail.body.encoded
-    assert_match (/September .* 5, 2016/), mail.body.encoded
-    assert_match (/September .* 7, 2016/), mail.body.encoded
+
+    #email should include the date range for the slide request
+    assert_match (/September 5, 2016/), mail.body.encoded
+    assert_match (/September 7, 2016/), mail.body.encoded
   end
 
   test "sign_slide_sans_message_approved" do
