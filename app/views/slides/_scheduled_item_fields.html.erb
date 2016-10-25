@@ -21,6 +21,12 @@
     <div class="file-path-wrapper">
       <input class="file-path validate" type="text">
     </div>
+    <%# Let user know if a thumbnail exists. File field will not.
+      # TODO: display image itself?
+      #%>
+    <% if f.object.image.file %>
+      <p><strong>Current Thumbnail:</strong> <%= f.object.image.file.filename %></p>
+    <% end %>
     <p>
       <%= f.check_box :remove_image %>
       <%= f.label :remove_image, "Remove image" %>
