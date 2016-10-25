@@ -1,6 +1,6 @@
 class SlidesController < ApplicationController
   include Ownable
-  
+
   layout 'admin', except: [:preview]
 
   skip_before_action :authenticate_user!, only: [:preview]
@@ -41,7 +41,14 @@ class SlidesController < ApplicationController
   def draft
     @draft = @slide.find_or_create_draft
     @draft.scheduled_items.clear
-    @draft.update(slide_params)
+
+    # This will error if there are any nested scheduled items in slide_params. (See
+    # https://github.com/chapmanu/signage/issues/147.) It will look up scheduled_items using
+    # draft_id (negative) but scheduled_items are associated with proper ID.
+    # (Is this why scheduled_items are cleared above?)
+    filtered_params = slide_params.except('scheduled_items_attributes')
+
+    @draft.update(filtered_params)
     @draft.signs.clear
     render nothing: true
   end
