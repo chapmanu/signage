@@ -1,5 +1,5 @@
 class RemoveDurationDefaultValueFromSlides < ActiveRecord::Migration
-  # Default will not be specified in model.
+  # Default for duration will be set in model.
   def change
     change_column_default(:slides, :duration, nil)
   end
