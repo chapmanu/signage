@@ -74,13 +74,13 @@ class SlidesControllerTest < ActionController::TestCase
     assert_redirected_to slides_path
   end
 
-  test "updating draft scheduled items does not result in duplicates" do
-    patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
+  test "expects scheduled items to be ignored when updating a slide draft" do
+    # This was causing an error. Scheduled items will still be updated upon submit.
+    # For details, see: https://github.com/chapmanu/signage/issues/147
     patch :draft, id: @slide, slide: { scheduled_items_attributes: [ { date: 'Right Now'} ] }
 
     assert_response :success
     draft = @slide.find_or_create_draft
-    assert_equal 1, draft.scheduled_items.length
+    assert_equal 0, draft.scheduled_items.length
   end
-
 end
