@@ -38,4 +38,10 @@ class SlideTest < ActiveSupport::TestCase
     slide.duration = 4
     assert_not slide.valid?
   end
+
+  test "expects default duration to be 10 seconds" do
+    # As specified by product owners.
+    slide = Slide.new
+    assert_equal slide.duration, 10
+  end
 end

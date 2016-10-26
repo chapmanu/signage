@@ -1,5 +1,9 @@
 class Slide < ActiveRecord::Base
-  IMAGE_DIMENSIONS = {foreground: {width: 912, height: 1080}, background: {width: 1920, height: 1080}}
+  IMAGE_DIMENSIONS = {
+    foreground: {width: 912, height: 1080},
+    background: {width: 1920, height: 1080}
+  }
+  DEFAULT_DURATION = 10
 
   attr_accessor :skip_file_validation
 
@@ -15,6 +19,7 @@ class Slide < ActiveRecord::Base
 
   belongs_to :sponsor
 
+  after_initialize :set_defaults, unless: :persisted?
   after_save :touch_signs
 
   include PublicActivity::Common
@@ -125,6 +130,11 @@ class Slide < ActiveRecord::Base
   end
 
   private
+    def set_defaults
+      # Based on http://stackoverflow.com/a/29575389/6763239.
+      self.duration ||= DEFAULT_DURATION
+    end
+
     def touch_signs
       signs.update_all(updated_at: Time.now)
     end
