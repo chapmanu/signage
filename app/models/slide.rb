@@ -9,7 +9,9 @@ class Slide < ActiveRecord::Base
   has_many :slide_users
   has_many :users, through: :slide_users, dependent: :destroy, prevent_dups: true
 
-  has_many :scheduled_items, dependent: :destroy
+  # Adding order here just to clarify the default ordering. At present, users cannot reorder
+  # scheduled items for a slide. If they need to, they'll need to create a new slide.
+  has_many :scheduled_items, -> { order(created_at: :asc) }, dependent: :destroy
 
   belongs_to :sponsor
 
