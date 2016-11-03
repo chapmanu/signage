@@ -28,8 +28,6 @@
       <%= f.label :template, "Select slide template" %>
     </div>
 
-    <%= f.hidden_field :sign_ids, multiple: true, value: session[:parent_sign_id] %>
-
     <%= f.submit "Next", class: 'btn', data: { feedback: 'Loading editor...' } %>
   <% end %>
 </div>
