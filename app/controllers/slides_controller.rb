@@ -55,9 +55,6 @@ class SlidesController < ApplicationController
 
   # GET /slides/new
   def new
-    @slide = Slide.new
-    sign = Sign.friendly.find(session[:parent_sign_id]) if session[:parent_sign_id]
-    @slide.signs << sign if sign
   end
 
   # GET /slides/1/edit
@@ -121,7 +118,7 @@ class SlidesController < ApplicationController
     end
 
     def set_slide_or_draft
-      # I don't want the possibility of a draft being able to be editted or viewed.
+      # I don't want the possibility of a draft being able to be edited or viewed.
       @slide = Slide.find(params[:id])
     end
 
