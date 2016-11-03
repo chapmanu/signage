@@ -2,10 +2,6 @@
 # ======================
 server 'dev-signage.chapman.edu', user: 'charles', roles: %w{app db web postgres}
 
-# role-based syntax
-# ==================
-# role :postgres, %w{charles@dev-signage.chapman.edu}, no_release: true
-
 def red(str)
   "\e[31m#{str}\e[0m"
 end
