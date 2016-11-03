@@ -1,0 +1,22 @@
+namespace :db do
+  desc "Clone the server database to your local machine"
+  task :clone do
+    current_time           = Time.now.strftime('%Y-%m-%d_%H%M')
+    db_name                = "signage_#{fetch(:stage)}"
+    backup_name            = "#{db_name}_#{current_time}.tar"
+    remote_folder = '~/'
+    local_folder  = 'db/backups/'
+    hostname      = ''
+
+    on roles(:postgres) do |host|
+      hostname = host.hostname
+      execute "pg_dump -F t -t users -t sponsors -t sign_users -t slide_users #{db_name} > #{remote_folder}#{backup_name}"
+    end
+    
+    sh "scp charles@#{hostname}:#{remote_folder}#{backup_name} #{local_folder}"
+    sh "RAILS_ENV=development bundle exec rake db:drop db:create db:migrate"
+    sh "RAILS_ENV=development bundle exec rake cascade:sync faculty:sync"
+    sh "pg_restore -O -d signage_development #{local_folder}#{backup_name}"
+    puts "Success"
+  end
+end
