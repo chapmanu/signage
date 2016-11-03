@@ -20,9 +20,7 @@ bundle install
 touch .env
 
 # Clone production data
-rake db:create db:migrate
-rake cascade:sync
-rake faculty:sync
+cap production db:clone
 ```
 
 ### Development
