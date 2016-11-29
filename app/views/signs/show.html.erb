@@ -13,6 +13,9 @@
     <label>Transition type</label>
     <p><%= @sign.transition ? "#{@sign.transition.try(:capitalize)} effect" : 'None' %></p>
 
+    <label>Visibility</label>
+    <p><%= @sign.visibility.try(:titleize) %></p>
+
     <label>Owners</label>
     <ul class="owners-list">
       <%= render partial: 'ownable/owner_item', collection: @sign.users, as: :owner, locals: { removable: true, owned: @sign } %>
