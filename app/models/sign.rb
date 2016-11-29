@@ -5,6 +5,8 @@ class Sign < ActiveRecord::Base
   has_many :sign_slides
   has_many :slides, through: :sign_slides, dependent: :destroy, prevent_dups: true
 
+  enum visibility: { listed: 0, hidden: 1 }
+
   scope :search, -> (search) { where("signs.name ILIKE ?", "%#{search}%") if search.present? }
   scope :owned_by, -> (user) { joins(:sign_users).where('sign_users.user_id' => user.id) }
   
