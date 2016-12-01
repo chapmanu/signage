@@ -10,8 +10,13 @@ class SignPermissionTest < Capybara::Rails::TestCase
 
   describe "when user is not owner" do
     test "index page edit button is absent" do
-      visit signs_path
+      visit signs_path(filter: 'all')
       assert page.has_no_content?('Edit'), "Edit button is present"
+    end
+
+    test "hidden sign not present on index page" do
+      visit signs_path(filter: 'all')
+      assert page.has_no_content?('sign_two'), "Hidden sign is present"
     end
 
     test "remove owner button is absent" do
@@ -67,4 +72,11 @@ class SignPermissionTest < Capybara::Rails::TestCase
     end
   end
 
+  describe "when user is owner" do
+    test "hidden sign present on index page" do
+      user.signs << signs(:two)
+      visit signs_path(filter: 'all')
+      assert page.has_content?('sign_two'), "Hidden sign is not present"
+    end
+  end
 end
