@@ -43,9 +43,7 @@
   text-align: right;
 }
 
-
-
-.sign-inactive, .sign-active {
+.sign-inactive, .sign-active, .sign-hidden {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -53,15 +51,23 @@
   margin-top: 5px;
 }
 
-.sign-active {
+.sign-active, .sign-hidden {
   width: 8px;
   height: 8px;
-  background-color: $green;
-  box-shadow: 0 0 5px 5px $green;
 }
 
 .sign-inactive {
   background-color: $light-gray
+}
+
+.sign-active {
+  background-color: $green;
+  box-shadow: 0 0 5px 5px $green;
+}
+
+.sign-hidden {
+  background-color: $red;
+  box-shadow: 0 0 5px 5px $red;
 }
 
 /* Sign Show */
