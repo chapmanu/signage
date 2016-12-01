@@ -1,17 +1,24 @@
+/*
+ * JS response to poll request from sign (being displayed somewhere on campus)
+ */
 <% if @refresh %>
   window.location = '<%= j play_sign_path(@sign) %>';
-<% end %>
 
-var $current_emergency = $('#js-emergency-slide');
-
-<%  if @sign.emergency? %>
+<% elsif @sign.any_emergency? %>
+  var $emergency_slide = $('#js-emergency-slide');
   var $new_emergency = $('<%=j render("emergency") %>');
 
-  if ($new_emergency.text() !== $current_emergency.text()) {
-    $current_emergency.remove();
+  if ($new_emergency.text() !== $emergency_slide.text()) {
+    $emergency_slide.remove();
     $('body').prepend($new_emergency);
   }
 
 <% else %>
-  if ($current_emergency.length > 0) $current_emergency.remove();
+  // No emergencies. Remove emergency slide if present.
+  var $emergency_slide = $('#js-emergency-slide');
+
+  if ($emergency_slide.length > 0) {
+    $emergency_slide.remove();
+  }
+
 <% end %>

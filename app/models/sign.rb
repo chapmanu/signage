@@ -7,7 +7,7 @@ class Sign < ActiveRecord::Base
 
   scope :search, -> (search) { where("signs.name ILIKE ?", "%#{search}%") if search.present? }
   scope :owned_by, -> (user) { joins(:sign_users).where('sign_users.user_id' => user.id) }
-  
+
   validates :name, presence: true
 
   extend FriendlyId
@@ -40,7 +40,7 @@ class Sign < ActiveRecord::Base
   end
 
   def any_emergency?
-    emergency? || panther_alert?
+    emergency? || campus_alert?
   end
 
   def emergency?
@@ -49,10 +49,12 @@ class Sign < ActiveRecord::Base
     end
   end
 
-  def panther_alert?
-    [panther_alert, panther_alert_detail].any? do |field|
-      !field.blank?
-    end
+  def campus_alert?
+    campus_alerts.length > 0
+  end
+
+  def latest_campus_alert
+    campus_alert? ? campus_alerts.first : nil
   end
 
   def touch_last_ping
@@ -61,5 +63,24 @@ class Sign < ActiveRecord::Base
 
   def active?
     last_ping && (Time.zone.now - 8.seconds) <= last_ping  # The poll is every 5 seconds (3 second delay is fine)
+  end
+
+  private
+
+  def campus_alerts
+    # Check cache then campus alert feed.
+    Rails.cache.fetch('campus-alerts-feed', expires_in: 60.seconds) do
+      response = RestClient.get Rails.configuration.x.campus_alert.feed
+      data = Hash.from_xml(response)
+      items = data["rss"]["channel"]["item"]
+
+      # If multiple items, then items is an array of hashes, else a single hash
+      messages = items.is_a?(Array) ? items : [items]
+
+      # TODO: Verify the alert flag with Public Safety. In the sample feed provided, there
+      # is a default "everything is fine" message when no alerts. At this time, we are not yet
+      # sure exactly what an alert would look like, but we understand that it is user-generated.
+      alerts = messages.keep_if {|message| message['category'].upcase == 'EMERGENCY'}
+    end
   end
 end
