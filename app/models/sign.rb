@@ -9,6 +9,8 @@ class Sign < ActiveRecord::Base
 
   scope :search, -> (search) { where("signs.name ILIKE ?", "%#{search}%") if search.present? }
   scope :owned_by, -> (user) { joins(:sign_users).where('sign_users.user_id' => user.id) }
+  # This is a bit of a doozy, but needed for getting visible signs & potentially private signs owned by the current user at the same time (Left Outer Join on sign_users)
+  scope :visible_or_owned_by, -> (user) { eager_load(:sign_users).where("signs.visibility = ? OR sign_users.user_id = ?", 0, user.id) }
   
   validates :name, presence: true
 
