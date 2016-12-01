@@ -1,6 +1,8 @@
 <div class="sign-list-item">
   <div class="sign-list-item-status">
-    <%= content_tag :div, nil, class: (sign.active? ? 'sign-active' : 'sign-inactive') %>
+    <%= content_tag :div, nil, 
+        title: (sign.hidden? ? 'Sign is hidden' : sign.active? ? 'Sign is live' : 'Sign is inactive'), 
+        class: (sign.hidden? ? 'sign-hidden' : sign.active? ? 'sign-active' : 'sign-inactive') %>
   </div>
 
   <div class="sign-list-item-info">
