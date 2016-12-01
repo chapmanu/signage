@@ -13,8 +13,14 @@ class SignsController < ApplicationController
   # GET /signs
   # GET /signs.json
   def index
-    query  = Sign.eager_load(:slides)
-    query  = query.owned_by(current_user) if params['filter'] == 'mine'
+    query = Sign.eager_load(:slides)
+
+    if params['filter'] == 'mine'
+      query = query.owned_by(current_user)
+    elsif !current_user.super_admin?
+      query = query.visible_or_owned_by(current_user)
+    end
+
     @signs = query.search(params['search']).order(:name)
   end
 
