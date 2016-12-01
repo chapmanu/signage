@@ -28,7 +28,7 @@ class Slide < ActiveRecord::Base
   scope :search,   -> (search) { where("slides.menu_name ILIKE ?", "%#{search}%") if search.present? }
   scope :owned_by, -> (user) { includes(:slide_users).where('slide_users.user_id' => user.id) }
   scope :shown,    -> { where("slides.show" => true) }
-  scope :approved, -> { where("sign_slides.approved" => true)}
+  scope :approved, -> { where("sign_slides.approved" => true) }
   scope :ordered,  -> { order("sign_slides.order") }
   scope :popular,  -> { order(signs_count: :desc, menu_name: :asc) }
   scope :newest,   -> { order(created_at: :desc) }
