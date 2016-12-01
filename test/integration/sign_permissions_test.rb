@@ -78,5 +78,11 @@ class SignPermissionTest < Capybara::Rails::TestCase
       visit signs_path(filter: 'all')
       assert page.has_content?('sign_two'), "Hidden sign is not present"
     end
+
+    test "hidden sign is marked with red orb on index page" do
+      user.signs << signs(:two)
+      visit signs_path(filter: 'all')
+      assert page.has_css?('.sign-hidden'), "Hidden sign is not marked with red orb"
+    end
   end
 end
