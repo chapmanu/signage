@@ -70,6 +70,18 @@ class SignPermissionTest < Capybara::Rails::TestCase
       visit edit_sign_path(signs(:one))
       assert_equal 403, page.status_code
     end
+
+    test "show page for hidden sign is not accessible" do
+      visit sign_path(signs(:two))
+      assert_equal 403, page.status_code
+    end
+
+    test "play page for hidden sign is not accessible" do
+      visit play_sign_path(signs(:two))
+      assert_equal 403, page.status_code
+    end
+
+
   end
 
   describe "when user is owner" do
