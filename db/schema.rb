@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025224137) do
+ActiveRecord::Schema.define(version: 20161202004013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,12 +110,10 @@ ActiveRecord::Schema.define(version: 20161025224137) do
     t.string   "notification_detail"
     t.string   "emergency"
     t.string   "emergency_detail"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "slug"
     t.datetime "last_ping"
-    t.string   "panther_alert"
-    t.string   "panther_alert_detail"
     t.string   "transition"
   end
 
