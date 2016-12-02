@@ -47,9 +47,9 @@
     <% end %>
 
     <br />
-    <label>Shown on <%= pluralize(@slide.signs.length, 'sign')%>:</label>
+    <label>Shown on <%= pluralize(accessible_sign_slides(@slide).length, 'sign')%>:</label>
     <ul class="signs-list">
-      <% @slide.sign_slides.each do |ss| %>
+      <% accessible_sign_slides(@slide).each do |ss| %>
         <li>
           <div class="sign-list-item-status">
             <%= sign_status_orb(ss.sign) %>
