@@ -34,4 +34,11 @@ module SlidesHelper
   def organizer_options
     ORGANIZER_ICONS.keys.compact
   end
+
+  def accessible_sign_slides(slide)
+    return slide.sign_slides if current_user.super_admin?
+
+    accessible_sign_ids = slide.signs.visible_or_owned_by(current_user).ids
+    slide.sign_slides.select { |ss| accessible_sign_ids.include? ss.sign_id }
+  end
 end

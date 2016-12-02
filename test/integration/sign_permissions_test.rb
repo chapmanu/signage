@@ -19,6 +19,13 @@ class SignPermissionTest < Capybara::Rails::TestCase
       assert page.has_no_content?('sign_two'), "Hidden sign is present"
     end
 
+    test "user cannot see hidden sign listed on owned slide" do
+      signs(:two).slides << slides(:one)
+      slides(:one).users << users(:one)
+      visit slide_path(slides(:one))
+      assert page.has_no_css?('div.sign_hidden'), "Hidden sign is present on slide"
+    end
+
     test "remove owner button is absent" do
       signs(:one).users << users(:two)
       visit sign_path(signs(:one))
