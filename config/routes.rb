@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'server', to: 'server#index'
 
   get 'cascade/form'
@@ -46,9 +46,13 @@ Rails.application.routes.draw do
   resources :users do
     get 'lookup', on: :collection
   end
-  
+
   # Sponsors
   resources :sponsors
+
+  # Mock: for staging / UAT
+  get 'mock/campus_alerts_feed(/:status)' => 'mock#campus_alerts_feed'
+  get 'mock/test' => 'mock#test'
 
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
