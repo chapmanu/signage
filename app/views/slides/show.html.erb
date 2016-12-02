@@ -52,7 +52,7 @@
       <% @slide.sign_slides.each do |ss| %>
         <li>
           <div class="sign-list-item-status">
-            <%= content_tag :div, nil, class: (ss.sign.active? ? 'sign-active' : 'sign-inactive') %>
+            <%= sign_status_orb(ss.sign) %>
           </div>
           <p><%= link_to ss.sign.name, ss.sign %> <%= "(pending approval)" unless ss.approved? %></p>
         </li>
