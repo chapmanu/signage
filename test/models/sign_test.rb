@@ -79,22 +79,47 @@ class SignTest < ActiveSupport::TestCase
   end
 
   test 'any_emergency? when all nil' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
     assert_not Sign.new.any_emergency?
+
+    turn_vcr_on
   end
 
   test 'any_emergency? when empty string' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
     assert_not Sign.new(emergency: '').any_emergency?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert' do
-    assert Sign.new(panther_alert: 'hi').any_emergency?
+  test 'expects any_emergency? to be true when campus alert' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_alert
+
+    assert Sign.new.any_emergency?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert detail' do
-    assert Sign.new(panther_alert_detail: 'hi').any_emergency?
+  test 'expects campus_alert? to be true' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_alert
+
+    assert Sign.new.campus_alert?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert detail empty string' do
-    assert_not Sign.new(panther_alert_detail: '  ').any_emergency?
+  test 'expect campus_alert? to be false' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
+    assert_not Sign.new.campus_alert?
+
+    turn_vcr_on
   end
 end

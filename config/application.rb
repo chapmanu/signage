@@ -51,7 +51,7 @@ module Signage
       g.helper_specs false
     end
 
-    # Campus alert configuration
+    # Campus alert configuration.
     config.x.campus_alert.feed = 'https://www.getrave.com/rss/chapman/channel1'
   end
 end

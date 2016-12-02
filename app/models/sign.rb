@@ -80,7 +80,7 @@ class Sign < ActiveRecord::Base
       # TODO: Verify the alert flag with Public Safety. In the sample feed provided, there
       # is a default "everything is fine" message when no alerts. At this time, we are not yet
       # sure exactly what an alert would look like, but we understand that it is user-generated.
-      alerts = messages.keep_if {|message| message['category'].upcase == 'EMERGENCY'}
+      messages.keep_if {|message| message['category'].upcase == 'EMERGENCY'}
     end
   end
 end

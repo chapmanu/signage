@@ -14,6 +14,7 @@ require 'minitest/pride'
 
 class ActiveSupport::TestCase
   fixtures :all
+  include MockCampusAlertFeed
 end
 
 class ActionController::TestCase
