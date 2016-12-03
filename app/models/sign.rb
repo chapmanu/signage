@@ -19,6 +19,13 @@ class Sign < ActiveRecord::Base
 
   alias_method :owners, :users
 
+  # Virtual Fields
+  attr_accessor :campus_alert_feed  # See setter below for details.
+
+  after_initialize do |sign|
+    sign.campus_alert_feed = Rails.configuration.x.campus_alert.feed
+  end
+
   def self.menus
     @_menus ||= Dir[Rails.root.join('app', 'views', 'signs', 'menus', '*.html.erb')].map {|f| f[/\/_(.*)\.html\.erb$/, 1]}.sort
   end
@@ -65,12 +72,26 @@ class Sign < ActiveRecord::Base
     last_ping && (Time.zone.now - 8.seconds) <= last_ping  # The poll is every 5 seconds (3 second delay is fine)
   end
 
+  def campus_alert_feed=(url)
+    # Virtual field that can be set dynamically in non-production environment to switch campus
+    # alerts feed URL for test/demo purposes.
+    #
+    # The alerts_feed param can be attached as a query string param to the play URL in order to
+    # set a test feed for any non-production environment:
+    # /signs/test-sign/play?alerts-feed=http://localhost:3000/mock/campus_alerts_feed/emergency
+    if url && Rails.env.staging?
+      @campus_alert_feed = url
+    else
+      @campus_alert_feed = Rails.configuration.x.campus_alert.feed
+    end
+  end
+
   private
 
   def campus_alerts
     # Check cache then campus alert feed.
     Rails.cache.fetch('campus-alerts-feed', expires_in: 60.seconds) do
-      response = RestClient.get Rails.configuration.x.campus_alert.feed
+      response = RestClient.get campus_alert_feed
       data = Hash.from_xml(response)
       items = data["rss"]["channel"]["item"]
 

@@ -114,12 +114,33 @@ class SignTest < ActiveSupport::TestCase
     turn_vcr_on
   end
 
-  test 'expect campus_alert? to be false' do
+  test 'expects campus_alert? to be false' do
     turn_vcr_off
     mock_campus_alert_feed_with_no_alerts
 
     assert_not Sign.new.campus_alert?
 
     turn_vcr_on
+  end
+
+  test 'expects default campus_alert_feed value to be config value' do
+    sign = Sign.new
+    assert_equal sign.campus_alert_feed, Rails.configuration.x.campus_alert.feed
+  end
+
+  test 'expects to set campus_alert_feed value in staging environment' do
+    # Mock staging env: http://stackoverflow.com/a/9119087/6763239
+    Rails.stub(:env, ActiveSupport::StringInquirer.new("staging")) do
+      sign = Sign.new
+      test_feed_url = 'http://signage-staging.chapman.edu/mock/campus_alerts_feed/emergency'
+      sign.campus_alert_feed = test_feed_url
+      assert_equal sign.campus_alert_feed, test_feed_url
+    end
+  end
+
+  test 'expects to set campus_alert_feed to be config value when set to nil' do
+    sign = Sign.new
+    sign.campus_alert_feed = nil
+    assert_equal sign.campus_alert_feed, Rails.configuration.x.campus_alert.feed
   end
 end

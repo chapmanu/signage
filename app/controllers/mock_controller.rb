@@ -6,9 +6,7 @@ class MockController < ApplicationController
   # GET /mock/campus_alerts_feed/emergency
   def campus_alerts_feed
     # By adding an alerts-feed to the signs/play url, user can specify this as a mock feed.
-    # For example:
-    # /signs/test-sign/play?alerts-feed=http://localhost:3000/mock/campus_alerts_feed/emergency
-    # This only works in non-production environments.
+    # See Sign model campus_alert_feed= method for details.
     if params['status'] == 'emergency'
       file_name = 'campus_feed_emergency.xml'
     else
