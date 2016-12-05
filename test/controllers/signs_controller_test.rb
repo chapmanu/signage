@@ -116,7 +116,7 @@ class SignsControllerTest < ActionController::TestCase
     sign_out @sign.owners.first
     @sign.update({emergency: nil, emergency_detail: nil})
 
-    # Assert
+    # Assume
     assert !@sign.emergency?
 
     # Act
