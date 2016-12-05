@@ -51,7 +51,7 @@ There is a mock campus alerts XML feed that has been added within the applicatio
 
 A shim has been introduced to signs that allows you -- in staging only -- to instruct a sign to use one of these feeds by setting an `alerts-feed` parameter in the query string. For example:
 
-https://dev-signage.chapman.edu/signs/test-sign/play?alerts-feed=https://dev-signage.chapman.edu/mock/campus_alerts_feed/emergency
+- https://dev-signage.chapman.edu/signs/test-sign/play?alerts-feed=https://dev-signage.chapman.edu/mock/campus_alerts_feed/emergency
 
 For more details, see the `Sign` model `campus_alert_feed=` method.
 

@@ -73,12 +73,11 @@ class Sign < ActiveRecord::Base
   end
 
   def campus_alert_feed=(url)
-    # Virtual field that can be set dynamically in non-production environment to switch campus
+    # Virtual field that can be set dynamically in staging environment to switch campus
     # alerts feed URL for test/demo purposes.
     #
-    # The alerts_feed param can be attached as a query string param to the play URL in order to
-    # set a test feed for any non-production environment:
-    # /signs/test-sign/play?alerts-feed=http://localhost:3000/mock/campus_alerts_feed/emergency
+    # The alerts_feed param can be attached as a query string param to the play URL like so:
+    # https://dev-signage.chapman.edu/signs/my-sign/play?alerts-feed=https://dev-signage.chapman.edu/mock/campus_alerts_feed/emergency
     if url && Rails.env.staging?
       @campus_alert_feed = url
     else
