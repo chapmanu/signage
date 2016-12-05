@@ -42,6 +42,19 @@ To start the the local server on port 3000:
 
 Then head over to [localhost:3000](http://localhost:3000).
 
+#### Mock Feed
+
+There is a mock campus alerts XML feed that has been added within the application. It currently offers two mock feeds, one without alerts and one with an alert:
+
+- http://localhost:3000/mock/campus_alerts_feed/
+- http://localhost:3000/mock/campus_alerts_feed/emergency
+
+A shim has been introduced to signs that allows you -- in staging only -- to instruct a sign to use one of these feeds by setting an `alerts-feed` parameter in the query string. For example:
+
+https://dev-signage.chapman.edu/signs/test-sign/play?alerts-feed=https://dev-signage.chapman.edu/mock/campus_alerts_feed/emergency
+
+For more details, see the `Sign` model `campus_alert_feed=` method.
+
 
 ### Deployment
 
