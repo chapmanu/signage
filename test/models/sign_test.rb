@@ -79,22 +79,68 @@ class SignTest < ActiveSupport::TestCase
   end
 
   test 'any_emergency? when all nil' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
     assert_not Sign.new.any_emergency?
+
+    turn_vcr_on
   end
 
   test 'any_emergency? when empty string' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
     assert_not Sign.new(emergency: '').any_emergency?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert' do
-    assert Sign.new(panther_alert: 'hi').any_emergency?
+  test 'expects any_emergency? to be true when campus alert' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_alert
+
+    assert Sign.new.any_emergency?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert detail' do
-    assert Sign.new(panther_alert_detail: 'hi').any_emergency?
+  test 'expects campus_alert? to be true' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_alert
+
+    assert Sign.new.campus_alert?
+
+    turn_vcr_on
   end
 
-  test 'any_emergency? when panther alert detail empty string' do
-    assert_not Sign.new(panther_alert_detail: '  ').any_emergency?
+  test 'expects campus_alert? to be false' do
+    turn_vcr_off
+    mock_campus_alert_feed_with_no_alerts
+
+    assert_not Sign.new.campus_alert?
+
+    turn_vcr_on
+  end
+
+  test 'expects default campus_alert_feed value to be config value' do
+    sign = Sign.new
+    assert_equal sign.campus_alert_feed, Rails.configuration.x.campus_alert.feed
+  end
+
+  test 'expects to set campus_alert_feed value in staging environment' do
+    # Mock staging env: http://stackoverflow.com/a/9119087/6763239
+    Rails.stub(:env, ActiveSupport::StringInquirer.new("staging")) do
+      sign = Sign.new
+      test_feed_url = 'http://signage-staging.chapman.edu/mock/campus_alerts_feed/emergency'
+      sign.campus_alert_feed = test_feed_url
+      assert_equal sign.campus_alert_feed, test_feed_url
+    end
+  end
+
+  test 'expects to set campus_alert_feed to be config value when set to nil' do
+    sign = Sign.new
+    sign.campus_alert_feed = nil
+    assert_equal sign.campus_alert_feed, Rails.configuration.x.campus_alert.feed
   end
 end

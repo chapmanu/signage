@@ -41,14 +41,17 @@ module Signage
     end
 
     # Override the rails field errors wrappers
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
 
     config.generators do |g|
-      g.controller_specs false 
+      g.controller_specs false
       g.view_specs false
       g.helper_specs false
     end
+
+    # Campus alert configuration.
+    config.x.campus_alert.feed = 'https://www.getrave.com/rss/chapman/channel1'
   end
 end

@@ -25,6 +25,9 @@ class SignsController < ApplicationController
 
   # GET /signs/1/play
   def play
+    # Allows user to set alert feed for UAT/demos in non-production env.
+    # See Sign model campus_alert_feed= method for details.
+    @sign.campus_alert_feed = params['alerts-feed']
   end
 
   # GET /signs/new
@@ -96,6 +99,9 @@ class SignsController < ApplicationController
   def poll
     # This is the endpoint play page polls in background to monitor for emergencies or sign
     # updates.
+    # See Sign model campus_alert_feed= method for details on this param.
+    @sign.campus_alert_feed = sign_params[:alerts_feed]
+
     @sign.touch_last_ping
     last_updated = Time.zone.parse(sign_params[:updated_at])
     @refresh = @sign.updated_at.to_i > last_updated.to_i
@@ -113,7 +119,8 @@ class SignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sign_params
-      params.require(:sign).permit(:name, :template, :transition, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
+      params.require(:sign).permit(:name, :template, :transition, :location, :emergency,
+                                   :emergency_detail, :updated_at, :alerts_feed, user_ids: [])
     end
 
     def set_owned_object

@@ -106,5 +106,27 @@ class SignsControllerTest < ActionController::TestCase
     xhr :get, :poll, id: @sign, sign: { updated_at: Time.zone.now }
     assert_response :success
   end
-end
 
+  test "expects campus alert feed to be checked when polled" do
+    # Poll endpoint should not require auth. Authorization had been enabled leading to 403
+    # responses in production that were blocking updates.
+    # Arrange
+    turn_vcr_off
+    stubbed_request = mock_campus_alert_feed_with_no_alerts
+    sign_out @sign.owners.first
+    @sign.update({emergency: nil, emergency_detail: nil})
+
+    # Assume
+    assert !@sign.emergency?
+
+    # Act
+    xhr :get, :poll, id: @sign, sign: { updated_at: @sign.updated_at }
+
+    # Assert
+    assert_response :success
+    assert_requested(stubbed_request) # Should poll campus alerts feed.
+
+    # Rearrange
+    turn_vcr_on
+  end
+end

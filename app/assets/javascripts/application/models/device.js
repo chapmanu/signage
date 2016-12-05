@@ -134,6 +134,13 @@ Device._queueNextSlide = function() {
 Device._startPolling = function() {
   var path = Device.meta('poll-device-path');
   var data = { sign: {updated_at: Device.meta('updated-at')}};
+
+  // Add feed url as data param if set. See note in SignsController#poll for details.
+  var alertsFeedUrl = Device.meta('alerts-feed-url');
+  if ( alertsFeedUrl ) {
+    data.sign.alerts_feed = alertsFeedUrl;
+  }
+
   setInterval(function() {
     $.get(path, data);
   }, Device.emergency_poll_interval);

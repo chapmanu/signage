@@ -38,6 +38,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # For mock alerts feed to work on local server, need to enable concurrency.
+  # From http://stackoverflow.com/a/30228125/6763239
+  # This did not work for mock alert feeds in dev (server still hung on REST call). But
+  # maybe someone someday can figure out how to make it work?
+  #config.allow_concurrency=true
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
