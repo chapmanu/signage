@@ -6,17 +6,16 @@ class HomeController < ApplicationController
 		query = PublicActivity::Activity.order(created_at: :desc)
     query = visible_activities(query) unless current_user.super_admin?
     @activities = query.take(20)
-    PublicActivity::Activity
     render 'notifications/index'
 	end
 
   private
     def visible_activities(query)
       query.select do |activity|
-        if activity.trackable_type == 'Sign'
+        if activity.trackable_type == 'Sign' && Sign.exists?(activity.trackable_id)
           sign = Sign.find(activity.trackable_id)
           sign.listed? || sign.users.include?(current_user) ? true : false
-        else # trackable_type == 'Slide'
+        else # trackable_type == 'Slide' || Sign has been deleted
             true
         end
       end
