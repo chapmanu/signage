@@ -3,7 +3,23 @@ class HomeController < ApplicationController
 
 	def index
 		@unapproved_sign_slides = SignSlide.joins(sign: :sign_users).eager_load(:sign, :slide).where('sign_users.user_id' => current_user.id).where(approved: false)
-		@activities = PublicActivity::Activity.order(created_at: :desc).limit(20)
+		query = PublicActivity::Activity.order(created_at: :desc)
+    query = visible_activities(query) unless current_user.super_admin?
+    @activities = query.take(20)
+    PublicActivity::Activity
     render 'notifications/index'
 	end
+
+  private
+    def visible_activities(query)
+      query.select do |activity|
+        if activity.trackable_type == 'Sign'
+          sign = Sign.find(activity.trackable_id)
+          sign.listed? || sign.users.include?(current_user) ? true : false
+        else # trackable_type == 'Slide'
+            true
+        end
+      end
+    end
+    
 end
