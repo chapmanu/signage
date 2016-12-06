@@ -14,7 +14,7 @@
     <p><%= @sign.transition ? "#{@sign.transition.try(:capitalize)} effect" : 'None' %></p>
 
     <label>Visibility</label>
-    <p><%= @sign.visibility.try(:titleize) %></p>
+    <p><%= SignsHelper::VISIBILITY_STATES[@sign.visibility] %></p>
 
     <label>Owners</label>
     <ul class="owners-list">

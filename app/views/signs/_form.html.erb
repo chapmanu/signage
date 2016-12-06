@@ -33,7 +33,7 @@
     </div>
 
     <div class="input-field">
-      <%= f.select :visibility, Sign.visibilities.keys.map{|k| [k.titleize, k]} %>
+      <%= f.select :visibility, Sign.visibilities.keys.map{|k| [SignsHelper::VISIBILITY_STATES[k], k]} %>
       <%= f.label :visibility, "Visibility" %>
     </div>
 

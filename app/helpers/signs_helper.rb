@@ -1,4 +1,8 @@
 module SignsHelper
+  VISIBILITY_STATES = {
+    'listed' => 'Public',
+    'hidden' => 'Private'
+  }
 
   def sign_name_with_approval_details(sign)
     if sign.owned_by?(current_user)
