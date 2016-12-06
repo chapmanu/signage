@@ -13,8 +13,8 @@ module SignsHelper
   end
 
   def sign_status_orb(sign)
-    orb_title = sign.hidden? ? 'Sign is hidden' : sign.active? ? 'Sign is live' : 'Sign is inactive'
-    orb_class = sign.hidden? ? 'sign-hidden' : sign.active? ? 'sign-active' : 'sign-inactive'
+    orb_title = sign.private? ? 'Sign is private' : sign.active? ? 'Sign is live' : 'Sign is inactive'
+    orb_class = sign.private? ? 'sign-private' : sign.active? ? 'sign-active' : 'sign-inactive'
     content_tag :div, nil, title: orb_title, class: orb_class
   end
 end
