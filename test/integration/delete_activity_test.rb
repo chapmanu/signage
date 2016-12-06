@@ -20,7 +20,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
     assert_equal 200, page.status_code
   end
 
-  test "updating and deleteing a slide" do
+  test "updating and deleting a slide" do
     assert_difference 'PublicActivity::Activity.count', 2 do
       visit edit_slide_path(slides(:one))
       fill_in 'slide_menu_name', with: 'updated'
@@ -47,7 +47,7 @@ class DeleteActivityTest < Capybara::Rails::TestCase
   test "updating and deleting a sign" do
     assert_difference 'PublicActivity::Activity.count', 2 do
       visit edit_sign_path(signs(:one))
-      fill_in 'sign_name', with: 'cupdated a sign'
+      fill_in 'sign_name', with: 'updated a sign'
       click_button 'Update Sign'
       click_link 'Delete'
     end
