@@ -43,7 +43,7 @@
   text-align: right;
 }
 
-.sign-inactive, .sign-active, .sign-hidden {
+.sign-inactive, .sign-active, .sign-private {
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -61,7 +61,7 @@
   box-shadow: 0 0 5px 5px $green;
 }
 
-.sign-hidden {
+.sign-private {
   background-color: $red;
   box-shadow: 0 0 5px 5px $red;
 }
