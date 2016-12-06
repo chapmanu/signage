@@ -14,7 +14,7 @@ class HomeController < ApplicationController
       query.select do |activity|
         if activity.trackable_type == 'Sign' && Sign.exists?(activity.trackable_id)
           sign = Sign.find(activity.trackable_id)
-          sign.listed? || sign.users.include?(current_user) ? true : false
+          sign.public? || sign.users.include?(current_user) ? true : false
         else # trackable_type == 'Slide' || Sign has been deleted
             true
         end
