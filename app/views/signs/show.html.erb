@@ -11,7 +11,10 @@
     <p><%= @sign.menu.try(:titleize) %></p>
 
     <label>Transition type</label>
-    <p><%= @sign.transition.try(:capitalize) %> effect</p>
+    <p><%= @sign.transition ? "#{@sign.transition.try(:capitalize)} effect" : 'None' %></p>
+
+    <label>Visibility</label>
+    <p><%= SignsHelper::VISIBILITY_STATES[@sign.visibility] %></p>
 
     <label>Owners</label>
     <ul class="owners-list">
