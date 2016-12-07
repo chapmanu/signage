@@ -32,10 +32,12 @@
       <%= f.label :transition, "Transition type" %>
     </div>
 
-    <div class="input-field">
-      <%= f.select :visibility, Sign.visibilities.keys.map{|k| [SignsHelper::VISIBILITY_STATES[k], k]} %>
-      <%= f.label :visibility, "Visibility" %>
-    </div>
+    <% if current_user.super_admin? %>
+      <div class="input-field">
+        <%= f.select :visibility, Sign.visibilities.keys.map{|k| [SignsHelper::VISIBILITY_STATES[k], k]} %>
+        <%= f.label :visibility, "Visibility" %>
+      </div>
+    <% end %>
 
     <br />
     <div class="actions">
