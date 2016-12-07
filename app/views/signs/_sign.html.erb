@@ -1,6 +1,6 @@
 <div class="sign-list-item">
   <div class="sign-list-item-status">
-    <%= content_tag :div, nil, class: (sign.active? ? 'sign-active' : 'sign-inactive') %>
+    <%= sign_status_orb(sign) %>
   </div>
 
   <div class="sign-list-item-info">

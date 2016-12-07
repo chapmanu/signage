@@ -43,25 +43,27 @@
   text-align: right;
 }
 
-
-
-.sign-inactive, .sign-active {
+.sign-inactive, .sign-active, .sign-private {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   margin-top: 5px;
 }
 
+.sign-inactive {
+  background-color: $light-gray;
+  box-shadow: 0 0 5px 5px $light-gray;
+}
+
 .sign-active {
-  width: 8px;
-  height: 8px;
   background-color: $green;
   box-shadow: 0 0 5px 5px $green;
 }
 
-.sign-inactive {
-  background-color: $light-gray
+.sign-private {
+  background-color: $red;
+  box-shadow: 0 0 5px 5px $red;
 }
 
 /* Sign Show */

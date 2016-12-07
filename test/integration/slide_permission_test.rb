@@ -31,7 +31,7 @@ class SlidePermissionTest < Capybara::Rails::TestCase
       assert page.has_no_css?('form#add-owner'), "Add owner form is present"
     end
 
-    test "slide edit page is accessable" do
+    test "slide edit page is not accessible" do
       visit edit_slide_path(slides(:one))
       assert_equal 403, page.status_code
     end

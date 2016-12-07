@@ -8,13 +8,19 @@ class SignsController < ApplicationController
   before_action :set_sign, only: [:remove_slide, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
   before_action :set_search_filters, only: [:index]
 
-  load_and_authorize_resource except: [:play, :poll]
+  load_and_authorize_resource except: :poll
 
   # GET /signs
   # GET /signs.json
   def index
-    query  = Sign.eager_load(:slides)
-    query  = query.owned_by(current_user) if params['filter'] == 'mine'
+    query = Sign.eager_load(:slides)
+
+    if params['filter'] == 'mine'
+      query = query.owned_by(current_user)
+    elsif !current_user.super_admin?
+      query = query.visible_or_owned_by(current_user)
+    end
+
     @signs = query.search(params['search']).order(:name)
   end
 
@@ -113,7 +119,7 @@ class SignsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sign_params
-      params.require(:sign).permit(:name, :template, :transition, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
+      params.require(:sign).permit(:name, :template, :transition, :visibility, :location, :emergency, :emergency_detail, :updated_at, user_ids: [])
     end
 
     def set_owned_object

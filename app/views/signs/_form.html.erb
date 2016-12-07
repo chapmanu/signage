@@ -8,7 +8,7 @@
         <% @sign.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
-        </ul>p
+        </ul>
       </div>
     <% end %>
 
@@ -31,6 +31,13 @@
       <%= f.select :transition, Sign.transitions.map{|m| [m.humanize, m] } %>
       <%= f.label :transition, "Transition type" %>
     </div>
+
+    <% if current_user.super_admin? %>
+      <div class="input-field">
+        <%= f.select :visibility, Sign.visibilities.keys.map{|k| [SignsHelper::VISIBILITY_STATES[k], k]} %>
+        <%= f.label :visibility, "Visibility" %>
+      </div>
+    <% end %>
 
     <br />
     <div class="actions">

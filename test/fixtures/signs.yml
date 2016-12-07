@@ -8,6 +8,7 @@ one:
   notification_detail: MyString
   emergency: MyString
   emergency_detail: MyString
+  visibility: 0
 
 two:
   name: sign_two
@@ -17,3 +18,4 @@ two:
   notification_detail: MyString
   emergency: MyString
   emergency_detail: MyString
+  visibility: 1
