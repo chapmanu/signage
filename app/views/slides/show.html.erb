@@ -47,12 +47,12 @@
     <% end %>
 
     <br />
-    <label>Shown on <%= pluralize(@slide.signs.length, 'sign')%>:</label>
+    <label>Shown on <%= pluralize(accessible_sign_slides(@slide).length, 'sign')%>:</label>
     <ul class="signs-list">
-      <% @slide.sign_slides.each do |ss| %>
+      <% accessible_sign_slides(@slide).each do |ss| %>
         <li>
           <div class="sign-list-item-status">
-            <%= content_tag :div, nil, class: (ss.sign.active? ? 'sign-active' : 'sign-inactive') %>
+            <%= sign_status_orb(ss.sign) %>
           </div>
           <p><%= link_to ss.sign.name, ss.sign %> <%= "(pending approval)" unless ss.approved? %></p>
         </li>

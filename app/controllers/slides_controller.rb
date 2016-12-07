@@ -7,7 +7,7 @@ class SlidesController < ApplicationController
 
   before_action :set_slide,                  only: [:draft, :show, :edit, :update, :send_to_sign, :destroy]
   before_action :set_slide_or_draft,         only: [:preview]
-  before_action :set_signs,                  only: [:new, :edit, :create, :update]
+  before_action :set_signs,                  only: [:index, :new, :edit, :create, :update]
   before_action :set_parent_sign_path,       only: [:new, :edit]
   before_action :set_search_filters,         only: [:index]
 
@@ -26,7 +26,6 @@ class SlidesController < ApplicationController
     else
       query = query.newest
     end
-    @signs  = Sign.order(:name)
     @slides = query.search(params[:search]).page params[:page]
   end
 
@@ -123,7 +122,9 @@ class SlidesController < ApplicationController
     end
 
     def set_signs
-      @signs = Sign.includes(:users).order(:name)
+      query  = Sign.includes(:users)
+      query  = query.visible_or_owned_by(current_user) unless current_user.super_admin?
+      @signs = query.order(:name)
     end
 
     def set_parent_sign_path
