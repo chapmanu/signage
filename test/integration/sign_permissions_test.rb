@@ -103,5 +103,11 @@ class SignPermissionTest < Capybara::Rails::TestCase
       visit signs_path(filter: 'all')
       assert page.has_css?('div.sign-private'), "Private sign is not marked with red orb"
     end
+
+    test "sign visibility select is absent" do
+      user.signs << signs(:two)
+      visit edit_sign_path(signs(:two))
+      assert page.has_no_content?('Visibility'), "Owner can edit sign visibility"
+    end
   end
 end
