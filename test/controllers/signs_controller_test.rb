@@ -99,7 +99,7 @@ class SignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "expects signs to be center properly when played" do
+  test "expects signs to be centered properly when played" do
     # Issue 156: https://github.com/chapmanu/signage/issues/156
     sign_out @sign.owners.first
     get :play, id: @sign
