@@ -109,7 +109,7 @@ class SignsControllerTest < ActionController::TestCase
     assert_select 'body' do |elements|
       body_content = elements.first.content.strip
       expected_content = 'MyString'
-      assert_equal body_content[0..expected_content.length], expected_content
+      assert_equal body_content[0...expected_content.length], expected_content
     end
   end
 
