@@ -99,6 +99,20 @@ class SignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "expects signs to be center properly when played" do
+    # Issue 156: https://github.com/chapmanu/signage/issues/156
+    sign_out @sign.owners.first
+    get :play, id: @sign
+    assert_response :success
+
+    # Assert body text starts with expected content.
+    assert_select 'body' do |elements|
+      body_content = elements.first.content.strip
+      expected_content = 'MyString'
+      assert_equal body_content[0..expected_content.length], expected_content
+    end
+  end
+
   test "should poll sign for updates" do
     # Poll endpoint should not require auth. Authorization had been enabled leading to 403
     # responses in production that were blocking updates.
@@ -107,4 +121,3 @@ class SignsControllerTest < ActionController::TestCase
     assert_response :success
   end
 end
-
