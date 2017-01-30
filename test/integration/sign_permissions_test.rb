@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SignPermissionTest < Capybara::Rails::TestCase
   let (:user) { users(:ross) }
-  
+
   before do
     sign_in user
     user.signs.clear
@@ -79,13 +79,13 @@ class SignPermissionTest < Capybara::Rails::TestCase
     end
 
     test "show page for private sign is not accessible" do
-      visit sign_path(signs(:two))
+      visit sign_path(signs(:private))
       assert_equal 403, page.status_code
     end
 
-    test "play page for private sign is not accessible" do
-      visit play_sign_path(signs(:two))
-      assert_equal 403, page.status_code
+    test "expects play page for private sign to be accessible" do
+      visit play_sign_path(signs(:private))
+      assert_equal 200, page.status_code
     end
 
 
