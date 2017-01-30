@@ -8,7 +8,7 @@ class SignsController < ApplicationController
   before_action :set_sign, only: [:remove_slide, :poll, :show, :edit, :update, :destroy, :play, :settings, :order]
   before_action :set_search_filters, only: [:index]
 
-  load_and_authorize_resource except: :poll
+  load_and_authorize_resource except: [:play, :poll]
 
   # GET /signs
   # GET /signs.json
