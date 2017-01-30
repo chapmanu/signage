@@ -120,4 +120,20 @@ class SignsControllerTest < ActionController::TestCase
     xhr :get, :poll, id: @sign, sign: { updated_at: Time.zone.now }
     assert_response :success
   end
+
+  test "expects sign to be played even when it is private" do
+    # Issue 160: https://github.com/chapmanu/signage/issues/160
+    # Arrange
+    private_sign = signs(:private)
+
+    # Assume
+    assert private_sign.owners.empty?
+    assert private_sign.private?
+
+    # Act
+    get :play, id: private_sign
+
+    # Assert
+    assert_response :success
+  end
 end
