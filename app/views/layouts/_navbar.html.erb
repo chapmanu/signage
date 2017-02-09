@@ -7,7 +7,13 @@
   </div>
 
   <div class="navbar-right">
-    <% if current_user %>
+    <% if Rails.env.development? %>
+
+      <div class="switch-user-dropdown">
+        <%= switch_user_select %>
+      </div>
+
+    <% elsif current_user %>
       <p>Signed in as <%= current_user.first_name %></p> <%= link_to "Sign Out", destroy_user_session_path, method: 'delete', class: 'navbar-button' %>
     <% else %>
       <%= link_to "Sign In", new_user_session_path, class: "sign-in" %>
