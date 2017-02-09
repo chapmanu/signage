@@ -38,6 +38,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Skip authentication for SkipUserController: http://stackoverflow.com/a/16623868/6763239
+  config.to_prepare do
+    SwitchUserController.skip_before_filter :authenticate_user!
+  end
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
