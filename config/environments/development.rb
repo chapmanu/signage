@@ -39,9 +39,24 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  #
+  # Switch User
+  #
   # Skip authentication for SkipUserController: http://stackoverflow.com/a/16623868/6763239
   config.to_prepare do
     SwitchUserController.skip_before_filter :authenticate_user!
+  end
+
+  config.after_initialize do
+    SwitchUser.setup do |config|
+      # provider may be :devise, :authlogic, :clearance, :restful_authentication, :sorcery, or :session
+      config.provider = :devise
+
+      # available_users_names is a hash,
+      # keys in this hash should match a key in the available_users hash
+      # value is the column name which will be displayed in select box
+      config.available_users_names = { :user => :full_name }
+    end
   end
 end
 
