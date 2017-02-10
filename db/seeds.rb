@@ -47,7 +47,7 @@ public_sign.create_activity(:create, owner: sign_owner, parameters: { name: publ
 
 
 #
-# Slides
+# Slides and Notifications
 # Create 4 slides:
 # - 1 by sign_owner for both signs
 # - 1 by non_sign_owner for sign_owner sign that is approved by sign owner

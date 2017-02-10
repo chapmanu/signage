@@ -20,4 +20,28 @@ class HomeControllerTest < ActionController::TestCase
 
     assert_equal 2, assigns(:unapproved_sign_slides).length
   end
+
+  test "expects index to show all unexpired notifications to super admin" do
+    # Arrange
+    super_admin = users(:super_admin)
+    sign_owner = users(:sign_owner)
+    sign = signs(:build_team_area)
+    sign.owners << sign_owner
+    sign.slides << slides(:awaiting_approval)
+    sign.slides << slides(:expired)
+    sign.save!
+
+    # Assume super_admin does not own signs with slides awaiting approval.
+    assert_equal 2, sign.slides.count
+    assert_equal 1, SignSlide.awaiting_approval.count
+    assert_equal 0, super_admin.signs.count
+    assert_includes sign.owners, sign_owner, "sign_owner should own build team area sign."
+
+    # Act
+    sign_in super_admin
+    get :index
+
+    # Assert
+    assert_select "div.unapproved-sign-slide", 1
+  end
 end
