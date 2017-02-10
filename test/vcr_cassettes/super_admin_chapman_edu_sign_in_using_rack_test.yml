@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://chapmanedu%2Fadbind400:yedvodX4lZBCOeqmMcBm@webfarm.chapman.edu/RoleIdentity/api/Role/allthepower
+    uri: https://chapmanedu%2Fadbind400:yedvodX4lZBCOeqmMcBm@webfarm.chapman.edu/RoleIdentity/api/Role/super_admin
     body:
       encoding: US-ASCII
       string: ''
@@ -41,12 +41,12 @@ http_interactions:
       Access-Control-Allow-Headers:
       - Content-Type
       Date:
-      - Fri, 18 Mar 2016 21:48:45 GMT
+      - Fri, 10 Feb 2017 21:03:45 GMT
       Content-Length:
       - '161'
     body:
       encoding: UTF-8
-      string: '{"username":"allthepower","role":"student","firstname":"Power","lastname":"User","email":"allthepower@chapman.edu","staff_department":null,"faculty_department":null,"school":null,"major":null}'
-    http_version: 
-  recorded_at: Fri, 18 Mar 2016 21:48:45 GMT
+      string: '{"username":"super_admin","role":"student","firstname":"Super","lastname":"Admin","email":"super_admin@chapman.edu","staff_department":null,"faculty_department":null,"school":null,"major":null}'
+    http_version:
+  recorded_at: Fri, 10 Feb 2017 21:03:45 GMT
 recorded_with: VCR 2.9.3

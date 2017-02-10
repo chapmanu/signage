@@ -3,6 +3,8 @@ require 'test_helper'
 class EmergencyBroadcastTest < Capybara::Rails::TestCase
 
   setup do
+    # FIXME: This requires a VCR cassette that broken when I changed the super_admin's name in
+    # the fixture. web_mock should be used to block and mock all web requests.
     sign_in users(:super_admin)
   end
 
@@ -23,7 +25,7 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
 
     visit emergencies_path
     click_link "Clear All Emergency Messages"
-    
+
     assert_empty all_emergencies, "Did not clear all emergencies"
   end
 
@@ -41,7 +43,7 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
   private
 
     def clear_emergencies
-      Sign.update_all(emergency: nil, emergency_detail: nil)  
+      Sign.update_all(emergency: nil, emergency_detail: nil)
     end
 
     def all_emergencies
