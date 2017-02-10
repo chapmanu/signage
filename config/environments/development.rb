@@ -47,6 +47,8 @@ Rails.application.configure do
     SwitchUserController.skip_before_filter :authenticate_user!
   end
 
+  # Dev-specific configuration replaces initializers/switch_user.rb
+  # Source: https://github.com/flyerhzm/switch_user/issues/35
   config.after_initialize do
     SwitchUser.setup do |config|
       # provider may be :devise, :authlogic, :clearance, :restful_authentication, :sorcery, or :session
