@@ -1,5 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# To assign a slide to a sign in test:
+# sign = signs(:build_team_area)
+# sign.owners << sign_owner
+# sign.slides << slides(:awaiting_approval)
+# sign.save!
+
 one:
   order: 1
   sign: one

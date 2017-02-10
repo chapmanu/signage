@@ -30,3 +30,8 @@ super_admin:
   last_name: Admin
   email: super_admin@chapman.edu
   role: <%= User.roles[:super_admin] %>
+
+non_sign_owner:
+  first_name: Non
+  last_name: Owner
+  email: non_sign_owner@chapman.edu
