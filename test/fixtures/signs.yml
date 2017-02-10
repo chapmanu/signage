@@ -21,7 +21,7 @@ two:
   visibility: 1
 
 build_team_area:
-  name: sign_one
+  name: Build Team Area Test Sign
   template: default
   location: Build Team Area
   visibility: <%= Sign.visibilities[:listed] %>

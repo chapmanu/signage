@@ -4,12 +4,12 @@
   </div>
 
   <div class="sign-in-form">
-    <p>
-      Development allows you to easily switch users using
-      <a href="https://github.com/flyerhzm/switch_user" target="_blank">switch_user</a>.
-    </p>
     <% if Rails.env.development? %>
 
+      <p>
+        Development allows you to easily switch users using
+        <a href="https://github.com/flyerhzm/switch_user" target="_blank">switch_user</a>.
+      </p>
       <%= switch_user_select %>
 
     <% else %>
