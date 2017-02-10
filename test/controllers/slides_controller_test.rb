@@ -7,6 +7,7 @@ class SlidesControllerTest < ActionController::TestCase
     @slide = @owned_object = slides(:one)
     sign_in users(:two)
     @slide.owners << users(:two)
+    ActionMailer::Base.deliveries.clear
   end
 
   test "should get index" do
@@ -82,5 +83,34 @@ class SlidesControllerTest < ActionController::TestCase
     assert_response :success
     draft = @slide.find_or_create_draft
     assert_equal 0, draft.scheduled_items.length
+  end
+
+  test "expects sign owner and not super admin to be emailed when slide sent to sign" do
+    # Arrange
+    super_admin = users(:super_admin)
+    sign_owner = users(:sign_owner)
+    slide_owner = users(:non_sign_owner)
+    sign = signs(:build_team_area)
+    slide = slides(:awaiting_approval)
+
+    sign.owners << sign_owner
+    slide_owner.slides << slide
+    super_admin_notifications_before = super_admin.sign_slides_awaiting_approval.count
+    sign_owner_notifications_before = sign_owner.sign_slides_awaiting_approval.count
+
+    # Assume
+    assert_equal 0, ActionMailer::Base.deliveries.length
+
+    # Act
+    sign_in slide_owner
+    patch :update, id: slide, slide: { sign_ids: [sign.id] }
+    emails_sent = ActionMailer::Base.deliveries
+
+    # Assert
+    assert_redirected_to slide_path(assigns(:slide))
+    assert_equal super_admin_notifications_before + 1, super_admin.sign_slides_awaiting_approval.count
+    assert_equal sign_owner_notifications_before + 1, sign_owner.sign_slides_awaiting_approval.count
+    assert_equal 1, emails_sent.length
+    assert_equal [sign_owner.email], emails_sent.first.to
   end
 end
