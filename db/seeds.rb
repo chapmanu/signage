@@ -48,8 +48,11 @@ public_sign.create_activity(:create, owner: sign_owner, parameters: { name: publ
 
 #
 # Slides
-# Create 3 slides: 1 by sign_owner for both signs, 1 by non_sign_owner for sign_owner sign that
-# is approved and 1 not approved.
+# Create 4 slides:
+# - 1 by sign_owner for both signs
+# - 1 by non_sign_owner for sign_owner sign that is approved by sign owner
+# - 1 that is not approved by sign owner
+# - 1 that is expired
 #
 # Sign Owner's adds slide to both her signs.
 sign_owners_slide = Slide.create!(name: "Sign Owner's Slide",
@@ -94,3 +97,17 @@ public_sign.touch
 UserMailer.sign_slide_approved(sign_slide: approved_slide.sign_slides.first,
                                approver: sign_owner,
                                message: 'I approve this sign!').deliver_now
+
+# Non Owner create slide that has expired
+expired_slide = Slide.create!(name: 'Expired Slide',
+                              template: 'standard',
+                              menu_name: 'Expired Slide',
+                              heading: 'This slide died alone and unloved.',
+                              play_on: Time.zone.now - 5.days,
+                              stop_on: Time.zone.now - 2.days)
+expired_slide.create_activity(:create,
+                              owner: non_sign_owner,
+                              parameters: { name: approved_slide.menu_name })
+non_sign_owner.slides << expired_slide
+non_sign_owner.save!
+UpdateSlide.execute(expired_slide, {sign_ids: [public_sign.id]}, non_sign_owner)
