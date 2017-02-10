@@ -8,6 +8,7 @@ class SignSlide < ActiveRecord::Base
     joins(:slide)
     .where(approved: false)
     .where('slides.stop_on IS NULL OR slides.stop_on > ?', Time.zone.now)
+    .order('slides.stop_on ASC')
   end
 
   def self.awaiting_approval_by_sign_owner(sign_owner)
