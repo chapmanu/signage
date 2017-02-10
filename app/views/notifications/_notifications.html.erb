@@ -1,20 +1,29 @@
-<div id="unapproved-sign-slide-<%= ss.id %>" class="unapproved-sign-slide">
-  <p><%= image_tag ss.slide.screenshot, class: 'screenshot' %></p>
-  <p>The slide <%=link_to ss.slide.menu_name, ss.slide %> needs to be approved to go on the sign <%= link_to ss.sign.name, ss.sign %>.</p>
+<div id="unapproved-sign-slide-<%= notification.id %>" class="unapproved-sign-slide">
+  <p><%= image_tag notification.slide.screenshot, class: 'screenshot' %></p>
+  <p>
+    The slide <%=link_to notification.slide.menu_name, notification.slide %> needs to be
+    approved to go on the sign <%= link_to notification.sign.name, notification.sign %>.
+  </p>
   <p class="daterange">
-    <% if ss.slide.play_on.present? %>
-      <span><strong>Starting on: </strong><%= ss.slide.play_on.strftime("%B %-d, %G") %></span>
+    <% if notification.slide.play_on.present? %>
+      <span>
+        <strong>Starting on: </strong><%= notification.slide.play_on.strftime("%B %-d, %G") %>
+      </span>
     <%end%>
-    <% if ss.slide.stop_on.present? %>
-      <span><strong>Ending on: </strong><%= ss.slide.stop_on.strftime("%B %-d, %G") %></span>
+    <% if notification.slide.stop_on.present? %>
+      <span>
+        <strong>Ending on: </strong><%= notification.slide.stop_on.strftime("%B %-d, %G") %>
+      </span>
     <% end %>
   </p>
   <div class="input-field">
-    <%= text_field_tag "message-#{ss.id}" %>
-    <%= label_tag      "message-#{ss.id}", "Approve/Reject Slide Custom Message" %>
+    <%= text_field_tag "message-#{notification.id}" %>
+    <%= label_tag      "message-#{notification.id}", "Approve/Reject Slide Custom Message" %>
   </div>
   <p>
-    <%= link_to 'Approve', approve_sign_slide_path(ss), remote: true, method: :post, class: 'approve-sign-slide btn green' %>
-    <%= link_to 'Reject', reject_sign_slide_path(ss), remote: true, method: :post, class: 'reject-sign-slide btn red' %>
+    <%= link_to 'Approve', approve_sign_slide_path(notification), remote: true, method: :post,
+        class: 'approve-sign-slide btn green' %>
+    <%= link_to 'Reject', reject_sign_slide_path(notification), remote: true, method: :post,
+        class: 'reject-sign-slide btn red' %>
   </p>
 </div>

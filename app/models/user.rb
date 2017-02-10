@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
   def full_name_with_email
     "#{first_name} #{last_name} (#{email})"
   end
+
+  def sign_slides_awaiting_approval
+    # Otherwise known as notifications
+    super_admin? ? SignSlide.awaiting_approval : SignSlide.awaiting_approval_by_sign_owner(self)
+  end
 end
 
 # An unknown user
