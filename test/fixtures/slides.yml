@@ -53,3 +53,11 @@ expired:
   heading: I am expired.
   play_on: <%= Time.zone.now - 5.days %>
   stop_on: <%= Time.zone.now - 2.days %>
+
+without_stop:
+  name: forever
+  template: standard
+  menu_name: forever
+  duration: 5
+  heading: I am expired.
+  play_on: <%= Time.zone.now - 5.days %>

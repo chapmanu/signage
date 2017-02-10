@@ -5,9 +5,12 @@ class SignSlide < ActiveRecord::Base
   validates_uniqueness_of :slide_id, scope: [:sign_id]
 
   scope :awaiting_approval, -> do
-    includes(:slide)
+    joins(:slide)
     .where(approved: false)
-    .where.not(slides: {stop_on: nil})
-    .where('slides.stop_on < ?', Time.zone.now)
+    .where('slides.stop_on IS NULL OR slides.stop_on > ?', Time.zone.now)
+  end
+
+  def self.awaiting_approval_by_sign_owner(sign_owner)
+    awaiting_approval.joins(sign: :sign_users).where('sign_users.user_id' => sign_owner.id)
   end
 end
