@@ -93,6 +93,7 @@ class SlidesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /slides/1
   def send_to_sign
     ids = params[:slide][:sign_ids]
     UpdateSlide.execute(@slide, {sign_ids: ids}, current_user)
