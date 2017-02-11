@@ -22,7 +22,15 @@
 
   <div class="navbar-center">
     <div class="pill-buttons">
-      <%= link_to "Notifications", notifications_path, class: controller_action == 'notifications#index' ? 'active' : '' %><%= link_to "Signs", signs_path, class: signs_controller? ? 'active' : '' %><%= link_to "Slides", slides_path , class: slides_controller? ? 'active' : '' %>
+      <%# These links can have no white-space between them. %>
+      <%= format(
+            '%s%s%s%s',
+            link_to("Notifications", notifications_path,
+                    class: controller_action == 'notifications#index' ? 'active' : ''),
+            link_to("Signs", signs_path, class: signs_controller? ? 'active' : ''),
+            link_to("Slides", slides_path , class: slides_controller? ? 'active' : ''),
+            Rails.env.development? ? link_to("Dev Email", '/letter_opener') : ''
+          ).html_safe %>
     </div>
 
   </div>

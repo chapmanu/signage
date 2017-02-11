@@ -60,6 +60,10 @@ gem 'awesome_print'
 # Allow user to easily switch users in dev
 gem "switch_user", group: :development
 
+# View sent emails in browser at /letter_opener
+# https://github.com/fgrehm/letter_opener_web
+gem "letter_opener_web", group: :development
+
 # Use Capistrano for deployment
 gem 'capistrano',          '~> 3.1',   group: :development
 gem 'capistrano-rails',    '~> 1.1',   group: :development
