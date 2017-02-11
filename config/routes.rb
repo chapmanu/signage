@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'server', to: 'server#index'
 
   get 'cascade/form'
@@ -46,9 +46,12 @@ Rails.application.routes.draw do
   resources :users do
     get 'lookup', on: :collection
   end
-  
+
   # Sponsors
   resources :sponsors
+
+  # Letter Opener Web
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
