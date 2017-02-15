@@ -45,5 +45,12 @@
       margin-right: 12px;
       font-weight: 100;
     }
+
+    // switch_user dropdown
+    div.switch-user-dropdown {
+      span.caret {
+        top: 0px;
+      }
+    }
   }
 }
