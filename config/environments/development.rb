@@ -16,6 +16,9 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # User letter_opener_web to view emails in browser at /letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -38,6 +41,28 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  #
+  # Switch User
+  #
+  # Skip authentication for SkipUserController: http://stackoverflow.com/a/16623868/6763239
+  config.to_prepare do
+    SwitchUserController.skip_before_filter :authenticate_user!
+  end
+
+  # Dev-specific configuration replaces initializers/switch_user.rb
+  # Source: https://github.com/flyerhzm/switch_user/issues/35
+  config.after_initialize do
+    SwitchUser.setup do |config|
+      # provider may be :devise, :authlogic, :clearance, :restful_authentication, :sorcery, or :session
+      config.provider = :devise
+
+      # available_users_names is a hash,
+      # keys in this hash should match a key in the available_users hash
+      # value is the column name which will be displayed in select box
+      config.available_users_names = { :user => :full_name }
+    end
+  end
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'

@@ -20,8 +20,14 @@ two:
   emergency_detail: MyString
   visibility: 1
 
+build_team_area:
+  name: Build Team Area Test Sign
+  template: default
+  location: Build Team Area
+  visibility: <%= Sign.visibilities[:listed] %>
+
 private:
   name: A Private Sign
   template: default
   location: Build Team Area
-  visibility: 1               # Yes, 1 means hidden/private.
+  visibility: <%= Sign.visibilities[:hidden] %>

@@ -20,8 +20,18 @@ ross:
   last_name: Loehner
   email: loehner@chapman.edu
 
+sign_owner:
+  first_name: Sign
+  last_name: Owner
+  email: sign_owner@chapman.edu
+
 super_admin:
-  first_name: powerful
-  last_name: user
-  email: allthepower@chapman.edu
+  first_name: Super
+  last_name: Admin
+  email: super_admin@chapman.edu
   role: <%= User.roles[:super_admin] %>
+
+non_sign_owner:
+  first_name: Non
+  last_name: Owner
+  email: non_sign_owner@chapman.edu
