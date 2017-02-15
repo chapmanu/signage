@@ -1,10 +1,12 @@
 <div class="notifications-container">
-  
+
   <div class="notifications-listing <%= 'notifications-centered' if controller_action == 'notifications#index' %>">
     <h4>Notifications</h4>
-    <%= render partial: 'notifications/notifications', collection: @unapproved_sign_slides, as: :ss %>
+    <%= render partial: 'notifications/notifications',
+               collection: current_user.sign_slides_awaiting_approval,
+               as: :notification %>
   </div>
-  
+
   <% if controller_action == 'home#index' %>
     <div class="activities-listing">
       <h4>Recent Activity</h4>

@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# TODO: Remove these. Always use descriptive name with fixtures.
 one:
   name: one
   template: standard
@@ -33,3 +34,30 @@ two:
   foreground: MyString
   foreground_type: none
   foreground_sizing: MyString
+
+awaiting_approval:
+  name: awaiting_approval
+  template: standard
+  menu_name: awaiting approval
+  duration: 5
+  heading: Approve Me
+  subheading: I seek your approval.
+  play_on: <%= Time.zone.now - 2.days %>
+  stop_on: <%= Time.zone.now + 2.days %>
+
+expired:
+  name: expired
+  template: standard
+  menu_name: expired
+  duration: 5
+  heading: I am expired.
+  play_on: <%= Time.zone.now - 5.days %>
+  stop_on: <%= Time.zone.now - 2.days %>
+
+without_stop:
+  name: forever
+  template: standard
+  menu_name: forever
+  duration: 5
+  heading: I am expired.
+  play_on: <%= Time.zone.now - 5.days %>
