@@ -737,6 +737,11 @@ subhead {
       display: table;
       clear: both;
     }
+
+    &.vertical {
+      display: inline-block;
+      width: 996px;
+    }
   }
 }
 

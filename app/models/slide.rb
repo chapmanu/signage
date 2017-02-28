@@ -34,6 +34,8 @@ class Slide < ActiveRecord::Base
   scope :newest,   -> { order(created_at: :desc) }
   scope :alpha,    -> { order(menu_name: :asc) }
 
+  enum orientation: { horizontal: 0, vertical: 1 }
+
   mount_uploader :background, ImageUploader
   mount_uploader :foreground, ImageUploader
   mount_uploader :screenshot, ImageUploader
