@@ -1,5 +1,5 @@
 <div class="slide-form-container">
-  
+
   <%= form_for @slide, 
     html: { 
       multipart: true, 
@@ -31,9 +31,14 @@
         <%= f.label :menu_name, "Slide name" %>
       </div>
 
-      <div class="input-field">
-        <%= f.select :template, Slide.templates.map{|t| [t.titleize, t] }, { include_blank: 'Select your template'} %>
+      <div class="input-field template">
+        <%= f.select :template, Slide.templates.map{|t| [t.titleize, t] }, { include_blank: 'Select your template'}, id: "slide_template" %>
         <%= f.label :template, "Select slide template" %>
+      </div>
+
+      <div class="input-field orientation" data-show-when="#slide_template==social_feed">
+        <%= f.select :orientation, Slide.orientations.keys.map{|o| [o.humanize, o] }, { include_blank: 'Select slide orientation'}, id: "slide_orientation" %>
+        <%= f.label :orientation, "Select slide orientation" %>
       </div>
     </div>
 
@@ -242,7 +247,7 @@
           <%= link_to "Delete", @slide, class: 'delete-slide', method: :delete, data: { confirm: 'Are you sure you want to delete this slide?'} %>
         </div>
       </div>
-      <div class="slide-live-preview">
+      <div class="slide-live-preview <%= @slide.orientation %>">
         <div class="js-sticky-slide-preview">
           <div class="slide-preview">
             <div class="slide-preview-wrapper">
