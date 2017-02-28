@@ -8,9 +8,19 @@ require 'rails/test_help'
 require 'minitest/mock'
 require 'webmock/minitest'
 require 'vcr'
+require 'capybara/poltergeist'
 require 'minitest/rails/capybara'
 require 'public_activity/testing'
 require 'minitest/pride'
+
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    url_blacklist: ["http://use.typekit.net", "https://use.typekit.net"]
+  })
+end
+Capybara.javascript_driver = :poltergeist
+Capybara.default_max_wait_time = 10
+
 
 class ActiveSupport::TestCase
   fixtures :all
