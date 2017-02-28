@@ -113,4 +113,34 @@ class SlidesControllerTest < ActionController::TestCase
     assert_equal 1, emails_sent.length
     assert_equal [sign_owner.email], emails_sent.first.to
   end
+
+  test "updates slide orientation to horizontal when updating slide template from vertical capable template to non-vertical capable template" do
+    sign_in users(:super_admin)
+    slide = slides(:social_feed_vertical)
+    assert_equal "vertical", slide.orientation
+
+    patch :update, id: slide, slide: { template: "standard"}
+
+    assert_equal "horizontal", slide.reload.orientation
+  end
+
+  test "vertical capable template can update orientation to vertical when updating slide orientation" do
+    sign_in users(:super_admin)
+    slide = slides(:social_feed_horizontal)
+    assert_equal "horizontal", slide.orientation
+
+    patch :update, id: slide, slide: { orientation: "vertical", template: slide.template }
+
+    assert_equal "vertical", slide.reload.orientation
+  end
+
+  test "non-vertical capable template cannot update orientation to vertical when updating slide orientation" do
+    sign_in users(:super_admin)
+    slide = slides(:one)
+    assert_equal "horizontal", slide.orientation
+
+    patch :update, id: slide, slide: { orientation: "vertical", template: slide.template }
+
+    assert_equal "horizontal", slide.reload.orientation
+  end
 end

@@ -3,6 +3,7 @@
      data-hash="<%= slide.slug %>"
      data-duration="<%= slide.duration %>"
      data-template="<%= slide.template %>"
+     data-orientation="<%= slide.orientation %>"
      >
   <article data-slide-name="<%= slide.name %>" class="<%= slide.css_classes %>">
     <%= render "slides/templates/#{slide.template}", slide: slide %>

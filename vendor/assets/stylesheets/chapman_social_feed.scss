@@ -5,6 +5,7 @@ $font-stack-body: "proxima-nova-soft", "Helvetica Neue", "Microsoft Sans Serif",
 $font-stack-heading: "proxima-nova", "Helvetica Neue", "Microsoft Sans Serif", sans-serif;
 $gutter_width: 20px;
 $tile_width: 335px;
+$v_orient_tile_width: 312px;
 
 #content {
   min-height: 650px;
@@ -27,9 +28,13 @@ $tile_width: 335px;
   }
 }
 
-.column {
-  float: left;
-  width: $tile_width + $gutter_width;
+.social-feed-container {
+  .column {
+    float: left;
+    width: $tile_width + $gutter_width;
+  }
+
+  &.vertical .column { width: $v_orient_tile_width + $gutter_width; }
 }
 
 // 2 Columns
@@ -287,6 +292,17 @@ $content_width: 4 * $tile_width + 3 * $gutter_width;
     }
   }
 }
+
+.social-feed-container.vertical .post_tile {
+  width: $v_orient_tile_width;
+
+  &.blog, &.blog_photo, &.post_photo {
+    .photo img { width: $v_orient_tile_width; }
+  }
+
+  iframe { width: $v_orient_tile_width; }
+}
+
 
 //---------------------------
 // POST WITH PICTURE

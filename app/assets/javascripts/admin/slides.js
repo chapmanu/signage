@@ -14,7 +14,7 @@ Admin.Slides.livePreviewAjax = function() {
     
     var $form     = $('#slide_form');
     var form_data = new FormData($('#slide_form')[0]);
-    
+
     $.ajax({
         url:        $form.data('draft-url'),
         type:       'POST',
@@ -60,6 +60,20 @@ Admin.Slides.initDateTimePickers = function() {
   });
 };
 
+Admin.Slides.setPreviewOrientation = function() {
+  var slidePreview = $(".slide-live-preview");
+  var selectedTemplate = $(this).find("#slide_template option:selected").val();
+  slidePreview.removeClass("vertical horizontal");
+
+  // currently only social feed template can have vertical orientation
+  if(selectedTemplate != "social_feed"){
+    slidePreview.addClass("horizontal");
+  }else{
+    var selectedOrientation = $(this).find("#slide_orientation option:selected").val();
+    slidePreview.addClass(selectedOrientation);
+  }
+}
+
 Admin.Slides.initShowWhen = function() {
   $('[data-show-when]').each(function(i, val) {
     var $this   = $(this);
@@ -89,7 +103,7 @@ Admin.Slides.initLivePreview = function() {
 
   $('.live-preview-triggers').on('blur', ':input', Admin.Slides.inputBlur);
   $('.live-preview-triggers').on('change', 'select, :file, :checkbox, :radio', Admin.Slides.livePreviewAjax);
-  
+  $('.live-preview-triggers').on('change', Admin.Slides.setPreviewOrientation);
   setTimeout(function() { Admin.Slides.livePreviewAjax(); }, 10);
 };
 

@@ -94,5 +94,6 @@ group :test do
   gem 'minitest-rails-capybara'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
+  gem 'poltergeist'
 end
 
