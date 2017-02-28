@@ -1,9 +1,13 @@
 Utils.fireWhenReady(['slides#preview'], function(e) {
+  // Product owners provided these values. They are our standard monitors dimensions.
+  var STD_LONG_DIM = 1920;
+  var STD_SHORT_DIM = 1080;
+
   // Scale the view to the size it will need to display
   var $uiFeed = $('.ui-feed');
-  var isVertical = $uiFeed.find(".js-slide-meta").data("orientation") == "vertical" ? true : false;
-  var stdWidth = isVertical? 1080 : 1920;
-  var stdHeight = isVertical? 1920 : 1080;
+  var isVertical = $uiFeed.find(".js-slide-meta").data("orientation") === "vertical" ? true : false;
+  var stdWidth = isVertical? STD_SHORT_DIM : STD_LONG_DIM;
+  var stdHeight = isVertical? STD_LONG_DIM : STD_SHORT_DIM;
 
   $('.ui-feed').css({width: stdWidth, height: stdHeight});
 
