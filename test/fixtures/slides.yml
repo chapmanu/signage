@@ -61,3 +61,17 @@ without_stop:
   duration: 5
   heading: I am expired.
   play_on: <%= Time.zone.now - 5.days %>
+
+social_feed_vertical:
+  name: vertical social
+  template: social_feed
+  menu_name: vertical social
+  orientation: 1
+  duration: 5
+
+social_feed_horizontal:
+  name: horizontal social
+  template: social_feed
+  menu_name: horizontal social
+  orientation: 0
+  duration: 5
