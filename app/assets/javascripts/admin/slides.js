@@ -62,14 +62,14 @@ Admin.Slides.initDateTimePickers = function() {
 
 Admin.Slides.setPreviewOrientation = function() {
   var slidePreview = $(".slide-live-preview");
-  var selectedTemplate = $(this).find("#slide_template option:selected").val();
+  var selectedTemplate = $("#slide_template option:selected").val();
   slidePreview.removeClass("vertical horizontal");
 
   // currently only social feed template can have vertical orientation
   if(selectedTemplate != "social_feed"){
     slidePreview.addClass("horizontal");
   }else{
-    var selectedOrientation = $(this).find("#slide_orientation option:selected").val();
+    var selectedOrientation = $("#slide_orientation option:selected").val();
     slidePreview.addClass(selectedOrientation);
   }
 }
