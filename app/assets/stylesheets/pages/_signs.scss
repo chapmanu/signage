@@ -116,7 +116,11 @@
   }
   .screenshot {
     background: $dark-gray;
-    img { display: block; }
+    img {
+      display: block;
+      height: 200px;
+      margin: 0 auto;
+    }
   }
 
   .pending-approval {
