@@ -14,8 +14,13 @@
     position: relative;
     top: 0;
     transition: top 200ms;
-    img { display: block; }
     cursor: pointer;
+
+    img {
+      display: block;
+      height: 200px;
+      margin: 0 auto;
+    }
   }
   .name {
     padding: $base-spacing;
