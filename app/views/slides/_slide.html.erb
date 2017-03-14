@@ -10,7 +10,7 @@
   </article>
 
   <% if slide.sponsor %>
-    <footer class="ui-slide-organizer" id="js-organizer">
+    <footer class="ui-slide-organizer <%= slide.orientation %>" id="js-organizer">
       <%= image_tag slide.sponsor.icon, class: 'ui-slide-organizer-icon' unless slide.sponsor.icon.blank? %>
       <%= slide.sponsor.name %>
     </footer>
