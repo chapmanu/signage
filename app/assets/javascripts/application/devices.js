@@ -1,4 +1,7 @@
 Utils.fireWhenReady(['signs#play'], function(e) {
+  var footer = $('footer#js-organizer');
+  var footerHeightRatio = footer.hasClass('vertical') ? .85 : .75;
+
   Device.initialize({
     menu: $('.ui-menu-list'),
     slides: $('main')
@@ -13,6 +16,6 @@ Utils.fireWhenReady(['signs#play'], function(e) {
 
   // Listen for page load/resize to position the organizer footer
   $(window).on('load resize', function() {
-    $('footer#js-organizer').css('top', ($(window).height() * .75));
+    footer.css('top', ($(window).height() * footerHeightRatio));
   });
 });
