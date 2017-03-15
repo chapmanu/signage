@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129191259) do
+ActiveRecord::Schema.define(version: 20170217194017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20161129191259) do
     t.integer  "signs_count",       default: 0,       null: false
     t.string   "feed_url"
     t.integer  "sponsor_id"
+    t.integer  "orientation",       default: 0
   end
 
   add_index "slides", ["sponsor_id"], name: "index_slides_on_sponsor_id", using: :btree

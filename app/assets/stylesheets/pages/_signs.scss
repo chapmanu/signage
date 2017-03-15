@@ -114,14 +114,16 @@
     .destroy-sign-slide { top: 0; }
     .reorder-handle     { bottom: 0; cursor: move; }
   }
+
   .screenshot {
     background: $dark-gray;
+
     img { display: block; }
   }
 
   .pending-approval {
     position: relative;
-    
+
     &:after {
       padding: $base-spacing;
       text-align: center;
@@ -131,6 +133,11 @@
       content: 'Pending Approval';
       background-color: rgba(0,0,0,0.7);
       top: 0; bottom: 0; right: 0; left: 0;
+    }
+
+    &.vertical:after {
+      padding: 0;
+      font-size: 12px;
     }
   }
 

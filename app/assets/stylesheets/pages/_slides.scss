@@ -14,8 +14,13 @@
     position: relative;
     top: 0;
     transition: top 200ms;
-    img { display: block; }
     cursor: pointer;
+
+    img {
+      display: block;
+      height: 200px;
+      margin: 0 auto;
+    }
   }
   .name {
     padding: $base-spacing;
@@ -73,12 +78,6 @@
 }
 
 
-
-
-
-
-
-
 /* SHOW VIEW */
 .show-slide-container {
   padding-top: $base-spacing*2;
@@ -86,6 +85,9 @@
 
   .left-column {
     @include span-columns(4);
+    text-align: center;
+
+    img { height: 200px; }
   }
 
   .right-column {
@@ -100,6 +102,7 @@
   .bold-actions {
     padding: $base-spacing;
     padding-left: 30%;
+    text-align: left;
   }
 
   .name {

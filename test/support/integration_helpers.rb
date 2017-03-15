@@ -1,7 +1,8 @@
 module IntegrationHelpers
   def sign_in(user)
     Net::LDAP.stub_any_instance(:bind, true) do
-      VCR.use_cassette("#{user.email}_sign_in_using_#{Capybara.current_driver}") do
+      #use default driver(:rack_test) in case current driver is poltergeist, which is not supported by VCR
+      VCR.use_cassette("#{user.email}_sign_in_using_#{Capybara.default_driver}") do
         visit new_user_session_path
         fill_in 'Chapman Username', with: user.email
         fill_in 'Password', with: 'anything'
