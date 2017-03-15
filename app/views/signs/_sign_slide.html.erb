@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <div class="screenshot <%= 'pending-approval' unless sign_slide.approved? %>">
+  <div class="screenshot <%= slide.orientation %> <%= 'pending-approval' unless sign_slide.approved? %>">
     <%= image_tag slide.screenshot.url, height: 100 %>
     <div class="status <%= slide.status %>"><%= slide.status.try(:titleize) %></div>
   </div>

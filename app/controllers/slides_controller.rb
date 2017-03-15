@@ -45,7 +45,7 @@ class SlidesController < ApplicationController
     # https://github.com/chapmanu/signage/issues/147.) It will look up scheduled_items using
     # draft_id (negative) but scheduled_items are associated with proper ID.
     # (Is this why scheduled_items are cleared above?)
-    filtered_params = slide_params.except('scheduled_items_attributes')
+    filtered_params = filter_orientation_params(slide_params.except('scheduled_items_attributes'))
 
     @draft.update(filtered_params)
     @draft.signs.clear
@@ -82,7 +82,9 @@ class SlidesController < ApplicationController
   # PATCH/PUT /slides/1.json
   def update
     respond_to do |format|
-      if UpdateSlide.execute(@slide, slide_params, current_user)
+      filtered_params = filter_orientation_params(slide_params)
+
+      if UpdateSlide.execute(@slide, filtered_params, current_user)
         @slide.create_activity(:update, owner: current_user, parameters: { name: @slide.menu_name })
         format.html { redirect_to @slide, notice: 'Slide was successfully updated.' }
         format.json { render :show, status: :ok, location: @slide }
@@ -159,6 +161,7 @@ class SlidesController < ApplicationController
       params.require(:slide).permit(
         :name,
         :template,
+        :orientation,
         :theme,
         :layout,
         :play_on,
@@ -201,5 +204,12 @@ class SlidesController < ApplicationController
           :stop_on
         ]
         )
+    end
+
+    # So vertical orientation does not get set on non-vertical capable templates
+    def filter_orientation_params(params_hash)
+      return params_hash if params_hash[:template] == "social_feed"
+      params_hash[:orientation] = "horizontal"
+      params_hash
     end
 end

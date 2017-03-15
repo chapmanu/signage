@@ -3,13 +3,14 @@
      data-hash="<%= slide.slug %>"
      data-duration="<%= slide.duration %>"
      data-template="<%= slide.template %>"
+     data-orientation="<%= slide.orientation %>"
      >
   <article data-slide-name="<%= slide.name %>" class="<%= slide.css_classes %>">
     <%= render "slides/templates/#{slide.template}", slide: slide %>
   </article>
 
   <% if slide.sponsor %>
-    <footer class="ui-slide-organizer" id="js-organizer">
+    <footer class="ui-slide-organizer <%= slide.orientation %>" id="js-organizer">
       <%= image_tag slide.sponsor.icon, class: 'ui-slide-organizer-icon' unless slide.sponsor.icon.blank? %>
       <%= slide.sponsor.name %>
     </footer>
