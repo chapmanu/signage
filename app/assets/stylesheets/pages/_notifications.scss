@@ -63,8 +63,9 @@
 
   .screenshot {
     display: block;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 300px;
+    margin: 0 auto;
   }
 
   .daterange span {
