@@ -6,13 +6,13 @@
 # sign.slides << slides(:awaiting_approval)
 # sign.save!
 
-one:
+default:
   order: 1
-  sign: one
-  slide: one
+  sign: default
+  slide: standard
 
 two:
   order: 1
-  sign: two
-  slide: two
+  sign: dodge
+  slide: standard
 
