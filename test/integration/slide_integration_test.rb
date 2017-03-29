@@ -2,10 +2,10 @@ require 'test_helper'
 
 class SlideIntegrationTest < Capybara::Rails::TestCase
   let(:user) { users(:james) }
-  let(:slide) { slides(:one)}
+  let(:slide) { slides(:standard)}
   let(:vert_social_slide) { slides(:social_feed_vertical) }
   let(:horiz_social_slide) { slides(:social_feed_horizontal) }
-  let(:standard_slide) { slides(:one) }
+  let(:standard_slide) { slides(:standard) }
   let(:scheduled_item) { scheduled_items(:one) }
 
   setup do

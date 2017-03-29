@@ -6,7 +6,7 @@ class SignsControllerTest < ActionController::TestCase
   let(:user) { users(:james) }
 
   setup do
-    @sign = @owned_object = signs(:one)
+    @sign = @owned_object = signs(:default)
     @sign.owners << user
     sign_in user
   end
@@ -46,9 +46,9 @@ class SignsControllerTest < ActionController::TestCase
   end
 
   test "should reorder sign_slides" do
-    signs(:one).slides << slides(:one)
-    signs(:one).slides << slides(:two)
-    before_order = signs(:one).sign_slides.order(:order).ids
+    signs(:default).slides << slides(:standard)
+    signs(:default).slides << slides(:awaiting_approval)
+    before_order = signs(:default).sign_slides.order(:order).ids
 
     post :order, id: @sign, sign_slide_ids: before_order.reverse
     assert_equal before_order.reverse, assigns(:sign).sign_slides.order(:order).ids
@@ -61,9 +61,9 @@ class SignsControllerTest < ActionController::TestCase
 
   test "remove a slide from the sign" do
     @sign.slides.clear
-    @sign.slides << slides(:one)
+    @sign.slides << slides(:standard)
     assert_equal 1, @sign.slides.count
-    delete :remove_slide, id: @sign, slide_id: slides(:one).id, format: :js
+    delete :remove_slide, id: @sign, slide_id: slides(:standard).id, format: :js
     assert_equal 0, @sign.slides.count
   end
 
@@ -79,7 +79,7 @@ class SignsControllerTest < ActionController::TestCase
     end
   end
 
-  test "destorying a slide produces 1 new activity record" do
+  test "destroying a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
       patch :destroy, id: @sign, sign: { menu_name: 'Show me on the activity page!'}
     end
