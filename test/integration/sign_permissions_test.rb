@@ -20,61 +20,61 @@ class SignPermissionTest < Capybara::Rails::TestCase
     end
 
     test "user cannot see private sign listed on owned slide" do
-      signs(:two).slides << slides(:one)
-      slides(:one).users << users(:one)
-      visit slide_path(slides(:one))
+      signs(:dodge).slides << slides(:standard)
+      slides(:standard).users << users(:one)
+      visit slide_path(slides(:standard))
       assert page.has_no_css?('div.sign-private'), "Private sign is present on slide"
     end
 
     test "remove owner button is absent" do
-      signs(:one).users << users(:two)
-      visit sign_path(signs(:one))
+      signs(:default).users << users(:two)
+      visit sign_path(signs(:default))
       assert page.has_no_css?('a.remove-owner'), "Remove owner link present"
     end
 
     test "add owner form is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       assert page.has_no_css?('form#add-owner'), "Add owner form is present"
     end
 
     test "edit button is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       within '.actions' do
         assert page.has_no_content?("Edit"), "Edit button is present"
       end
     end
 
     test "delete button is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       within '.actions' do
         assert page.has_no_content?("Delete"), "Delete button is present"
       end
     end
 
     test "slides cannot be reodered" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       assert page.has_no_css?('#js-sortable-slides'), "Slides are sortable"
     end
 
     test "remove slide button is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       assert page.has_no_css?('.destroy-slide-sign'), "Destroy sign slide is present"
     end
 
     test "add slide button is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       assert page.has_no_content?("+ New Slide"), "New slide button is present"
     end
 
     test "edit slide button is absent" do
-      visit sign_path(signs(:one))
+      visit sign_path(signs(:default))
       within '.sign-slides-listing' do
         assert page.has_no_content?("Edit"), "Edit slide button is present"
       end
     end
 
     test "edit page is not accessible" do
-      visit edit_sign_path(signs(:one))
+      visit edit_sign_path(signs(:default))
       assert_equal 403, page.status_code
     end
 
@@ -93,20 +93,20 @@ class SignPermissionTest < Capybara::Rails::TestCase
 
   describe "when user is owner" do
     test "private sign present on index page" do
-      user.signs << signs(:two)
+      user.signs << signs(:dodge)
       visit signs_path(filter: 'all')
       assert page.has_content?('sign_two'), "Private sign is not present"
     end
 
     test "private sign is marked with red orb on index page" do
-      user.signs << signs(:two)
+      user.signs << signs(:dodge)
       visit signs_path(filter: 'all')
       assert page.has_css?('div.sign-private'), "Private sign is not marked with red orb"
     end
 
     test "sign visibility select is absent" do
-      user.signs << signs(:two)
-      visit edit_sign_path(signs(:two))
+      user.signs << signs(:dodge)
+      visit edit_sign_path(signs(:dodge))
       assert page.has_no_content?('Visibility'), "Owner can edit sign visibility"
     end
   end
