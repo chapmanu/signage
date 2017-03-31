@@ -1,15 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: one
-  last_name: user
-  email: one@chapman.edu
-
-two:
-  first_name: two
-  last_name: user
-  email: two@chapman.edu
-
 james:
   first_name: James
   last_name: Kerr

@@ -3,7 +3,7 @@ require 'test_helper'
 class SignsControllerTest < ActionController::TestCase
   include OwnableControllerTest
 
-  let(:user) { users(:james) }
+  let(:user) { users(:non_sign_owner) }
 
   setup do
     @sign = @owned_object = signs(:default)
