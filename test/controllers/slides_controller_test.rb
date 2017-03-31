@@ -5,8 +5,8 @@ class SlidesControllerTest < ActionController::TestCase
 
   setup do
     @slide = @owned_object = slides(:standard)
-    sign_in users(:two)
-    @slide.owners << users(:two)
+    sign_in users(:non_sign_owner)
+    @slide.owners << users(:non_sign_owner)
     ActionMailer::Base.deliveries.clear
   end
 

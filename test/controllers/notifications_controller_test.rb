@@ -3,7 +3,7 @@ require 'test_helper'
 class NotificationsControllerTest < ActionController::TestCase
 
   setup do
-    sign_in users(:two)
+    sign_in users(:non_sign_owner)
   end
 
   test "should get index" do
@@ -12,9 +12,9 @@ class NotificationsControllerTest < ActionController::TestCase
   end
 
   test "should assign unapproved sign slides" do
-    users(:two).signs << signs(:default)
+    users(:non_sign_owner).signs << signs(:default)
     signs(:default).slides << slides(:awaiting_approval)
-    assert_equal 1, users(:two).signs.count
+    assert_equal 1, users(:non_sign_owner).signs.count
 
     get :index
 
