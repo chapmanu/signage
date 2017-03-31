@@ -21,13 +21,13 @@ class SignPermissionTest < Capybara::Rails::TestCase
 
     test "user cannot see private sign listed on owned slide" do
       signs(:dodge).slides << slides(:standard)
-      slides(:standard).users << users(:one)
+      slides(:standard).users << users(:non_sign_owner)
       visit slide_path(slides(:standard))
       assert page.has_no_css?('div.sign-private'), "Private sign is present on slide"
     end
 
     test "remove owner button is absent" do
-      signs(:default).users << users(:two)
+      signs(:default).users << users(:non_sign_owner)
       visit sign_path(signs(:default))
       assert page.has_no_css?('a.remove-owner'), "Remove owner link present"
     end

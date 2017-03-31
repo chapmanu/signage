@@ -21,7 +21,7 @@ class SlidePermissionTest < Capybara::Rails::TestCase
     end
 
     test "remove owner button is absent" do
-      slides(:standard).users << users(:two)
+      slides(:standard).users << users(:non_sign_owner)
       visit slide_path(slides(:standard))
       assert page.has_no_css?('a.remove-owner'), "Remove owner link present"
     end

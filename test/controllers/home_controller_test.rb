@@ -3,7 +3,7 @@ require 'test_helper'
 class HomeControllerTest < ActionController::TestCase
 
   setup do
-    sign_in users(:two)
+    sign_in users(:non_sign_owner)
   end
 
   def setup_sign_owner_signs_and_slides

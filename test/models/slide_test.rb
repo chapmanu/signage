@@ -5,7 +5,7 @@ class SlideTest < ActiveSupport::TestCase
 
   setup do
     @slide = @object = slides(:standard)
-    @user = users(:one)
+    @user = users(:non_sign_owner)
   end
 
   test 'fixture is valid' do
