@@ -7,7 +7,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'minitest/mock'
 require 'webmock/minitest'
-require 'vcr'
+#require 'vcr'
 require 'capybara/poltergeist'
 require 'minitest/rails/capybara'
 require 'public_activity/testing'
@@ -34,10 +34,13 @@ class Capybara::Rails::TestCase
   include IntegrationHelpers
 end
 
-VCR.configure do |config|
-  config.cassette_library_dir = "test/vcr_cassettes"
-  config.ignore_localhost = true
-  config.hook_into :webmock
-end
+# VCR.configure do |config|
+#   config.cassette_library_dir = "test/vcr_cassettes"
+#   config.ignore_localhost = true
+#   config.hook_into :webmock
+# end
 
 PublicActivity.enabled = true
+
+# No network connections allowed in the tests
+WebMock.disable_net_connect!(:allow_localhost => true)
