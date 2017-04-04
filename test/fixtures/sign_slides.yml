@@ -10,9 +10,3 @@ default:
   order: 1
   sign: default
   slide: standard
-
-two:
-  order: 1
-  sign: dodge
-  slide: two
-
