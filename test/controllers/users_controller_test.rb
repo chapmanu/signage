@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 
   setup do
-    @user = users(:one)
+    @user = users(:non_sign_owner)
     sign_in users(:super_admin)
   end
 

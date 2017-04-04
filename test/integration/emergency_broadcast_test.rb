@@ -12,9 +12,9 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
     visit emergencies_path
     fill_in "emergency",        with: "Get to the chopper!"
     fill_in "emergency_detail", with: "Everybody down!"
-    check signs(:one).name
+    check signs(:default).name
     click_button "Broadcast!"
-    visit play_sign_path(signs(:one))
+    visit play_sign_path(signs(:default))
 
     assert page.has_content?("Get to the chopper!"), "Emergency did not appear on slide"
     assert page.has_content?("Everybody down!"),     "Emergency detail did not appear on slide"
@@ -31,11 +31,11 @@ class EmergencyBroadcastTest < Capybara::Rails::TestCase
 
   test "clear single emergency" do
     clear_emergencies
-    signs(:one).update(emergency: 'Clear just me')
+    signs(:default).update(emergency: 'Clear just me')
 
     visit emergencies_path
     click_link "Clear"
-    visit play_sign_path(signs(:one))
+    visit play_sign_path(signs(:default))
 
     assert page.has_no_content?("Clear just me")
   end
