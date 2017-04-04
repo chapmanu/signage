@@ -19,6 +19,9 @@ bundle install
 # This file is needed for tests (and dev?). Ask a team member for the environment variables.
 touch .env
 
+# Get databases
+rake db:setup
+
 # Clone production data
 cap production db:clone
 ```

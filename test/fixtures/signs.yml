@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+default:
   name: sign_one
   template: default
   location: MyString
@@ -10,7 +10,7 @@ one:
   emergency_detail: MyString
   visibility: 0
 
-two:
+dodge:
   name: sign_two
   template: dodge
   location: MyString
