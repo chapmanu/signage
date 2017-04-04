@@ -2,9 +2,9 @@ require 'test_helper'
 
 class SendSlideToSignTest < Capybara::Rails::TestCase
   setup do
-    signs(:one).update(name: 'Ross Sign')
-    signs(:one).slides.clear
-    users(:ross).signs << signs(:one)
+    signs(:default).update(name: 'Ross Sign')
+    signs(:default).slides.clear
+    users(:ross).signs << signs(:default)
   end
 
   scenario "sending and approving" do
@@ -13,7 +13,7 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     assert_difference 'sent_emails.length' do
       send_to_sign 'Ross Sign (requires approval)'
     end
-    assert_not slide_is_on_sign?('James Slide', signs(:one))
+    assert_not slide_is_on_sign?('James Slide', signs(:default))
     sign_out
     sign_in users(:ross)
 
@@ -23,7 +23,7 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     assert_difference 'sent_emails.length' do
       click_link 'Approve'
     end
-    assert slide_is_on_sign?('James Slide', signs(:one))
+    assert slide_is_on_sign?('James Slide', signs(:default))
   end
 
   scenario "sending and rejecting" do
@@ -35,7 +35,7 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     assert_difference 'sent_emails.length' do
       click_link 'Reject'
     end
-    assert_not slide_is_on_sign?('James Slide', signs(:one))
+    assert_not slide_is_on_sign?('James Slide', signs(:default))
   end
 
   scenario "sending to sign you own" do
@@ -46,7 +46,7 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     end
     visit root_path
     assert page.has_no_content?(/(Reject|Approve)/)
-    assert slide_is_on_sign?('Ross Slide', signs(:one))
+    assert slide_is_on_sign?('Ross Slide', signs(:default))
   end
 
   private
