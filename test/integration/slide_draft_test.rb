@@ -4,8 +4,8 @@ class SlideDraftTest < Capybara::Rails::TestCase
 
   before do
     sign_in users(:james)    
-    @slide = slides(:one)
-    slides(:one).owners << users(:james)
+    @slide = slides(:standard)
+    slides(:standard).owners << users(:james)
   end
 
   test "drafts have equivalent negative ids" do
@@ -14,7 +14,7 @@ class SlideDraftTest < Capybara::Rails::TestCase
   end
 
   test "drafts dont have associations to signs" do
-    @slide.signs << signs(:one)
+    @slide.signs << signs(:default)
     assert_equal 1, @slide.signs.length
     visit draft_slide_path(@slide)
     assert_equal 0, Slide.unscoped.find(@slide.draft_id).signs.length

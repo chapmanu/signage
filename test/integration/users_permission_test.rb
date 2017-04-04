@@ -9,7 +9,7 @@ class UsersPermissionTest < Capybara::Rails::TestCase
   end
 
   test "cannot view when normal user" do
-    sign_in users(:one)
+    sign_in users(:james)
     visit users_path
     assert_equal 403, page.status_code
   end
