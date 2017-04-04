@@ -32,15 +32,15 @@ class HomeControllerTest < ActionController::TestCase
     assert_equal 0, super_admin.signs.count
     assert_includes sign.owners, sign_owner, "sign_owner should own build team area sign."
 
-    # Includes two sign_slide fixtures.
-    assert_equal 4, SignSlide.awaiting_approval.count
+    # Includes one sign_slide fixture.
+    assert_equal 3, SignSlide.awaiting_approval.count
 
     # Act
     sign_in super_admin
     get :index
 
     # Assert
-    assert_select "div.unapproved-sign-slide", 4
+    assert_select "div.unapproved-sign-slide", 3
   end
 
   test "expects index to show all unexpired notifications to sign owner" do

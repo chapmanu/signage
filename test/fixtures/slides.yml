@@ -17,23 +17,6 @@ standard:
   foreground_type: none
   foreground_sizing: MyString
 
-two:
-  name: two
-  template: standard
-  menu_name: MyString
-  duration: 5
-  heading: MyString
-  subheading: MyString
-  datetime: 2015-07-24 11:49:42
-  location: MyString
-  content: MyText
-  background: MyString
-  background_type: none
-  background_sizing: MyString
-  foreground: MyString
-  foreground_type: none
-  foreground_sizing: MyString
-
 awaiting_approval:
   name: awaiting_approval
   template: standard
