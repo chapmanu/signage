@@ -6,7 +6,7 @@ class SlideIntegrationTest < Capybara::Rails::TestCase
   let(:vert_social_slide) { slides(:social_feed_vertical) }
   let(:horiz_social_slide) { slides(:social_feed_horizontal) }
   let(:standard_slide) { slides(:standard) }
-  let(:scheduled_item) { scheduled_items(:one) }
+  let(:scheduled_item) { scheduled_items(:standard) }
 
   setup do
     slide.owners << user
