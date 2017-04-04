@@ -4,9 +4,9 @@ class SlidesControllerTest < ActionController::TestCase
   include OwnableControllerTest
 
   setup do
-    @slide = @owned_object = slides(:one)
-    sign_in users(:two)
-    @slide.owners << users(:two)
+    @slide = @owned_object = slides(:standard)
+    sign_in users(:non_sign_owner)
+    @slide.owners << users(:non_sign_owner)
     ActionMailer::Base.deliveries.clear
   end
 
@@ -136,7 +136,7 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "non-vertical capable template cannot update orientation to vertical when updating slide orientation" do
     sign_in users(:super_admin)
-    slide = slides(:one)
+    slide = slides(:standard)
     assert_equal "horizontal", slide.orientation
 
     patch :update, id: slide, slide: { orientation: "vertical", template: slide.template }

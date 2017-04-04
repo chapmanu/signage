@@ -3,9 +3,9 @@ require 'test_helper'
 class SignTest < ActiveSupport::TestCase
 
   setup do
-    @sign = @object = signs(:one)
-    @slide  = slides(:one) # The fixures already relate @sign and @slide
-    @user   = users(:one)
+    @sign = @object = signs(:default)
+    @slide  = slides(:standard) # The fixures already relate @sign and @slide
+    @user   = users(:non_sign_owner)
     @sign.sign_slides.update_all(approved: true)
   end
 
