@@ -27,6 +27,9 @@ class SignsController < ApplicationController
   # GET /signs/1
   # GET /signs/1.json
   def show
+    @unexpired_slides = @sign.sign_slides.order(:order).eager_load(:slide).select do |slide|
+      !Slide.find(slide.slide_id).expired?
+    end
   end
 
   # GET /signs/1/play
