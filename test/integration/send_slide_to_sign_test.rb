@@ -49,6 +49,16 @@ class SendSlideToSignTest < Capybara::Rails::TestCase
     assert slide_is_on_sign?('Ross Slide', signs(:default))
   end
 
+  test "expired slides not displayed" do
+    sign_in users(:ross)
+    sign = signs(:default)
+    sign.slides << slides(:expired)
+    sign.save!
+
+    visit sign_path(sign)
+    assert_not page.has_content?("Expired")
+  end
+
   private
 
     def slide_is_on_sign?(slide_name, sign)
