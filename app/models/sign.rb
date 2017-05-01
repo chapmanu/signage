@@ -38,6 +38,10 @@ class Sign < ActiveRecord::Base
     slides.shown.active.approved.ordered
   end
 
+  def unexpired_slides
+    sign_slides.unexpired
+  end
+
   def directory_slides
     playable_slides.where('template ILIKE ?', '%directory%')
   end
