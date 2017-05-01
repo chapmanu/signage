@@ -49,7 +49,7 @@
 
   <div class="sign-slides">
     <div class="sign-slides-listing" <%= "id=js-sortable-slides" if can? :update, @sign %>>
-      <%= render partial: 'sign_slide', collection: @unexpired_slides %>
+      <%= render partial: 'sign_slide', collection: @sign.unexpired_slides %>
     </div>
   </div>
 </div>
