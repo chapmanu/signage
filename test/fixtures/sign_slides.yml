@@ -10,3 +10,8 @@ default:
   order: 1
   sign: default
   slide: standard
+
+expired:
+  order: 2
+  sign: default
+  slide: expired
