@@ -17,7 +17,7 @@ class SignSlideTest < ActiveSupport::TestCase
 
     # Assume
     assert_equal 1, slide_awaiting_approval.sign_slides.count
-    assert_equal 1, slide_not_awaiting_approval.sign_slides.count
+    assert_equal 2, slide_not_awaiting_approval.sign_slides.count
     assert_equal 1, slide_without_stop_date.sign_slides.count
 
     # Act
@@ -43,7 +43,7 @@ class SignSlideTest < ActiveSupport::TestCase
 
     # Assume
     assert_equal 1, slide_awaiting_approval.sign_slides.count
-    assert_equal 1, slide_not_awaiting_approval.sign_slides.count
+    assert_equal 2, slide_not_awaiting_approval.sign_slides.count
 
     # Act
     sign_slides = SignSlide.awaiting_approval_by_sign_owner(sign_owner)
@@ -66,7 +66,7 @@ class SignSlideTest < ActiveSupport::TestCase
 
     # Assume
     assert_equal 1, slide_awaiting_approval.sign_slides.count
-    assert_equal 1, slide_not_awaiting_approval.sign_slides.count
+    assert_equal 2, slide_not_awaiting_approval.sign_slides.count
 
     # Act
     sign_slides = SignSlide.awaiting_approval_by_sign_owner(users(:non_sign_owner))
@@ -107,5 +107,17 @@ class SignSlideTest < ActiveSupport::TestCase
 
     # Assert
     assert_equal expected_sign_slides_order, sign_slides
+  end
+
+  test "expects unexpired to filter expired slides" do
+    #Arrange
+    #sign_slides fixture associates expired slide with default sign
+    sign = signs(:default)
+    sign.save!
+
+    #Assert
+    assert_includes sign.sign_slides, sign_slides(:expired)
+    assert_not_includes sign.sign_slides.unexpired, sign_slides(:expired)
+
   end
 end

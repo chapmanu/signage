@@ -18,6 +18,6 @@ class NotificationsControllerTest < ActionController::TestCase
 
     get :index
 
-    assert_equal 2, assigns(:unapproved_sign_slides).length
+    assert_equal 3, assigns(:unapproved_sign_slides).length
   end
 end
