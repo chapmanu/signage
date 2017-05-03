@@ -61,6 +61,11 @@ class SignTest < ActiveSupport::TestCase
     assert_equal(1, @sign.playable_slides.count)
   end
 
+  test 'unexpired_slides filters expired slides' do
+    @sign.sign_slides << sign_slides(:expired)
+    assert_equal(1, @sign.unexpired_slides.count)
+  end
+
   test 'active? returns true' do
     @sign.touch_last_ping
     assert @sign.active?
