@@ -4,11 +4,11 @@
 //= require jquery.datetimepicker
 //= require jquery.sticky
 //= require jquery-ui
+//= require materialize
 //= require trix
 //= require moment
 //= require timeago
 //= require selectize
-//= require materialize-sprockets
 //= require autocomplete-rails
 
 
@@ -29,7 +29,6 @@ $(document).on('ready', function(e) {
 
   $('.js-sticky-slide-preview').sticky({topSpacing: 64});
 
-  $('select').not('.disabled').material_select();
 
   $("abbr.timeago").timeago();
   
@@ -39,4 +38,7 @@ $(document).on('ready', function(e) {
     $feedback.find('.message').text(message);
     $feedback.show();
   });
+
+  $('select').not('.disabled').material_select();
+  Materialize.updateTextFields();
 });
