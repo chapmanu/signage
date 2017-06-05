@@ -131,7 +131,7 @@ AdminSlides.filterClicked = function(e) {
 };
 
 AdminSlides.initSlideActionMenus = function() {
-  $('.modal-trigger').leanModal();
+  $('.modal-trigger').modal();
   $('html').on('click', function() {
     $('.js-admin-slide.selected').removeClass('selected');
   });
@@ -171,5 +171,5 @@ Utils.fireWhenReady(['slides#index'], function(e) {
 });
 
 Utils.fireWhenReady(['slides#show'], function() {
-  $('.modal-trigger').leanModal();
+  $('.modal-trigger').modal();
 });
