@@ -2,7 +2,7 @@
 
 <div class="slide-list-item js-admin-slide">
   <div class="screenshot">
-    <%= image_tag slide.screenshot.url %>
+    <%= content_tag  :iframe, nil, src: preview_slide_path(slide.find_or_create_draft), frameborder: 0 %>
     <div class="slide-actions">
       <%= inline_svg('close_light.svg', class: 'close') %>
       <div>
