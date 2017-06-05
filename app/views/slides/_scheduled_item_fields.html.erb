@@ -1,65 +1,73 @@
-<div class="scheduled-item-fields" data-behavior="dynamic-fields">
-  <div class="input-field">
-    <%= f.text_field :date %>
-    <%= f.label :date, "Date of Event" %>
+<li class="scheduled-item-fields" data-behavior="dynamic-fields">
+  <div class= "collapsible-header">
+    <span class="event-name"><%= f.object.name ? f.object.name : "New Event Item" %></span>
+    <span class="arrow-expand-collapsible"></span>
   </div>
-  <div class="input-field">
-    <%= f.text_field :time %>
-    <%= f.label :time, "Time Event Starts" %>
-  </div>
-  <div class="input-field">
-    <%= f.text_field :name %>
-    <%= f.label :name, "Name of Event" %>
-  </div>
-
-  <div class="file-field">
-    <div class="btn">
-      <span>Thumbnail</span>
-      <%= f.file_field :image %>
-      <%= f.hidden_field :image_cache %>
+  <div class="collapsible-body">
+    <div class="scheduled-item-actions">
+      <span class="add-scheduled-item action-icon">
+        <%= inline_svg('plus.svg') %>
+      </span>
+      <span class="remove-scheduled-item action-icon"><%= inline_svg('close.svg') %></span>
+      <span class="move-up-scheduled-item action-icon"> <%= inline_svg('move-up.svg') %></span>
+      <span class="move-down-scheduled-item action-icon"> <%= inline_svg('move-down.svg') %></span>
     </div>
-    <div class="file-path-wrapper">
-      <input class="file-path validate" type="text">
+    <div class="input-field">
+      <%= f.text_field :name, class: "event-item-name" %>
+      <%= f.label :name, "Name of Event" %>
     </div>
-    <%# Let user know if a thumbnail exists. File field will not.
-      # TODO: display image itself?
-      #%>
-    <% if f.object.image.file %>
-      <p><strong>Current Thumbnail:</strong> <%= f.object.image.file.filename %></p>
-    <% end %>
-    <p>
-      <%= f.check_box :remove_image %>
-      <%= f.label :remove_image, "Remove image" %>
-    </p>
+    <div class="input-field">
+      <%= f.text_field :date %>
+      <%= f.label :date, "Date of Event" %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :time %>
+      <%= f.label :time, "Time Event Starts" %>
+    </div>
+    <div class="file-field">
+      <div class="btn">
+        <span>Thumbnail</span>
+        <%= f.file_field :image %>
+        <%= f.hidden_field :image_cache %>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+      <%# Let user know if a thumbnail exists. File field will not.
+        # TODO: display image itself?
+        #%>
+      <% if f.object.image.file %>
+        <p><strong>Current Thumbnail:</strong> <%= f.object.image.file.filename %></p>
+      <% end %>
+      <p>
+        <%= f.check_box :remove_image %>
+        <%= f.label :remove_image, "Remove image" %>
+      </p>
+    </div>
+    <br /> <br />
+    <div class="input-field">
+      <%= f.label :content %>
+      <%= f.trix_editor :content %>
+    </div>
+    <div class="input-field">
+      <%= f.select :admission, Slide.admission_types.map{|t| [t, t]}, include_blank: 'N/A' %>
+      <%= f.label :admission %>
+    </div>
+    <div class="input-field">
+      <%= f.select :audience, Slide.audience_types.map{|t| [t, t]}, include_blank: 'N/A' %>
+      <%= f.label :audience %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :play_on, class: 'datepicker', value: format_date(f.object.play_on) %>
+      <%= f.label :play_on, "Start playing event on" %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :stop_on, class: 'datepicker' %>
+      <%= f.label :stop_on, "Stop playing event on" %>
+    </div>
+    <div class="input-field remove-scheduled-item-btn">
+      <%= link_to_remove_dynamic_fields "Delete", f, class: 'btn red' %>
+    </div>
   </div>
-
-  <br /> <br />
-  <div class="input-field">
-    <%= f.label :content %>
-    <%= f.trix_editor :content %>
-  </div>
-
-  <div class="input-field">
-    <%= f.select :admission, Slide.admission_types.map{|t| [t, t]}, include_blank: 'N/A' %>
-    <%= f.label :admission %>
-  </div>
-
-  <div class="input-field">
-    <%= f.select :audience, Slide.audience_types.map{|t| [t, t]}, include_blank: 'N/A' %>
-    <%= f.label :audience %>
-  </div>
-
-  <div class="input-field">
-    <%= f.text_field :play_on, class: 'datepicker', value: format_date(f.object.play_on) %>
-    <%= f.label :play_on, "Start playing event on" %>
-  </div>
-
-  <div class="input-field">
-    <%= f.text_field :stop_on, class: 'datepicker' %>
-    <%= f.label :stop_on, "Stop playing event on" %>
-  </div>
-
-  <div class="input-field">
-    <%= link_to_remove_dynamic_fields "Delete", f, class: 'btn red' %>
-  </div>
-</div>
+  <%= f.hidden_field :order, value: f.object.order || f.index , class: 'scheduled-item-order' %>
+</li>
