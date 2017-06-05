@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/jameskerr/materialize-sass.git
-  revision: 89dfd58b7e2ce0bfea32d811e310531c58c74b7b
-  specs:
-    materialize-sass (0.97.3)
-      sass (~> 3.3)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -186,6 +179,8 @@ GEM
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    materialize-sass (0.98.2)
+      sass (~> 3.3)
     method_source (0.8.2)
     mime-types (2.6.1)
     mini_magick (4.3.6)
@@ -389,7 +384,7 @@ DEPENDENCIES
   jquery-ui-rails (= 5.0.5)
   kaminari (= 0.16.3)
   letter_opener_web
-  materialize-sass!
+  materialize-sass (= 0.98.2)
   mini_magick
   minitest-rails-capybara
   minitest-reporters
@@ -413,7 +408,7 @@ DEPENDENCIES
   spring
   switch_user
   trix
-  turbolinks
+  turbolinks (= 2.5.3)
   uglifier (>= 1.3.0)
   vcr
   web-console (~> 2.0)
