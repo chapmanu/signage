@@ -44,4 +44,8 @@ $(document).on('ready', function(e) {
 
   //prevents labels from overlapping text field values
   Materialize.updateTextFields();
+
+  //initialize popup forms
+  $('.modal').modal();
+
 });
