@@ -202,7 +202,7 @@
             <h4>Listing of Events to Show on Slide</h4>
             <ul id="event-list-parent" data-collapsible="expandable"
             data-behavior="dynamic-fields-parent" data-behavior="sortable" class='collapsible <%= "empty" if @slide.scheduled_items.empty? %>'>
-              <%= f.fields_for :scheduled_items do |ff| %>
+              <%= f.fields_for :scheduled_items, @slide.scheduled_items.ordered do |ff| %>
                 <% render 'scheduled_item_fields', f: ff %>
               <% end %>
             </ul>

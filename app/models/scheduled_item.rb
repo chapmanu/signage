@@ -5,7 +5,7 @@ class ScheduledItem < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  default_scope{ order(:order) }
+  scope :ordered, -> { order(order: :asc) }
 
   def image_url
     Rails.application.config.asset_url + image
