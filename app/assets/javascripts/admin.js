@@ -39,6 +39,9 @@ $(document).on('ready', function(e) {
     $feedback.show();
   });
 
+  //initialize dynamically added materialize select boxes
   $('select').not('.disabled').material_select();
+
+  //prevents labels from overlapping text field values
   Materialize.updateTextFields();
 });
