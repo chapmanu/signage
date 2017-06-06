@@ -1,5 +1,9 @@
 <div id="unapproved-sign-slide-<%= notification.id %>" class="unapproved-sign-slide">
-  <p><%= image_tag notification.slide.screenshot, class: 'screenshot' %></p>
+  <p>
+    <div class="slide-preview-wrapper">
+      <%= content_tag  :iframe, nil, src: preview_slide_path(notification.slide.find_or_create_draft), frameborder: 0, allowfullscreen: true %>
+    </div>
+  </p>
   <p>
     The slide <%=link_to notification.slide.menu_name, notification.slide %> needs to be
     approved to go on the sign <%= link_to notification.sign.name, notification.sign %>.
