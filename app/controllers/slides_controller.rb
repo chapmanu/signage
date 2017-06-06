@@ -201,7 +201,8 @@ class SlidesController < ApplicationController
           :remove_image,
           :name,
           :play_on,
-          :stop_on
+          :stop_on,
+          :order
         ]
         )
     end
