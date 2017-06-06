@@ -3,7 +3,7 @@
 
 <div class="ui-slide-collection" on-pointerdown="delayAutoScroll" on-mousewheel="delayAutoScroll">
   <div class="ui-slide-collection-inset">
-    <% slide.scheduled_items.each do |item| %>
+    <% slide.scheduled_items.ordered.each do |item| %>
       <% next if !item.active? || item.marked_for_destruction? %>
 
       <article class="ui-event">
