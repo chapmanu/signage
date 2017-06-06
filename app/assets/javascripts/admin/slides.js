@@ -132,12 +132,14 @@ AdminSlides.filterClicked = function(e) {
 
 AdminSlides.initSlideActionMenus = function() {
   $('.modal-trigger').modal();
-  $('html').on('click', function() {
-    $('.js-admin-slide.selected').removeClass('selected');
+
+  $('html').on('click', function(event) {
+    if($(event.target).closest('.slide-list-item').length == 0) {
+      $('.js-admin-slide.selected').removeClass('selected');
+    }
   });
 
   $('.js-admin-slide').on('click', function(e) {
-    e.stopPropagation();
     if ($(this).hasClass('selected')) {
       $(this).removeClass('selected');
     } else {
