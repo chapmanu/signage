@@ -1,11 +1,17 @@
 Utils.fireWhenReady(['slides#edit'], function(e) {
   var $itemContainer = $("#event-list-parent"), $items;
-  refreshItemList();
-
-  $itemContainer.collapsible({ accordion: false });
 
   $itemContainer.sortable({
+    items: 'li:not(.sortable-state-disabled)',
     update: refreshItemList
+  });
+
+  refreshItemList();
+
+  $itemContainer.collapsible({
+    accordion: false,
+    onOpen: onCollapsibleOpen,
+    onClose: onCollapsibleClose
   });
 
   $(document).on("click", ".add-scheduled-item", onInsertItemClick);
@@ -14,6 +20,16 @@ Utils.fireWhenReady(['slides#edit'], function(e) {
   $(document).on("click", ".move-down-scheduled-item", onMoveItemDown);
   $(document).on("focusout", ".event-item-name", onItemNameUpdate);
   $(document).on("afterAppendScheduledItem", $itemContainer, onAfterAppendScheduledItem);
+
+  function onCollapsibleOpen(el) {
+
+    $(el).removeClass('sortable-state-disabled').addClass('sortable-state-disabled');
+    $itemContainer.sortable({ cancel: '.sortable-state-disabled' });
+  }
+
+  function onCollapsibleClose(el) {
+    $(el).removeClass('sortable-state-disabled');
+  }
 
   //Inserts a new event item after currently selected item
   function onInsertItemClick(event){
@@ -35,6 +51,7 @@ Utils.fireWhenReady(['slides#edit'], function(e) {
 
     $itemContainer.collapsible('open', addedIndex);
     $itemContainer.removeClass('empty');
+    onCollapsibleOpen($addedItem);
     $('html, body').animate({ scrollTop: $addedItem.offset().top });
   }
 
