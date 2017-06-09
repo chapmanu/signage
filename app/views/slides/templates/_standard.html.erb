@@ -9,7 +9,9 @@
 </div>
 
 <% if slide.background_type == 'video' %>
-  <video id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" preload='auto' loop></video>
+<%# `controls muted` attribute mutes videos automatically
+    Source: https://www.w3schools.com/tags/att_video_muted.asp %>
+  <video controls muted id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" preload='auto' loop></video>
 <% end %>
 
 <% if slide.background_type == 'image' %>
