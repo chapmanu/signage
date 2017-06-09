@@ -17,8 +17,8 @@
 <% end %>
 
 <% if slide.foreground_type == 'video' %>
-  <!-- `controls muted` attribute mutes videos automatically
-  	Source: https://www.w3schools.com/tags/att_video_muted.asp -->
+<%# `controls muted` attribute mutes videos automatically
+    Source: https://www.w3schools.com/tags/att_video_muted.asp %>
   <video controls muted id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" loop style="width: 100%; height: 100%;"></video>
 <% end %>
 
