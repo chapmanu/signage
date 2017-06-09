@@ -143,4 +143,12 @@ class SlidesControllerTest < ActionController::TestCase
 
     assert_equal "horizontal", slide.reload.orientation
   end
+
+  test "assert that `controls muted` attribute is present" do
+    video_foreground = slides.foreground_type
+    video_background = slides.background_type
+
+    assert_equal("video controls muted", slide.foreground_type)
+    assert_equal("video controls muted", slide.background_type)
+  end
 end
