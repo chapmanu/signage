@@ -64,3 +64,10 @@ video_foreground:
   menu_name: video foreground
   duration: 5
   foreground_type: video
+
+video_background:
+  name: video background
+  template: standard
+  menu_name: video background
+  duration: 5
+  background_type: video
