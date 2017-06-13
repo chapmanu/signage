@@ -146,11 +146,11 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "assert that `controls muted` attribute is present on slides with foreground_type: video" do
     # Arrange
-    super_admin = users(:super_admin)
+    sign_in users(:super_admin)
     slide = slides(:video_foreground)
-    assert_equal "video", slide.foreground_type
 
     # Assume
+    assert_equal "video", slide.foreground_type
 
     # Act
     get :preview, id: slide
@@ -163,11 +163,11 @@ class SlidesControllerTest < ActionController::TestCase
 
   test "assert that `controls muted` attribute is present on slides with background_type: video" do
     # Arrange
-    super_admin = users(:super_admin)
+    sign_in users(:super_admin)
     slide = slides(:video_background)
-    assert_equal "video", slide.background_type
 
     # Assume
+    assert_equal "video", slide.background_type
 
     # Act
     get :preview, id: slide
