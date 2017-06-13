@@ -157,6 +157,24 @@ class SlidesControllerTest < ActionController::TestCase
     assert_response :success
 
     # Assert
-    assert_select "controls muted"
+    assert_select "video[controls]"
+    assert_select "video[muted]"
+  end
+
+  test "assert that `controls muted` attribute is present on slides with background_type: video" do
+    # Arrange
+    super_admin = users(:super_admin)
+    slide = slides(:video_background)
+    assert_equal "video", slide.background_type
+
+    # Assume
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_select "video[controls]"
+    assert_select "video[muted]"
   end
 end
