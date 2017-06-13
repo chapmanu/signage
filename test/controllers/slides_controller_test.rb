@@ -144,11 +144,19 @@ class SlidesControllerTest < ActionController::TestCase
     assert_equal "horizontal", slide.reload.orientation
   end
 
-  test "assert that `controls muted` attribute is present" do
-    video_foreground = slides.foreground_type
-    video_background = slides.background_type
+  test "assert that `controls muted` attribute is present on slides with foreground_type: video" do
+    # Arrange
+    super_admin = users(:super_admin)
+    slide = slides(:video_foreground)
+    assert_equal "video", slide.foreground_type
 
-    assert_equal("video controls muted", slide.foreground_type)
-    assert_equal("video controls muted", slide.background_type)
+    # Assume
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_select "controls muted"
   end
 end

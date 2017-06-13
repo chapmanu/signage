@@ -57,3 +57,10 @@ social_feed_horizontal:
   menu_name: horizontal social
   orientation: 0
   duration: 5
+
+video_foreground:
+  name: video foreground
+  template: standard
+  menu_name: video foreground
+  duration: 5
+  foreground_type: video
