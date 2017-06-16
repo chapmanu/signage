@@ -13,7 +13,7 @@
     Source: https://www.w3schools.com/tags/att_video_muted.asp %>
   <!-- <video controls muted id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" preload='auto' loop></video> -->
 
-  <%= video_background %>
+  <%= slide_video_tag(slide, :background) %>
 <% end %>
 
 <% if slide.background_type == 'image' %>
@@ -23,7 +23,9 @@
 <% if slide.foreground_type == 'video' %>
 <%# `controls muted` attribute mutes videos automatically
     Source: https://www.w3schools.com/tags/att_video_muted.asp %>
-  <video controls muted id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" loop style="width: 100%; height: 100%;"></video>
+  <!-- <video controls muted id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" loop style="width: 100%; height: 100%;"></video> -->
+
+  <%= slide_video_tag(slide, :foreground) %>
 <% end %>
 
 <% if slide.foreground_type == 'image' %>
