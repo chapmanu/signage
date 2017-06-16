@@ -17,4 +17,12 @@ module SignsHelper
     orb_class = sign.private? ? 'sign-private' : sign.active? ? 'sign-active' : 'sign-inactive'
     content_tag :div, nil, title: orb_title, class: orb_class
   end
+
+  def video_background
+    if current_page?(controller: 'signs', action: 'play')
+      video_tag("<%= slide.background %>", id: "js-background-video", class: "ui-slide-background", preload: "auto", loop: true)
+    else
+      video_tag("<%= slide.background %>", controls: true, muted: true, id: "js-background-video", class: "ui-slide-background", preload: "auto", loop: true)
+    end
+  end
 end
