@@ -136,4 +136,38 @@ class SignsControllerTest < ActionController::TestCase
     # Assert
     assert_response :success
   end
+
+  test "assert that `controls muted` attributes are NOT present on slides with foreground_type: video on the `/play` page" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:video_foreground)
+
+    # Assume
+    assert_equal "video", slide.foreground_type
+
+    # Act
+    get :play, id: @sign
+    assert_response :success
+
+    # Assert
+    assert_select "video[controls]", false
+    assert_select "video[muted]", false
+  end
+
+  test "assert that `controls muted` attributes are NOT present on slides with background_type: video on the `/play` page" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:video_background)
+
+    # Assume
+    assert_equal "video", slide.background_type
+
+    # Act
+    get :play, id: @sign
+    assert_response :success
+
+    # Assert
+    assert_select "video[controls]", false
+    assert_select "video[muted]", false
+  end
 end
