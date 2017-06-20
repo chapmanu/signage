@@ -9,7 +9,8 @@
 </div>
 
 <% if slide.background_type == 'video' %>
-  <video id="js-background-video" src="<%= slide.background %>" class="ui-slide-background" preload='auto' loop></video>
+  <%# helper found in slides_helper.rb %>
+  <%= slide_video_tag(slide, :background) %>
 <% end %>
 
 <% if slide.background_type == 'image' %>
@@ -17,7 +18,8 @@
 <% end %>
 
 <% if slide.foreground_type == 'video' %>
-  <video id="js-foreground-video" src="<%= slide.foreground %>" class="ui-slide-foreground" loop style="width: 100%; height: 100%;"></video>
+  <%# helper found in slides_helper.rb %>
+  <%= slide_video_tag(slide, :foreground) %>
 <% end %>
 
 <% if slide.foreground_type == 'image' %>

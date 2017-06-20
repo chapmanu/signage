@@ -41,4 +41,22 @@ module SlidesHelper
     accessible_sign_ids = slide.signs.visible_or_owned_by(current_user).ids
     slide.sign_slides.select { |ss| accessible_sign_ids.include? ss.sign_id }
   end
+
+  # `controls:true muted: true` attributes mute videos automatically and display a controls below video
+  # Source: https://www.w3schools.com/tags/att_video_muted.asp %>
+  def slide_video_tag(slide, field)
+    if current_page?(controller: 'signs', action: 'play')
+      if field == :background
+        video_tag(slide.background, id: "js-background-video", class: "ui-slide-background", preload: "auto", loop: true)
+      else
+        video_tag(slide.foreground, id: "js-foreground-video", class: "ui-slide-foreground", preload: "auto", loop: true)
+      end
+    else
+      if field == :background
+        video_tag(slide.background, controls: true, muted: true, id: "js-background-video", class: "ui-slide-background", preload: "auto", loop: true)
+      else
+        video_tag(slide.foreground, controls: true, muted: true, id: "js-foreground-video", class: "ui-slide-foreground", preload: "auto", loop: true)
+      end
+    end
+  end
 end
