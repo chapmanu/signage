@@ -143,4 +143,38 @@ class SlidesControllerTest < ActionController::TestCase
 
     assert_equal "horizontal", slide.reload.orientation
   end
+
+  test "confirm that foreground videos are muted and controls are displayed when previewed" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:video_foreground)
+
+    # Assume
+    assert_equal "video", slide.foreground_type
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_select "video[controls]"
+    assert_select "video[muted]"
+  end
+
+  test "confirm that background videos are muted and controls are displayed when previewed" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:video_background)
+
+    # Assume
+    assert_equal "video", slide.background_type
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_select "video[controls]"
+    assert_select "video[muted]"
+  end
 end
