@@ -149,6 +149,16 @@ AdminSlides.initSlideActionMenus = function() {
   });
 };
 
+
+
+AdminSlides.uglyTempAddOwnerCallback = function(e) {
+  $('#add_owner').on('click', function(e) {
+    var user = $('#search_users').val();
+    //get id
+    //$('input#user_id').val(user_id);
+  });
+}
+
 /**
  * The code that runs on document.ready
  */
@@ -172,6 +182,7 @@ Utils.fireWhenReady(['slides#index'], function(e) {
   $('#filters a, #sort a').on('click', AdminSlides.filterClicked);
 });
 
-Utils.fireWhenReady(['slides#show'], function() {
+Utils.fireWhenReady(['slides#show'], function(e) {
+  AdminSlides.uglyTempAddOwnerCallback();
   $('.modal-trigger').modal();
 });
