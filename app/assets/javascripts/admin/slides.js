@@ -152,10 +152,21 @@ AdminSlides.initSlideActionMenus = function() {
 
 
 AdminSlides.uglyTempAddOwnerCallback = function(e) {
+  // doesn't wait
+
   $('#add_owner').on('click', function(e) {
     var user = $('#search_users').val();
-    //get id
-    //$('input#user_id').val(user_id);
+
+    var $this = $(this);
+
+    if ($this.data("executing")) return;
+    $this.data("executing", true);
+
+    $.get('/slides/autocomplete_user_email?term=' + user, function(returnedData) {
+      console.log(returnedData[0].id);
+      $('input#user_id').val(returnedData[0].id);
+      $this.removeData("executing");
+    });
   });
 }
 
