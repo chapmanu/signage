@@ -60,7 +60,6 @@ Utils.fireWhenReady(['signs#index'], function(e) {
 
 Utils.fireWhenReady(['signs#show', 'signs#edit', 'signs#update'], function(e) {
   // TODO: Remove when materialize releases autocomplete update or another fix
-  AddOwnerMonkeyPatch.setURL("/signs/autocomplete_user_email?term=");
   $("#add_owner").on("click", AddOwnerMonkeyPatch.onClick);
 
   $('#js-sortable-slides').sortable({

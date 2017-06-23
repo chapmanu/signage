@@ -8,21 +8,17 @@
 
 var AddOwnerMonkeyPatch = (function() {
 
-  var url;
-
-  var setURL = function(newURL){
-    url = newURL;
-  }
+  var ajaxAutocompleteEndpoint = "/slides/autocomplete_user_email?term=";
 
   var onClick = function(e){
-    
+
     // stop all
     e.preventDefault();
 
     var user = $('#search_users').val();
 
     $.ajax({
-      url: url + user,
+      url: ajaxAutocompleteEndpoint + user,
       type: "GET",
     }).done(function(returnedData) {
       // if returnedData not null
@@ -43,8 +39,7 @@ var AddOwnerMonkeyPatch = (function() {
   }
 
   return {
-    onClick: onClick,
-    setURL: setURL
+    onClick: onClick
   }
 
 })();

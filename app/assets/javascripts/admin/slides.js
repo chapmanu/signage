@@ -175,7 +175,6 @@ Utils.fireWhenReady(['slides#index'], function(e) {
 
 Utils.fireWhenReady(['slides#show'], function(e) {
   // TODO: Remove when materialize releases autocomplete update or another fix
-  AddOwnerMonkeyPatch.setURL("/slides/autocomplete_user_email?term=");
   $("#add_owner").on("click", AddOwnerMonkeyPatch.onClick);
 
   $('.modal-trigger').modal();
