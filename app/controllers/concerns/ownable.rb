@@ -6,7 +6,7 @@ module Ownable
     before_action :set_owner, only: [:add_owner, :remove_owner]
     before_action :set_owned_object, only: [:add_owner, :remove_owner]
 
-    autocomplete :user, :email, extra_data: [:id, :first_name, :last_name], display_value: :full_name_with_email, full: true
+    autocomplete :user, :email, extra_data: [:id, :first_name, :last_name, :email], display_value: :full_name_with_email, full: true
   end
 
   def add_owner

@@ -149,6 +149,7 @@ AdminSlides.initSlideActionMenus = function() {
   });
 };
 
+
 /**
  * The code that runs on document.ready
  */
@@ -172,6 +173,9 @@ Utils.fireWhenReady(['slides#index'], function(e) {
   $('#filters a, #sort a').on('click', AdminSlides.filterClicked);
 });
 
-Utils.fireWhenReady(['slides#show'], function() {
+Utils.fireWhenReady(['slides#show'], function(e) {
+  // TODO: Remove when materialize releases autocomplete update or another fix
+  $("#add_owner").on("click", AddOwnerMonkeyPatch.onClick);
+
   $('.modal-trigger').modal();
 });
