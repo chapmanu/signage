@@ -144,6 +144,22 @@ class SlidesControllerTest < ActionController::TestCase
     assert_equal "horizontal", slide.reload.orientation
   end
 
+  test "file must be uploaded in foreground" do
+    sign_in users(:super_admin)
+    slide = slides(:video_foreground)
+    patch :update, id: slide, slide: { foreground: nil }
+
+    assert response.body.include?('You must upload a valid video file.')
+  end
+
+  test "file must be uploaded in background" do
+    sign_in users(:super_admin)
+    slide = slides(:video_background)
+    patch :update, id: slide, slide: { background: nil }
+
+    assert response.body.include?('You must upload a valid video file.')
+  end
+
   test "confirm that foreground videos are muted and controls are displayed when previewed" do
     # Arrange
     sign_in users(:super_admin)
