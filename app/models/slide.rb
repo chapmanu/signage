@@ -45,6 +45,7 @@ class Slide < ActiveRecord::Base
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }
   validate  :validate_file_size, on: :update
 
+
   include SlideFormOptions
   include Schedulable
   include OwnableModel
@@ -131,6 +132,7 @@ class Slide < ActiveRecord::Base
     end
   end
 
+
   private
     def set_defaults
       # Based on http://stackoverflow.com/a/29575389/6763239.
@@ -154,20 +156,28 @@ class Slide < ActiveRecord::Base
     end
 
     def validate_video_file(type, opts = nil)
-      video = File.open(self.send("#{type}").file.path)
-
-      if video.size > 12.megabytes
-        errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
+      if !self.send("#{type}").file.nil?
+        video = File.open(self.send("#{type}").file.path)
+        if video.size > 12.megabytes
+          errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
+        end
+      else
+        errors.add("#{type} Video: ","You must upload a valid video file.")
       end
     end
 
     def validate_image_file(type, opts = nil)
-      file   = MiniMagick::Image.open(self.send("#{type}").file.path)
-      width  = IMAGE_DIMENSIONS[type.to_sym][:width]
-      height = IMAGE_DIMENSIONS[type.to_sym][:height]
+      if !self.send("#{type}").file.nil?
+        file   = MiniMagick::Image.open(self.send("#{type}").file.path)
+        width  = IMAGE_DIMENSIONS[type.to_sym][:width]
+        height = IMAGE_DIMENSIONS[type.to_sym][:height]
 
-      if file.width > width || file.height > height
-        errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
+        if file.width > width || file.height > height
+          errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
+        end
+      else
+        errors.add("#{type} Image: ","You must upload a valid image file.")
       end
+
     end
 end
