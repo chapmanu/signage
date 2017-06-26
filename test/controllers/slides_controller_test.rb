@@ -145,18 +145,26 @@ class SlidesControllerTest < ActionController::TestCase
   end
 
   test "file must be uploaded in foreground" do
+    # Arrange
     sign_in users(:super_admin)
     slide = slides(:video_foreground)
+
+    # Act
     patch :update, id: slide, slide: { foreground: nil }
 
+    # Assert
     assert response.body.include?('You must upload a valid video file.')
   end
 
   test "file must be uploaded in background" do
+    # Arrange
     sign_in users(:super_admin)
     slide = slides(:video_background)
+
+    # Act
     patch :update, id: slide, slide: { background: nil }
 
+    # Assert
     assert response.body.include?('You must upload a valid video file.')
   end
 
