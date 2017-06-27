@@ -4,6 +4,8 @@ class Slide < ActiveRecord::Base
     background: {width: 1920, height: 1080}
   }
   DEFAULT_DURATION = 10
+  VIDEO_EXT = ["mp4", "mp3", "mov", "avi", "qt", "asf", "flv"]
+  IMAGE_EXT = ["jpeg", "jpg", "gif", "png", "tiff", "bmp"]
 
   attr_accessor :skip_file_validation
 
@@ -156,7 +158,7 @@ class Slide < ActiveRecord::Base
     end
 
     def validate_video_file(type, media, opts = nil)
-      if !self.send("#{type}").file.nil? && media == "video"
+      if !self.send("#{type}").file.nil? && VIDEO_EXT.include?(self.send("#{type}").file.extension.downcase)
         video = File.open(self.send("#{type}").file.path)
         if video.size > 12.megabytes
           errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
@@ -167,7 +169,7 @@ class Slide < ActiveRecord::Base
     end
 
     def validate_image_file(type, media, opts = nil)
-      if !self.send("#{type}").file.nil? && media == "image"
+      if !self.send("#{type}").file.nil? && IMAGE_EXT.include?(self.send("#{type}").file.extension.downcase)
         file   = MiniMagick::Image.open(self.send("#{type}").file.path)
         width  = IMAGE_DIMENSIONS[type.to_sym][:width]
         height = IMAGE_DIMENSIONS[type.to_sym][:height]
