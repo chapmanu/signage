@@ -145,18 +145,18 @@ class Slide < ActiveRecord::Base
 
     def validate_foreground_file
       if foreground_type.present? && foreground_type != 'none'
-        self.send("validate_#{foreground_type}_file", 'foreground')
+        self.send("validate_#{foreground_type}_file", 'foreground', foreground_type)
       end
     end
 
     def validate_background_file
       if background_type.present? && background_type != 'none'
-        self.send("validate_#{background_type}_file", 'background')
+        self.send("validate_#{background_type}_file", 'background', background_type)
       end
     end
 
-    def validate_video_file(type, opts = nil)
-      if !self.send("#{type}").file.nil?
+    def validate_video_file(type, media, opts = nil)
+      if !self.send("#{type}").file.nil? && media == "video"
         video = File.open(self.send("#{type}").file.path)
         if video.size > 12.megabytes
           errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
@@ -166,8 +166,8 @@ class Slide < ActiveRecord::Base
       end
     end
 
-    def validate_image_file(type, opts = nil)
-      if !self.send("#{type}").file.nil?
+    def validate_image_file(type, media, opts = nil)
+      if !self.send("#{type}").file.nil? && media == "image"
         file   = MiniMagick::Image.open(self.send("#{type}").file.path)
         width  = IMAGE_DIMENSIONS[type.to_sym][:width]
         height = IMAGE_DIMENSIONS[type.to_sym][:height]
