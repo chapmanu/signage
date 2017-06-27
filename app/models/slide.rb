@@ -157,29 +157,36 @@ class Slide < ActiveRecord::Base
       end
     end
 
-    def validate_video_file(type, media, opts = nil)
-      if !self.send("#{type}").file.nil? && VIDEO_EXT.include?(self.send("#{type}").file.extension.downcase)
-        video = File.open(self.send("#{type}").file.path)
-        if video.size > 12.megabytes
-          errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
-        end
-      else
-        errors.add("#{type} Video: ","You must upload a valid video file.")
+    def validate_video_file(type, opts = nil)
+      video_upload = self.send("#{type}").file
+
+      return errors.add("#{type} Video: ", "You must upload a valid video file.") unless video_upload.present?
+
+      file_ext = self.send("#{type}").file.extension.downcase
+
+      return errors.add("#{type} Video: ", "#{file_ext} video files not supported.") unless VIDEO_EXT.include?(file_ext)
+
+      video = File.open(self.send("#{type}").file.path)
+      if video.size > 12.megabytes
+        errors.add("#{type} Video: ", 'You cannot upload a video larger than 12 MB')
       end
     end
 
-    def validate_image_file(type, media, opts = nil)
-      if !self.send("#{type}").file.nil? && IMAGE_EXT.include?(self.send("#{type}").file.extension.downcase)
-        file   = MiniMagick::Image.open(self.send("#{type}").file.path)
-        width  = IMAGE_DIMENSIONS[type.to_sym][:width]
-        height = IMAGE_DIMENSIONS[type.to_sym][:height]
+    def validate_image_file(type, opts = nil)
+      image_upload = self.send("#{type}").file
 
-        if file.width > width || file.height > height
-          errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
-        end
-      else
-        errors.add("#{type} Image: ","You must upload a valid image file.")
+      return errors.add("#{type} Image: ", "You must upload a valid image file.") unless image_upload.present?
+
+      file_ext = self.send("#{type}").file.extension.downcase
+
+      return errors.add("#{type} Image: ", "#{file_ext} image files not supported.") unless IMAGE_EXT.include?(file_ext)
+
+      file   = MiniMagick::Image.open(self.send("#{type}").file.path)
+      width  = IMAGE_DIMENSIONS[type.to_sym][:width]
+      height = IMAGE_DIMENSIONS[type.to_sym][:height]
+
+      if file.width > width || file.height > height
+        errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
       end
-
     end
 end
