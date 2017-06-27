@@ -71,3 +71,10 @@ video_background:
   menu_name: video background
   duration: 5
   background_type: video
+
+image_foreground:
+  name: image foreground
+  template: standard
+  menu_name: image foreground
+  duration: 5
+  foreground_type: image
