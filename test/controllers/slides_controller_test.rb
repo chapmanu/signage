@@ -168,6 +168,38 @@ class SlidesControllerTest < ActionController::TestCase
     assert response.body.include?('You must upload a valid video file.')
   end
 
+  test "expects validation error when switching from video to image without uploading new file" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:video_background)
+
+    # Assume
+    assert_equal "video", slide.background_type
+
+    # Act
+    patch :update, id: slide, slide: { background_type: "image" }
+
+    # Assert
+    # can confirm background is updated to image because otherwise the error would say video
+    assert response.body.include?('You must upload a valid image file.')
+  end
+
+  test "expects validation error when switching from image to video without uploading new file" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = slides(:image_foreground)
+
+    # Assume
+    assert_equal "image", slide.foreground_type
+
+    # Act
+    patch :update, id: slide, slide: { background_type: "video" }
+
+    # Assert
+    # can confirm background is updated to video because otherwise the error would say image
+    assert response.body.include?('You must upload a valid video file.')
+  end
+
   test "confirm that foreground videos are muted and controls are displayed when previewed" do
     # Arrange
     sign_in users(:super_admin)
