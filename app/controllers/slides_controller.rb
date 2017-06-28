@@ -179,13 +179,11 @@ class SlidesController < ApplicationController
         :background,
         :background_type,
         :background_sizing,
-        :remove_background,
         :foreground,
         :foreground_type,
         :foreground_sizing,
         :background_cache,
         :foreground_cache,
-        :remove_foreground,
         :sponsor_id,
         :sign_ids => [],
         :scheduled_items_attributes => [
