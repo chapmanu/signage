@@ -6,6 +6,6 @@ standard:
   image: MyString
   name: MyString
   content: MyText
-  admission: MyString
-  audience: MyString
+  admission: ['Free', 'Tickets Required', 'Free - Registration Required', 'Sold out', 'Cancelled']
+  audience: ['Students', 'Club Members', 'Members', 'Faculty', 'Staff', 'Faculty and Staff', 'Chapman', 'Campus and Community', 'Orange Community', 'Public']
   location: MyString
