@@ -26,12 +26,12 @@ module SlideFormOptions
       @_foreground_sizings ||= [['Exact Size', 'auto'], ['Fill Screen', 'cover'], ['Fill Screen (do not crop)', 'contain']]
     end
 
-    def audience_types
-      @_audience_types ||= ['Free', 'Tickets Required', 'Free - Registration Required', 'Sold out', 'Cancelled']
+    def admission_types
+      @_admission_types ||= ['Free', 'Tickets Required', 'Free - Registration Required', 'Sold out', 'Cancelled']
     end
 
-    def admission_types
-      @_admission_types ||= ['Students', 'Club Members', 'Members', 'Faculty', 'Staff', 'Faculty and Staff', 'Chapman', 'Campus and Community', 'Orange Community', 'Public']
+    def audience_types
+      @_audience_types ||= ['Students', 'Club Members', 'Members', 'Faculty', 'Staff', 'Faculty and Staff', 'Chapman', 'Campus and Community', 'Orange Community', 'Public']
     end
   end
 end
