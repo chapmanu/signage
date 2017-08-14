@@ -233,4 +233,34 @@ class SlidesControllerTest < ActionController::TestCase
     assert_select "video[controls]"
     assert_select "video[muted]"
   end
+
+  test "check for proper options for admission labels on scheduled slides" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = scheduled_items(:standard)
+
+    # Assume
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_equal "---\n- Free\n- Tickets Required\n- Free - Registration Required\n- Sold out\n- Cancelled\n", slide.admission
+  end
+
+  test "check for proper options for audience labels on scheduled slides" do
+    # Arrange
+    sign_in users(:super_admin)
+    slide = scheduled_items(:standard)
+
+    # Assume
+
+    # Act
+    get :preview, id: slide
+    assert_response :success
+
+    # Assert
+    assert_equal "---\n- Students\n- Club Members\n- Members\n- Faculty\n- Staff\n- Faculty and Staff\n- Chapman\n- Campus and Community\n- Orange Community\n- Public\n", slide.audience
+  end
 end
