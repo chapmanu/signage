@@ -43,8 +43,12 @@ class SlideIntegrationTest < Capybara::Rails::TestCase
     visit edit_slide_path(slide)
     assert page.has_select?('Admission', :with_options => ['Free']), "Admission does not include 'Free'"
     assert page.has_select?('Audience', :with_options => ['Students']), "Admission does not include 'Students'"
-  end  
+  end
 
+  # TODO: We are already aware of the mix of minitest and rspec syntax and that the below
+  # set of tests are inconsistent with all other tests. At the moment it is not affecting
+  # test performances negatively. If it becomes a problem we'll change the below tests to
+  # match all other tests.
   describe "Selecting slide orientation" do
     before { sign_in(users(:super_admin)) }
 
