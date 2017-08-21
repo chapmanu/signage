@@ -9,7 +9,3 @@ standard:
   admission: MyString
   audience: MyString
   location: MyString
-
-free_student_event:
-  admission: Free
-  audience: Students

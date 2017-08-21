@@ -33,6 +33,18 @@ class SlideIntegrationTest < Capybara::Rails::TestCase
     assert page.has_no_css?('img#ui-event-audience-icon'), "Audience icon is present"
   end
 
+  # This admission test is to confirm that the admission and audience labels properly match
+  # their respective options. This is due to an issue where the data in the database had
+  # accidentally been swapped, shown here: https://github.com/chapmanu/signage/issues/188
+  test "schedule slide's admission and audience have the correct options" do
+    slide.update(template: 'schedule')
+    slide.scheduled_items << scheduled_item
+
+    visit edit_slide_path(slide)
+    assert page.has_select?('Admission', :with_options => ['Free']), "Admission does not include 'Free'"
+    assert page.has_select?('Audience', :with_options => ['Students']), "Admission does not include 'Students'"
+  end  
+
   describe "Selecting slide orientation" do
     before { sign_in(users(:super_admin)) }
 
