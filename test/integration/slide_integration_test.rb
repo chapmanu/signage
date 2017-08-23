@@ -33,6 +33,22 @@ class SlideIntegrationTest < Capybara::Rails::TestCase
     assert page.has_no_css?('img#ui-event-audience-icon'), "Audience icon is present"
   end
 
+  # This admission test is to confirm that the admission and audience labels properly match
+  # their respective options. This is due to an issue where the data in the database had
+  # accidentally been swapped, shown here: https://github.com/chapmanu/signage/issues/188
+  test "schedule slide's admission and audience have the correct options" do
+    slide.update(template: 'schedule')
+    slide.scheduled_items << scheduled_item
+
+    visit edit_slide_path(slide)
+    assert page.has_select?('Admission', :with_options => ['Free']), "Admission does not include 'Free'"
+    assert page.has_select?('Audience', :with_options => ['Students']), "Admission does not include 'Students'"
+  end
+
+  # TODO: We are already aware of the mix of minitest and rspec syntax and that the below
+  # set of tests are inconsistent with all other tests. At the moment it is not affecting
+  # test performances negatively. If it becomes a problem we'll change the below tests to
+  # match all other tests.
   describe "Selecting slide orientation" do
     before { sign_in(users(:super_admin)) }
 
