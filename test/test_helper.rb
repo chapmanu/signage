@@ -21,9 +21,22 @@ end
 Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = 10
 
+# VCR does not play nice with Webmock stubs: https://github.com/vcr/vcr/issues/146
+module VCRRemoteControl
+  def turn_vcr_off
+    VCR.turn_off!
+    WebMock.enable!
+    Rails.cache.clear
+  end
+
+  def turn_vcr_on
+    VCR.turn_on!
+  end
+end
 
 class ActiveSupport::TestCase
   fixtures :all
+  include VCRRemoteControl
   include MockPublicSafetyFeed
 end
 
