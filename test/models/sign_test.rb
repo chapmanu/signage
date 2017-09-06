@@ -109,7 +109,7 @@ class SignTest < ActiveSupport::TestCase
     mock_no_public_safety_emergency_alert
 
     # Assert
-    assert @sign.emergency?
+    assert_not @sign.emergency?
     assert @sign.emergency_alert.nil?
     assert @sign.emergency_alert_detail.nil?
 
