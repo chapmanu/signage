@@ -31,7 +31,13 @@ class PublicSafetyService
     def emergency_feed
       # Check cache then campus alert feed.
       Rails.cache.fetch('public-safety-emergency-feed', expires_in: 60.seconds) do
-        response = RestClient.get FEED_URL
+        # Require SSL certificate verification only in production.
+        verify_ssl = Rails.env.production?
+
+        # verify_ssl is not accepted in RestCient.get per https://stackoverflow.com/a/38500706/6763239
+        response = RestClient::Request.execute(url: FEED_URL,
+                                               method: :get,
+                                               verify_ssl: verify_ssl)
         data = Hash.from_xml(response)
         items = data["rss"]["channel"]["item"]
 
