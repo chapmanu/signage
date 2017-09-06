@@ -23,8 +23,15 @@ class SignsControllerTest < ActionController::TestCase
   end
 
   test "should create sign" do
+    sign_params = {
+      location: @sign.location,
+      name: @sign.name,
+      template: @sign.template,
+      updated_at: @sign.updated_at
+    }
+
     assert_difference('Sign.count') do
-      post :create, sign: { emergency: @sign.emergency, emergency_detail: @sign.emergency_detail, location: @sign.location, name: @sign.name, template: @sign.template, updated_at: @sign.updated_at }
+      post :create, sign: sign_params
     end
 
     assert_redirected_to assigns(:sign)
@@ -41,7 +48,13 @@ class SignsControllerTest < ActionController::TestCase
   end
 
   test "should update sign" do
-    patch :update, id: @sign, sign: { emergency: @sign.emergency, emergency_detail: @sign.emergency_detail, location: @sign.location, name: @sign.name, template: @sign.template, updated_at: @sign.updated_at }
+    sign_params = {
+      location: @sign.location,
+      name: @sign.name,
+      template: @sign.template,
+      updated_at: @sign.updated_at
+    }
+    patch :update, id: @sign, sign: sign_params
     assert_redirected_to assigns(:sign)
   end
 
@@ -69,7 +82,13 @@ class SignsControllerTest < ActionController::TestCase
 
   test "creating a slide produces 1 new activity record" do
     assert_difference('PublicActivity::Activity.count', 1) do
-      post :create, sign: { emergency: @sign.emergency, emergency_detail: @sign.emergency_detail, location: @sign.location, name: @sign.name, template: @sign.template, updated_at: @sign.updated_at }
+      sign_params = {
+        location: @sign.location, 
+        name: @sign.name,
+        template: @sign.template,
+        updated_at: @sign.updated_at
+      }
+      post :create, sign: sign_params
     end
   end
 
