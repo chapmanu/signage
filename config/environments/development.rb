@@ -63,6 +63,9 @@ Rails.application.configure do
       config.available_users_names = { :user => :full_name }
     end
   end
+
+  # Public Safety alert configuration.
+  config.x.public_safety.feed = 'https://imposter.chapman.edu/rave.rss'
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
