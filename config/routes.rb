@@ -9,8 +9,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :emergencies, only: [:index, :create, :destroy]
-
   resources :notifications, only: [:index]
 
   concern :ownable do
