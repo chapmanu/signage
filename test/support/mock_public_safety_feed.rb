@@ -32,12 +32,12 @@ module MockPublicSafetyFeed
     </item>
   xml
 
-  def mock_feed_with_no_alerts
+  def mock_no_public_safety_emergency_alert
     stubbed_xml = format(XML_TEMPLATE, DEFAULT_ITEMS_BLOCK)
-    stub_feed(body: stubbed_xml)
+    stub_public_safety_feed(body: stubbed_xml)
   end
 
-  def mock_feed_with_alert
+  def mock_public_safety_emergency_alert
     items_xml = <<-xml
     <item>
       <title>It's the end of the world as we know it.</title>
@@ -52,29 +52,19 @@ module MockPublicSafetyFeed
     xml
 
     stubbed_xml = format(XML_TEMPLATE, items_xml)
-    stub_feed(body: stubbed_xml)
+    stub_public_safety_feed(body: stubbed_xml)
   end
 
-  def mock_feed_unavailable
-    stub_feed(status: 404)
+  def mock_public_safety_feed_unavailable
+    stub_public_safety_feed(status: 404)
   end
 
-  def stub_feed(options = {})
+  def stub_public_safety_feed(options = {})
+    # Default options
     body = options.fetch(:body, '')
     status = options.fetch(:status, 200)
+
     alert_feed_host = Rails.configuration.x.public_safety.feed
-
     stub_request(:get, alert_feed_host).to_return(body: body, status: status)
-  end
-
-  def turn_vcr_off
-    # VCR does not play nice with Webmock stubs: https://github.com/vcr/vcr/issues/146
-    VCR.turn_off!
-    WebMock.enable!
-    Rails.cache.clear
-  end
-
-  def turn_vcr_on
-    VCR.turn_on!
   end
 end

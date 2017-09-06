@@ -12,17 +12,32 @@ class PublicSafetyService
     # it once the emergency is complete and if they don't input it as expected,
     # signs would continue to display emergency alert.
     NO_EMERGENCY_TITLE = 'There is currently no emergency.'.freeze
+    FEED_URL = Rails.configuration.x.public_safety.feed.freeze
+
+    def all_clear?
+      latest_emergency_feed_message['title'] == NO_EMERGENCY_TITLE
+    end
 
     def emergency_alert?
-      latest_emergency_feed_message.title != NO_EMERGENCY_TITLE
+      ! all_clear?
     end
 
     def latest_emergency_feed_message
+      emergency_feed.last
     end
 
     private
 
     def emergency_feed
+      # Check cache then campus alert feed.
+      Rails.cache.fetch('public-safety-emergency-feed', expires_in: 60.seconds) do
+        response = RestClient.get FEED_URL
+        data = Hash.from_xml(response)
+        items = data["rss"]["channel"]["item"]
+
+        # If multiple items, then items is an array of hashes, else a single hash
+        items.is_a?(Array) ? items : [items]
+      end
     end
   end
   # End Static/Class Methods
