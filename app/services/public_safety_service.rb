@@ -15,6 +15,7 @@ class PublicSafetyService
     FEED_URL = Rails.configuration.x.public_safety.feed.freeze
 
     def all_clear?
+      return true if emergency_feed.empty?
       latest_emergency_feed_message['title'] == NO_EMERGENCY_TITLE
     end
 
@@ -35,9 +36,15 @@ class PublicSafetyService
         verify_ssl = Rails.env.production?
 
         # verify_ssl is not accepted in RestCient.get per https://stackoverflow.com/a/38500706/6763239
-        response = RestClient::Request.execute(url: FEED_URL,
-                                               method: :get,
-                                               verify_ssl: verify_ssl)
+        begin
+          response = RestClient::Request.execute(url: FEED_URL,
+                                                 method: :get,
+                                                 verify_ssl: verify_ssl)
+        rescue => e
+          # If request fails, return empty array.
+          return []
+        end
+
         data = Hash.from_xml(response)
         items = data["rss"]["channel"]["item"]
 
