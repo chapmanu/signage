@@ -23,4 +23,21 @@ class PublicSafetyServiceTest < ActiveSupport::TestCase
     assert_not PublicSafetyService.emergency_alert?
     turn_vcr_on
   end
+
+  test 'expects no emergency alert when emergency alert feed is inaccessible' do
+    # Arrange
+    turn_vcr_off
+    cases = [404, 500]
+
+    cases.each do | status |
+      # Act
+      stub_public_safety_feed(status: status)
+
+      # Assert
+      assert_not PublicSafetyService.emergency_alert?
+    end
+
+    # Unarrange
+    turn_vcr_on
+  end
 end
