@@ -50,20 +50,16 @@ class Sign < ActiveRecord::Base
     template.to_s[/(\w+)(\.mustache)?$/, 1].underscore
   end
 
-  def any_emergency?
-    emergency? || panther_alert?
-  end
-
   def emergency?
-    [emergency, emergency_detail].any? do |field|
-      !field.blank?
-    end
+    PublicSafetyService.emergency_alert?
   end
 
-  def panther_alert?
-    [panther_alert, panther_alert_detail].any? do |field|
-      !field.blank?
-    end
+  def emergency_alert
+    emergency? ? PublicSafetyService.latest_emergency_feed_message['title'] : nil
+  end
+
+  def emergency_alert_detail
+    emergency? ? PublicSafetyService.latest_emergency_feed_message['description'] : nil
   end
 
   def touch_last_ping
