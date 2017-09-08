@@ -40,4 +40,24 @@ class PublicSafetyServiceTest < ActiveSupport::TestCase
     # Unarrange
     turn_vcr_on
   end
+
+  test 'expects to skip alert check when safety feed config is blank' do
+    # Arrange
+    turn_vcr_off
+    cases = ['', nil]
+
+    cases.each do | blank_value |
+      # Stub config value to be empty.
+      Rails.configuration.x.public_safety.stub(:feed, blank_value) do
+        # I'd also like to assert that RestClient::Request.execute is not called, but
+        # couldn't find a simple way to do it in MiniTest.
+
+        # Act / Assert
+        refute PublicSafetyService.emergency_alert?
+      end
+    end
+
+    # Unarrange
+    turn_vcr_on
+  end
 end
