@@ -94,6 +94,7 @@ subhead {
  padding-left: 260px;
  padding-top: 16px;
  padding-bottom: 16px;
+ bottom: 65px;
 }
 
 .ui-head > * {
@@ -121,12 +122,12 @@ subhead {
 }
 
 .ui-logo-wacubo {
-  top: -51px;
+  top: -90px;
   left: 54px;
   position: absolute;
   background: image-url('wacubo-logo-2018.jpg') 0 0 / 100% 100%;
   width: 180px;
-  height: 165px;
+  height: 230px;
   border-radius: 2px;
   box-shadow: 0 2px 1px 0 rgba(0,0,0,0.3);
 }
