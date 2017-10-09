@@ -1,0 +1,39 @@
+---
+- name: Create application directory.
+  file:
+    state: directory
+    path: "{{ remote_app_root_path }}"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: u=rwx,g=rx,o=rx
+  become: yes
+
+- name: Stat config files to verify present
+  local_action: stat path={{ item.src }}
+  with_items: "{{ capistrano_linked_files }}"
+  register: stat_config_files
+
+- name: Fail if config files not present
+  fail:
+    msg: "The file ({{ item.item.src }}) not found. Please review README documentation."
+  when: item.stat.exists == false
+  with_items: "{{ stat_config_files.results }}"
+
+- name: Create capistrano directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: u=rwx,g=rx,o=rx
+  with_items: "{{ capistrano_dir_paths }}"
+  become: yes
+
+- name: Copy linked files from local to remote
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+  with_items: "{{ capistrano_linked_files }}"
+  become: yes

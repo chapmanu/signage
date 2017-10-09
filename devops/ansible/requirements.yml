@@ -1,0 +1,41 @@
+#
+# Ansible Requirement Files
+# Imports third-party roles.
+#
+# Usage:
+#   ansible-galaxy install -r requirements.yml
+#
+# References:
+# - https://stackoverflow.com/a/30176625/6763239
+# - http://docs.ansible.com/ansible/latest/galaxy.html#installing-multiple-roles-from-a-file
+#
+
+# Avoid issues with time skew.
+- src: geerlingguy.ntp
+
+# Adds needed Red Hat repos.
+- src: geerlingguy.repo-epel
+
+# I think Rails needs this for testing or the asset bundler.
+- src: geerlingguy.nodejs
+
+# Sets up user accounts.
+- src: ontic.account
+
+# Self-signed certificates for vm/staging servers.
+- src: tjarrett.selfsignedcertificate
+
+# Installs rbenv and ruby.
+- src: zzet.rbenv
+
+# Sets environment variables on remote server.
+- src: franklinkim.environment
+
+# Install nginx webserver.
+- src: geerlingguy.nginx
+
+# Rotate logs.
+- src: nickhammond.logrotate
+
+# Manages firewall.
+- src: geerlingguy.firewall
