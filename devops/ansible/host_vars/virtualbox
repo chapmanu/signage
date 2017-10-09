@@ -1,0 +1,13 @@
+#
+# Role: franklinkim.environment
+# Set environmental variables.
+#
+environment_config:
+  RAILS_ENV: virtualbox
+
+#
+# Role: rails-application
+#
+nginx_server_names:
+  - localhost
+  - "{{ app_name }}-virtualbox.chapman.edu"
