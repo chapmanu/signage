@@ -1,0 +1,20 @@
+---
+# app_remote_path is set in group_vars/webserver
+remote_app_root_path: "{{ app_remote_path }}"
+remote_app_config_path: "{{ remote_app_root_path }}/shared/config"
+local_app_root_path: "{{ playbook_dir | dirname | dirname }}"
+local_app_config_path: "{{ local_app_root_path }}/config"
+
+puma_socket_dir: "{{ remote_app_root_path }}/shared/tmp/sockets/puma.sock"
+
+capistrano_dir_paths:
+  - "{{ remote_app_root_path }}/releases"
+  - "{{ remote_app_root_path }}/repo"
+  - "{{ remote_app_root_path }}/shared"
+  - "{{ remote_app_root_path }}/shared/config"
+  - "{{ remote_app_root_path }}/shared/log"
+  - "{{ remote_app_root_path }}/shared/tmp"
+  - "{{ remote_app_root_path }}/shared/tmp/sockets"
+
+capistrano_linked_files:
+  - { src: "{{ local_app_config_path }}/secrets.yml", dest: "{{ remote_app_config_path }}/secrets.yml" }

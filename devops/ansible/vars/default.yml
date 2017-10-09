@@ -1,0 +1,16 @@
+# General app vars
+app_name: "signage"
+local_app_root_path: "{{ playbook_dir | dirname | dirname }}"
+remote_app_root_path: "/var/www/{{ app_name }}"
+remote_app_root_dir: "{{ remote_app_root_path }}/current"
+app_env_name: "{{ app_name }}-{{ env }}"
+dev_usr: wimops
+
+#ssl
+ssl_path: /etc/pki/tls
+ssl_crt: "{{ ssl_path }}/certs/{{ app_env_name }}.crt"
+ssl_private_key: "{{ ssl_path }}/private/{{ app_env_name }}.key"
+
+#app config path
+local_config_path: "{{ local_app_root_path }}/config"
+remote_config_path: "{{ remote_app_root_path  }}/shared/config"

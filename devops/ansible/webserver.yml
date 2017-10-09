@@ -1,0 +1,25 @@
+#
+# To run playbook:
+#   cd devops/ansible
+#   ansible-playbook webserver.yml -i hosts/virtualbox
+#
+# To run specific roles, tag the role(s) dev and use the --tags option:
+#   ansible-playbook webserver.yml -i hosts/virtualbox --tags dev -v
+#
+# See group_vars/webserver for more info on each role.
+#
+- hosts: webserver
+
+  roles:
+    - { role: basic-packages, become: yes }
+    - { role: geerlingguy.ntp, become: yes }
+    - { role: geerlingguy.repo-epel, become: yes }
+    - { role: geerlingguy.nodejs, become: yes }
+    - { role: ontic.account, become: yes }
+    - { role: tjarrett.selfsignedcertificate, become: yes, when: use_self_signed_cert }
+    - { role: zzet.rbenv }
+    - { role: geerlingguy.nginx, become: yes }
+    - { role: franklinkim.environment, become: yes }
+    - { role: rails-application }
+    - { role: nickhammond.logrotate, become: yes }
+    - { role: geerlingguy.firewall, become: yes }

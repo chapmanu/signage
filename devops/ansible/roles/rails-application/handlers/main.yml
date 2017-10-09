@@ -1,0 +1,10 @@
+---
+- name: Restart nginx
+  service: name=nginx state=restarted
+  become: yes
+
+- name: Reload ssh service
+  service:
+    name: sshd
+    state: reloaded
+  become: yes
