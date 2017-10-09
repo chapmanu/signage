@@ -18,3 +18,4 @@ capistrano_dir_paths:
 
 capistrano_linked_files:
   - { src: "{{ local_app_config_path }}/secrets.yml", dest: "{{ remote_app_config_path }}/secrets.yml" }
+  - { src: "{{ local_app_config_path }}/database.yml", dest: "{{ remote_app_config_path }}/database.yml" }

@@ -1,0 +1,16 @@
+# Copyright (c) Ontic. (http://www.ontic.com.au). All rights reserved.
+# See the COPYING file bundled with this package for license details.
+
+---
+
+- hosts: 'localhost'
+  vars:
+    account_groups:
+      - name: 'administrator'
+        gid: '1333'
+    account_users:
+      - name: 'adam'
+        group: 'administrator'
+        uid: '1444'
+  roles:
+    - { role: 'role_under_test' }
