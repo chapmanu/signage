@@ -1,0 +1,8 @@
+selfsignedcertificates: []
+  # - filename: ep.jhu.edu
+  #   country: US
+  #   state: Maryland
+  #   locality: Baltimore
+  #   organization: Johns Hopkins University
+  #   domain: *.ep.jhu.edu
+  
