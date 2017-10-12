@@ -65,10 +65,12 @@ gem "switch_user", group: :development
 gem "letter_opener_web", group: :development
 
 # Use Capistrano for deployment
-gem 'capistrano',          '~> 3.1',   group: :development
-gem 'capistrano-rails',    '~> 1.1',   group: :development
-gem 'capistrano-rvm',      '0.1.2',    group: :development
-gem 'capistrano-passenger', '0.1.1',    group: :development
+gem 'capistrano',          '~>3.7',   group: :development
+gem 'capistrano-rails',    '~> 1.1',  group: :development
+gem 'capistrano3-puma',    '>=3.0.2', group: :development
+gem 'capistrano-rbenv'
+
+gem 'puma', '>= 3.10.0', group: [:production, :staging, :virtualbox]
 
 group :development, :test do
   gem 'dotenv-rails'
