@@ -4,14 +4,14 @@
 #
 # USAGE:
 #   vboxmanage startvm redhat7 --type headless
-#   cap vm deploy
+#   cap virtualbox deploy
 #
 # Roles are where the various servers live
 server "localhost", user: "deploy", roles: %w{web}, port: 2222
 
 # Rbenv is under user.
 set :rbenv_type, :user
-set :rbenv_ruby, '2.4.1'
+set :rbenv_ruby, '2.2.1'
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, [:web]
 
