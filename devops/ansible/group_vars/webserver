@@ -54,9 +54,9 @@ selfsignedcertificates:
 rbenv:
   env: user
   version: v1.1.1
-  default_ruby: 2.4.1
+  default_ruby: 2.2.1
   rubies:
-    - version: 2.4.1
+    - version: 2.2.1
 
 rbenv_users:
   - "{{ app_user }}"
