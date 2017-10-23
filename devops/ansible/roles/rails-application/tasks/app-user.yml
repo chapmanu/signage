@@ -16,6 +16,6 @@
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: '^AllowUsers'
-    line: "AllowUsers {{ ansible_user }} {{ app_user }}"
+    line: "AllowUsers {{ ansible_user }} {{ app_user }} root"
   become: yes
   notify: Reload ssh service
