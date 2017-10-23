@@ -39,3 +39,6 @@
 
 # Manages firewall.
 - src: geerlingguy.firewall
+
+# Set up PotgreSQL server.
+- src: geerlingguy.postgresql
