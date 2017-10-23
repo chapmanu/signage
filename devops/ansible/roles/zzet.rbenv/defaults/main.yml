@@ -42,6 +42,7 @@ rbenv_dnf_packages:
 - zlib-devel
 - libffi-devel
 - git
+- rpm-build
 rbenv_yum_packages:
 - bzip2
 - gcc
@@ -51,3 +52,6 @@ rbenv_yum_packages:
 - openssl-devel
 - readline-devel
 - zlib-devel
+- ruby-devel
+- postgresql-devel
+- patch
