@@ -153,3 +153,12 @@ firewall_allowed_tcp_ports:
   - "22"
   - "80"
   - "443"
+
+#
+# Role: geerlingguy.postgresql
+#
+postgresql_databases:
+  - name: signage_virtualbox
+postgresql_users:
+  - name: deploy
+    db: signage_virtualbox
