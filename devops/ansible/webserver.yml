@@ -23,3 +23,4 @@
     - { role: rails-application }
     - { role: nickhammond.logrotate, become: yes }
     - { role: geerlingguy.firewall, become: yes }
+    - { role: geerlingguy.postgresql, become: yes }
