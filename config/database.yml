@@ -60,6 +60,7 @@ test:
   database: signage_test
 
 virtualbox:
+  <<: *default
   database: signage_virtualbox
   username: deploy
 
