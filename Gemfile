@@ -58,7 +58,7 @@ gem 'rest-client', '1.8.0'
 gem 'awesome_print'
 
 # Allow user to easily switch users in dev
-gem "switch_user", group: :development
+gem "switch_user", group: [:development, :virtualbox]
 
 # View sent emails in browser at /letter_opener
 # https://github.com/fgrehm/letter_opener_web
@@ -72,7 +72,7 @@ gem 'capistrano-rbenv'
 
 gem 'puma', '>= 3.10.0', group: [:production, :staging, :virtualbox]
 
-group :development, :test do
+group :development, :test, :virtualbox do
   gem 'dotenv-rails'
   gem 'better_errors'
   gem 'guard'
