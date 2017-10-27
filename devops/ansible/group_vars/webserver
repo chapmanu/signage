@@ -7,7 +7,7 @@
 app_name: signage
 app_user: deploy
 app_user_pw_path: "/tmp/ansible-{{ app_name }}-{{ app_user }}-{{inventory_hostname}}-pw.txt"
-app_remote_path: "/var/www/{{ app_name }}"
+app_remote_path: "/home/{{ app_user }}/{{ app_name }}"
 
 #
 # Role: ontic.account

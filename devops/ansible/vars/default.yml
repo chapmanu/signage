@@ -1,7 +1,7 @@
 # General app vars
 app_name: "signage"
 local_app_root_path: "{{ playbook_dir | dirname | dirname }}"
-remote_app_root_path: "/var/www/{{ app_name }}"
+remote_app_root_path: "/home/deploy/{{ app_name }}"
 remote_app_root_dir: "{{ remote_app_root_path }}/current"
 app_env_name: "{{ app_name }}-{{ env }}"
 dev_usr: wimops
