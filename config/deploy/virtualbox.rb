@@ -9,8 +9,6 @@
 # Roles are where the various servers live
 server "localhost", user: "deploy", roles: %w{web}, port: 2222
 
-set :deploy_to, '/home/deploy/signage'
-
 # Rbenv is under user.
 set :rbenv_type, :user
 set :rbenv_ruby, '2.2.1'
