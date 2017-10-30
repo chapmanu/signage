@@ -1,16 +1,16 @@
 # Use socket file rather port for reverse proxy.
-bind 'unix:///home/deploy/signage/shared/tmp/sockets/puma.sock'
+bind 'unix:///var/www/signage/shared/tmp/sockets/puma.sock'
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 # Disabled since we're using bind socket above.
 #port        ENV.fetch("PORT") { 3000 }
 
 # Config / Log Paths
-directory '/home/deploy/signage/current'
-rackup "/home/deploy/signage/current/config.ru"
-pidfile "/home/deploy/signage/shared/tmp/pids/puma.pid"
-state_path "/home/deploy/signage/shared/tmp/pids/puma.state"
-stdout_redirect '/home/deploy/signage/current/log/puma.error.log', '/home/deploy/signage/current/log/puma.access.log', true
+directory '/var/www/signage/current'
+rackup "/var/www/signage/current/config.ru"
+pidfile "/var/www/signage/shared/tmp/pids/puma.pid"
+state_path "/var/www/signage/shared/tmp/pids/puma.state"
+stdout_redirect '/var/www/signage/current/log/puma.error.log', '/var/www/signage/current/log/puma.access.log', true
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -34,5 +34,5 @@ daemonize
 
 on_restart do
   puts 'Refreshing Gemfile'
-  ENV["BUNDLE_GEMFILE"] = "/home/deploy/signage/current/Gemfile"
+  ENV["BUNDLE_GEMFILE"] = "/var/www/signage/current/Gemfile"
 end
