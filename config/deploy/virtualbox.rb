@@ -7,7 +7,7 @@
 #   cap virtualbox deploy
 #
 # Roles are where the various servers live
-server "localhost", user: "deploy", roles: %w{web}, port: 2222
+server "localhost", user: "deploy", roles: %w{app db web postgres}, port: 2222
 
 # Rbenv is under user.
 set :rbenv_type, :user
