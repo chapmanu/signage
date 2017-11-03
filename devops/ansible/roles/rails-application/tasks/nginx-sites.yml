@@ -1,0 +1,12 @@
+#
+# Setup NGINX webserver
+# References:
+# - https://www.nginx.com/blog/installing-nginx-nginx-plus-ansible/
+#
+---
+- name: Install conf file for Rails application.
+  template:
+    src: rails-app.conf.j2
+    dest: "{{ nginx_vhost_path }}/rails-app.conf"
+  become: yes
+  notify: Restart nginx

@@ -1,17 +1,25 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.9.1'
 
 set :application, 'signage'
 set :repo_url, 'git@github.com:chapmanu/signage.git'
-
-# RVM SETTINGS
-set :rvm_ruby_version, '2.2.1'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/signage'
+
+# Capistrano rbenv: https://github.com/capistrano/rbenv
+# Set Ruby version here.
+set :rbenv_type, :user
+set :rbenv_ruby, '2.2.1'
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, [:web]
+
+# puma configuration
+set :puma_conf, "#{shared_path}/config/puma.rb"
+set :puma_role, :web
 
 # Default value for :scm is :git
 # set :scm, :git

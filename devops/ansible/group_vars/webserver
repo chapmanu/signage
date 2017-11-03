@@ -1,0 +1,164 @@
+#
+# General Application Settings
+#
+# Puma needs ownership of the full path to run so we put the app root under the
+# app_user home rather than /var/www.
+#
+app_name: signage
+app_user: deploy
+app_user_pw_path: "/tmp/ansible-{{ app_name }}-{{ app_user }}-{{inventory_hostname}}-pw.txt"
+app_remote_path: "/var/www/{{ app_name }}"
+
+#
+# Role: ontic.account
+# https://github.com/ontic/ansible-role-account/tree/master/docs
+# http://docs.ansible.com/ansible/latest/playbooks_lookups.html#the-password-lookup
+#
+account_groups:
+  - name: "{{ app_user }}"
+    system: yes
+account_users:
+  - name: "{{ app_user }}"
+    createhome: yes
+    sudoer: yes
+    group: "{{ app_user }}"
+    password: "{{ lookup('password', '{{ app_user_pw_path }} length=16 encrypt=md5_crypt') }}"
+    files:
+      - path: '.ssh'
+        mode: '0700'
+        state: 'directory'
+
+#
+# Role: tjarrett.selfsignedcertificate
+#
+use_self_signed_cert: yes
+self_signed_cert_path: /etc/pki/tls/certs
+self_signed_cert_key_path: /etc/pki/tls/private
+self_signed_cert_filename: self-signed-cert
+
+selfsignedcertificates:
+  - {
+      certs_path: "{{ self_signed_cert_path }}",
+      key_path: "{{ self_signed_cert_key_path }}",
+      filename: "{{ self_signed_cert_filename }}",
+      country: US,
+      state: California,
+      locality: Orange,
+      organization: "Chapman University",
+      domain: "{{ app_name }}.chapman.edu"
+    }
+
+#
+# Role: zzet.rbenv
+#
+rbenv:
+  env: user
+  version: v1.1.1
+  default_ruby: 2.2.1
+  rubies:
+    - version: 2.2.1
+
+rbenv_users:
+  - "{{ app_user }}"
+
+rbenv_plugins:
+  - { name: "rbenv-vars",
+      repo: "https://github.com/rbenv/rbenv-vars.git",
+      version: "v1.2.0" }
+
+  - { name: "ruby-build",
+      repo: "https://github.com/rbenv/ruby-build.git",
+      version: "master" }
+
+  - { name: "rbenv-default-gems",
+      repo: "https://github.com/rbenv/rbenv-default-gems.git",
+      version: "master" }
+
+  - { name: "rbenv-installer",
+      repo: "https://github.com/rbenv/rbenv-installer.git",
+      version: "bc21e7055dcc8f5f9bc66ce0c78cc9ae0c28cd7a" }
+
+  - { name: "rbenv-update",
+      repo: "https://github.com/rkh/rbenv-update.git",
+      version: "1961fa180280bb50b64cbbffe6a5df7cf70f5e50" }
+
+  - { name: "rbenv-whatis",
+      repo: "https://github.com/rkh/rbenv-whatis.git",
+      version: "v1.0.0" }
+
+  - { name: "rbenv-use",
+      repo: "https://github.com/rkh/rbenv-use.git",
+      version: "v1.0.0" }
+
+#
+# Role: geerlingguy.nginx
+#
+# This is the default Red Hat setting from the role.
+nginx_vhost_path: /etc/nginx/conf.d
+nginx_remove_default_vhost: true
+nginx_client_max_body_size: "500M"
+
+#
+# Role: franklinkim.environment
+# Set environmental variables.
+#
+environment_config:
+  # Required for Puma. Override in host_vars.
+  RAILS_ENV: production
+
+#
+# Role: rails-application
+#
+puma_socket_dir: "{{ app_remote_path }}/shared/tmp/sockets/puma.sock"
+nginx_server_names:
+  - localhost
+  - "{{ app_name }}.chapman.edu"
+
+#
+# Role: nickhammond.logrotate
+#
+logrotate_scripts:
+  - name: rails
+    path: "{{ app_remote_path }}/shared/log/*.log"
+    options:
+      - daily
+      - rotate 28
+      - size 25M
+      - missingok
+      - compress
+      - delaycompress
+      - copytruncate
+      - dateext
+      - sharedscripts
+
+  - name: nginx
+    path: /var/log/nginx/*.log
+    options:
+      - daily
+      - rotate 28
+      - size 25M
+      - missingok
+      - compress
+      - delaycompress
+      - copytruncate
+      - dateext
+      - sharedscripts
+    scripts:
+      postrotate: "[ -s /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`"
+
+#
+# Role: geerlingguy.firewall
+#
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
+  - "443"
+
+#
+# Role: geerlingguy.postgresql
+#
+postgresql_databases:
+  - name: signage_virtualbox
+postgresql_users:
+  - name: deploy
+    db: signage_virtualbox
