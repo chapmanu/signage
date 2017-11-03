@@ -1,0 +1,14 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Tim Jarrett (tjarrett)
+  description: Self signed certificate creation
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.9
+  platforms:
+    - name: EL
+      versions:
+      - all
+  galaxy_tags:
+    - web

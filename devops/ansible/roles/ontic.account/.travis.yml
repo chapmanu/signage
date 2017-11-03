@@ -1,0 +1,28 @@
+# Copyright (c) Ontic. (http://www.ontic.com.au). All rights reserved.
+# See the COPYING file bundled with this package for license details.
+
+---
+
+services: 'docker'
+
+env:
+  - distribution: 'centos'
+    version: '7'
+  - distribution: 'debian'
+    version: '9'
+  - distribution: 'ubuntu'
+    version: '16.04'
+
+before_install:
+  - 'export container_id=$(date +%s)'
+  - 'export cleanup=false'
+  - 'wget -O ${PWD}/tests/docker.sh https://raw.githubusercontent.com/ontic/ansible-role-test/master/docker.sh'
+  - 'chmod +x ${PWD}/tests/docker.sh'
+  - '${PWD}/tests/docker.sh build'
+
+script:
+  - '${PWD}/tests/docker.sh test'
+  - '${PWD}/tests/docker.sh verify'
+
+notifications:
+  webhooks: 'https://galaxy.ansible.com/api/v1/notifications/'
