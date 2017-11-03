@@ -58,19 +58,21 @@ gem 'rest-client', '1.8.0'
 gem 'awesome_print'
 
 # Allow user to easily switch users in dev
-gem "switch_user", group: :development
+gem "switch_user", group: [:development, :virtualbox]
 
 # View sent emails in browser at /letter_opener
 # https://github.com/fgrehm/letter_opener_web
 gem "letter_opener_web", group: :development
 
 # Use Capistrano for deployment
-gem 'capistrano',          '~> 3.1',   group: :development
-gem 'capistrano-rails',    '~> 1.1',   group: :development
-gem 'capistrano-rvm',      '0.1.2',    group: :development
-gem 'capistrano-passenger', '0.1.1',    group: :development
+gem 'capistrano',          '~>3.7',   group: [:development, :virtualbox]
+gem 'capistrano-rails',    '~> 1.1',  group: [:development, :virtualbox]
+gem 'capistrano3-puma',    '>=3.0.2', group: [:development, :virtualbox]
+gem 'capistrano-rbenv'
 
-group :development, :test do
+gem 'puma', '>= 3.10.0', group: [:production, :staging, :virtualbox]
+
+group :development, :test, :virtualbox do
   gem 'dotenv-rails'
   gem 'better_errors'
   gem 'guard'

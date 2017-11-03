@@ -1,0 +1,11 @@
+---
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+ 
+# Create the certificate(s)
+- name: Create Certificate(s)
+  shell: openssl req -subj "/C={{ item.country }}/ST={{ item.state }}/L={{ item.locality }}/O={{ item.organization }}/CN={{ item.domain }}" -new -newkey rsa:2048 -sha256 -days 1095 -nodes -x509 -keyout {{ key_path }}/{{ item.filename }}.key -out {{ certs_path }}/{{ item.filename }}.csr
+  args:
+    creates: "{{ key_path }}/{{ item.filename }}.csr"
+  with_items: "{{ selfsignedcertificates }}"
