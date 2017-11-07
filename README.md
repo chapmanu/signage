@@ -26,6 +26,15 @@ rake db:setup
 cap production db:clone
 ```
 
+#### Emergency Alerts
+
+By default, this application is configured to monitor the Chapman University Public Safety feed and overlay all signs with a red emergency screen in the event the feed reports an emergency.
+
+Unless you are displaying signs for Chapman University, you will probably want to disable this. To do so, update the following setting in `config/application.rb` to `nil`:
+
+    config.x.public_safety.feed = nil
+
+
 ### Development
 #### Tests
 
@@ -56,4 +65,3 @@ See team lead for server authentication information.
 
 - Production Server: signage.chapman.edu
 - Staging Server: dev-signage.chapman.edu
-

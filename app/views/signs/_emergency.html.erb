@@ -1,11 +1,8 @@
 <article id="js-emergency-slide" class="ui-slide ui-slide--emergency">
 
-  <% if @sign.emergency? # A manual emergency takes presedence over panther alert %>
-    <h1 class="ui-slide-heading"><%= @sign.emergency %></h1>
-    <p class="ui-slide-content"><%= @sign.emergency_detail %></p>
-  <% elsif %>
-    <h1 class="ui-slide-heading"><%= @sign.panther_alert %></h1>
-    <p class="ui-slide-content"><%= @sign.panther_alert_detail %></p>
+  <% if @sign.emergency? %>
+    <h1 class="ui-slide-heading"><%= @sign.emergency_alert %></h1>
+    <p class="ui-slide-content"><%= @sign.emergency_alert_detail %></p>
   <% end %>
 
 </article>

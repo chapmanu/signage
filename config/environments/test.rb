@@ -39,6 +39,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Public Safety alert configuration.
+  config.x.public_safety.feed = 'https://www.getrave.com/rss/chapman/channel1'
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
