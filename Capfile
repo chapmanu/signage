@@ -16,16 +16,13 @@ require 'capistrano/rails'
 #   https://github.com/capistrano/rails
 #   https://github.com/capistrano/passenger
 #
-
-require 'capistrano/rbenv'
-require 'capistrano/puma'
-require "capistrano/scm/git"
-install_plugin Capistrano::SCM::Git
-install_plugin Capistrano::Puma  # Default puma tasks
+require 'capistrano/rvm'
+# require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
+require 'capistrano/passenger'
 require "whenever/capistrano"
 require "airbrussh/capistrano"
 
