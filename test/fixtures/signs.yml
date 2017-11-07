@@ -6,8 +6,6 @@ default:
   location: MyString
   notification: MyString
   notification_detail: MyString
-  emergency: MyString
-  emergency_detail: MyString
   visibility: 0
 
 dodge:
@@ -16,8 +14,6 @@ dodge:
   location: MyString
   notification: MyString
   notification_detail: MyString
-  emergency: MyString
-  emergency_detail: MyString
   visibility: 1
 
 build_team_area:
