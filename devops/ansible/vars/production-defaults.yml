@@ -1,7 +1,0 @@
----
-env: production
-
-nginx_server_name_list:
-  - dsv-mkt-prd01.chapman.edu
-  - signage.chapman.edu
-  - www.signage.chapman.edu

@@ -1,5 +1,0 @@
----
-env: development
-
-nginx_server_name_list:
-  - localhost.localdomain

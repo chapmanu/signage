@@ -1,5 +1,0 @@
----
-- include: app-user.yml
-- include: nginx-sites.yml
-- include: rails-packages.yml
-- include: capistrano.yml
