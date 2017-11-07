@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815175201) do
+ActiveRecord::Schema.define(version: 20170906202418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,16 +109,12 @@ ActiveRecord::Schema.define(version: 20170815175201) do
     t.string   "location"
     t.string   "notification"
     t.string   "notification_detail"
-    t.string   "emergency"
-    t.string   "emergency_detail"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "slug"
     t.datetime "last_ping"
-    t.string   "panther_alert"
-    t.string   "panther_alert_detail"
     t.string   "transition"
-    t.integer  "visibility",           default: 0
+    t.integer  "visibility",          default: 0
   end
 
   add_index "signs", ["slug"], name: "index_signs_on_slug", unique: true, using: :btree

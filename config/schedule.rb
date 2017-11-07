@@ -22,7 +22,3 @@
 every 1.day, at: '2:00 am' do
   rake 'faculty:sync'
 end
-
-every 1.minute do
-  rake 'panther_alert:check'
-end
