@@ -1,6 +1,0 @@
-#
-# Inventory File for Production Server
-# Usage: ansible-playbook webserver.yml -i hosts/production --ask-become-pass
-#
-[webserver]
-production ansible_host=signage.chapman.edu ansible_user=wimops
