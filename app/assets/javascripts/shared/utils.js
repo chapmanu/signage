@@ -51,16 +51,3 @@ Utils.selectAllCheckboxes = function() {
 Utils.deselectAllCheckboxes = function() {
   $('input[type="checkbox"]').prop('checked', false);
 };
-
-/**
- * Parse query string params from URL.
- * Source: https://stackoverflow.com/a/901144/6763239
- */
-Utils.extractParamFromQueryString = function(name, url) {
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-};
