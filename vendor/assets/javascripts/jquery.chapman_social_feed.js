@@ -271,7 +271,10 @@ ChapmanSocialFeed.prototype.__realtimePostReceive = function(post) {
   // If feed has a keyword, make sure post contains that keyword.
   // See Issue #196: https://github.com/chapmanu/signage/issues/196
   if ( this.keyword ) {
-    var includesKeyword = post.indexOf(this.keyword) !== -1;
+    // Checks for keyword in post (case-insensitive).
+    var insensitivePost = post.toLowerCase();
+    var insensitiveKeyword = this.keyword.toLowerCase();
+    var includesKeyword = insensitivePost.indexOf(insensitiveKeyword) !== -1;
 
     if ( ! includesKeyword ) {
       //console.log('Realtime post not displayed. Does not contain keyword', this.keyword);
