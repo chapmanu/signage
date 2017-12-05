@@ -34,6 +34,7 @@ ChapmanSocialFeed = function(options) {
   };
   this.animation_queue = [];
   this.resize_timer    = null;
+  this.keyword         = null;  // Will be set dynamically based on url.
 };
 
 
@@ -44,9 +45,15 @@ ChapmanSocialFeed = function(options) {
 ChapmanSocialFeed.prototype.initialize = function() {
   this.initializePosts();
   this.initializeRealtime();
+  this.keyword = this.extractKeywordFromUrl();
   $(window).on('resize', this.onResize.bind(this));
   $(window).on('scroll', this.onWindowScroll.bind(this));
   this.$element.trigger('csf:initialized');
+
+  // These log calls (and a couple other belows) can be uncommented to help
+  // with troubleshooting.
+  //console.log('ChapmanSocialFeed keyword set to:', this.keyword);
+  //console.log('ChapmanSocialFeed subscribed to realtime channel:', this.realtime_subscription_channel, 'on', this.realtime_server_url)
 };
 
 ChapmanSocialFeed.prototype.initializePosts = function() {
@@ -67,6 +74,20 @@ ChapmanSocialFeed.prototype.initializeRealtime = function() {
   realtime.on('transport:up', function() { self.$element.trigger('csf:realtime_connected') });
   realtime.subscribe(self.realtime_subscription_channel, self.__realtimePostReceive.bind(self));
   realtime.subscribe('/social/remove', self.__realtimePostRemove.bind(self));
+};
+
+ChapmanSocialFeed.prototype.extractKeywordFromUrl = function() {
+  // Source: https://stackoverflow.com/a/901144/6763239
+  var self = this;
+  var url = self.url;
+  var name = 'keyword';
+
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 
 
@@ -245,6 +266,19 @@ ChapmanSocialFeed.prototype.realtimeSubscriptionChannel =  function() {
  */
 
 ChapmanSocialFeed.prototype.__realtimePostReceive = function(post) {
+  //console.log('ChapmanSocialFeed.__realtimePostReceive:', post);
+
+  // If feed has a keyword, make sure post contains that keyword.
+  // See Issue #196: https://github.com/chapmanu/signage/issues/196
+  if ( this.keyword ) {
+    var includesKeyword = post.indexOf(this.keyword) !== -1;
+
+    if ( ! includesKeyword ) {
+      //console.log('Realtime post not displayed. Does not contain keyword', this.keyword);
+      return;
+    }
+  }
+
   this.realtimePostReceive(post);
   this.$element.trigger('csf:realtime_post_received', [post]);
 };
