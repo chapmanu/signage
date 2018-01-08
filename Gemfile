@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.7.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '0.18.2'
 # Use SCSS for stylesheets
@@ -40,7 +40,7 @@ gem 'screencap', '0.1.4'
 gem 'materialize-sass', '0.98.2'
 gem 'selectize-rails', '0.12.1'
 gem 'cancancan', '1.12.0'
-gem 'net-ldap', '0.11'
+gem 'net-ldap', '0.16.0'
 gem 'devise', '3.5.2'
 gem 'bugsnag', '2.8.12'
 gem 'whenever', '0.9.4', :require => false
