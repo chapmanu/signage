@@ -49,8 +49,8 @@ class FetchDeviceDataJobTest < ActiveJob::TestCase
   test "it saves play_on as nil if it is blank" do
     perform_job_with_people
     slide = Slide.where(menu_name: '16-17 Audition Dates').first
-    assert_equal(nil, slide.play_on)
-    assert_equal(nil, slide.stop_on)
+    assert_nil(slide.play_on)
+    assert_nil(slide.stop_on)
   end
 
   private
