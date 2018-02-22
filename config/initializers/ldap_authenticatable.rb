@@ -4,21 +4,20 @@ module Devise
 
       def authenticate!
 
-        if valid_credentials?("#{username}@chapman.edu", password)
+        if valid_credentials?("#{username}@chapman.edu", password)          
           success! User.create_or_update_from_active_directory(username)
         else
-          user = User.where(email: "#{username}@chapman.edu")
-          identity_info = User.lookup_in_active_directory(username)
-
-          if valid_identity_info(identity_info)
-            notify_bugsnag(user: user, response: identity_info)
-          end
-          
-          fail!(:invalid_identity_info)
+          fail(:invalid_login)
         end
-      rescue UnexpectedActiveDirectoryFormat, ChapmanIdentityNotFound
+      rescue UnexpectedActiveDirectoryFormat
+        fail(:invalid_login)
+      rescue ChapmanIdentityNotFound
+        user = User.where(email: "#{username}@chapman.edu")
+        identity_info = User.lookup_in_active_directory(username)
+        notify_bugsnag(user: user, response: identity_info)
         fail(:invalid_login)
       end
+
 
       private
         def valid_credentials?(email, password)

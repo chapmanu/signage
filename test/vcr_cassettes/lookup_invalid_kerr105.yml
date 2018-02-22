@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://chapmanedu%2Fadbind400:yedvodX4lZBCOeqmMcBm@webfarm.chapman.edu/RoleIdentity/api/Role/kerr105
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Server:
+      - Microsoft-IIS/7.5
+      X-Aspnet-Version:
+      - 4.0.30319
+      X-Powered-By:
+      - ASP.NET
+      X-Ua-Compatible:
+      - IE=edge
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Date:
+      - Wed, 21 Feb 2018 22:40:25 GMT
+      Content-Length:
+      - '182'
+      Set-Cookie:
+      - BIGipServerCU-web-443=2099161280.47873.0000; path=/; Httponly; Secure
+    body:
+      encoding: UTF-8
+      string: '{"username":"kerr105","role":[],"firstname":"James","lastname":"Kerr","email":"kerr105@mail.chapman.edu","staff_department":null,"faculty_department":null,"school":null,"major":null}'
+    http_version: 
+  recorded_at: Wed, 21 Feb 2018 22:40:24 GMT
+recorded_with: VCR 2.9.3
