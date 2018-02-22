@@ -11,7 +11,7 @@ module Devise
         end
       rescue UnexpectedActiveDirectoryFormat
         fail(:invalid_login)
-      #if identity issue occurs in create_or_update_from_active_directory method ChapmanandIdentityNotFound is raised and reported to bugsnag in rescue
+      #if identity issue occurs in create_or_update_from_active_directory method ChapmanandIdentityNotFound error is raised and with user information reported to bugsnag in rescue
       rescue ChapmanIdentityNotFound
         user = User.where(email: "#{username}@chapman.edu")
         identity_info = User.lookup_in_active_directory(username)
