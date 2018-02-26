@@ -33,7 +33,8 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test 'the ldap server has cant find the user data' do
-    # The chapmanidentitynotfound error performs a live request and we use VCR for a successful test for request
+    # test for invalid identity info, VCR needs a valid user due to how authenticate! method is written
+    # even though testing for an invalid user 
     VCR.use_cassette(:lookup_kerr105) do
       User.stub :create_or_update_from_active_directory, ->(arg) { raise ChapmanIdentityNotFound } do
         Net::LDAP.stub_any_instance(:bind, true) do
