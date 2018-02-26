@@ -3,7 +3,6 @@ module Devise
     class LdapAuthenticatable < Authenticatable
 
       def authenticate!
-
         if valid_credentials?("#{username}@chapman.edu", password)          
           success! User.create_or_update_from_active_directory(username)
         else
@@ -11,13 +10,14 @@ module Devise
         end
       rescue UnexpectedActiveDirectoryFormat
         fail(:invalid_login)
-      #if identity issue occurs in create_or_update_from_active_directory method ChapmanandIdentityNotFound error is raised and with user information reported to bugsnag in rescue
+      #if identity issue occurs in create_or_update_from_active_directory method ChapmanandIdentityNotFound 
+      #error is raised and with user information reported to bugsnag in rescue
       rescue ChapmanIdentityNotFound
         user = User.where(email: "#{username}@chapman.edu")
         identity_info = User.lookup_in_active_directory(username)
 
         notify_bugsnag(user: user, response: identity_info)
-        fail(:invalid_login)
+        fail(:invalid_identity_info)
       end
 
 
@@ -40,10 +40,6 @@ module Devise
 
         def username
           /^([\w]*)@?.*$/.match(email.downcase)[1]
-        end
-
-        def valid_identity_info?(info)
-          %w(email firstname lastname).all? { |key| info.has_key?(key) && info[key].present? }
         end
 
         def notify_bugsnag(options)
