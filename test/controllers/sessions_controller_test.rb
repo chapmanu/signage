@@ -31,13 +31,4 @@ class SessionsControllerTest < ActionController::TestCase
       end
     end
   end
-
-  test 'the ldap server has cant find the user data' do
-    User.stub :create_or_update_from_active_directory, ->(arg) { raise ChapmanIdentityNotFound } do
-      Net::LDAP.stub_any_instance(:bind, true) do
-        post :create, user: { email: 'kerr105@chapman.edu', password: 'blahblahbalah' }
-        assert response.body.include?('Invalid email or password.')
-      end
-    end
-  end
 end
