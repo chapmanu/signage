@@ -34,7 +34,6 @@ Unless you are displaying signs for Chapman University, you will probably want t
 
     config.x.public_safety.feed = nil
 
-
 ### Development
 #### Tests
 
@@ -57,11 +56,15 @@ Then head over to [localhost:3000](http://localhost:3000).
 
 ### Deployment
 
-Deployment is handled as expected by capistrano. To deploy a feature branch to staging:
+Deployment is handled by [Capistrano](http://capistranorb.com/). For staging, the default branch that will be deployed is the currently checked out branch. You can also specify a different branch in the deploy command:
 
     cap staging deploy BRANCH=my-feature-branch
 
-See team lead for server authentication information.
+For production, the `master` branch is deployed by default:
+
+    cap production deploy
+
+See team lead or Passpack for server authentication information.
 
 - Production Server: signage.chapman.edu
 - Staging Server: dev-signage.chapman.edu
