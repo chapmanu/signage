@@ -7,7 +7,7 @@ class SlidesController < ApplicationController
 
   before_action :set_slide,                  only: [:draft, :show, :edit, :update, :send_to_sign, :destroy]
   before_action :set_slide_or_draft,         only: [:preview]
-  before_action :set_signs,                  only: [:index, :new, :edit, :create, :update]
+  before_action :set_signs,                  only: [:index, :show, :new, :edit, :create, :update]
   before_action :set_parent_sign_path,       only: [:new, :edit]
   before_action :set_search_filters,         only: [:index]
 
