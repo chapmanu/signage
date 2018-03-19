@@ -20,6 +20,20 @@ class SlidePermissionTest < Capybara::Rails::TestCase
       assert page.has_no_content?('Edit'), "Edit button is present"
     end
 
+    test "private signs are not listed under Send to Slide" do
+      # Act/Arrange
+      visit slide_path(slides(:standard))
+      private_sign = signs(:private)
+      public_sign = signs(:build_team_area)
+      assert_equal private_sign.owners.include?(user), false
+
+      # Assert
+      within '.edit_slide' do
+        assert page.has_no_content?(private_sign.name)
+        assert page.has_content?(public_sign.name)
+      end
+    end
+
     test "remove owner button is absent" do
       slides(:standard).users << users(:non_sign_owner)
       visit slide_path(slides(:standard))
