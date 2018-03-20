@@ -87,8 +87,6 @@ class SignPermissionTest < Capybara::Rails::TestCase
       visit play_sign_path(signs(:private))
       assert_equal 200, page.status_code
     end
-
-
   end
 
   describe "when user is owner" do
