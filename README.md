@@ -68,3 +68,11 @@ See team lead or Passpack for server authentication information.
 
 - Production Server: signage.chapman.edu
 - Staging Server: dev-signage.chapman.edu
+
+### Troubleshooting
+For issues installing pg, try `which pg_config` to find pg_config's path
+
+Then `bundle config build.pg --with-pg-config=THE_PATH`
+
+Finally `bundle install`
+
