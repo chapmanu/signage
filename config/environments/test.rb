@@ -42,6 +42,8 @@ Rails.application.configure do
 
   # Public Safety alert configuration.
   config.x.public_safety.feed = 'https://content.getrave.com/rss/chapman/channel1'
+  
+  # Allows web_console in testing
   config.web_console.development_only = false
 end
 
