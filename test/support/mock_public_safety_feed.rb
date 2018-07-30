@@ -1,18 +1,18 @@
 module MockPublicSafetyFeed
-  # Based on http://www.getrave.com/rss/chapman/channel1
+  # Based on https://content.getrave.com/rss/chapman/channel1
   XML_TEMPLATE = <<-xml
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Mock Chapman Panther Alerts</title>
-    <link>http://www.getrave.com/rss/chapman/channel1</link>
+    <link>https://content.getrave.com/rss/chapman/channel1</link>
     <description>Welcome to Panther-Alert, Chapman University’s Emergency Notification system.  Panther-Alert sends emergency messages to your mobile or fixed device of choice so you get emergency messages quickly wherever you are.</description>
     <category>Panther Alerts</category>
     <dc:subject>Panther Alerts</dc:subject>
     <image>
       <title>Mock Chapman Panther Alerts</title>
       <url>http://www.chapman.edu/campus-services/public-safety/_files/Panther-Alert-Logo-Web.jpg</url>
-      <link>http://www.getrave.com/rss/chapman/channel1</link>
+      <link>https://content.getrave.com/rss/chapman/channel1</link>
     </image>
     %s
   </channel>

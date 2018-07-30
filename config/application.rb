@@ -52,6 +52,6 @@ module Signage
     end
 
     # Public Safety alert configuration.
-    config.x.public_safety.feed = 'https://www.getrave.com/rss/chapman/channel1'
+    config.x.public_safety.feed = 'https://content.getrave.com/rss/chapman/channel1'
   end
 end
