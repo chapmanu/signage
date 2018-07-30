@@ -42,6 +42,7 @@ Rails.application.configure do
 
   # Public Safety alert configuration.
   config.x.public_safety.feed = 'https://www.getrave.com/rss/chapman/channel1'
+  config.web_console.development_only = false
 end
 
 Rails.application.routes.default_url_options[:host] = 'localhost:3000'
