@@ -41,7 +41,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Public Safety alert configuration.
-  config.x.public_safety.feed = 'https://www.getrave.com/rss/chapman/channel1'
+  config.x.public_safety.feed = 'https://content.getrave.com/rss/chapman/channel1'
   config.web_console.development_only = false
 end
 
