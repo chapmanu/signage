@@ -83,6 +83,5 @@ Finally `bundle install`
 #### Testing Issues
 `ActiveRecord::StatementInvalid: PG::UndefinedColumn: ERROR:  column "increment_by" does not exist` may be thrown with older versions of Rails (< 5.0.2) + newer versions of PostgreSQL (10). One workaround is to use PostgreSQL 9.5. [Read more](http://ugisozols.com/running-multiple-versions-of-postgresql-on-mac)
 
-`Web Console is activated in the test environment, which is
-usually a mistake. To ensure it's only activated in development
-mode, move it to the development group of your Gemfile:` Resolved by adding `config.web_console.development_only = false` to `Test.rb`
+
+`Web Console is activated in the test environment, which is usually a mistake. To ensure it's only activated in development mode, move it to the development group of your Gemfile:` Resolved by adding `config.web_console.development_only = false` to `test.rb`
