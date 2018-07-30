@@ -2,6 +2,13 @@
 $base-font-family: 'proxima-nova-soft', 'sans-serif';
 $heading-font-family: 'proxima-nova', 'sans-serif';
 
+@base-font-family-2 {
+  font-family: 'proxima-nova-soft', 'sans-serif';
+  src: url('Tungsten-Bold.otf') format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 // Font Sizes
 $base-font-size: 1em;
 

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.7.1'
+gem 'rails', '~> 4.2.8'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18.4'
 # Use SCSS for stylesheets
@@ -50,9 +51,9 @@ gem 'remotipart', '~> 1.4.2'
 gem 'carrierwave', '~> 0.10.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'trix'
-gem 'bourbon', '~> 4.2.3'
-gem 'neat', '~> 1.8.0'
-gem 'bitters', '~> 1.0.0'
+gem 'bourbon', '< 5.0.0'
+gem 'neat', '~> 1.8'
+gem 'bitters', '< 1.0.0'
 gem 'refills'
 gem 'rest-client', '~> 1.8.0'
 gem 'awesome_print'
