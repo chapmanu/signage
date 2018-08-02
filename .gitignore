@@ -22,3 +22,5 @@ config/secrets.yml
 .env
 
 coverage
+
+# Change for change's sake. (To revive red-hat-playbook branch.) You can delete this in future.
