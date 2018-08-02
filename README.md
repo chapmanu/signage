@@ -16,6 +16,8 @@ git clone https://github.com/chapmanu/signage.git
 cd signage
 bundle install
 
+#Retrieve secrets.yml from WimOps colleague add add to config/secrets.yml
+
 # This file is needed for tests (and dev?). Ask a team member for the environment variables.
 touch .env
 
