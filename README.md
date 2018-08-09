@@ -15,7 +15,7 @@ You'll also need to install ImageMagick. Mac instructions can be found [here](ht
 git clone https://github.com/chapmanu/signage.git
 cd signage
 
-# Retrieve secrets.yml from WimOps colleague add add to config/secrets.yml
+# Retrieve secrets.yml from WimOps colleague & add to config/secrets.yml
 bundle install
 
 # This file is needed for tests (and dev?). Ask a team member for the environment variables.
