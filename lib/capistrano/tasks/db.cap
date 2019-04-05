@@ -10,12 +10,11 @@ namespace :db do
 
     on roles(:postgres) do |host|
       hostname = host.hostname
-      execute "pg_dump -F t -t users -t sponsors -t sign_users -t slide_users #{db_name} > #{remote_folder}#{backup_name}"
+      execute "pg_dump -F t #{db_name} > #{remote_folder}#{backup_name}"
     end
     
     sh "scp charles@#{hostname}:#{remote_folder}#{backup_name} #{local_folder}"
     sh "RAILS_ENV=development bundle exec rake db:drop db:create db:migrate"
-    sh "RAILS_ENV=development bundle exec rake cascade:sync faculty:sync"
     sh "pg_restore -O -d signage_development #{local_folder}#{backup_name}"
     puts "Success"
   end
