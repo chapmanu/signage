@@ -21,7 +21,7 @@ class PreviewTest < Capybara::Rails::TestCase
 
   scenario "notifications do not have slide preview for non sign owners" do 
     # Act
-    sign_in users(:james)
+    sign_in users(:ross)
 
     #Assume
     assert page.has_content?("Sign Out"), "User did not successfully log in"
