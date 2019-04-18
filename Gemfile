@@ -57,6 +57,8 @@ gem 'bitters', '< 1.0.0'
 gem 'refills'
 gem 'rest-client', '~> 1.8.0'
 gem 'awesome_print'
+gem 'pry', '~> 0.12.2'
+gem 'will_paginate', '~> 3.1.0'
 
 # Allow user to easily switch users in dev
 gem "switch_user", group: :development

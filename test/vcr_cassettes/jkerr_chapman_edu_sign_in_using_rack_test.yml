@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://chapmanedu%2Fadbind400:yedvodX4lZBCOeqmMcBm@webfarm.chapman.edu/RoleIdentity/api/Role/jkerr
+    uri: https://webfarm.chapman.edu/RoleIdentity/api/Role/jkerr
     body:
       encoding: US-ASCII
       string: ''

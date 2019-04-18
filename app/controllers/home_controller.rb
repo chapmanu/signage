@@ -6,6 +6,7 @@ class HomeController < ApplicationController
 		query = PublicActivity::Activity.order(created_at: :desc)
     query = visible_activities(query) unless current_user.super_admin?
     @activities = query.take(20)
+    @user_slides_collection = current_user.sign_slides_awaiting_approval.paginate(page: params[:page], per_page: 10).limit(10)
     render 'notifications/index'
 	end
 

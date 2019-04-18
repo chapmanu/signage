@@ -3,7 +3,7 @@
   <div class="notifications-listing <%= 'notifications-centered' if controller_action == 'notifications#index' %>">
     <h4>Notifications</h4>
     <%= render partial: 'notifications/notifications',
-               collection: current_user.sign_slides_awaiting_approval,
+               collection: @user_slides_collection,
                as: :notification %>
   </div>
 
@@ -14,4 +14,7 @@
     </div>
   <% end %>
 
+  <% if params[:controller] == 'notifications' %>
+    <%= will_paginate @user_slides_collection, :previous_label => '« Prev', :next_label => 'Next »', :inner_window => 1, :outer_window => 0 %>
+  <% end %>
 </div>
