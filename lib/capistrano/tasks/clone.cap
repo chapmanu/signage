@@ -13,18 +13,19 @@ task :clone do
   set :downstream_deploy_to, "/var/www/signage"
   set :stage_deploy_to, fetch(:deploy_to)
 
+  # Local for cloning to
+  set :local_path, "~/Desktop/signage"
+
   on roles(:web) do
-    puts   "this is #{fetch(:stage_deploy_to)}"
+
     on roles(:downstream) do |downstream|
-      puts "this be a test #{downstream}"
-
-      puts "this be the other #{downstream}"
-      puts "this is the downstream #{downstream.user}"
-      puts "this is the deploy_to #{fetch(:deploy_to)}"
-
       set :downstream_user, downstream.user
       set :downstream_host, downstream
+    end
 
+    on roles(:upstream) do |upstream|
+      set :upstream_user, upstream.user
+      set :upstream_host, upstream
     end
     
     set :deploy_to, fetch(:upstream_deploy_to)
@@ -32,7 +33,11 @@ task :clone do
 
     set :deploy_to, fetch(:stage_deploy_to)
     dest_shared_path = "#{shared_path}"
-    execute "rsync -avzO --delete --stats --progress #{upstream_shared_path}/public/ #{fetch(:downstream_user)}@#{fetch(:downstream_host)}:#{dest_shared_path}/public/" 
+    execute "rsync -avzO --delete --stats --progress #{upstream_shared_path}/public/ #{fetch(:downstream_user)}@#{fetch(:downstream_host)}:#{dest_shared_path}/public/"
+
+    run_locally do
+      execute "rsync -avzO --delete --stats --progress #{fetch(:upstream_user)}@#{fetch(:upstream_host)}:#{upstream_shared_path}/public/ #{fetch(:local_path)}/public/"
+    end
   end
 
 
