@@ -16,7 +16,7 @@
 /tmp
 
 /public/uploads/*
-
+/public/assets/*
 .env
 
 coverage
