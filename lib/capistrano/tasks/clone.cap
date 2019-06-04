@@ -1,0 +1,39 @@
+desc "Clones upstream data to the remote target"
+task :clone do
+
+  # Production server for cloning
+  server "dsv-mkt-prd01", user: "charles", roles: %w{upstream}
+  set :upstream_domain, "dev-signage.chapman.edu"
+  set :upstream_deploy_to, "/var/www/signage"
+  set :stage_deploy_to, fetch(:deploy_to)
+
+  # Staging server for cloning to
+  server "dsv-mkt-dev01", user: "charles", roles: %w{downstream}
+  set :downstream_domain, "dev-signage.chapman.edu"
+  set :downstream_deploy_to, "/var/www/signage"
+  set :stage_deploy_to, fetch(:deploy_to)
+
+  on roles(:web) do
+    puts   "this is #{fetch(:stage_deploy_to)}"
+    on roles(:downstream) do |downstream|
+      puts "this be a test #{downstream}"
+
+      puts "this be the other #{downstream}"
+      puts "this is the downstream #{downstream.user}"
+      puts "this is the deploy_to #{fetch(:deploy_to)}"
+
+      set :downstream_user, downstream.user
+      set :downstream_host, downstream
+
+    end
+    
+    set :deploy_to, fetch(:upstream_deploy_to)
+    upstream_shared_path = "#{shared_path}"
+
+    set :deploy_to, fetch(:stage_deploy_to)
+    dest_shared_path = "#{shared_path}"
+    execute "rsync -avzO --delete --stats --progress #{upstream_shared_path}/public/ #{fetch(:downstream_user)}@#{fetch(:downstream_host)}:#{dest_shared_path}/public/" 
+  end
+
+
+end
