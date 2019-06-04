@@ -27,6 +27,13 @@ rake db:setup
 # Clone production data
 cap production db:clone
 ```
+#### Production Assets
+To copy production assets to both staging and local run the command:
+
+    cap production clone
+
+If the local copy of signage is in a different location than the Desktop in the file `/lib/capistrano/tasks/clone.cap` set `:local_path` symbol to the appropriate location
+
 
 #### Emergency Alerts
 
