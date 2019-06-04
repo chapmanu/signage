@@ -33,10 +33,10 @@ task :clone do
 
     set :deploy_to, fetch(:stage_deploy_to)
     dest_shared_path = "#{shared_path}"
-    execute "rsync -avzO --delete --stats --progress #{upstream_shared_path}/public/uploads #{fetch(:downstream_user)}@#{fetch(:downstream_host)}:#{dest_shared_path}/public/uploads"
+    execute "rsync -avzO --delete --stats --progress #{upstream_shared_path}/public/uploads/ #{fetch(:downstream_user)}@#{fetch(:downstream_host)}:#{dest_shared_path}/public/uploads/"
 
     run_locally do
-      execute "rsync -avzO --delete --stats --progress #{fetch(:upstream_user)}@#{fetch(:upstream_host)}:#{upstream_shared_path}/public/uploads #{fetch(:local_path)}/public/uploads"
+      execute "rsync -avzO --delete --stats --progress #{fetch(:upstream_user)}@#{fetch(:upstream_host)}:#{upstream_shared_path}/public/uploads/ #{fetch(:local_path)}/public/uploads/"
     end
   end
 
