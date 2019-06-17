@@ -15,7 +15,7 @@ namespace :db do
     
     sh "scp charles@#{hostname}:#{remote_folder}#{backup_name} #{local_folder}"
     sh "RAILS_ENV=development bundle exec rake db:drop db:create db:migrate"
-    sh "pg_restore -O -d signage_development #{local_folder}#{backup_name}"
+    sh "pg_restore -O -c -d signage_development #{local_folder}#{backup_name}"
     puts "Success"
   end
 end

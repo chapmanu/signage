@@ -21,6 +21,9 @@ bundle install
 # This file is needed for tests (and dev?). Ask a team member for the environment variables.
 touch .env
 
+# Create folder db backups folder for cloning production data
+mkdir db/backups
+
 # Get databases
 rake db:setup
 

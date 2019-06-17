@@ -17,6 +17,7 @@
 
 /public/uploads/*
 /public/assets/*
+
 .env
 
 coverage
