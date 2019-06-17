@@ -1,5 +1,12 @@
+include Helpers
+
 desc "Clones upstream data to the remote target"
 task :clone do
+
+  if fetch(:stage) == :staging
+    print_warning("You cant run this task on staging!")
+    next
+  end
 
   # Production server for cloning
   server "dsv-mkt-prd01", user: "charles", roles: %w{upstream}
