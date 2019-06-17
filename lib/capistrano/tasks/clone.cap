@@ -14,7 +14,7 @@ task :clone do
   set :stage_deploy_to, fetch(:deploy_to)
 
   # Local for cloning to
-  set :local_path, "~/Desktop/signage"
+  set :local_path, Dir.pwd
 
   on roles(:web) do
 
