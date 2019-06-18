@@ -14,10 +14,15 @@ You'll also need to install ImageMagick. Mac instructions can be found [here](ht
 ```
 git clone https://github.com/chapmanu/signage.git
 cd signage
+
+# Retrieve secrets.yml from WimOps colleague & add to config/secrets.yml
 bundle install
 
 # This file is needed for tests (and dev?). Ask a team member for the environment variables.
 touch .env
+
+# Create folder db backups folder for cloning production data
+mkdir db/backups
 
 # Get databases
 rake db:setup
@@ -45,6 +50,8 @@ Single test:
 
     bundle exec rake test test/models/sign_test.rb
 
+See Troubleshooting
+
 #### Local Server
 
 To start the the local server on port 3000:
@@ -68,3 +75,18 @@ See team lead or Passpack for server authentication information.
 
 - Production Server: signage.chapman.edu
 - Staging Server: dev-signage.chapman.edu
+
+### Troubleshooting
+#### PostgreSQL Bundle Install Issues
+For issues installing pg, try `which pg_config` to find pg_config's path
+
+Then `bundle config build.pg --with-pg-config=THE_PATH`
+
+Finally `bundle install`
+
+
+#### Testing Issues
+-`ActiveRecord::StatementInvalid: PG::UndefinedColumn: ERROR:  column "increment_by" does not exist` may be thrown with older versions of Rails (< 5.0.2) + newer versions of PostgreSQL (10). One workaround is to use PostgreSQL 9.5. [Read more](http://ugisozols.com/running-multiple-versions-of-postgresql-on-mac)
+
+
+-`Web Console is activated in the test environment, which is usually a mistake. To ensure it's only activated in development mode, move it to the development group of your Gemfile:` Resolved by adding `config.web_console.development_only = false` to `test.rb`

@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.4.1 (15681) - http://www.bohemiancoding.com/sketch -->
-    <title>paper-plane</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Slides" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Slides::Index" sketch:type="MSArtboardGroup" transform="translate(-668.000000, -233.000000)" fill="#FFFFFF">
-            <g id="paper-plane" sketch:type="MSLayerGroup" transform="translate(668.000000, 233.000000)">
-                <g id="Group" sketch:type="MSShapeGroup">
-                    <path d="M5.25,8.25 L9.86292187,9.89634375 L12,0.552328125 L5.25,8.25 Z M3.75,7.73329688 L12,0.552328125 L0,6.48742969 L3.75,7.73329688 Z M5.25,9.04633594 L5.25,12 L7.42678125,9.82321875 L5.25,9.04633594 Z" id="Shape"></path>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg height="12" viewBox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m5.25 8.25 4.61292187 1.64634375 2.13707813-9.34401563zm-1.5-.51670312 8.25-7.18096876-12 5.93510157zm1.5 1.31303906v2.95366406l2.17678125-2.17678125z" fill="#fff" fill-rule="evenodd" transform=""/></svg>
