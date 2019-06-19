@@ -72,7 +72,7 @@ gem "letter_opener_web", group: :development
 gem 'capistrano', '~> 3.11.0',   group: :development
 gem 'capistrano-rails', '~> 1.4.0',   group: :development
 gem 'capistrano-rvm', '~> 0.1.2',    group: :development
-gem 'capistrano-passenger', '~> 0.1.1',    group: :development
+gem 'capistrano-passenger', '~> 0.2.0',    group: :development
 
 group :development, :test do
   gem 'dotenv-rails'
