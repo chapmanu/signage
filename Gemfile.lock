@@ -101,6 +101,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -379,6 +380,7 @@ DEPENDENCIES
   capistrano-rvm (~> 0.1.2)
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.1)
+  colorize
   devise (~> 3.5.10)
   dotenv-rails
   friendly_id (~> 5.1.0)
