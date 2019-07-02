@@ -6,18 +6,6 @@ This application manages digital signage across the Chapman University campus. S
 
 The monitors and virtual machines powering them are administered by IS&T.
 
-# Handy Commands
-
-Command | Description
-------- | -----------
-`bundle exec rails server -b 0.0.0.0 -p 3000` | Starts a development server on your machine
-`bundle exec rake db:setup` | setup databases on your machine
-`bundle exec rake test` | Runs all tests
-`cap production db:clone` | Download and clones the `production` database to your machine
-`cap staging deploy` | Deploys the project to staging, empties the server cache, and restarts services.
-`cap production deploy` | Deploys the project to porduction, empties the server cache, and restarts services.
-`cap production clone` | Clone assets from `production` --> `staging` and `production` --> `local`
-
 ### Installation
 Signage requires PostgreSQL as its datastore. See [Brew install guide here](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/).
 
@@ -42,13 +30,6 @@ rake db:setup
 # Clone production data
 cap production db:clone
 ```
-#### Production Assets
-To copy production assets to both staging and local run the command:
-
-    cap production clone
-
-If the local copy of signage is in a different location than the Desktop in the file `/lib/capistrano/tasks/clone.cap` set `:local_path` symbol to the appropriate location
-
 
 #### Emergency Alerts
 
