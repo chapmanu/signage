@@ -401,6 +401,7 @@ DEPENDENCIES
   neat (~> 1.8)
   net-ldap (~> 0.16.1)
   pg (~> 0.18.4)
+  phantomjs
   poltergeist
   pry (~> 0.12.2)
   public_activity (~> 1.4.3)
