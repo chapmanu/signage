@@ -228,7 +228,7 @@ GEM
       shellany (~> 0.0)
     orm_adapter (0.5.0)
     pg (0.18.4)
-    phantomjs (2.1.1.0)
+    phantomjs (1.9.8.0)
     poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
