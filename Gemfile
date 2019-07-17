@@ -60,6 +60,7 @@ gem 'awesome_print'
 gem 'pry', '~> 0.12.2'
 gem 'will_paginate', '~> 3.1.0'
 gem 'colorize'
+gem 'phantomjs'
 
 # Allow user to easily switch users in dev
 gem "switch_user", group: :development
