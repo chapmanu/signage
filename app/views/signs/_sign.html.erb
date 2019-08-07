@@ -12,6 +12,7 @@
       <p>
         <%= '...' if sign.unexpired_slides.length > 8 %>
         <%= pluralize(sign.unexpired_slides.length, "slide") %>
+        <%= sign.unexpired_slides.where(approved: false).length %> pending
       </p>
     </div>
   </div>
