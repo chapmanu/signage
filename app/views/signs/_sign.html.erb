@@ -10,8 +10,9 @@
         <%= image_tag slide.screenshot %>
       <% end %>
       <p>
-        <%= '...' if sign.slides.length > 8 %>
-        <%= pluralize(sign.slides.length, "slide") %>
+        <%= '...' if sign.unexpired_slides.length > 8 %>
+        <%= pluralize(sign.unexpired_slides.length, "slide") %>
+        <%= sign.unexpired_slides.where(approved: false).length %> pending
       </p>
     </div>
   </div>
