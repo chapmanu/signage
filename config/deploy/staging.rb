@@ -1,7 +1,7 @@
 # server-based syntax
 # ======================
-# server 'dev-signage.chapman.edu', user: 'charles', roles: %w{app db web postgres}
-server 'dsv-mkt-prd02', user: 'charles', roles: %w{app db web postgres}
+server 'dev-signage.chapman.edu', user: 'charles', roles: %w{app db web postgres}
+# server 'dsv-mkt-prd02', user: 'charles', roles: %w{app db web postgres}
 
 def red(str)
   "\e[31m#{str}\e[0m"
