@@ -36,6 +36,10 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 
 set :passenger_restart_with_touch, true
 
+SSHKit.config.command_map.prefix[:passenger].unshift('ruby -S')
+SSHKit.config.command_map.prefix[:'passenger-config'].unshift('ruby -S')
+SSHKit.config.command_map.prefix[:'passenger-status'].unshift('ruby -S')
+
 namespace :deploy do
 
   after :restart, :clear_cache do
