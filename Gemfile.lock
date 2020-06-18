@@ -89,6 +89,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    certified (1.0.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
@@ -379,6 +380,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.4.0)
   capistrano-rvm (~> 0.1.2)
   carrierwave (~> 0.10.0)
+  certified (~> 1.0)
   coffee-rails (~> 4.1.1)
   colorize
   devise (~> 3.5.10)
@@ -431,4 +433,4 @@ RUBY VERSION
    ruby 2.2.2p95
 
 BUNDLED WITH
-   1.16.5
+   1.17.3
