@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.2.1'
 
-gem 'certified', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.8'
 # Use postgresql as the database for Active Record
@@ -74,7 +73,7 @@ gem "letter_opener_web", group: :development
 gem 'capistrano', '~> 3.11.0',   group: :development
 gem 'capistrano-rails', '~> 1.4.0',   group: :development
 gem 'capistrano-rvm', '~> 0.1.2',    group: :development
-gem 'capistrano-passenger', '~> 0.2.0',    group: :development
+gem 'capistrano-passenger', '~> 0.1.1',    group: :development
 
 group :development, :test do
   gem 'dotenv-rails'
