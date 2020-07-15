@@ -13,5 +13,7 @@ def current_git_branch
   branch
 end
 
+set :rbenv_ruby, File.read('.ruby-version').strip
+
 # Set the deploy branch to the current branch
 set :branch, ENV["BRANCH"] || current_git_branch
