@@ -114,7 +114,7 @@ class Slide < ActiveRecord::Base
     if (Rails.env.test? || Rails.env.development?)
       self.screenshot = File.open(Rails.root.join('app/assets/images/dev-screenshot.jpg'))
       save!
-    else
+    elsif false #commenting out screenshot ability
       f = Screencap::Fetcher.new(Rails.application.routes.url_helpers.preview_slide_url(self))
       file  = f.fetch output: Rails.root.join('tmp', "screenshot_of_slide_#{id}.png")
       image = MiniMagick::Image.open(file)
