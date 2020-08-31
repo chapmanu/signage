@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+gem 'certified', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.8'
 # Use postgresql as the database for Active Record
@@ -60,7 +61,7 @@ gem 'awesome_print'
 gem 'pry', '~> 0.12.2'
 gem 'will_paginate', '~> 3.1.0'
 gem 'colorize'
-gem 'phantomjs'
+gem 'phantomjs', '~> 1.9.8'
 
 # Allow user to easily switch users in dev
 gem "switch_user", group: :development

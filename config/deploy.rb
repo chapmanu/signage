@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 #lock '3.4.0'
-
+:passenger_in_gemfile
 set :application, 'signage'
 set :repo_url, 'git@github.com:chapmanu/signage.git'
 
@@ -33,6 +33,12 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/upl
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+set :passenger_restart_with_touch, true
+
+SSHKit.config.command_map.prefix[:passenger].unshift('ruby -S')
+SSHKit.config.command_map.prefix[:'passenger-config'].unshift('ruby -S')
+SSHKit.config.command_map.prefix[:'passenger-status'].unshift('ruby -S')
 
 namespace :deploy do
 
