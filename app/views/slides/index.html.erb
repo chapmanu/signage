@@ -22,6 +22,14 @@
   <div class="new">
     <%= link_to "New", new_slide_path, class: 'btn green' %>
   </div>
+
+  <% if false #build feature to toggle previews on/off for faster loading?  %>
+  <div style="clear:both;"> 
+    <label>Show Preview:</label>
+    <%= check_box_tag 'show_preview', 'yes', false, style: "position: relative; left: auto; opacity: 1;" %>
+  </div>  
+  <% end %>
+
 </div>
 
 <div class="slide-listing-container" id="slides-listing">

@@ -2,7 +2,15 @@
 
 <div class="slide-list-item js-admin-slide">
   <div class="screenshot <%= 'video' if slide.background_type == 'video' %>">
-    <%= image_tag slide.screenshot.url %>
+  
+    <div class="slide-live-preview <%= slide.orientation %>" style="width:100%; margin-bottom: 30px;">
+      <div class="slide-preview">
+        <div class="slide-preview-wrapper">
+          <%= content_tag  :iframe, nil, src: preview_slide_path(slide.find_or_create_draft), id: 'slide-live-preview', frameborder: 0, allowfullscreen: true, loading: 'lazy' %>
+        </div>
+      </div>
+    </div>
+    
     <div class="slide-actions">
       <%= inline_svg('close_light.svg', class: 'close') %>
       <div>
