@@ -2,7 +2,7 @@
 
 <div class="slide-list-item js-admin-slide">
   <div class="screenshot <%= 'video' if slide.background_type == 'video' %>">
-    <%= image_tag slide.screenshot.url %>
+    <%= image_tag slide.background_url #slide.screenshot.url %>
     <div class="slide-actions">
       <%= inline_svg('close_light.svg', class: 'close') %>
       <div>
