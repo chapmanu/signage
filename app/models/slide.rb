@@ -45,6 +45,9 @@ class Slide < ActiveRecord::Base
   validates :menu_name, presence: true
   validates :template,  presence: true
   validates :duration,  numericality: { greater_than_or_equal_to: 5 }
+  validates :play_on, presence: true, on: :update
+  validates :stop_on, presence: true, on: :update
+  validate  :validate_stop_on_after_play_on, on: :update
   validate  :validate_file_size, on: :update
 
 
@@ -139,6 +142,8 @@ class Slide < ActiveRecord::Base
     def set_defaults
       # Based on http://stackoverflow.com/a/29575389/6763239.
       self.duration ||= DEFAULT_DURATION
+      self.play_on  ||= Date.current
+      self.stop_on  ||= Date.tomorrow
     end
 
     def touch_signs
@@ -189,4 +194,12 @@ class Slide < ActiveRecord::Base
         errors.add("#{type} Image: ", "You cannot upload a #{type} image that is larger than #{width}x#{height}")
       end
     end
+
+    def validate_stop_on_after_play_on
+      return if stop_on.blank? || play_on.blank?
+  
+      if stop_on <= play_on
+        errors.add(:stop_on, "must be after the start date")
+      end
+   end
 end

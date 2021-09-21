@@ -220,13 +220,17 @@
           <%= f.label :duration, "Number of seconds to display slide" %>
         </div>
 
-        <div class="input-field">
-          <%= f.date_field :play_on, value: format_date(@slide.play_on || Time.zone.now), class: 'datepicker' %>
-          <%= f.label :play_on, "Start playing slide on", class: 'active' %>
+        <div><p><b>Select the date range your slide will show on screens.<br>
+          Two weeks prior to an event date is ideal.</b></p>
         </div>
 
         <div class="input-field">
-          <%= f.text_field :stop_on, class: 'datepicker' %>
+          <%= f.text_field :play_on, value: format_date(@slide.play_on || Time.zone.now), class: 'datepicker' %>
+          <%= f.label :play_on, "Start playing slide on", class: @slide.play_on ? 'active' : '' %>
+        </div>
+
+        <div class="input-field">
+          <%= f.text_field :stop_on, value: format_date(@slide.stop_on || Time.zone.now), class: 'datepicker' %>
           <%= f.label :stop_on, "Stop playing slide on", class: @slide.stop_on ? 'active' : '' %>
         </div>
 
